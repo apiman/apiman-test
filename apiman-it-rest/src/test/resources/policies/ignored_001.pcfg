@@ -1,0 +1,8 @@
+IgnoredResourcesPolicy
+---
+{
+"rules" : [
+        {"pathPattern" : "/path/to/ignore", "verb" : "*"},
+        {"pathPattern" : "^.*/foobar$", "verb" : "*"}
+    ]
+}

@@ -1,0 +1,28 @@
+# Build output
+build/
+bin/
+target/
+
+# Hidden files
+.*
+!/.gitignore
+!/.travis.yml
+
+# Java Classes
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.classpath
+.settings
+.project
+
+# Idea
+*.iml
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*

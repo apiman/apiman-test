@@ -1,0 +1,5 @@
+IPBlacklistPolicy
+---
+{
+"ipList" : ["127.*.*.*"]
+}

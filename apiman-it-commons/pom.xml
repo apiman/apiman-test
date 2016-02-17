@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jboss.apiman.qa</groupId>
+    <artifactId>apiman-integration-tests</artifactId>
+    <version>1.1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>apiman-it-commons</artifactId>
+  <name>${project.groupId} :: ${project.artifactId}</name>
+
+  <properties>
+    <version.dballocator>2.4.2</version.dballocator>
+    <version.creaper>0.7.0</version.creaper>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <!-- Using Apiman beans to come from REST endpoints -->
+    <dependency>
+      <groupId>io.apiman</groupId>
+      <artifactId>apiman-manager-api-beans</artifactId>
+    </dependency>
+    <!-- Simple DDL parser -->
+    <dependency>
+      <groupId>io.apiman</groupId>
+      <artifactId>apiman-tools-ddl</artifactId>
+      <version>${version.apiman}</version>
+    </dependency>
+    <!-- REST client/testing -->
+    <dependency>
+      <groupId>com.jayway.restassured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${version.restassred}</version>
+    </dependency>
+    <!-- JSON serialization -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <!-- Utility libraries -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <!-- DBAllocator: https://mojo.redhat.com/docs/DOC-1016483-->
+    <dependency>
+      <groupId>org.jboss.qa.dballoc</groupId>
+      <artifactId>dballocator-client-rest</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+    <!-- Creaper EAP and WF tooling library -->
+    <dependency>
+      <groupId>org.jboss.qa.creaper</groupId>
+      <artifactId>creaper-core</artifactId>
+      <version>${version.creaper}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.qa.creaper</groupId>
+      <artifactId>creaper-commands</artifactId>
+      <version>${version.creaper}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Failsafe integration tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+      </plugin>
+      <!-- Enforcer -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>jboss-qa-releases</id>
+      <name>JBoss QA release repository</name>
+      <url>http://repository.engineering.redhat.com/nexus/content/repositories/jboss-qa-releases/</url>
+    </repository>
+    <repository>
+      <id>jboss-qa-snapshots</id>
+      <name>JBoss QA snapshot repository</name>
+      <url>http://repository.engineering.redhat.com/nexus/content/repositories/jboss-qa-snapshots/</url>
+    </repository>
+  </repositories>
+
+</project>

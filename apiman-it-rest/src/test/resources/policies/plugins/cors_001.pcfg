@@ -1,0 +1,11 @@
+cors-policy
+---
+{
+"errorOnCorsFailure" : ${error},
+"allowOrigin" : ["http://www.foo.com"],
+"allowCredentials" : true,
+"exposeHeaders" : ["exposed_header"],
+"allowHeaders" : ["allowed_header"],
+"allowMethods" : ["GET"],
+"maxAge" : 1600
+}

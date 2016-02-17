@@ -1,0 +1,11 @@
+IPBlacklistPolicy
+---
+{
+"ipList" : ["${apiman.test.proxy.address}"]
+}
+
+IPWhitelistPolicy
+---
+{
+"ipList" : ["${apiman.test.proxy.address}"]
+}

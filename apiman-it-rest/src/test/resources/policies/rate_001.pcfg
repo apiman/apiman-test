@@ -1,0 +1,7 @@
+RateLimitingPolicy
+---
+{
+"limit" : 20,
+"granularity" : "Api",
+"period" : "Minute"
+}

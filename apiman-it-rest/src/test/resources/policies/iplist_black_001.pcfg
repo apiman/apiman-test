@@ -1,0 +1,6 @@
+IPBlacklistPolicy
+---
+{
+"ipList" : ["127.0.0.1"]
+}
+

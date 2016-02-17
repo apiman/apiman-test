@@ -1,0 +1,18 @@
+BASICAuthenticationPolicy
+---
+{
+"requireTransportSecurity" : false,
+"realm" : "qerealm",
+"forwardIdentityHttpHeader": "x-auth-user",
+"ldapIdentity" : {
+        "bindAs" : "ServiceAccount",
+        "url" : "ldap://${apiman.test.tools.address}:10389",
+        "dnPattern" : "uid=admin,ou=system",
+        "credentials" : {"username" : "admin", "password" : "secret"},
+        "userSearch" : {"baseDn" : "ou=users,dc=example,dc=com", "expression" : "(uid=$${username})"},
+        "membershipAttribute" : "title",
+        "rolenameAttribute" : "cn",
+        "extractRoles" : true
+    }
+}
+

@@ -1,0 +1,10 @@
+BASICAuthenticationPolicy
+---
+{
+"requireTransportSecurity" : false,
+"realm" : "qerealm",
+"forwardIdentityHttpHeader": "x-auth-user",
+"staticIdentity" : {
+        "identities" : [{"username" : "admin", "password" : "admin"}]
+    }
+}

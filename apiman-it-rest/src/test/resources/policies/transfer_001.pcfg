@@ -1,0 +1,8 @@
+TransferQuotaPolicy
+---
+{
+"limit" : 10,
+"direction" : "${direction}",
+"granularity" : "Api",
+"period" : "Minute"
+}

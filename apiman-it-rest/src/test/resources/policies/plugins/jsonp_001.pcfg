@@ -1,0 +1,5 @@
+jsonp-policy
+---
+{
+    "callbackParamName" : "${param}"
+}

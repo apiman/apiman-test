@@ -1,0 +1,12 @@
+AuthorizationPolicy
+---
+{
+    "requestUnmatched" : "pass",
+    "multiMatch" : "all",
+    "rules" : [
+        {"verb" : "get", "pathPattern" : "/singlerole", "role" : "user"},
+        {"verb" : "get", "pathPattern" : "/multirole", "role" : "user"},
+        {"verb" : "get", "pathPattern" : "/multirole", "role" : "admin"},
+        {"verb" : "get", "pathPattern" : "/wildcard(/.*)?", "role" : "admin"}
+    ]
+}

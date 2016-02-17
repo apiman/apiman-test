@@ -1,0 +1,172 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jboss.apiman.qa</groupId>
+  <artifactId>apiman-integration-tests</artifactId>
+  <version>1.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <organization>
+    <name>JBoss Apiman QE</name>
+  </organization>
+  <name>${project.groupId} :: ${project.artifactId}</name>
+  <description>Parent pom for Apiman QE tests.</description>
+
+  <modules>
+    <module>apiman-it-commons</module>
+    <module>apiman-it-deployments</module>
+    <module>apiman-it-coverage</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.test.failure.ignore>true</maven.test.failure.ignore>
+    <!-- Dependency version properties -->
+    <version.apiman>1.2.2-SNAPSHOT</version.apiman>
+    <version.junit>4.12</version.junit>
+    <version.log4j>1.2.17</version.log4j>
+    <version.slf4j>1.7.12</version.slf4j>
+    <version.selenium>2.45.0</version.selenium>
+    <version.shrinkwrap>2.1.1</version.shrinkwrap>
+    <version.failsafe>2.19.1</version.failsafe>
+    <version.jaxrs>1.0.1.Final</version.jaxrs>
+    <version.commons-lang3>3.4</version.commons-lang3>
+    <version.restassred>2.4.1</version.restassred>
+    <version.jackson>2.6.3</version.jackson>
+    <version.jacoco>0.7.5.201505241946</version.jacoco>
+    <!-- Build influencing properties -->
+    <groups></groups>
+    <groups.exclude></groups.exclude>
+    <skipCoverage>false</skipCoverage>
+    <!-- in seconds -->
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Using Apiman beans to come from REST endpoints -->
+      <dependency>
+        <groupId>io.apiman</groupId>
+        <artifactId>apiman-manager-api-beans</artifactId>
+        <version>${version.apiman}</version>
+      </dependency>
+      <!-- JUnit dependencies -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${version.junit}</version>
+      </dependency>
+      <!-- REST testing -->
+      <dependency>
+        <groupId>com.jayway.restassured</groupId>
+        <artifactId>rest-assured</artifactId>
+        <version>${version.restassred}</version>
+      </dependency>
+      <!-- JSON serialization -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${version.jackson}</version>
+      </dependency>
+      <!-- Logging dependencies -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${version.slf4j}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${version.slf4j}</version>
+      </dependency>
+      <!-- Utility libraries -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${version.commons-lang3}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <profiles>
+    <!-- Use this profile to build REST API tests -->
+    <profile>
+      <id>rest-tests</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>apiman-it-rest</module>
+      </modules>
+    </profile>
+    <!-- Use this profile to build UI tests -->
+    <profile>
+      <id>ui-tests</id>
+      <modules>
+        <module>apiman-it-ui</module>
+      </modules>
+    </profile>
+  </profiles>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Failsafe integration tests -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${version.failsafe}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <systemPropertyVariables>
+              <apiman.version>${version.apiman}</apiman.version>
+            </systemPropertyVariables>
+            <failIfNoTests>false</failIfNoTests>
+            <groups>${groups}</groups>
+            <excludedGroups>${groups.exclude}</excludedGroups>
+          </configuration>
+        </plugin>
+
+        <!-- Surefire unit tests -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+            <!-- Disable unit tests -->
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+
+        <!-- Enforcer -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.4</version>
+          <executions>
+            <execution>
+              <id>enforce-versions</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireJavaVersion>
+                    <version>1.8</version>
+                  </requireJavaVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

@@ -1,0 +1,7 @@
+IgnoredResourcesPolicy
+---
+{
+"rules" : [
+        {"pathPattern" : "/foo", "verb" : "*"},
+    ]
+}

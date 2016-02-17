@@ -1,0 +1,15 @@
+BASICAuthenticationPolicy
+---
+{
+"requireTransportSecurity" : false,
+"realm" : "qerealm",
+"forwardIdentityHttpHeader": "x-auth-user",
+"jdbcIdentity" : {
+        "hashAlgorithm" : "None",
+        "datasourcePath" : "${apiman.test.jdbc.ds}",
+        "query" : "SELECT * FROM qe_users WHERE username=? AND password=?",
+        "extractRoles" : true,
+        "roleQuery": "SELECT role FROM qe_roles WHERE username=?"
+    }
+}
+

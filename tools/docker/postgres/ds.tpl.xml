@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+  <datasource jndi-name="java:jboss/datasources/apimanqe" pool-name="apimanqe" enabled="true" use-java-context="true">
+    <connection-url>jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}</connection-url>
+    <driver>${POSTGRES_DRIVER}</driver>
+    <pool>
+      <max-pool-size>30</max-pool-size>
+    </pool>
+    <security>
+      <user-name>${POSTGRES_USER}</user-name>
+      <password>${POSTGRES_PASSWORD}</password>
+    </security>
+  </datasource>
+</datasources>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>apiman-integration-tests</artifactId>
+    <groupId>org.jboss.apiman.qa</groupId>
+    <version>1.1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>apiman-it-coverage</artifactId>
+  <name>${project.groupId} :: ${project.artifactId}</name>
+  <packaging>pom</packaging>
+
+  <properties>
+    <version.jacoco>0.7.5.201505241946</version.jacoco>
+    <version.plugin.antrun>1.8</version.plugin.antrun>
+    <jacoco.target>data</jacoco.target>
+    <jacoco.host>localhost</jacoco.host>
+    <jacoco.port>6300</jacoco.port>
+    <jacoco.home>${basedir}/target/coverage</jacoco.home>
+    <jacoco.lib.dir>${jacoco.home}/lib</jacoco.lib.dir>
+    <jacoco.data.dir>${jacoco.home}/data</jacoco.data.dir>
+    <jacoco.data.name>all</jacoco.data.name>
+    <jacoco.data.file>${jacoco.data.dir}/jacoco-${jacoco.data.name}.exec</jacoco.data.file>
+    <jacoco.report.dir>${jacoco.home}/report</jacoco.report.dir>
+  </properties>
+
+  <profiles>
+    <!--  Use this to Copy JaCoCo agent jar to available location -->
+    <profile>
+      <id>coverage-agent</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.jacoco</groupId>
+          <artifactId>org.jacoco.agent</artifactId>
+          <version>${version.jacoco}</version>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-jacoco-agent</id>
+                <goals>
+                  <goal>unpack</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>org.jacoco</groupId>
+                      <artifactId>org.jacoco.agent</artifactId>
+                      <version>${version.jacoco}</version>
+                      <type>jar</type>
+                      <overWrite>true</overWrite>
+                      <includes>jacocoagent.jar</includes>
+                      <outputDirectory>${jacoco.lib.dir}</outputDirectory>
+                      <destFileName>jacocoagent.jar</destFileName>
+                    </artifactItem>
+                  </artifactItems>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Use this to invoke JaCoCo ant target -->
+    <profile>
+      <id>coverage</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>skipCoverage</name>
+          <value>false</value>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.jacoco</groupId>
+          <artifactId>org.jacoco.ant</artifactId>
+          <version>${version.jacoco}</version>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <!-- Copy JaCoCo ant targets -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>jacoco.copy.ant</id>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <phase>pre-integration-test</phase>
+                <configuration>
+                  <includeArtifactIds>
+                    org.jacoco.ant, org.jacoco.core, org.jacoco.report, asm-debug-all
+                  </includeArtifactIds>
+                  <excludeTransitive>false</excludeTransitive>
+                  <stripVersion>true</stripVersion>
+                  <outputDirectory>${jacoco.lib.dir}</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- Execute jacoco ant target-->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>${version.plugin.antrun}</version>
+            <executions>
+              <execution>
+                <id>jacoco.report</id>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <phase>verify</phase>
+                <configuration>
+                  <target>
+                    <property name="plugin_classpath" refid="maven.plugin.classpath"/>
+                    <echo>Running ant target: ${jacoco.target}</echo>
+                    <ant antfile="${basedir}/jacoco.xml" dir="${basedir}" target="${jacoco.target}"/>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

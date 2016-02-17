@@ -1,0 +1,24 @@
+ldap:
+    image: apimanqe/ldap
+    ports:
+        - "10389:10389"
+    container_name: apiman_it_ldap
+
+posgres:
+    image: apimanqe/postgres
+    ports:
+        - "5432:5432"
+    container_name: apiman_it_postgres
+
+elastic:
+    image: elasticsearch:1.7.2
+    ports:
+        - "9200:9200"
+        - "9300:9300"
+    container_name: apiman_it_elastic
+
+keycloak:
+    image: apimanqe/keycloak
+    ports:
+        - "8081:8080"
+    container_name: apiman_it_keycloak

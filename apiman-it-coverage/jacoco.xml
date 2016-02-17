@@ -1,0 +1,56 @@
+<project name="Jacoco library to collect code coverage remotely" xmlns:jacoco="antlib:org.jacoco.ant">
+
+  <path id="jacoco.lib.path">
+    <fileset dir="${jacoco.lib.dir}" includes="*.jar"/>
+  </path>
+
+  <taskdef resource="org/jacoco/ant/antlib.xml"
+           uri="antlib:org.jacoco.ant"
+           classpathref="jacoco.lib.path"/>
+  
+  <target name="data">
+    <echo>Exporting JaCoCo test coverage data...</echo>
+    <mkdir dir="${jacoco.data.dir}"/>
+    <jacoco:dump address="${jacoco.host}" port="${jacoco.port}" destfile="${jacoco.data.file}"
+                 append="false" reset="false" dump="true"/>
+  </target>
+
+  <target name="report">
+    <!-- Merge all available data files -->
+    <echo>Merging JaCoCo data files...</echo>
+    <jacoco:merge destfile="${jacoco.data.file}">
+      <fileset dir="${jacoco.data.dir}" includes="*.exec"/>
+    </jacoco:merge>
+    <!-- Generage HTML report -->
+    <echo>Creating JaCoCo test coverage reports...</echo>
+    <jacoco:report>
+      <executiondata>
+        <file file="${jacoco.data.file}"/>
+      </executiondata>
+      <structure name="Apiman Code Coverage">
+        <group name="manager">
+          <classfiles>
+            <zipfileset src="${apiman.home}/standalone/deployments/apiman.war">
+              <include name="WEB-INF/lib/apiman-*"/>
+            </zipfileset>
+          </classfiles>
+        </group>
+        <group name="gateway">
+          <classfiles>
+            <zipfileset src="${apiman.home}/standalone/deployments/apiman-gateway.war">
+              <include name="WEB-INF/lib/apiman-*"/>
+            </zipfileset>
+          </classfiles>
+        </group>
+      </structure>
+      <html destdir="${jacoco.report.dir}"/>
+    </jacoco:report>
+  </target>
+
+  <target name="reset">
+    <echo>Reset JaCoCo test coverage data...</echo>
+    <jacoco:dump address="${jacoco.host}" port="${jacoco.port}" destfile="${jacoco.data.file}"
+                 append="false" reset="true"/>
+    <delete file="${jacoco.report.data}"/>
+  </target>
+</project>

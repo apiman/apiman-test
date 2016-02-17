@@ -1,0 +1,37 @@
+{
+  "name" : "Apiman API Catalog",
+  "apis" : [
+    {
+      "endpoint" : "https://foo.com/",
+      "endpointType" : "rest",
+      "name" : "Foo",
+      "description" : "Foo description",
+      "definitionUrl" : null,
+      "definitionType" : null
+    },
+    {
+      "endpoint" : "https://bar.com/",
+      "endpointType" : "rest",
+      "name" : "Bar",
+      "description" : "Bar description",
+      "definitionUrl" : null,
+      "definitionType" : null
+    },
+    {
+      "endpoint" : "http://baz.com/",
+      "endpointType" : "rest",
+      "name" : "Baz1",
+      "description" : "Baz1 description",
+      "definitionUrl" : null,
+      "definitionType" : null
+    },
+    {
+      "endpoint" : "http://baz.com/",
+      "endpointType" : "rest",
+      "name" : "Baz2",
+      "description" : "Baz2 description",
+      "definitionUrl" : null,
+      "definitionType" : null
+    }
+  ]
+}

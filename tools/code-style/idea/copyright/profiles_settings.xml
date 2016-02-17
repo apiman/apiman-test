@@ -1,0 +1,8 @@
+<component name="CopyrightManager">
+  <settings default="apiman-qe">
+    <module2copyright>
+      <element module="All" copyright="apiman-qe" />
+    </module2copyright>
+    <LanguageOptions name="JAVA" />
+  </settings>
+</component>
