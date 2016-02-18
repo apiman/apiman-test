@@ -22,11 +22,15 @@ package io.apiman.test.integration;
  */
 public class DeployedServices {
 
+    public static final String LOCALHOST = "http://localhost:8080";
     public static final String ROOT = "/qa";
     public static final String REST_ROOT = ROOT + "/rest";
 
     public static final String ECHO_ENDPOINT = ROOT + "/echo";
     public static final String DOWNLOAD_ENDPOINT = ROOT + "/download";
     public static final String STATUS_CODE_ENDPOINT = REST_ROOT + "/status";
+    public static final String RESPONSE_REST_ROOT = REST_ROOT +"/response";
 
+    public static final String JSON_DATA = RESPONSE_REST_ROOT + "/json";
+    public static final String XML_DATA = RESPONSE_REST_ROOT + "/xml";
 }
