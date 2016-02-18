@@ -6,7 +6,7 @@ BASICAuthenticationPolicy
 "forwardIdentityHttpHeader": "x-auth-user",
 "ldapIdentity" : {
         "bindAs" : "ServiceAccount",
-        "url" : "ldap://${apiman.test.tools.address}:10389",
+        "url" : "ldap://${apiman.test.ldap.address}:${apiman.test.ldap.port}",
         "dnPattern" : "uid=admin,ou=system",
         "credentials" : {"username" : "admin", "password" : "secret"},
         "userSearch" : {"baseDn" : "ou=users,dc=example,dc=com", "expression" : "(uid=$${username})"},
