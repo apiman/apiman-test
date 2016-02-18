@@ -50,8 +50,8 @@ public class ApiUsageMetricsIT extends AbstractClientTest {
 
     private static final int SUCCESSFUL_REQUESTS = 10;
     private static final int FAILED_REQUESTS = 11;
-    private static final int SECOND_FAILED_REQUESTS = 20;
-    private static final int SECOND_SUCCESSFUL_REQUESTS = 22;
+    private static final int SECOND_API_SUCCESSFUL_REQUESTS = 22;
+    private static final int SECOND_API_FAILED_REQUESTS = 20;
 
     ClientVersions clientVersions;
     private Date beforeRecoding;
@@ -78,13 +78,13 @@ public class ApiUsageMetricsIT extends AbstractClientTest {
 
     private static void recordSuccessfulRequests(int count, String endpoint, String apiKey)
         throws InterruptedException {
-        for (long i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             givenGateway().get(addApiKeyParameter(endpoint, apiKey));
         }
     }
 
     private static void recordFailedRequests(int count, String endpoint, String apiKey) throws InterruptedException {
-        for (long i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             givenGateway().get(addApiKeyParameter(endpoint + "/foo", apiKey));
         }
     }
@@ -96,8 +96,8 @@ public class ApiUsageMetricsIT extends AbstractClientTest {
         recordSuccessfulRequests(SUCCESSFUL_REQUESTS, endpoint, apiKey);
         recordFailedRequests(FAILED_REQUESTS, endpoint, apiKey);
 
-        recordSuccessfulRequests(SECOND_SUCCESSFUL_REQUESTS, secondEdpoint, secondApiKey);
-        recordFailedRequests(SECOND_FAILED_REQUESTS, secondEdpoint, secondApiKey);
+        recordSuccessfulRequests(SECOND_API_SUCCESSFUL_REQUESTS, secondEdpoint, secondApiKey);
+        recordFailedRequests(SECOND_API_FAILED_REQUESTS, secondEdpoint, secondApiKey);
 
         afterRecording = new Date();
         TimeUnit.SECONDS.sleep(TIME_DELAY);
@@ -126,7 +126,7 @@ public class ApiUsageMetricsIT extends AbstractClientTest {
             metrics.getData().get(api.getId()));
 
         assertEquals("Unexpected metrics data",
-            new Long(SECOND_SUCCESSFUL_REQUESTS + SECOND_FAILED_REQUESTS),
+            new Long(SECOND_API_SUCCESSFUL_REQUESTS + SECOND_API_FAILED_REQUESTS),
             metrics.getData().get(secondApi.getId()));
     }
 }

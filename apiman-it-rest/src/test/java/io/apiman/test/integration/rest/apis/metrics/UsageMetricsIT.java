@@ -36,17 +36,18 @@ import org.junit.Test;
 public class UsageMetricsIT extends AbstractIntervalMetricsIT {
 
     @SuppressWarnings("unchecked")
-    @Override public HistogramBean<HistogramDataPoint> getMetrics() {
+    @Override
+    public HistogramBean<HistogramDataPoint> getMetrics() {
         return (HistogramBean) apiVersions.metricsUsage(beforeRecoding, tenMinutesAfterRecording,
-                HistogramIntervalType.minute);
+            HistogramIntervalType.minute);
     }
 
     @Test
-    public void countValueInEachSubintervalIsCorrect() throws Exception {
-        recordMetricsIntoNextMinute();
+    public void shouldHaveCorrectCountValueInEachSubinterval() throws Exception {
+        recordMetricsInFollowingMinute();
 
         UsageHistogramBean metrics = apiVersions.metricsUsage(beforeRecoding, tenMinutesAfterRecording,
-                HistogramIntervalType.minute);
+            HistogramIntervalType.minute);
 
         for (UsageDataPoint i : metrics.getData()) {
             Date subinterval = formatter.parse(i.getLabel());
@@ -54,9 +55,11 @@ public class UsageMetricsIT extends AbstractIntervalMetricsIT {
             calendar.setTime(subinterval);
             calendar.add(Calendar.SECOND, 59);
             Date endOfSubinterval = calendar.getTime();
-            ResponseStatsSummaryBean expectedMetrics = apiVersions.metricsSummaryResponseStats(subinterval, endOfSubinterval);
+            ResponseStatsSummaryBean expectedMetrics = apiVersions
+                .metricsSummaryResponseStats(subinterval, endOfSubinterval);
 
-            assertEquals("Unexpected count value", expectedMetrics.getTotal(), i.getCount());
+            assertEquals("Unexpected count value for subinterval: " + i.getLabel(),
+                expectedMetrics.getTotal(), i.getCount());
         }
     }
 }

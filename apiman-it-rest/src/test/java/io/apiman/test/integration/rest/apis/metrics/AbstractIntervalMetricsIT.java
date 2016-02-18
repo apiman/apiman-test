@@ -52,11 +52,12 @@ public abstract class AbstractIntervalMetricsIT extends AbstractMetricsIT {
      */
     public abstract HistogramBean<HistogramDataPoint> getMetrics();
 
-    protected void recordMetricsIntoNextMinute() throws InterruptedException {
-        // wait until next minute begin
+    protected void recordMetricsInFollowingMinute() throws InterruptedException {
+        // wait until current minute expires
         long millisWithinMinute = System.currentTimeMillis() % TimeUnit.MINUTES.toMillis(1);
         long waitFor = TimeUnit.MINUTES.toMillis(1) - millisWithinMinute;
-        LOG.info(String.format("Waiting %d seconds until next minute begin.", TimeUnit.MILLISECONDS.toSeconds(waitFor)));
+        LOG.info(
+            String.format("Waiting %d seconds current minute expires.", TimeUnit.MILLISECONDS.toSeconds(waitFor)));
         Thread.sleep(waitFor);
 
         recordSuccessfulRequests(2);
@@ -78,13 +79,13 @@ public abstract class AbstractIntervalMetricsIT extends AbstractMetricsIT {
     }
 
     @Test
-    public void intervalIsDividedToCorrectNumberOfSubintervals() throws Exception {
+    public void shouldHaveCorrectNumberOfSubintervals() throws Exception {
         HistogramBean metrics = getMetrics();
         assertEquals("Unexpected number of subintervals", 10, metrics.getData().size());
     }
 
     @Test
-    public void subintervalsAreConsecutive() throws Exception {
+    public void shouldHaveConsecutiveValueOnSubintervals() throws Exception {
         HistogramBean<HistogramDataPoint> metrics = getMetrics();
 
         Date prevDate = formatter.parse(metrics.getData().get(0).getLabel());
@@ -96,21 +97,21 @@ public abstract class AbstractIntervalMetricsIT extends AbstractMetricsIT {
     }
 
     @Test
-    public void firstSubintervalHasTheSameLabelValueAsTheBeginningOfTheRequiredInterval() throws Exception {
+    public void shouldHaveCorrectLabelOnFirstSubinterval() throws Exception {
         HistogramBean<HistogramDataPoint> metrics = getMetrics();
         Date firstSubinterval = formatter.parse(metrics.getData().get(0).getLabel());
 
         assertEquals("Unexpected label value of first subinterval",
-                DateUtils.truncate(beforeRecoding, Calendar.MINUTE), firstSubinterval);
+            DateUtils.truncate(beforeRecoding, Calendar.MINUTE), firstSubinterval);
     }
 
     @Test
-    public void lastSubintervalHasTheSameLabelValueAsTheEndOfTheRequiredInterval() throws Exception {
+    public void shouldHaveCorrectLabelOnLastSubinterval() throws Exception {
         HistogramBean<HistogramDataPoint> metrics = getMetrics();
-        int last = metrics.getData().size()-1;
+        int last = metrics.getData().size() - 1;
         Date lastSubinterval = formatter.parse(metrics.getData().get(last).getLabel());
 
-        assertEquals("Unexpected label value of first subinterval",
-                DateUtils.truncate(tenMinutesAfterRecording, Calendar.MINUTE), lastSubinterval);
+        assertEquals("Unexpected label value of last subinterval",
+            DateUtils.truncate(tenMinutesAfterRecording, Calendar.MINUTE), lastSubinterval);
     }
 }
