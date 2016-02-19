@@ -114,7 +114,7 @@ public class ImportApisIT {
     public void canImportApis() throws Exception {
         addTwoApisAndGoToTheLastStep()
             .importApis();
-        TimeUnit.SECONDS.sleep(Integer.valueOf(SuiteProperties.getProperty("time.delay")));
+        TimeUnit.SECONDS.sleep(Integer.valueOf(SuiteProperties.getProperty("apiman.test.delay")));
 
         List<ApiSummaryBean> apis = new APIs(organization).fetchAll();
 
