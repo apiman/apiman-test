@@ -49,7 +49,7 @@ public class ActivityAssert {
      */
     public static void assertLatestActivity(OrganizationBean expected, String entityType, String what)
         throws InterruptedException {
-        TimeUnit.SECONDS.sleep(Integer.valueOf(SuiteProperties.getProperty("time.delay")));
+        TimeUnit.SECONDS.sleep(Integer.valueOf(SuiteProperties.getProperty("apiman.test.delay")));
         final String path = "/organizations/{org}/activity/";
        
         /* Select the activity listed first on page 1 */
