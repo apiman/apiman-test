@@ -99,7 +99,7 @@ public class CORSPluginPolicyIT extends AbstractApiPolicyIT {
         canAddItemIntoList(addPolicyPage.allowMethodsList(), "GET");
     }
 
-    public void canAddItemIntoList(AddCORSPolicyPage.CORSItemList list, String itemValue) {
+    private void canAddItemIntoList(AddCORSPolicyPage.CORSItemList list, String itemValue) {
         list.listedItems().shouldHaveSize(0);
         list.addItem(itemValue);
         list.listedItems().shouldHaveSize(1);
@@ -130,7 +130,7 @@ public class CORSPluginPolicyIT extends AbstractApiPolicyIT {
         cannotAddPolicyWithDuplicateItemsInList(addPolicyPage.allowMethodsList(), "GET");
     }
 
-    public void cannotAddPolicyWithDuplicateItemsInList(AddCORSPolicyPage.CORSItemList list, String itemValue) {
+    private void cannotAddPolicyWithDuplicateItemsInList(AddCORSPolicyPage.CORSItemList list, String itemValue) {
         list.addItem(itemValue);
         list.addItem(itemValue);
         addPolicyPage.addPolicyButton().shouldBe(disabled);
@@ -158,7 +158,7 @@ public class CORSPluginPolicyIT extends AbstractApiPolicyIT {
         canDeleteAllItemsFromList(addPolicyPage.allowMethodsList());
     }
 
-    public void canDeleteAllItemsFromList(AddCORSPolicyPage.CORSItemList list) {
+    private void canDeleteAllItemsFromList(AddCORSPolicyPage.CORSItemList list) {
         list.addItem("foo");
         list.addItem("bar");
         list.deleteAllItems();
@@ -190,7 +190,7 @@ public class CORSPluginPolicyIT extends AbstractApiPolicyIT {
         canDeleteLastItemFromList(addPolicyPage.allowMethodsList());
     }
 
-    public void canDeleteLastItemFromList(AddCORSPolicyPage.CORSItemList list) {
+    private void canDeleteLastItemFromList(AddCORSPolicyPage.CORSItemList list) {
         list.addItem("foo");
         list.addItem("bar");
         list.listedItems().shouldHaveSize(2);
