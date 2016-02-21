@@ -77,7 +77,7 @@ public class AddCORSPolicyPage extends AbstractAddPolicyPage<AddCORSPolicyPage> 
         return this;
     }
 
-    public class CORSItemList extends ItemList<AddCORSPolicyPage> {
+    public static class CORSItemList extends ItemList<AddCORSPolicyPage> {
 
         public CORSItemList(SelenideElement root, AddCORSPolicyPage thisPageObject) {
             super(root, thisPageObject);
