@@ -18,17 +18,15 @@ package io.apiman.test.integration.ui.tests.plans;
 
 import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.exist;
 
 import io.apiman.test.integration.base.AbstractTest;
 import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
-import io.apiman.test.integration.ui.support.selenide.pages.policies.PoliciesDetailPage;
+import io.apiman.test.integration.ui.support.selenide.pages.plans.detail.PlanPoliciesDetailPage;
 import io.apiman.manager.api.beans.plans.PlanVersionBean;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -37,13 +35,13 @@ import org.junit.runner.RunWith;
  *
  * Acceptance test for requirement: APIMAN-90 - Policy UI - Plan Policies UI Page
  * Test verifies presence of UI elements that contain expected information as created via REST for: 
- *    apimanui/api-manager/orgs/{0}/plans/{1}/{2}/policies - PoliciesDetailPage.java
+ *    apimanui/api-manager/orgs/{0}/plans/{1}/{2}/policies - PlanPoliciesDetailPage.java
  *
  */
 @RunWith(ApimanRunner.class)
 public class PlanPolicyIT extends AbstractTest {
 
-    @PlanVersion(plan = "plan", policies = @Policies("arbitrary"))
+    @PlanVersion(plan = "plan", policies = @Policies("ignored_001"))
     private static PlanVersionBean version;
 
     /**
@@ -52,12 +50,10 @@ public class PlanPolicyIT extends AbstractTest {
     @Test
     public void shouldListConfiguredPolicy() {
 
-        PoliciesDetailPage thePoliciesDetailPage = open(PoliciesDetailPage.class, organization.getName(), plan.getId(),
-            version.getVersion());
+        PlanPoliciesDetailPage thePoliciesDetailPage = open(PlanPoliciesDetailPage.class,
+            organization.getName(), plan.getId(), version.getVersion());
 
-        ElementsCollection thePolicies = thePoliciesDetailPage.policies();
-        SelenideElement foundPolicy = thePolicies.find(text("Ignored Resources Policy"));
-        thePoliciesDetailPage.policyTitle(foundPolicy).shouldHave(text("Ignored Resources Policy"));
+        thePoliciesDetailPage.entryContainer("Ignored Resources Policy").should(exist);
     }
 
 }
