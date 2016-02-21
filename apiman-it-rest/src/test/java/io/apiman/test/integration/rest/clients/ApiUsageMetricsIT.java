@@ -16,7 +16,8 @@
 
 package io.apiman.test.integration.rest.clients;
 
-import static com.jayway.restassured.RestAssured.get;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
+
 import static org.junit.Assert.assertEquals;
 
 import io.apiman.test.integration.SuiteProperties;
@@ -78,13 +79,13 @@ public class ApiUsageMetricsIT extends AbstractClientTest {
     private static void recordSuccessfulRequests(int count, String endpoint, String apiKey)
         throws InterruptedException {
         for (long i = 0; i < count; i++) {
-            get(addApiKeyParameter(endpoint, apiKey));
+            givenGateway().get(addApiKeyParameter(endpoint, apiKey));
         }
     }
 
     private static void recordFailedRequests(int count, String endpoint, String apiKey) throws InterruptedException {
         for (long i = 0; i < count; i++) {
-            get(addApiKeyParameter(endpoint + "/foo", apiKey));
+            givenGateway().get(addApiKeyParameter(endpoint + "/foo", apiKey));
         }
     }
 

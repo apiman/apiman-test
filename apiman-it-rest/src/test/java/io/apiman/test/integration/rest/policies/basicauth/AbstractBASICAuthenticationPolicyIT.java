@@ -16,7 +16,7 @@
 
 package io.apiman.test.integration.rest.policies.basicauth;
 
-import static com.jayway.restassured.RestAssured.given;
+import static io.apiman.test.integration.runner.RestAssuredUtils.given;
 
 import io.apiman.test.integration.base.AbstractApiTest;
 

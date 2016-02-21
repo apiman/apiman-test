@@ -16,8 +16,9 @@
 
 package io.apiman.test.integration.rest.plugins.policies.configplugin;
 
-import static com.jayway.restassured.RestAssured.get;
-import static com.jayway.restassured.RestAssured.when;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
+import static io.apiman.test.integration.runner.RestAssuredUtils.when;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 
@@ -29,35 +30,35 @@ import com.jayway.restassured.path.json.JsonPath;
 public class CommonTestMethods {
 
     public static void requestContainsAddedHeaderTest(String endpoint) throws Exception {
-        when()
-            .get(endpoint)
-        .then()
-            .statusCode(200)
-            .body("headers.request-header", equalTo("true"));
+        when().
+            get(endpoint).
+        then().
+            statusCode(200).
+            body("headers.request-header", equalTo("true"));
     }
 
     public static void responseContainsAddedHeaderTest(String endpoint) throws Exception {
         when()
             .get(endpoint)
-        .then()
-            .statusCode(200)
-            .header("response-header", equalTo("true"));
+        .then().
+            statusCode(200).
+            header("response-header", equalTo("true"));
     }
 
     public static void pluginAddedJustOneHeaderInResponseTest(String basicEndpoint, String pluginEndpoint) throws Exception {
-        int basicHeaders = get(basicEndpoint).getHeaders().size();
-        int pluginHeaders = get(pluginEndpoint).getHeaders().size();
+        int basicHeaders = givenGateway().get(basicEndpoint).getHeaders().size();
+        int pluginHeaders = givenGateway().get(pluginEndpoint).getHeaders().size();
         assertEquals("Unexpected number of headers", basicHeaders + 1, pluginHeaders);
     }
 
     public static void pluginAddedJustOneHeaderInRequestTest(String basicEndpoint, String pluginEndpoint) throws Exception {
-        String json = get(basicEndpoint).asString();
+        String json = givenGateway().get(basicEndpoint).asString();
         JsonPath jsonPath = new JsonPath(json);
         int basicHeaders = jsonPath.getInt("headers.size()");
 
-        when()
-            .get(pluginEndpoint)
-        .then()
-            .body("headers.size()", equalTo(basicHeaders + 1));
+        when().
+            get(pluginEndpoint).
+        then().
+            body("headers.size()", equalTo(basicHeaders + 1));
     }
 }

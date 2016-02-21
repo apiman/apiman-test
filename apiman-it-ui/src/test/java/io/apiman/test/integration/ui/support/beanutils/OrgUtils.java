@@ -18,7 +18,6 @@ package io.apiman.test.integration.ui.support.beanutils;
 
 import static io.apiman.test.integration.ui.support.beanutils.BeanUtils.uniqueName;
 
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.test.integration.runner.restclients.entity.Organizations;
 import io.apiman.manager.api.beans.orgs.NewOrganizationBean;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
@@ -29,10 +28,6 @@ import io.apiman.manager.api.beans.orgs.OrganizationBean;
 public class OrgUtils {
 
     public static final String TEST_ORG_NAME_BASE = "MyTestOrg";
-
-    static {
-        RestAssuredConfig.init();
-    }
 
     /**
      * Create an instance of OrganizationBean with unique name and description

@@ -17,8 +17,7 @@
 package io.apiman.test.integration.rest.support;
 
 import static io.apiman.test.integration.SuiteProperties.*;
-
-import static com.jayway.restassured.RestAssured.with;
+import static io.apiman.test.integration.runner.RestAssuredUtils.with;
 
 import io.apiman.test.integration.SuiteProperties;
 
@@ -51,15 +50,15 @@ public class KCTokenProvider {
 
 
     public static String getAccessToken(String username, String password) {
-        return with().
-            contentType("application/x-www-form-urlencoded").
-            authentication().none().
-            formParam("username", username).
-            formParam("password", password).
-            formParam("grant_type", "password").
-            formParam("client_id", "apiman").
-        post(getKcAuthUrl()).
-            body().
-            path("access_token");
+        return  with().
+                    contentType("application/x-www-form-urlencoded").
+                    authentication().none().
+                    formParam("username", username).
+                    formParam("password", password).
+                    formParam("grant_type", "password").
+                    formParam("client_id", "apiman").
+                post(getKcAuthUrl()).
+                    body().
+                    path("access_token");
     }
 }

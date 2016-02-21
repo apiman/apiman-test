@@ -16,8 +16,8 @@
 
 package io.apiman.test.integration.rest.plugins.policies.keycloakplugin;
 
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.RestAssured.when;
+import static io.apiman.test.integration.runner.RestAssuredUtils.given;
+import static io.apiman.test.integration.runner.RestAssuredUtils.when;
 
 import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.rest.support.KCTokenProvider;

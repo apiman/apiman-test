@@ -16,7 +16,6 @@
 
 package io.apiman.test.integration.ui.support.beanutils;
 
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.test.integration.runner.restclients.entity.PolicyDefinitions;
 import io.apiman.manager.api.beans.policies.PolicyDefinitionBean;
 import io.apiman.manager.api.beans.policies.UpdatePolicyDefinitionBean;
@@ -31,10 +30,6 @@ public class PolicyDefinitionUtils {
     private static final String POLICY_IMPL = "class:io.apiman.gateway.engine.policies.AuthorizationPolicy";
     private static final String ICON = "users";
     private static final String DESCRIPTION = "";
-
-    static {
-        RestAssuredConfig.init();
-    }
 
     /**
      * Create an instance of PolicyDefinitionBean with unique name and description

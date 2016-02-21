@@ -16,7 +16,7 @@
 
 package io.apiman.test.integration.rest.apis.metrics;
 
-import static com.jayway.restassured.RestAssured.get;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.base.AbstractTest;
@@ -152,25 +152,25 @@ public abstract class AbstractMetricsIT extends AbstractTest {
 
     protected void recordSuccessfulRequests(int count) {
         for (long i = 0; i < count; i++) {
-            get(endpoint);
+            givenGateway().get(endpoint);
         }
     }
 
     protected void recordFailedRequests(int count) {
         for (long i = 0; i < count; i++) {
-            get(endpoint + "/foo");
+            givenGateway().get(endpoint + "/foo");
         }
     }
 
     protected void recordSuccessfulRequests(int count, String apiKey) {
         for (long i = 0; i < count; i++) {
-            get(addApiKeyParameter(endpoint, apiKey));
+            givenGateway().get(addApiKeyParameter(endpoint, apiKey));
         }
     }
 
     protected void recordFailedRequests(int count, String apiKey) {
         for (long i = 0; i < count; i++) {
-            get(addApiKeyParameter(endpoint + "/foo", apiKey));
+            givenGateway().get(addApiKeyParameter(endpoint + "/foo", apiKey));
         }
     }
 }

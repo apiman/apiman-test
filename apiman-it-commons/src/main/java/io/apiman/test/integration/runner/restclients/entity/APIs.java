@@ -16,6 +16,8 @@
 
 package io.apiman.test.integration.runner.restclients.entity;
 
+import static io.apiman.test.integration.runner.RestAssuredUtils.withManager;
+
 import io.apiman.test.integration.runner.restclients.AbstractEntityRestClient;
 import io.apiman.manager.api.beans.apis.ApiBean;
 import io.apiman.manager.api.beans.apis.NewApiBean;
@@ -24,8 +26,6 @@ import io.apiman.manager.api.beans.summary.ApiSummaryBean;
 
 import java.util.Arrays;
 import java.util.List;
-
-import com.jayway.restassured.RestAssured;
 
 /**
  * @author jcechace
@@ -39,7 +39,7 @@ public class APIs extends AbstractEntityRestClient<ApiBean, NewApiBean> {
     }
 
     public List<ApiSummaryBean> fetchAll() {
-        ApiSummaryBean[] services = RestAssured.get(getResourcePath()).as(ApiSummaryBean[].class);
+        ApiSummaryBean[] services = withManager().get(getResourcePath()).as(ApiSummaryBean[].class);
         return Arrays.asList(services);
     }
 }

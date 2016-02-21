@@ -16,11 +16,11 @@
 
 package io.apiman.test.integration.base;
 
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.RestAssured.when;
+import static io.apiman.test.integration.runner.RestAssuredUtils.given;
+import static io.apiman.test.integration.runner.RestAssuredUtils.when;
 
 import io.apiman.test.integration.runner.ApimanRunner;
-import io.apiman.test.integration.runner.RestAssuredConfig;
+import io.apiman.test.integration.runner.RestAssuredUtils;
 import io.apiman.test.integration.runner.annotations.entity.Api;
 import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.manager.api.beans.apis.ApiBean;
@@ -46,10 +46,6 @@ public abstract class AbstractApiTest {
     @Api(organization = "organization")
     public static ApiBean api;
 
-    @BeforeClass
-    public static void setupBeforeClass() {
-        RestAssuredConfig.init();
-    }
 
     /*
      * Convenience methods for basic POST and GET requests

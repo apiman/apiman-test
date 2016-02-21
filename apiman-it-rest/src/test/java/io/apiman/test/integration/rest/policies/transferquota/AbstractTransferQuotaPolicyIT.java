@@ -16,8 +16,10 @@
 
 package io.apiman.test.integration.rest.policies.transferquota;
 
-import static com.jayway.restassured.RestAssured.get;
-import static com.jayway.restassured.RestAssured.given;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
+import static io.apiman.test.integration.runner.RestAssuredUtils.with;
+import static io.apiman.test.integration.runner.RestAssuredUtils.withGateway;
+
 import static org.junit.Assert.assertTrue;
 
 import io.apiman.test.integration.base.AbstractApiTest;
@@ -50,25 +52,23 @@ public abstract class AbstractTransferQuotaPolicyIT extends AbstractApiTest {
     protected abstract Response useUpNBytes(int n);
 
     protected Response uploadNBytes(int n) {
-        return given()
-            .body(new byte[n])
-            .post(getResourceURL());
+        return  with().body(new byte[n]).post(getResourceURL());
     }
 
     protected Response downloadNBytes(int n) {
-        return given()
-            .header("X-download-n-bytes", n)
-            .get(getResourceURL());
+        return with().header("X-download-n-bytes", n).get(getResourceURL());
     }
 
     protected void assertRemaining(int remaining) {
-        get(getResourceURL()).then()
-            .header(HEADER_REMAINING, String.valueOf(remaining));
+        givenGateway().
+            get(getResourceURL()).
+        then().
+            header(HEADER_REMAINING, String.valueOf(remaining));
     }
 
     @Before
     public void waitForLimitReset() throws InterruptedException {
-        Response response = get(getResourceURL());
+        Response response = withGateway().get(getResourceURL());
         int waitFor = Integer.valueOf(response.header(HEADER_RESET)) + 1;
         LOG.info(String.format("Waiting %d seconds until period reset.", waitFor));
         TimeUnit.SECONDS.sleep(waitFor);
@@ -78,7 +78,7 @@ public abstract class AbstractTransferQuotaPolicyIT extends AbstractApiTest {
     public void shouldHaveValidResponseHeadersWithLimitInfo() {
         for (int i = 1; i <= LIMIT; i++) {
             useUpNBytes(1);
-            Response response = get(getResourceURL());
+            Response response = withGateway().get(getResourceURL());
 
             response.then().
                 header(HEADER_LIMIT, String.valueOf(LIMIT)).

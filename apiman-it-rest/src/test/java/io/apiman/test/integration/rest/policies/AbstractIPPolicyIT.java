@@ -18,8 +18,7 @@ package io.apiman.test.integration.rest.policies;
 
 import static io.apiman.test.integration.SuiteProperties.TOOL_PROXY_ADDRESS_PROP;
 import static io.apiman.test.integration.SuiteProperties.TOOL_PROXY_PORT_PROP;
-
-import static com.jayway.restassured.RestAssured.given;
+import static io.apiman.test.integration.runner.RestAssuredUtils.given;
 
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.base.AbstractApiTest;

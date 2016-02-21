@@ -16,11 +16,12 @@
 
 package io.apiman.test.integration.runner.restclients.entity;
 
+import static io.apiman.test.integration.runner.RestAssuredUtils.withManager;
+
 import io.apiman.test.integration.runner.restclients.AbstractEntityRestClient;
 import io.apiman.manager.api.beans.policies.PolicyDefinitionBean;
 import io.apiman.manager.api.beans.policies.UpdatePolicyDefinitionBean;
 
-import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 
 /**
@@ -41,6 +42,6 @@ public class PolicyDefinitions extends AbstractEntityRestClient<PolicyDefinition
     }
 
     public Response delete(PolicyDefinitionBean bean) {
-        return RestAssured.delete(getResourcePath(bean.getId()));
+        return withManager().delete(getResourcePath(bean.getId()));
     }
 }

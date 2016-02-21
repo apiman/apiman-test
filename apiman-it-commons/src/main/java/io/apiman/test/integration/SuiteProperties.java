@@ -18,6 +18,8 @@ package io.apiman.test.integration;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -31,10 +33,22 @@ public class SuiteProperties {
         initProperties();
     }
 
-    // Apiman constants
+    // Apiman properties
     public static final String APIMAN_PLUGIN_VERSION_PROP = "apiman.version.plugin";
 
-    // Tools binding address constants
+    // Manager connection properties
+    public static final String APIMAN_MANAGER_HOST_PROP = "apiman.manager.host";
+    public static final String APIMAN_MANAGER_PORT_PROP = "apiman.manager.port";
+    public static final String APIMAN_MANAGER_PROTOCOL_PROP = "apiman.manager.protocol";
+    public static final String APIMAN_MANAGER_USER = "apiman.manager.username";
+    public static final String APIMAN_MANAGER_PASSWORD = "apiman.manager.password";
+
+    // Deployment server connection properties
+    public static final String TOOL_DEPLOY_HOST_PROP = "apiman.test.deploy.host";
+    public static final String TOOL_DEPLOY_PORT_PROP = "apiman.test.deploy.port";
+    public static final String TOOL_DEPLOY_PROTOCOL_PROP = "apiman.test.deploy.protocol";
+
+    // Tools binding address properties
     public static final String TOOL_PROXY_ADDRESS_PROP = "apiman.test.proxy.address";
     public static final String TOOL_PROXY_PORT_PROP = "apiman.test.proxy.port";
     public static final String TOOL_KC_ADDRESS_PROP = "apiman.test.kc.address";
@@ -51,6 +65,22 @@ public class SuiteProperties {
 
     public static Properties getProperties() {
         return properties;
+    }
+
+    public static String getManagerUrl() {
+        String protocol = getProperty(APIMAN_MANAGER_PROTOCOL_PROP);
+        String host = getProperty(APIMAN_MANAGER_HOST_PROP);
+        String port = getProperty(APIMAN_MANAGER_PORT_PROP);
+
+        return String.format("%s://%s:%s/apiman", protocol, host, port);
+    }
+
+    public static String getDeploymentUrl() {
+        String protocol = getProperty(TOOL_DEPLOY_PROTOCOL_PROP);
+        String host = getProperty(TOOL_DEPLOY_HOST_PROP);
+        String port = getProperty(TOOL_DEPLOY_PORT_PROP);
+
+        return String.format("%s://%s:%s/apiman", protocol, host, port);
     }
 
     private static void initProperties() {

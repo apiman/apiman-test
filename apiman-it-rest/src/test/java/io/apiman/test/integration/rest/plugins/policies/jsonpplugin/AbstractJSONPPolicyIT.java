@@ -16,14 +16,15 @@
 
 package io.apiman.test.integration.rest.plugins.policies.jsonpplugin;
 
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.RestAssured.when;
+import static io.apiman.test.integration.runner.RestAssuredUtils.given;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
+import static io.apiman.test.integration.runner.RestAssuredUtils.when;
+
 import static org.hamcrest.Matchers.equalTo;
 
 import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 
-import com.jayway.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,46 +44,46 @@ public abstract class AbstractJSONPPolicyIT extends AbstractApiTest {
 
     @Before
     public void setUp() throws Exception {
-        echoApiPureResponse = RestAssured.get(getApiEndpoint()).getBody().print();
+        echoApiPureResponse = givenGateway().get(getApiEndpoint()).getBody().print();
     }
 
     @Test
     public void shouldNotChangeResponseBodyWhenCallbackIsNotSet() throws Exception {
-        when()
-            .get(getResourceURL())
-        .then()
-            .body(equalTo(echoApiPureResponse));
+        when().
+            get(getResourceURL()).
+        then().
+            body(equalTo(echoApiPureResponse));
     }
 
     @Test
     public void shouldNotChangeResponseBodyLengthWhenCallbackIsNotSet() throws Exception {
         Integer expectedLength = echoApiPureResponse.length();
 
-        when()
-            .get(getResourceURL())
-        .then()
-            .header("Content-Length", equalTo(expectedLength.toString()));
+        when().
+            get(getResourceURL()).
+        then().
+            header("Content-Length", equalTo(expectedLength.toString()));
     }
 
     @Test
     public void shouldWrapBodyInCallback() throws Exception {
-        given()
-            .queryParam(CALLBACK_PARAM, CALLBACK)
-        .when()
-            .get(getResourceURL())
-        .then()
-            .body(equalTo(CALLBACK + "(" + echoApiPureResponse + ")"));
+        given().
+            queryParam(CALLBACK_PARAM, CALLBACK).
+        when().
+            get(getResourceURL()).
+        then().
+            body(equalTo(CALLBACK + "(" + echoApiPureResponse + ")"));
     }
 
     @Test
     public void shouldIncreaseResponseBodyLengthByLengthOfAddedCallbackWrapper() throws Exception {
         Integer expectedLength = echoApiPureResponse.length() + CALLBACK.length() + 2;
 
-        given()
-            .queryParam(CALLBACK_PARAM, CALLBACK)
-        .when()
-            .get(getResourceURL())
-        .then()
-            .header("Content-Length", equalTo(expectedLength.toString()));
+        given().
+            queryParam(CALLBACK_PARAM, CALLBACK).
+        when().
+            get(getResourceURL()).
+        then().
+            header("Content-Length", equalTo(expectedLength.toString()));
     }
 }

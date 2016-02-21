@@ -18,7 +18,6 @@ package io.apiman.test.integration.ui.support.beanutils;
 
 import static io.apiman.test.integration.ui.support.beanutils.BeanUtils.uniqueName;
 
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.manager.api.beans.clients.ClientBean;
 
 /**
@@ -27,10 +26,6 @@ import io.apiman.manager.api.beans.clients.ClientBean;
 public class ClientUtils {
 
     public static final String TEST_CLIENT_NAME_BASE = "MyTestClient";
-
-    static {
-        RestAssuredConfig.init();
-    }
 
     /**
      * Create an instance of ClientBean with unique name and description

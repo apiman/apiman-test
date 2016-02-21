@@ -16,14 +16,14 @@
 
 package io.apiman.test.integration.rest.policies.ratelimit;
 
-import static com.jayway.restassured.RestAssured.get;
+import static io.apiman.test.integration.runner.RestAssuredUtils.withGateway;
+
 import static org.junit.Assert.assertTrue;
 
 import io.apiman.test.integration.base.AbstractApiTest;
 
 import java.util.concurrent.TimeUnit;
 
-import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +50,7 @@ public abstract class AbstractRateLimitingPolicyIT extends AbstractApiTest {
 
     @Before
     public void waitForLimitReset() throws InterruptedException {
-        Response response = get(getResourceURL());
+        Response response = withGateway().get(getResourceURL());
         int waitFor = Integer.valueOf(response.header(HEADER_RESET)) + 1;
         LOG.info(String.format("Waiting %d seconds until period reset.", waitFor));
         TimeUnit.SECONDS.sleep(waitFor);
@@ -64,14 +64,14 @@ public abstract class AbstractRateLimitingPolicyIT extends AbstractApiTest {
 
     protected void getNRequests(int n) {
         for (int i = 0; i < n; i++) {
-            RestAssured.get(getResourceURL());
+            withGateway().get(getResourceURL());
         }
     }
 
     @Test
     public void shouldHaveValidResponseHeadersWithLimitInfo() {
         for (int i = 1; i <= LIMIT; i++ ) {
-            Response response = get(getResourceURL());
+            Response response = withGateway().get(getResourceURL());
             response.then().
                     header(HEADER_LIMIT, String.valueOf(LIMIT)).
                     header(HEADER_REMAINING, String.valueOf(LIMIT - i));

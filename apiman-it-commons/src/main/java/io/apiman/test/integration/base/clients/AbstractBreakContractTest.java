@@ -16,7 +16,7 @@
 
 package io.apiman.test.integration.base.clients;
 
-import static com.jayway.restassured.RestAssured.when;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenManager;
 
 import io.apiman.test.integration.base.AbstractClientTest;
 import io.apiman.test.integration.runner.ApimanRunner;
@@ -104,14 +104,15 @@ public class AbstractBreakContractTest extends AbstractClientTest {
      * @param expectations which will be required from response
      */
     protected static void getContract(ContractSummaryBean contract, ResponseSpecification expectations) {
-        when()
-            .get(CONTRACT_PATH,
-                    contract.getClientOrganizationId(),
-                    contract.getClientId(),
-                    contract.getClientVersion(),
-                    contract.getContractId())
-        .then()
-            .spec(expectations);
+        String orgId = contract.getClientOrganizationId();
+        String clientId = contract.getClientId();
+        String clientVersion = contract.getClientVersion();
+        Long contractId = contract.getContractId();
+
+        givenManager().
+            get(CONTRACT_PATH,orgId, clientId, clientVersion, contractId).
+        then().
+            spec(expectations);
     }
 
     /**
@@ -131,14 +132,15 @@ public class AbstractBreakContractTest extends AbstractClientTest {
      * @param expectations which will be required from response
      */
     protected static void breakContract(ContractSummaryBean contract, ResponseSpecification expectations) {
-        when()
-            .delete(CONTRACT_PATH,
-                    contract.getClientOrganizationId(),
-                    contract.getClientId(),
-                    contract.getClientVersion(),
-                    contract.getContractId())
-        .then()
-            .spec(expectations);
+        String orgId = contract.getClientOrganizationId();
+        String clientId = contract.getClientId();
+        String clientVersion = contract.getClientVersion();
+        Long contractId = contract.getContractId();
+
+        givenManager().
+            delete(CONTRACT_PATH, orgId, clientId, clientVersions, contract).
+        then().
+            spec(expectations);
     }
 
     /**
@@ -148,13 +150,14 @@ public class AbstractBreakContractTest extends AbstractClientTest {
      * @param expectations which will be required from response
      */
     protected static void breakAllContracts(ClientVersionBean clientVersion, ResponseSpecification expectations) {
-        when()
-            .delete(CONTRACTS_PATH,
-                    clientVersion.getClient().getOrganization().getId(),
-                    clientVersion.getClient().getId(),
-                    clientVersion.getVersion())
-        .then()
-            .spec(expectations);
+        String org = clientVersion.getClient().getOrganization().getId();
+        String client = clientVersion.getClient().getId();
+        String version = clientVersion.getVersion();
+
+        givenManager().
+            delete(CONTRACTS_PATH, org, client, version).
+        then().
+            spec(expectations);
     }
 
     /**

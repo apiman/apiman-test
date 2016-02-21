@@ -18,7 +18,6 @@ package io.apiman.test.integration.ui.support.beanutils;
 
 import static io.apiman.test.integration.ui.support.beanutils.BeanUtils.uniqueName;
 
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.manager.api.beans.apis.ApiBean;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
 
@@ -28,10 +27,6 @@ import io.apiman.manager.api.beans.orgs.OrganizationBean;
 public class ApiUtils {
 
     public static final String TEST_API_NAME_BASE = "MyTestApi";
-
-    static {
-        RestAssuredConfig.init();
-    }
 
     /**
      * Create an instance of ApiBean with unique name and description

@@ -16,13 +16,10 @@
 
 package io.apiman.test.integration.runner.restclients;
 
-import static com.jayway.restassured.RestAssured.with;
-
-import io.apiman.test.integration.runner.RestAssuredConfig;
+import static io.apiman.test.integration.runner.RestAssuredUtils.withManager;
 
 import java.text.MessageFormat;
 
-import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 
 /**
@@ -31,10 +28,6 @@ import com.jayway.restassured.response.Response;
 public abstract class AbstractRestWrapper {
 
     public static final String ACTION_PATH = "/actions";
-
-    static {
-        RestAssuredConfig.init();
-    }
 
     /**
      * Substitutes parameters in path template
@@ -59,7 +52,7 @@ public abstract class AbstractRestWrapper {
      */
     protected <ResponseEntity> ResponseEntity post(String location, Object entity, Class<ResponseEntity> entityClass,
         boolean nullOnError) {
-        Response response = with().content(entity).post(location).prettyPeek();
+        Response response = withManager().content(entity).post(location).prettyPeek();
         if (response.statusCode() != 200 && nullOnError) {
             return null;
         }
@@ -75,7 +68,7 @@ public abstract class AbstractRestWrapper {
      * @return object of specified response type
      */
     protected <ResponseEntity> ResponseEntity post(String location, Object entity, Class<ResponseEntity> entityClass) {
-        return with().content(entity).post(location).as(entityClass);
+        return withManager().content(entity).post(location).as(entityClass);
     }
 
     /**
@@ -86,7 +79,7 @@ public abstract class AbstractRestWrapper {
      * @return response object
      */
     protected Response post(String location, Object entity) {
-        return with().content(entity).post(location);
+        return withManager().content(entity).post(location);
     }
 
     /**
@@ -96,7 +89,7 @@ public abstract class AbstractRestWrapper {
      * @return object of specified response type
      */
     protected <ResponseEntity> ResponseEntity put(String location, Object entity, Class<ResponseEntity> entityClass) {
-        return with().content(entity).put(location).as(entityClass);
+        return withManager().content(entity).put(location).as(entityClass);
     }
 
     /**
@@ -107,7 +100,7 @@ public abstract class AbstractRestWrapper {
      * @return object of specified response type
      */
     protected Response put(String location, Object entity) {
-        return with().content(entity).put(location);
+        return withManager().content(entity).put(location);
     }
 
     /**
@@ -118,6 +111,6 @@ public abstract class AbstractRestWrapper {
      * @return object of specified response type
      */
     protected <ResponseEntity> ResponseEntity get(String location, Class<ResponseEntity> entityClass) {
-        return RestAssured.get(location).as(entityClass);
+        return withManager().get(location).as(entityClass);
     }
 }

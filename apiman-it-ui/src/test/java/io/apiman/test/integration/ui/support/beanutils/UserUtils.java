@@ -16,7 +16,6 @@
 
 package io.apiman.test.integration.ui.support.beanutils;
 
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.manager.api.beans.idm.UserBean;
 
 /**
@@ -25,10 +24,6 @@ import io.apiman.manager.api.beans.idm.UserBean;
 public class UserUtils {
 
     public static final String TEST_USER_NAME_BASE = "MyUsername";
-
-    static {
-        RestAssuredConfig.init();
-    }
 
     /**
      * Create an instance of UserBean with unique name, fullname, email

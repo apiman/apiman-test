@@ -18,7 +18,6 @@ package io.apiman.test.integration.ui.support.beanutils;
 
 import static io.apiman.test.integration.ui.support.beanutils.BeanUtils.uniqueName;
 
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
 /**
@@ -27,10 +26,6 @@ import io.apiman.manager.api.beans.plans.PlanBean;
 public class PlanUtils {
 
     public static final String TEST_PLAN_NAME_BASE = "MyTestPlan";
-
-    static {
-        RestAssuredConfig.init();
-    }
 
     /**
      * Create an instance of PlanBean with unique name and description

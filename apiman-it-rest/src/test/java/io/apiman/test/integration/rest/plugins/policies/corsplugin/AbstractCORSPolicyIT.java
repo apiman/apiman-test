@@ -16,8 +16,9 @@
 
 package io.apiman.test.integration.rest.plugins.policies.corsplugin;
 
-import static com.jayway.restassured.RestAssured.get;
-import static com.jayway.restassured.RestAssured.given;
+import static io.apiman.test.integration.runner.RestAssuredUtils.given;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
+
 import static org.hamcrest.Matchers.*;
 
 import io.apiman.test.integration.base.AbstractApiTest;
@@ -79,13 +80,15 @@ public abstract class AbstractCORSPolicyIT extends AbstractApiTest {
 
     @Test
     public void noCORSHeadersPresentWhenOriginHeaderIsNotSend() throws Exception {
-        get(getResourceURL()).then()
-            .header(AC_ALLOW_ORIGIN_KEY, is(nullValue()))
-            .header(AC_ALLOW_CREDENTIALS_KEY, is(nullValue()))
-            .header(AC_ALLOW_METHODS_KEY, is(nullValue()))
-            .header(AC_ALLOW_HEADERS_KEY, is(nullValue()))
-            .header(AC_EXPOSE_HEADERS_KEY, is(nullValue()))
-            .header(AC_MAX_AGE_KEY, is(nullValue()));
+        givenGateway().
+             get(getResourceURL()).
+        then().
+            header(AC_ALLOW_ORIGIN_KEY, is(nullValue())).
+            header(AC_ALLOW_CREDENTIALS_KEY, is(nullValue())).
+            header(AC_ALLOW_METHODS_KEY, is(nullValue())).
+            header(AC_ALLOW_HEADERS_KEY, is(nullValue())).
+            header(AC_EXPOSE_HEADERS_KEY, is(nullValue())).
+            header(AC_MAX_AGE_KEY, is(nullValue()));
     }
 
     @Test

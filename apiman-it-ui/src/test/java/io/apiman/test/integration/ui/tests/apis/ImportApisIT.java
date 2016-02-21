@@ -26,7 +26,6 @@ import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.runner.ApimanRunner;
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
@@ -42,7 +41,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -64,11 +62,6 @@ public class ImportApisIT {
     private final String API_NAME_1 = "Foo";
     private final String API_NAME_2 = "Bar";
     private final String TWO_APIS_QUERY = "Baz";
-
-    @BeforeClass
-    public static void setupBeforeClass() {
-        RestAssuredConfig.init();
-    }
 
     @Before
     public void setUp() throws Exception {

@@ -16,11 +16,11 @@
 
 package io.apiman.test.integration.ui.support.assertion;
 
-import static com.jayway.restassured.RestAssured.given;
+import static io.apiman.test.integration.runner.RestAssuredUtils.withManager;
+
 import static org.hamcrest.Matchers.equalTo;
 
 import io.apiman.test.integration.SuiteProperties;
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
 
 import java.util.concurrent.TimeUnit;
@@ -30,22 +30,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class ActivityAssert {
 
-    static {
-        RestAssuredConfig.init();
-    }
-
     /**
      * Asserts that the most recent activity log entry matches the expected orgBean, entity, and action (what)
      *
-     * @param expected org
-     * @param expected entity
-     * @param expected action (what)
-     *
-     * Supported values - as of December 2015
-     * entityType: Organization | Client | Plan | Api
-     * what: Create | Update | Delete | Clone | Grant | Revoke | Publish | Retire | Register | 
-     * Unregister | AddPolicy | RemovePolicy | UpdatePolicy | ReorderPolicies | CreateContract | 
-     * BreakContract | Lock | UpdateDefinition | DeleteDefinition
+     * @param expected expected bean
+     * @param entityType Organization | Client | Plan | Api
+     * @param what Create | Update | Delete | Clone | Grant | Revoke | Publish | Retire | Register | BreakContract |
+     *             Lock | UpdateDefinition | DeleteDefinition
+     * @throws InterruptedException
      */
     public static void assertLatestActivity(OrganizationBean expected, String entityType, String what)
         throws InterruptedException {
@@ -53,7 +45,7 @@ public class ActivityAssert {
         final String path = "/organizations/{org}/activity/";
        
         /* Select the activity listed first on page 1 */
-        given().
+        withManager().
             parameters("page", "1", "count", "1").
         when().
             get(path, expected.getName()).

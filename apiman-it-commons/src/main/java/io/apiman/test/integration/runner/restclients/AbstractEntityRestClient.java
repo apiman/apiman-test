@@ -16,7 +16,8 @@
 
 package io.apiman.test.integration.runner.restclients;
 
-import static com.jayway.restassured.RestAssured.*;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenManager;
+import static io.apiman.test.integration.runner.RestAssuredUtils.withManager;
 
 import io.apiman.manager.api.beans.metrics.HistogramIntervalType;
 
@@ -24,7 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.builder.ResponseSpecBuilder;
 import com.jayway.restassured.specification.ResponseSpecification;
 
@@ -49,13 +49,13 @@ public class AbstractEntityRestClient<Entity, NewEntity> extends AbstractRestWra
 
     @Override
     public EntityRestClient<Entity, NewEntity> fetch(String idOrVersion) {
-        this.bean = RestAssured.get(getResourcePath(idOrVersion)) .as(clazz);
+        this.bean = withManager().get(getResourcePath(idOrVersion)) .as(clazz);
         return this;
     }
 
     @Override
     public EntityRestClient<Entity, NewEntity> create(NewEntity newBean) {
-        this.bean =  with().content(newBean).post(resourcePath).as(clazz);;
+        this.bean =  withManager().content(newBean).post(resourcePath).as(clazz);;
         return this;
     }
 
@@ -67,12 +67,11 @@ public class AbstractEntityRestClient<Entity, NewEntity> extends AbstractRestWra
 
     @Override
     public void peek(String idOrVersion, ResponseSpecification spec) {
-        when().
+        givenManager().
             get(getResourcePath(idOrVersion)).
         then().
             specification(spec);
     }
-
 
     @Override
     public Entity getBean() {
@@ -92,22 +91,22 @@ public class AbstractEntityRestClient<Entity, NewEntity> extends AbstractRestWra
     }
 
     protected <Bean> Bean getMetrics(Date from, Date to, String idOrVersion, String metricsPath, Class<Bean> clazz) {
-        return given().
-            param("from", formatter.format(from)).
-            param("to", formatter.format(to)).
-        when().
-            get(getResourcePath(idOrVersion) + metricsPath).
-            as(clazz);
+        return  withManager().given().
+                    param("from", formatter.format(from)).
+                    param("to", formatter.format(to)).
+                then().
+                    get(getResourcePath(idOrVersion) + metricsPath).
+                    as(clazz);
     }
 
     protected <Bean> Bean getMetrics(Date from, Date to, String idOrVersion, String metricsPath, Class<Bean> clazz,
             HistogramIntervalType interval) {
-        return given().
-            param("from", formatter.format(from)).
-            param("to", formatter.format(to)).
-            param("interval", interval).
-        when().
-            get(getResourcePath(idOrVersion) + metricsPath).
-            as(clazz);
+        return  givenManager().
+                    param("from", formatter.format(from)).
+                    param("to", formatter.format(to)).
+                    param("interval", interval).
+                when().
+                    get(getResourcePath(idOrVersion) + metricsPath).
+                    as(clazz);
     }
 }

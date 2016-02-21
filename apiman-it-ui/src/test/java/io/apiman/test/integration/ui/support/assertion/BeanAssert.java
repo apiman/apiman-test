@@ -16,10 +16,10 @@
 
 package io.apiman.test.integration.ui.support.assertion;
 
-import static com.jayway.restassured.RestAssured.when;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenManager;
+
 import static org.hamcrest.Matchers.equalTo;
 
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.test.integration.runner.restclients.VersionRestClient;
 import io.apiman.manager.api.beans.apis.ApiBean;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
@@ -39,10 +39,6 @@ import org.junit.Assert;
  */
 public class BeanAssert {
 
-    static {
-        RestAssuredConfig.init();
-    }
-
     /**
      * Asserts that the given bean matches one inside apiman.
      * This method does not have to cross check all fields.
@@ -53,7 +49,7 @@ public class BeanAssert {
      */
     public static void assertOrganization(OrganizationBean expected) {
         final String path = "/organizations/{org}";
-        when().
+        givenManager().
             get(path, expected.getName()).
         then().
             body("name", equalTo(expected.getName())).
@@ -70,7 +66,7 @@ public class BeanAssert {
      */
     public static void assertApi(ApiBean expected) {
         final String path = "/organizations/{org}/apis/{api}";
-        when().
+        givenManager().
             get(path, expected.getOrganization().getName(), expected.getName()).
         then().
             statusCode(200).
@@ -101,11 +97,13 @@ public class BeanAssert {
      */
     public static void assertApiVersion(ApiVersionBean apiVersion, ResponseSpecification expectations) {
         final String path = "/organizations/{org}/apis/{api}/versions/{version}";
-        when().
-            get(path,
-                apiVersion.getApi().getOrganization().getName(),
-                apiVersion.getApi().getName(),
-                apiVersion.getVersion()).
+
+        String org = apiVersion.getApi().getOrganization().getName();
+        String name = apiVersion.getApi().getName();
+        String version = apiVersion.getVersion();
+
+        givenManager().
+            get(path, org, name, version).
         then().
             statusCode(200).
             spec(expectations);
@@ -121,7 +119,8 @@ public class BeanAssert {
      */
     public static void assertPolicyDefinition(PolicyDefinitionBean expected) {
         final String path = "/policyDefs/{def}";
-        when().
+
+        givenManager().
             get(path, expected.getId()).
         then().
             body("id", equalTo(expected.getId())).

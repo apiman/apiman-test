@@ -17,13 +17,11 @@
 package io.apiman.test.integration.base;
 
 import io.apiman.test.integration.runner.ApimanRunner;
-import io.apiman.test.integration.runner.RestAssuredConfig;
 import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 /**
@@ -43,8 +41,4 @@ public abstract class AbstractPlanTest {
     @Plan(organization = "organization")
     public static PlanBean plan;
 
-    @BeforeClass
-    public static void setupBeforeClass() {
-        RestAssuredConfig.init();
-    }
 }
