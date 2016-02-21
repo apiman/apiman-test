@@ -39,7 +39,7 @@ public abstract class AbstractBASICAuthenticationPolicyIT extends AbstractApiTes
     protected abstract String getResourceURL();
 
     @Test
-    public void shouldPassWheValidCredentialsProvided() {
+    public void shouldPassWhenValidCredentialsProvided() {
         doAuthRequest(PolicyConstants.USERNAME, PolicyConstants.PASSWORD, 200);
     }
 
