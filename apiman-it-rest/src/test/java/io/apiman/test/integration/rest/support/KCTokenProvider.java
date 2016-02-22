@@ -56,7 +56,7 @@ public class KCTokenProvider {
                     formParam("username", username).
                     formParam("password", password).
                     formParam("grant_type", "password").
-                    formParam("client_id", "apiman").
+                    formParam("client_id", "qeclient").
                 post(getKcAuthUrl()).
                     body().
                     path("access_token");
