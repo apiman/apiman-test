@@ -1,0 +1,49 @@
+{
+  "realm" : "apiman",
+  "users" : [ {
+    "id" : "dda64ec0-ecf0-46d7-9688-a7677f196b5b",
+    "username" : "admin",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "firstName" : "apiman",
+    "lastName" : "admin",
+    "email" : "admin@admin.com",
+    "credentials" : [ {
+      "type" : "password",
+      "hashedSaltedValue" : "jPtofmcxNJmO1vq53qnyKt4DUICwXPf/lkrOFXhg9JZUjraa1s5KfH15nAhgrLWx4T1lf5dErhel/dSeKLlRCQ==",
+      "salt" : "eLdmF3b9L5Ftg6lPBUKHcg==",
+      "hashIterations" : 1,
+      "counter" : 0,
+      "algorithm" : "pbkdf2",
+      "digits" : 0
+    } ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "apiuser", "apiadmin" ],
+    "clientRoles" : {
+      "realm-management" : [ "realm-admin" ]
+    },
+    "groups" : [ ]
+  }, {
+    "id" : "9e51cb42-368d-4ef1-9cb8-06580d4a1785",
+    "username" : "apimanager",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "credentials" : [ {
+      "type" : "password",
+      "hashedSaltedValue" : "Ylipauv5AgHTb4PCFcxnnBAvQwxq4UlupyKVRg3KHLWZOg/ShplHj5qN7Ty+OFgXP22l99pSSBYgDrNFvWg4Pw==",
+      "salt" : "0xJXge6lz97d4M03dvYm9g==",
+      "hashIterations" : 1,
+      "counter" : 0,
+      "algorithm" : "pbkdf2",
+      "digits" : 0
+    } ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "apipublisher" ],
+    "clientRoles" : {
+      "account" : [ "manage-account", "view-profile" ]
+    },
+    "groups" : [ ]
+  } ]
+}
