@@ -47,12 +47,6 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
-    <!-- DBAllocator: https://mojo.redhat.com/docs/DOC-1016483-->
-    <dependency>
-      <groupId>org.jboss.qa.dballoc</groupId>
-      <artifactId>dballocator-client-rest</artifactId>
-      <version>2.3.0</version>
-    </dependency>
     <!-- Creaper EAP and WF tooling library -->
     <dependency>
       <groupId>org.jboss.qa.creaper</groupId>
