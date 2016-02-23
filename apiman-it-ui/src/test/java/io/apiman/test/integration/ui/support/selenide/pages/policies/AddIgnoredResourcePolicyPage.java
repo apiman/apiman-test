@@ -19,7 +19,8 @@ package io.apiman.test.integration.ui.support.selenide.pages.policies;
 import static com.codeborne.selenide.Selenide.$;
 
 import io.apiman.test.integration.ui.support.selenide.NoLocation;
-import io.apiman.test.integration.ui.support.selenide.components.SelectList;
+import io.apiman.test.integration.ui.support.selenide.components.BootstrapSelect;
+import io.apiman.test.integration.ui.support.selenide.components.RulesTable;
 import io.apiman.test.integration.ui.support.selenide.layouts.AbstractAddPolicyPage;
 
 import com.codeborne.selenide.SelenideElement;
@@ -29,7 +30,7 @@ import com.codeborne.selenide.SelenideElement;
  */
 @NoLocation
 public class AddIgnoredResourcePolicyPage extends AbstractAddPolicyPage<AddIgnoredResourcePolicyPage>
-        implements SelectList<AddIgnoredResourcePolicyPage> {
+        implements RulesTable<AddIgnoredResourcePolicyPage> {
 
     @Override
     public AddIgnoredResourcePolicyPage selectPolicyType() {
@@ -37,8 +38,8 @@ public class AddIgnoredResourcePolicyPage extends AbstractAddPolicyPage<AddIgnor
     }
 
     @Override
-    public SelenideElement elementSelect() {
-        return $("#paths");
+    public SelenideElement tableRoot() {
+        return $("table");
     }
 
     /**
@@ -50,13 +51,30 @@ public class AddIgnoredResourcePolicyPage extends AbstractAddPolicyPage<AddIgnor
     }
 
     /**
+     * HTTP method select
+     * @return BootstrapSelect
+     */
+    public BootstrapSelect<AddIgnoredResourcePolicyPage> methodSelect() {
+        return new BootstrapSelect<>($("#requestMethod").parent().$("div.bootstrap-select"), this);
+    }
+
+    /**
+     * Add ignore resource button
+     * @return element
+     */
+    public SelenideElement addButton() {
+        return $("#add-rule");
+    }
+
+    /**
      * Add path to the list of ignored paths
      * @param path path to be added
      * @return this page object
      */
-    public AddIgnoredResourcePolicyPage ignorePath(String path) {
+    public AddIgnoredResourcePolicyPage ignorePath(String path, String method) {
         pathInput().val(path);
-        addOptionButton().click();
+        methodSelect().select(method);
+        addButton().click();
         return thisPageObject();
     }
 }

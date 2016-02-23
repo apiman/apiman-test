@@ -34,8 +34,8 @@ import org.openqa.selenium.By;
  */
 public class Select2<P extends AbstractPage> {
 
-    private P thisPageObject;
-    private SelenideElement root;
+    protected P thisPageObject;
+    protected SelenideElement root;
 
     /**
      *
