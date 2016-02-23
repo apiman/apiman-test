@@ -60,7 +60,7 @@ public class ApiImplDetailPage extends AbstractApiDetailPage<ApiImplDetailPage> 
      * @return element
      */
     public SelenideElement saveButton() {
-        return Selenide.$(ByApiman.i18n("button", "save"));
+        return Selenide.$(ByApiman.i18n("save"));
     }
 
     /**
