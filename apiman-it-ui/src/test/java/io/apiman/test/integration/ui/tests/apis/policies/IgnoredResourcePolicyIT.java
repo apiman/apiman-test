@@ -18,8 +18,6 @@ package io.apiman.test.integration.ui.tests.apis.policies;
 
 import static io.apiman.test.integration.ui.support.assertion.BeanAssert.assertNoPolicies;
 
-import static com.codeborne.selenide.CollectionCondition.empty;
-
 import io.apiman.test.integration.base.policies.PolicyDefs;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiPoliciesDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.policies.AddIgnoredResourcePolicyPage;
@@ -50,15 +48,15 @@ public class IgnoredResourcePolicyIT extends AbstractApiPolicyIT {
 
     protected void addStartingConfiguration() {
         addPolicyPage
-            .ignorePath(IGNORED_PATH_FOO)
-            .ignorePath(IGNORED_PATH_BAR);
+            .ignorePath(IGNORED_PATH_FOO, "*")
+            .ignorePath(IGNORED_PATH_BAR, "POST");
     }
 
     @Test
     public void canAddPolicyWithMultipleIgnoredPaths() {
         addStartingConfiguration();
         addPolicyPage
-            .listedOptions().shouldHaveSize(2);
+            .listedRules().shouldHaveSize(2);
         addPolicyPage
             .addPolicy(ApiPoliciesDetailPage.class);
         assertPolicyPresent();
@@ -68,18 +66,8 @@ public class IgnoredResourcePolicyIT extends AbstractApiPolicyIT {
     public void canRemovePathFromList() {
         addStartingConfiguration();
         addPolicyPage
-            .removeOption(IGNORED_PATH_FOO)
-            .listedOptions().shouldHaveSize(1);
-        addPolicyPage.addPolicy(ApiPoliciesDetailPage.class);
-        assertPolicyPresent();
-    }
-
-    @Test
-    public void canClearPathList() {
-        addStartingConfiguration();
-        addPolicyPage
-            .clearSelectList()
-            .listedOptions().shouldBe(empty);
+            .removeRule(IGNORED_PATH_FOO)
+            .listedRules().shouldHaveSize(1);
         addPolicyPage.addPolicy(ApiPoliciesDetailPage.class);
         assertPolicyPresent();
     }

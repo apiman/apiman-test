@@ -19,18 +19,23 @@ package io.apiman.test.integration.ui.support.selenide.pages.policies;
 import static com.codeborne.selenide.Selenide.$;
 
 import io.apiman.test.integration.ui.support.selenide.NoLocation;
+import io.apiman.test.integration.ui.support.selenide.components.BootstrapSelect;
+import io.apiman.test.integration.ui.support.selenide.components.RulesTable;
 import io.apiman.test.integration.ui.support.selenide.layouts.AbstractAddPolicyPage;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
 /**
  * @author jkaspar
  */
 @NoLocation
-public class AddAuthorizationPolicyPage extends AbstractAddPolicyPage<AddAuthorizationPolicyPage> {
+public class AddAuthorizationPolicyPage extends AbstractAddPolicyPage<AddAuthorizationPolicyPage>
+    implements RulesTable<AddAuthorizationPolicyPage> {
+
+    @Override
+    public SelenideElement tableRoot() {
+        return $("table");
+    }
 
     @Override
     public AddAuthorizationPolicyPage selectPolicyType() {
@@ -41,54 +46,24 @@ public class AddAuthorizationPolicyPage extends AbstractAddPolicyPage<AddAuthori
      * Path input inside Add Authorization Rule box
      * @return element
      */
-    public SelenideElement newRulePathInput() {
+    public SelenideElement pathInput() {
         return $("#path");
     }
 
     /**
-     * Set value into {@link #newRulePathInput()}
-     * @param path value
-     * @return this page object
+     * HTTP method select
+     * @return BootstrapSelect
      */
-    public AddAuthorizationPolicyPage newRulePath(String path) {
-        newRulePathInput().val(path);
-        return this;
-    }
-
-    /**
-     * Verb input inside Add Authorization Rule box
-     * @return element
-     */
-    public SelenideElement newRuleVerbInput() {
-        return $("#verb");
-    }
-
-    /**
-     * Set value into {@link #newRuleVerbInput()}
-     * @param verb value
-     * @return this page object
-     */
-    public AddAuthorizationPolicyPage newRuleVerb(String verb) {
-        newRuleVerbInput().val(verb);
-        return this;
+    public BootstrapSelect<AddAuthorizationPolicyPage> newRuleMethodSelect() {
+        return new BootstrapSelect<>($("#requestMethod").parent().$("div.bootstrap-select"), this);
     }
 
     /**
      * Role input inside Add Authorization Rule box
      * @return element
      */
-    public SelenideElement newRuleRoleInput() {
+    public SelenideElement roleInput() {
         return $("#role");
-    }
-
-    /**
-     * Set value into {@link #newRuleRoleInput()}
-     * @param role value
-     * @return this page object
-     */
-    public AddAuthorizationPolicyPage newRuleRole(String role) {
-        newRuleRoleInput().val(role);
-        return this;
     }
 
     /**
@@ -102,51 +77,33 @@ public class AddAuthorizationPolicyPage extends AbstractAddPolicyPage<AddAuthori
     /**
      * Helpful method for adding new Authorization Rule
      * @param path of new rule
-     * @param verb of new rule
+     * @param method of new rule
      * @param role of new rule
      * @return this page object
      */
-    public AddAuthorizationPolicyPage addAuthorizationRule(String path, String verb, String role) {
-        newRulePath(path);
-        newRuleVerb(verb);
-        newRuleRole(role);
+    public AddAuthorizationPolicyPage addAuthorizationRule(String path, String method, String role) {
+        pathInput().val(path);
+        newRuleMethodSelect().select(method);
+        roleInput().val(role);
         addRuleButton().click();
         return this;
     }
 
-    /**
-     * Table element containing configured rules
-     * TODO: element is missing identifier
-     * @return element
-     */
-    public SelenideElement configuredRulesTable() {
-        return $(By.xpath("//p[contains(text(), 'No authorization rules have been added')]")).closest("table");
+    public BootstrapSelect<AddAuthorizationPolicyPage> multipleMatchActionSelect() {
+        return new BootstrapSelect<>($("#multiple-match-action").parent().$("div.bootstrap-select"), this);
     }
 
-    /**
-     * Elements inside configured rules table
-     * @return elements collection
-     */
-    public ElementsCollection configuredRulesItems() {
-        return configuredRulesTable().findAll("tbody > tr").filter(Condition.hasClass("ng-scope"));
+    public AddAuthorizationPolicyPage multipleMatchAction(String value) {
+        multipleMatchActionSelect().select(value);
+        return this;
     }
 
-    /**
-     * tr element containing configured rule with given text
-     * @param text can be path, verb or required role
-     * @return element
-     */
-    public SelenideElement configuredRuleItem(String text) {
-        return configuredRulesTable().find(By.xpath("//td[contains(text(), '" + text + "')]")).closest("tr");
+    public BootstrapSelect<AddAuthorizationPolicyPage> unmatchedRequestActionSelect() {
+        return new BootstrapSelect<>($("#unmatched-request-action").parent().$("div.bootstrap-select"), this);
     }
 
-    /**
-     * Remove configured rule with given text
-     * @param text can be path, verb or required role
-     * @return element
-     */
-    public AddAuthorizationPolicyPage removeConfiguredRule(String text) {
-        configuredRuleItem(text).find("button[ng-click='remove(item)']").click();
+    public AddAuthorizationPolicyPage unmatchedRequestAction(String value) {
+        unmatchedRequestActionSelect().select(value);
         return this;
     }
 }

@@ -35,8 +35,10 @@ public class AuthorizationPolicyIT extends AbstractApiPolicyIT {
     public void openPage() {
         addPolicyPage = policiesDetailPage.addPolicy(AddAuthorizationPolicyPage.class);
         addPolicyPage
-            .addAuthorizationRule("/bar", "bar", "bar")
-            .addAuthorizationRule("/foo", "foo", "foo");
+            .addAuthorizationRule("/bar", "GET", "bar")
+            .addAuthorizationRule("/foo", "POST", "foo")
+            .multipleMatchAction("all")
+            .unmatchedRequestAction("pass");
     }
 
     @Override
@@ -54,10 +56,10 @@ public class AuthorizationPolicyIT extends AbstractApiPolicyIT {
     @Test
     public void canRemoveOneRule() {
         addPolicyPage
-            .configuredRulesItems().shouldHaveSize(2);
+            .listedRules().shouldHaveSize(2);
         addPolicyPage
-            .removeConfiguredRule("foo")
-            .configuredRulesItems().shouldHaveSize(1);
+            .removeRule("foo")
+            .listedRules().shouldHaveSize(1);
     }
 
     @Test
