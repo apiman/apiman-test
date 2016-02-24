@@ -1,74 +1,153 @@
 #!/usr/bin/env bash
 
-OPTS=`getopt -o medsfurv --long move,elastic,docker,del_datasource,fix,ui,vertx -- $@`
+OPTS=`getopt -o urv --long ui,rest,vertx -- $@`
 
-MOVE_APIMAN=false
-DELETE_ELASTIC=false
-RUN_DOCKER=false
-GET_CHROME_DRIVER=false
-RELEASE=false
-FIX_VERSION=false
-INSTALL_WF=false
-VERTX=false
+: ${MOVE_APIMAN:=false}
+: ${DELETE_ELASTIC:=false}
+: ${RUN_DOCKER:=false}
+: ${GET_CHROME_DRIVER:=false}
+: ${RELEASE:=false}
+: ${FIX_VERSION:=false}
+: ${INSTALL_WF:=false}
+: ${VERTX:=false}
+: ${API_CATALOG:=false}
+: ${DEPLOY_DS:=false}
+: ${CONFIGURE_ES:=false}
+: ${UI_TESTS:=false}
+: ${REST_TESTS:=false}
+: ${INSTALL_PLUGINS:=false}
+: ${TEST_DEPLOYMENTS:=false}
+: ${COMMUNITY_TESTS:=false}
 
 eval set -- "$OPTS"
 
+function set_ui() {
+    BUILD_APIMAN=true
+    MOVE_APIMAN=true
+    RUN_DOCKER=true
+    GET_CHROME_DRIVER=true
+    FIX_VERSION=true
+    DELETE_ELASTIC=true
+    CONFIGURE_ES=true
+    API_CATALOG=true
+    INSTALL_PLUGINS=true
+    TEST_DEPLOYMENTS=true
+    UI_TESTS=true
+}
+
+function set_rest() {
+    MOVE_APIMAN=true
+    BUILD_APIMAN=true
+    RUN_DOCKER=true
+    API_CATALOG =true
+    DEPLOY_DS=true
+    DELETE_ELASTIC=true
+    CONFIGURE_ES=true
+    INSTALL_PLUGINS=true
+    REST_TESTS=true
+    TEST_DEPLOYMENTS=true
+}
+
+function set_comunity() {
+    BUILD_APIMAN=true
+    MOVE_APIMAN=true
+    COMMUNITY_TESTS=true
+
+}
+
 while true; do
     case "$1" in
-    -m | --move) MOVE_APIMAN=true; shift ;;
-    -e | --elastic) DELETE_ELASTIC=true; shift ;;
-    -d | --docker) RUN_DOCKER=true; shift ;;
-    -r | --release) FIX_VERSION=true; INSTALL_WF=true shift ;;
-    -u | --ui) echo GET_CHROME_DRIVER=true shift ;;
+    -u | --ui) set_ui; shift ;;
+    -r | --rest) set_rest; shift ;;
+    -c | --community) set_community; shift;;
     *) break ;;
     esac
 done
 
+if $BUILD_APIMAN; then
+    sh maven/build_apiman.sh
+    sh maven/build_plugins.sh
+fi
 
-if [ $MOVE_APIMAN ]; then
+if $MOVE_APIMAN; then
     # move build apiman server to proper location
-    mv ${WORKSPACE}/apiman/tools/server-all/target/wildfly-9.0.2.Final ${APIMAN_HOME}
+    mv ${WORKSPACE}/apiman/tools/server-all/target/wildfly-10.0.0.Final ${APIMAN_HOME}
 fi
 
-if [ $GET_CHROME_DRIVER ]; then
+if $GET_CHROME_DRIVER; then
     # Install chrome driver
-    ${WORKSPACE}/apiman-qe-tests/tools/chrome_driver.sh   ${CHROME_DRIVER}
+    ${TEST_SOURCES}/tools/chrome_driver.sh   ${CHROME_DRIVER}
 fi
 
-if [ $FIX_VERSION ]; then
+if $FIX_VERSION; then
     # fix apiman version property
     ${TEST_SOURCES}/tools/fix_apiman_version.sh
 fi
 
-if [ $INSTALL_WF ]; then
+if $INSTALL_WF; then
     # install apiman
-    ${WORKSPACE}/apiman-qe-tests/tools/install_wildfly.sh ${APIMAN_HOME}
+    ${TEST_SOURCES}/tools/install_wildfly.sh ${APIMAN_HOME}
 fi
 
-# Set api catalog properties
-${TEST_SOURCES}/tools/api-catalog/set_api_catalog.sh
+if $API_CATALOG; then
+    # Set api catalog properties
+    ${TEST_SOURCES}/tools/api-catalog/set_api_catalog.sh
+fi
 
-# Deploy datasource
-${TEST_SOURCES}/tools/deploy_apimanqe_ds.sh
+if $DEPLOY_DS; then
+    # Deploy datasource
+    ${TEST_SOURCES}/tools/deploy_apimanqe_ds.sh
+fi
 
-if [ $DELETE_ELASTIC ]; then
+if $DELETE_ELASTIC; then
     # remove embedded elastic
     rm ${APIMAN_HOME}/standalone/deployments/apiman-es.war
+fi
 
+if $CONFIGURE_ES; then
     # configure and run es
     sed -i "s/apiman.es.port=19200/apiman.es.port=9200/g" $APIMAN_HOME/standalone/configuration/apiman.properties
 
 fi
 
-if [ $RUN_DOCKER ]; then
+if $RUN_DOCKER; then
     # run docker environment
     docker-compose -f ${TEST_SOURCES}/tools/docker/docker-compose.yml pull
     docker-compose -f ${TEST_SOURCES}/tools/docker/docker-compose.yml up -d
 fi
 
 # run apiman
-$APIMAN_HOME/bin/standalone.sh -c standalone-apiman.xml > server_stdout.log 2>&1 &
+$APIMAN_HOME/bin/standalone.sh > server_stdout.log 2>&1 &
+PID=$!
 sleep 30
 
-if [ $VERTX ]; then
+if $VERTX; then
     ${TEST_SOURCES}/tools/scripts/vertx.sh
+fi
+
+if $INSTALL_PLUGINS; then
+    sh maven/buld_plugins.sh
+fi
+
+if $TEST_DEPLOYMENTS; then
+    sh maven/deploy_services.sh
+fi
+
+if $COMMUNITY_TESTS; then
+    sh maven/run_community_tests.sh
+fi
+
+if $REST_TESTS; then
+    sh maven/build_rest_tests.sh
+fi
+
+if $UI_TESTS; then
+    sh maven/run_ui_tests.sh
+fi
+
+if $RUN_DOCKER; then
+    docker-compose -f ${TEST_SOURCES}/tools/docker/docker-compose.yml stop
+    docker-compose -f ${TEST_SOURCES}/tools/docker/docker-compose.yml rm -f
+fi
+
+kill -INT $PID
