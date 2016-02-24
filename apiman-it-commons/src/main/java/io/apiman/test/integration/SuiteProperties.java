@@ -18,6 +18,8 @@ package io.apiman.test.integration;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
@@ -30,6 +32,8 @@ public class SuiteProperties {
     static {
         initProperties();
     }
+
+    public static final String SUITE_PROPERTIES_PROP = "suite.properties";
 
     // Apiman properties
     public static final String APIMAN_PLUGIN_VERSION_PROP = "apiman.version.plugin";
@@ -83,10 +87,13 @@ public class SuiteProperties {
 
     private static void initProperties() {
         Properties defaults = new Properties();
-        try (InputStream is = SuiteProperties.class.getResourceAsStream("/defaults.properties")) {
-            defaults.load(is);
-        } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
+
+        String customConfig = System.getProperty(SUITE_PROPERTIES_PROP);
+
+        if (customConfig != null) {
+            loadDefaultsFromFile(defaults, customConfig);
+        } else {
+            loadDefaultsFromFile(defaults);
         }
 
         properties = new Properties();
@@ -95,6 +102,22 @@ public class SuiteProperties {
 
         for (String key : defaults.stringPropertyNames()) {
             setSystemProperty(key, defaults.getProperty(key));
+        }
+    }
+
+    private static void loadDefaultsFromFile(Properties properties) {
+        try (InputStream is = SuiteProperties.class.getResourceAsStream("/defaults.properties")) {
+            properties.load(is);
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+    }
+
+    private static void loadDefaultsFromFile(Properties properties, String location) {
+        try (InputStream is = Files.newInputStream(Paths.get(location))) {
+            properties.load(is);
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
         }
     }
 
