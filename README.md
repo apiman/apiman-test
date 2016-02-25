@@ -63,7 +63,7 @@ This modules contains various utility services used by the the following modules
 
 This command can be used for WildFly deployment
 ```
-mvn celan install wildfly:deploy.
+mvn clean install wildfly:deploy.
 ```
 
 By default these services are expected to run on ```localhost:8080```. However the configuration can be changed using these properties.
