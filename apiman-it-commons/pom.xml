@@ -25,12 +25,6 @@
       <groupId>io.apiman</groupId>
       <artifactId>apiman-manager-api-beans</artifactId>
     </dependency>
-    <!-- Simple DDL parser -->
-    <dependency>
-      <groupId>io.apiman</groupId>
-      <artifactId>apiman-tools-ddl</artifactId>
-      <version>${version.apiman}</version>
-    </dependency>
     <!-- REST client/testing -->
     <dependency>
       <groupId>com.jayway.restassured</groupId>
