@@ -20,6 +20,7 @@ import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Selenide.*;
 
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 
 /**
  * @author jcechace
@@ -47,7 +48,7 @@ public class LoginPage {
      * @return element
      */
     public SelenideElement loginButton() {
-        return $("input[name='login']");
+        return $("#kc-login");
     }
 
     /**
@@ -83,7 +84,8 @@ public class LoginPage {
      * @return true if current page is login page
      */
     public boolean isCurrentPage() {
-        return title().contains("Log in to apiman") && loginButton().is(present);
+        return WebDriverRunner.getWebDriver().manage().getCookieNamed("JSESSIONID") == null
+            && loginButton().is(present);
     }
 
     /**
