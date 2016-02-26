@@ -21,7 +21,7 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 import static com.codeborne.selenide.Condition.text;
 
 import io.apiman.test.integration.base.AbstractClientTest;
-import io.apiman.test.integration.categories.Visual;
+import io.apiman.test.integration.categories.VisualTest;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiContractsDetailPage;
@@ -34,7 +34,7 @@ import org.junit.experimental.categories.Category;
 /**
  * @author jkaspar
  */
-@Category({Visual.class})
+@Category({VisualTest.class})
 public class ApiContractsDetailIT extends AbstractClientTest {
 
     private static ApiContractsDetailPage page;

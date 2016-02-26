@@ -19,5 +19,5 @@ package io.apiman.test.integration.categories;
 /**
  * @author jcechace
  */
-public interface Visual {
+public interface VisualTest {
 }

@@ -19,7 +19,7 @@ package io.apiman.test.integration.ui.tests.plans;
 import static com.codeborne.selenide.Condition.text;
 
 import io.apiman.test.integration.base.AbstractTest;
-import io.apiman.test.integration.categories.Visual;
+import io.apiman.test.integration.categories.VisualTest;
 import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.ui.support.selenide.SelenideUtils;
 import io.apiman.test.integration.ui.support.selenide.pages.plans.CreatePlanPage;
@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
  *
  */
 @RunWith(ApimanRunner.class)
-@Category({Visual.class})
+@Category({VisualTest.class})
 public class NewPlanIT extends AbstractTest {
 
     /**

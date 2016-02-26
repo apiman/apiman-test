@@ -22,7 +22,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 
 import io.apiman.test.integration.base.AbstractClientTest;
-import io.apiman.test.integration.categories.Visual;
+import io.apiman.test.integration.categories.VisualTest;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
@@ -38,7 +38,7 @@ import org.junit.experimental.categories.Category;
 /**
  * @author jkaspar
  */
-@Category({Visual.class})
+@Category({VisualTest.class})
 public class ClientApisDetailIT extends AbstractClientTest {
 
     @ApiVersion(api = "api", vPlans = {"planVersion"}, version = "2.0")
