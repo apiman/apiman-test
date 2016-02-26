@@ -138,7 +138,7 @@ public class AbstractBreakContractTest extends AbstractClientTest {
         Long contractId = contract.getContractId();
 
         givenManager().
-            delete(CONTRACT_PATH, orgId, clientId, clientVersions, contract).
+            delete(CONTRACT_PATH, orgId, clientId, clientVersion, contractId).
         then().
             spec(expectations);
     }
