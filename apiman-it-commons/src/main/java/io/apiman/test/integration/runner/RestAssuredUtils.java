@@ -26,7 +26,6 @@ import io.apiman.test.integration.SuiteProperties;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.authentication.NoAuthScheme;
 import com.jayway.restassured.builder.RequestSpecBuilder;
-import com.jayway.restassured.builder.ResponseSpecBuilder;
 import com.jayway.restassured.filter.log.LogDetail;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
@@ -122,7 +121,7 @@ public class RestAssuredUtils {
      * @return the request specification
      */
     public static RequestSpecification givenGateway() {
-        return RestAssured.given().spec(MANAGER_SPEC);
+        return RestAssured.given().spec(GATEWAY_SPEC);
     }
 
     /**
