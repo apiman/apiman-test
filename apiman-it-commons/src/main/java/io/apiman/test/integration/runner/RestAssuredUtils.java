@@ -84,6 +84,7 @@ public class RestAssuredUtils {
      */
     public static RequestSpecification TEST_SERVICES_SPEC = new RequestSpecBuilder()
         .addRequestSpecification(DEFAULT_TEST_SPEC)
+        .setBaseUri(SuiteProperties.getDeploymentUrl())
         .build();
 
     /*

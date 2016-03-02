@@ -82,7 +82,7 @@ public class SuiteProperties {
         String host = getProperty(TOOL_DEPLOY_HOST_PROP);
         String port = getProperty(TOOL_DEPLOY_PORT_PROP);
 
-        return String.format("%s://%s:%s/apiman", protocol, host, port);
+        return String.format("%s://%s:%s", protocol, host, port);
     }
 
     private static void initProperties() {
