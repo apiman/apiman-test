@@ -7,16 +7,14 @@ import javax.ws.rs.core.Response;
 /**
  * @author opontes
  */
-@Path("/URLRewriting")
+@Path("/url_rewriting")
 public class URLRewritingService {
-    @GET @Path("/getDataToRewrite")
+    @GET @Path("/get_data_to_rewrite")
     public Response getDataToRewrite(){
         return Response.ok()
-                .header("URLRewrite","http://localhost:8080/apimanui/api-manager/orgs/TestOrg1455697754852599/apis/" +
-                        "TestApi14556977574004763/1.0/policies/362")
+                .header("URLRewrite","http://example.com/your/own/path")
                 .header("Change", "I want to change")
-                .entity("I want to change ---- body message. http://localhost:8080/apimanui/api-manager/orgs/" +
-                        "TestOrg1455697754852599/apis/TestApi14556977574004763/1.0/policies/362")
+                .entity("I want to change body message. http://example.com/your/own/path")
                 .build();
     }
 }

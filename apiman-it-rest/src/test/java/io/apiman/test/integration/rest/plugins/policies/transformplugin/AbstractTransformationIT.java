@@ -34,56 +34,56 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.givenTestServic
 @Plugin(artifactId = "apiman-plugins-transformation-policy")
 public abstract class AbstractTransformationIT extends AbstractApiTest {
 
-    protected String getJsonFromTestService(String link){
-        return givenTestServices()
-                   .accept(ContentType.JSON)
-               .when()
-                   .get(link)
-               .then()
-                   .contentType(ContentType.JSON)
-               .extract()
-                   .body()
-                   .jsonPath()
-                   .prettyPrint();
+    protected String getJsonFromTestService(String link) {
+        return givenTestServices().
+                   accept(ContentType.JSON).
+               when().
+                   get(link).
+               then().
+                   contentType(ContentType.JSON).
+               extract().
+                   body().
+                   jsonPath().
+                   prettyPrint();
     }
 
-    protected String getJsonFromGateway(String link){
-        return givenGateway()
-                .accept(ContentType.JSON)
-                .when()
-                .get(link)
-                .then()
-                .contentType(ContentType.JSON)
-                .extract()
-                .body()
-                .jsonPath()
-                .prettyPrint();
+    protected String getJsonFromGateway(String link) {
+        return givenGateway().
+                   accept(ContentType.JSON).
+               when().
+                   get(link).
+               then().
+                   contentType(ContentType.JSON).
+               extract().
+                   body().
+                   jsonPath().
+                   prettyPrint();
     }
 
-    protected String getXmlFromTestService(String link){
-        return givenTestServices()
-                   .accept("application/xml")
-               .when()
-                   .get(link)
-               .then()
-                   .contentType(ContentType.XML)
-               .extract()
-                   .body()
-                   .xmlPath()
-                   .prettyPrint();
+    protected String getXmlFromTestService(String link) {
+        return givenTestServices().
+                   accept("application/xml").
+               when().
+                   get(link).
+               then().
+                   contentType(ContentType.XML).
+               extract().
+                   body().
+                   xmlPath().
+                   prettyPrint();
     }
 
-    protected String getXmlFromGateway(String link){
-        return givenGateway()
-                .accept("application/xml")
-                .when()
-                .get(link)
-                .then()
-                .contentType(ContentType.XML)
-                .extract()
-                .body()
-                .xmlPath()
-                .prettyPrint();
+    protected String getXmlFromGateway(String link) {
+        return givenGateway().
+                   accept("application/xml").
+               when().
+                   get(link).
+               then().
+                   contentType(ContentType.XML).
+               extract().
+                   body().
+                   xmlPath().
+                   prettyPrint();
     }
 
     protected TestData jsonToTestDataObject(String json) throws IOException {

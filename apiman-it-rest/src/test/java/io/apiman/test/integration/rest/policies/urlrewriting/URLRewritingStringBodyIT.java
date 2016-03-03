@@ -29,28 +29,24 @@ import org.junit.Test;
 /**
  * @author opontes
  */
-public class URLRewritingStringBodyIT extends  AbstractURLRewritingPolicyIT{
+public class URLRewritingStringBodyIT extends AbstractURLRewritingPolicyIT {
 
     @ApiVersion(api = "api", endpoint = @Endpoint(value = DeployedServices.URL_REWRITING_DATA),
-        policies = @Policies(value = "url_rewrite_001",
-            params = {"regex", STRING_VALUE_UNCHANGED, "replace", STRING_VALUE_CHANGED, "header", "false", "body", "true" }))
+            policies = @Policies(value = "url_rewrite_001", params = {"regex", STRING_VALUE_UNCHANGED,
+                    "replace", STRING_VALUE_CHANGED, "header", "false", "body", "true"}))
     private static ApiVersionBean apiVersion;
 
     @ManagedEndpoint("apiVersion")
     private String endpoint;
 
     @Before
-    public void setUpValues(){
+    public void setUpValues() {
         setUpValues(endpoint, STRING_HEADER_NAME);
     }
 
     @Test
-    public void shouldPassWhenRewritingBodyIsSuccessful(){
+    public void shouldPassWhenRewritingBodyIsSuccessful() {
         Assert.assertEquals(originalHeaderValue, changedHeaderValue);
-
-        Assert.assertTrue(originalBodyValue.contains(STRING_VALUE_UNCHANGED));
         Assert.assertTrue(changedBodyValue.contains(STRING_VALUE_CHANGED));
-
-
     }
 }

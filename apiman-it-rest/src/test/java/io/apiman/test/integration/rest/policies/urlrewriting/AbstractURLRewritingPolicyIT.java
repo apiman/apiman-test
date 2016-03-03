@@ -18,6 +18,7 @@ package io.apiman.test.integration.rest.policies.urlrewriting;
 
 import io.apiman.test.integration.DeployedServices;
 import io.apiman.test.integration.base.AbstractApiTest;
+import org.junit.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,8 +35,8 @@ public abstract class AbstractURLRewritingPolicyIT extends AbstractApiTest {
     public static final String STRING_VALUE_CHANGED = "I am changed";
     public static final String STRING_HEADER_NAME = "Change";
 
-    public static final String REGEX_EXPRESSION = "(\\\\/orgs\\\\/TestOrg)\\\\d+";
-    public static final String REGEX_CHANGE = "XXXXXXXXXXX";
+    public static final String REGEX_EXPRESSION = "\\\\w+(?=\\\\/)";
+    public static final String REGEX_CHANGE = "XXXXXX";
     public static final String REGEX_HEADER_NAME = "URLRewrite";
 
     protected String originalHeaderValue;
@@ -49,6 +50,11 @@ public abstract class AbstractURLRewritingPolicyIT extends AbstractApiTest {
 
         originalBodyValue = getBodyFromTestServices(DeployedServices.URL_REWRITING_DATA);
         changedBodyValue = getBodyFromGateway(endpoint);
+
+        if(STRING_HEADER_NAME.equals(header)){
+            Assert.assertTrue(originalHeaderValue.contains(STRING_VALUE_UNCHANGED));
+            Assert.assertTrue(originalBodyValue.contains(STRING_VALUE_UNCHANGED));
+        }
     }
 
 

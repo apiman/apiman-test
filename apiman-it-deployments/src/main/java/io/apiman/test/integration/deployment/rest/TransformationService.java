@@ -29,7 +29,7 @@ import javax.ws.rs.core.MediaType;
  * @author opontes
  */
 @Path("/response")
-public class ResponseService {
+public class TransformationService {
 
     @GET @Path("/json") @Produces(MediaType.APPLICATION_JSON)
     public TestData getJSON(){

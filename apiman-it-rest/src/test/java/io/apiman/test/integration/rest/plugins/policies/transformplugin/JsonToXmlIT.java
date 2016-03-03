@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static com.jayway.restassured.RestAssured.get;
 import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
-import static io.apiman.test.integration.runner.RestAssuredUtils.givenTestServices;
 
 /**
  * @author opontes
@@ -46,7 +44,6 @@ public class JsonToXmlIT extends AbstractTransformationIT {
 
     @Test
     public void shouldPassWhenCanTransformJsonToXml() throws IOException {
-
         TestData client = jsonToTestDataObject(getJsonFromTestService(DeployedServices.JSON_DATA));
         TestData server = xmlToTestDataObject(getXmlFromGateway(endpointJsonToXml));
 

@@ -33,20 +33,19 @@ public class URLRewritingRegexBodyIT extends AbstractURLRewritingPolicyIT {
 
     @ApiVersion(api = "api", endpoint = @Endpoint(value = DeployedServices.URL_REWRITING_DATA),
             policies = @Policies(value = "url_rewrite_001",
-                    params = {"regex", REGEX_EXPRESSION, "replace", REGEX_CHANGE, "header", "false", "body", "true" }))
+                    params = {"regex", REGEX_EXPRESSION, "replace", REGEX_CHANGE, "header", "false", "body", "true"}))
     private static ApiVersionBean apiVersion;
 
     @ManagedEndpoint("apiVersion")
     private String endpoint;
 
     @Before
-    public void setUpValues(){
+    public void setUpValues() {
         setUpValues(endpoint, REGEX_HEADER_NAME);
     }
 
     @Test
-    public void shouldPassWhenRewritingBodyIsSuccessful(){
-        Assert.assertFalse(originalBodyValue.contains(REGEX_CHANGE)); //it is necessary?
+    public void shouldPassWhenRewritingBodyIsSuccessful() {
         Assert.assertTrue(changedBodyValue.contains(REGEX_CHANGE));
         Assert.assertEquals(originalHeaderValue, changedHeaderValue);
     }
