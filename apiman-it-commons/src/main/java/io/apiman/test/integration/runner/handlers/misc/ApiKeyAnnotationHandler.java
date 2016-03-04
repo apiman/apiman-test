@@ -40,15 +40,8 @@ public class ApiKeyAnnotationHandler extends FieldAnnotationHandler<ApiKey, Void
     @Override
     public void processField(Field field, ApiKey annotation) throws ReflectiveOperationException {
         ClientVersionBean vClient = getStoredEntity(ClientVersionBean.class, annotation.vClient(), field);
-        ClientVersions client =
-            (ClientVersions) new ClientVersions(vClient.getClient()).fetch(vClient.getVersion());
 
-        ApiVersionBean vApi = getStoredEntity(ApiVersionBean.class, annotation.vApi(), field);
-        PlanVersionBean vPlan = getStoredEntity(PlanVersionBean.class, annotation.vPlan(), field);
-        OrganizationBean org = vApi.getApi().getOrganization();
-
-        ContractSummaryBean contract = client.contracts().fetch(org, vApi, vPlan).getBean();
-        setField(field, String.class, contract.getApikey());
+        setField(field, String.class, vClient.getApikey());
     }
 
     @Override
