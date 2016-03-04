@@ -12,4 +12,4 @@ declare -a PROPERTIES=(
 "-Dapiman.junit.no-server=$NO_SERVER"
 )
 
-mvn test -DskipTests=false -fae -f ${APIMAN_SOURCES}/test/suite/pom.xml $PROPERTIES
+mvn -f ${APIMAN_SOURCES}/test/suite/pom.xml test -DskipTests=false -fae $PROPERTIES

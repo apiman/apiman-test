@@ -6,4 +6,4 @@ PROPERTIES=(
 "-Dapiman.test.proxy.address.server=$MACHINE_IP"
 )
 
-mvn clean install -Prest-tests -f ${TEST_SOURCES}/pom.xml $PROPERTIES
+mvn -f ${TEST_SOURCES}/pom.xml clean install -Prest-tests $PROPERTIES

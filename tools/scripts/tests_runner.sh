@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-OPTS=`getopt -o urv --long ui,rest,vertx -- $@`
+DIR=`dirname ${BASH_SOURCE[0]}`
 
+: ${BUILD_APIMAN:=false}
 : ${MOVE_APIMAN:=false}
 : ${DELETE_ELASTIC:=false}
 : ${RUN_DOCKER:=false}
@@ -18,6 +19,14 @@ OPTS=`getopt -o urv --long ui,rest,vertx -- $@`
 : ${INSTALL_PLUGINS:=false}
 : ${TEST_DEPLOYMENTS:=false}
 : ${COMMUNITY_TESTS:=false}
+: ${RC_FILE="$DIR/custom.rc"}
+
+OPTS=`getopt -o urc --long ui,rest,community -- $@`
+
+source "$DIR/apimanrc.sh"
+if [ -f $RC_FILE ]; then
+    source "$RC_FILE"
+fi
 
 eval set -- "$OPTS"
 
@@ -126,7 +135,7 @@ if $VERTX; then
 fi
 
 if $INSTALL_PLUGINS; then
-    sh maven/buld_plugins.sh
+    sh maven/build_plugins.sh
 fi
 
 if $TEST_DEPLOYMENTS; then

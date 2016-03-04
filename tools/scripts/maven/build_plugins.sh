@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mvn clean install -DskipTests -f ${APIMAN_PLUGINS}/pom.xml
+mvn -f ${APIMAN_PLUGINS}/pom.xml clean install -DskipTests 

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mvn package wildfly:deploy -DskipTests -f ${TEST_SOURCES}/apiman-it-deployments/pom.xml
+mvn -f ${TEST_SOURCES}/apiman-it-deployments/pom.xml package wildfly:deploy -DskipTests

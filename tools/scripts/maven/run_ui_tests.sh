@@ -6,4 +6,4 @@ PROPERTIES=(
 "-Dwebdriver.chrome.driver=${CHROME_DRIVER}"
 )
 
-mvn clean install -Pui-tests $PROPERTIES -f ${TEST_SOURCES}/pom.xml -fae
+mvn -f ${TEST_SOURCES}/pom.xml clean install -Pui-tests $PROPERTIES -fae 
