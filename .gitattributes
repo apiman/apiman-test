@@ -1,0 +1,3 @@
+# Bash scripts shouldn't change their line endings
+*.sh text eol=lf
+*.bash text eol=lf
