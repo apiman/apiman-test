@@ -3,7 +3,7 @@
 # Location of sources
 export TEST_SOURCES=${WORKSPACE}/apiman-test
 export APIMAN_SOURCES=${WORKSPACE}/apiman
-export APIMAN_PLUGINS=${WORKSPACE}/apiman-plugins
+export PLUGIN_SOURCES=${WORKSPACE}/apiman-plugins
 
 export WILDFLY_VERSION=10.0.0.Final
 export APIMAN_CONFIG_FILE=standalone-apiman.xml
