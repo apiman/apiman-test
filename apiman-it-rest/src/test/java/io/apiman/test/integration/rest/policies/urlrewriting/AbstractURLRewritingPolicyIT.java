@@ -31,30 +31,28 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.givenTestServic
  */
 public abstract class AbstractURLRewritingPolicyIT extends AbstractApiTest {
 
-    public static final String STRING_VALUE_UNCHANGED = "I want to change";
-    public static final String STRING_VALUE_CHANGED = "I am changed";
-    public static final String STRING_HEADER_NAME = "Change";
+    public static final String STRING_VALUE_UNCHANGED = "example.com";
+    public static final String STRING_VALUE_CHANGED = "redhat.com/en";
 
     public static final String REGEX_EXPRESSION = "\\\\w+(?=\\\\/)";
     public static final String REGEX_CHANGE = "XXXXXX";
-    public static final String REGEX_HEADER_NAME = "URLRewrite";
+
+    public static final String HEADER_NAME = "URLRewrite";
 
     protected String originalHeaderValue;
     protected String changedHeaderValue;
     protected String originalBodyValue;
     protected String changedBodyValue;
 
-    protected void setUpValues(String endpoint, String header) {
-        originalHeaderValue = getHeadersFromTestServices(DeployedServices.URL_REWRITING_DATA).get(header);
-        changedHeaderValue = getHeadersFromGateway(endpoint).get(header);
+    protected void setUpValues(String endpoint) {
+        originalHeaderValue = getHeadersFromTestServices(DeployedServices.URL_REWRITING_DATA).get(HEADER_NAME);
+        changedHeaderValue = getHeadersFromGateway(endpoint).get(HEADER_NAME);
 
         originalBodyValue = getBodyFromTestServices(DeployedServices.URL_REWRITING_DATA);
         changedBodyValue = getBodyFromGateway(endpoint);
 
-        if(STRING_HEADER_NAME.equals(header)){
-            Assert.assertTrue(originalHeaderValue.contains(STRING_VALUE_UNCHANGED));
-            Assert.assertTrue(originalBodyValue.contains(STRING_VALUE_UNCHANGED));
-        }
+        Assert.assertTrue(originalHeaderValue.contains(STRING_VALUE_UNCHANGED));
+        Assert.assertTrue(originalBodyValue.contains(STRING_VALUE_UNCHANGED));
     }
 
 
