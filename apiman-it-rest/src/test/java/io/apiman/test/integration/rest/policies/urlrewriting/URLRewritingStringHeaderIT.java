@@ -45,7 +45,7 @@ public class URLRewritingStringHeaderIT extends AbstractURLRewritingPolicyIT {
     }
 
     @Test
-    public void shouldPassWhenRewritingHeaderIsSuccessful() {
+    public void canRewriteHeaderWithString() {
         Assert.assertEquals(changedHeaderValue, STRING_VALUE_CHANGED);
         Assert.assertEquals(originalBodyValue, changedBodyValue);
     }

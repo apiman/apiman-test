@@ -45,7 +45,7 @@ public class URLRewritingStringBodyIT extends AbstractURLRewritingPolicyIT {
     }
 
     @Test
-    public void shouldPassWhenRewritingBodyIsSuccessful() {
+    public void canRewriteBodyWithString() {
         Assert.assertEquals(originalHeaderValue, changedHeaderValue);
         Assert.assertTrue(changedBodyValue.contains(STRING_VALUE_CHANGED));
     }

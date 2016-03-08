@@ -45,7 +45,7 @@ public class URLRewritingRegexHeaderAndBodyIT extends AbstractURLRewritingPolicy
     }
 
     @Test
-    public void shouldPassWhenRewritingHeaderAndBodyIsSuccessful() {
+    public void canRewriteHeaderAndBodyWithRegex() {
         Assert.assertTrue(changedHeaderValue.contains(REGEX_CHANGE));
         Assert.assertTrue(changedBodyValue.contains(REGEX_CHANGE));
     }
