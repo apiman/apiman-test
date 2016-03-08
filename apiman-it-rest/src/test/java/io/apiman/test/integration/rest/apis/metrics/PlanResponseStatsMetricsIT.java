@@ -30,37 +30,37 @@ import org.junit.Test;
 public class PlanResponseStatsMetricsIT extends AbstractMetricsIT {
 
     @Test
-    public void requestsAfterIntervalAreNotIncluded() throws Exception {
+    public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         ResponseStatsPerPlanBean metricsBefore = apiVersions.metricsPlanResponseStats(beforeRecoding, afterRecording);
-        recordFailedRequests(1, apiKey_Client1v1);
-        recordSuccessfulRequests(1, apiKey_Client1v1);
+        recordFailedRequests(1, apiKey_clientVersion1);
+        recordSuccessfulRequests(1, apiKey_clientVersion1);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
         ResponseStatsPerPlanBean metricsAfter = apiVersions.metricsPlanResponseStats(beforeRecoding, afterRecording);
 
         assertEquals("Unexpected number of total requests",
-                metricsBefore.getData().get(plan.getId()).getTotal(),
-                metricsAfter.getData().get(plan.getId()).getTotal());
+            metricsBefore.getData().get(plan.getId()).getTotal(),
+            metricsAfter.getData().get(plan.getId()).getTotal());
     }
 
     @Test
-    public void numberOfFailuresForEachPlanIsCorrect() throws Exception {
+    public void shouldHaveCorrectNumberOfFailuresForEachPlan() throws Exception {
         ResponseStatsPerPlanBean metrics = apiVersions.metricsPlanResponseStats(beforeRecoding, afterRecording);
 
-        assertEquals("Unexpected number of failed requests for plan", PLAN1_FAIL,
-                metrics.getData().get(plan.getId()).getFailures());
+        assertEquals("Unexpected number of failed requests for Plan", PLAN1_FAIL,
+            metrics.getData().get(plan.getId()).getFailures());
 
-        assertEquals("Unexpected number of failed requests for plan2", PLAN2_FAIL,
-                metrics.getData().get(plan2.getId()).getFailures());
+        assertEquals("Unexpected number of failed requests for Plan2", PLAN2_FAIL,
+            metrics.getData().get(plan2.getId()).getFailures());
     }
 
     @Test
-    public void numberOfTotalRequestsForEachPlanIsCorrect() throws Exception {
+    public void shouldHaveCorrectNumberOfTotalRequestsForEachPlan() throws Exception {
         ResponseStatsPerPlanBean metrics = apiVersions.metricsPlanResponseStats(beforeRecoding, afterRecording);
 
-        assertEquals("Unexpected number of total requests for plan", PLAN1_SUCC + PLAN1_FAIL,
-                metrics.getData().get(plan.getId()).getTotal());
+        assertEquals("Unexpected number of total requests for Plan", PLAN1_SUCC + PLAN1_FAIL,
+            metrics.getData().get(plan.getId()).getTotal());
 
-        assertEquals("Unexpected number of total requests for plan2", PLAN2_SUCC + PLAN2_FAIL,
-                metrics.getData().get(plan2.getId()).getTotal());
+        assertEquals("Unexpected number of total requests for Plan2", PLAN2_SUCC + PLAN2_FAIL,
+            metrics.getData().get(plan2.getId()).getTotal());
     }
 }

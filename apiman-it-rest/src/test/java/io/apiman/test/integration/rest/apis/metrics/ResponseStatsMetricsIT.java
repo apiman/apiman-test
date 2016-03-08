@@ -36,17 +36,18 @@ import org.junit.Test;
 public class ResponseStatsMetricsIT extends AbstractIntervalMetricsIT {
 
     @SuppressWarnings("unchecked")
-    @Override public HistogramBean<HistogramDataPoint> getMetrics() {
+    @Override
+    public HistogramBean<HistogramDataPoint> getMetrics() {
         return (HistogramBean) apiVersions.metricsResponseStats(beforeRecoding, tenMinutesAfterRecording,
-                HistogramIntervalType.minute);
+            HistogramIntervalType.minute);
     }
 
     @Test
-    public void valuesInEachSubintervalAreCorrect() throws Exception {
-        recordMetricsIntoNextMinute();
+    public void shouldHaveCorrectValuesInEachSubinterval() throws Exception {
+        recordMetricsInFollowingMinute();
 
         ResponseStatsHistogramBean metrics = apiVersions.metricsResponseStats(beforeRecoding, tenMinutesAfterRecording,
-                HistogramIntervalType.minute);
+            HistogramIntervalType.minute);
 
         for (ResponseStatsDataPoint i : metrics.getData()) {
             Date subinterval = formatter.parse(i.getLabel());
@@ -54,11 +55,15 @@ public class ResponseStatsMetricsIT extends AbstractIntervalMetricsIT {
             calendar.setTime(subinterval);
             calendar.add(Calendar.SECOND, 59);
             Date endOfSubinterval = calendar.getTime();
-            ResponseStatsSummaryBean expectedMetrics = apiVersions.metricsSummaryResponseStats(subinterval, endOfSubinterval);
+            ResponseStatsSummaryBean expectedMetrics = apiVersions
+                .metricsSummaryResponseStats(subinterval, endOfSubinterval);
 
-            assertEquals("Unexpected count value", expectedMetrics.getTotal(), i.getTotal());
-            assertEquals("Unexpected count value", expectedMetrics.getFailures(), i.getFailures());
-            assertEquals("Unexpected count value", expectedMetrics.getErrors(), i.getErrors());
+            assertEquals("Unexpected number of total requests for subinterval: " + i.getLabel(),
+                expectedMetrics.getTotal(), i.getTotal());
+            assertEquals("Unexpected number of failures for subinterval: " + i.getLabel(),
+                expectedMetrics.getFailures(), i.getFailures());
+            assertEquals("Unexpected number of errors for subinterval: " + i.getLabel(),
+                expectedMetrics.getErrors(), i.getErrors());
         }
     }
 }

@@ -30,27 +30,29 @@ import org.junit.Test;
 public class PlanUsageMetricsIT extends AbstractMetricsIT {
 
     @Test
-    public void requestsAfterIntervalAreNotIncluded() throws Exception {
+    public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         UsagePerPlanBean metricsBefore = apiVersions.metricsPlanUsage(beforeRecoding, afterRecording);
-        recordSuccessfulRequests(1, apiKey_Client1v1);
-        recordFailedRequests(2, apiKey_Client1v1);
+
+        recordSuccessfulRequests(1, apiKey_clientVersion1);
+        recordFailedRequests(2, apiKey_clientVersion1);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
+
         UsagePerPlanBean metricsAfter = apiVersions.metricsPlanUsage(beforeRecoding, afterRecording);
 
         assertEquals("Unexpected metrics data",
-                metricsBefore.getData().get(plan.getId()),
-                metricsAfter.getData().get(plan.getId()));
+            metricsBefore.getData().get(plan.getId()),
+            metricsAfter.getData().get(plan.getId()));
     }
 
     @Test
-    public void sumsOfRequestsForEachPlanAreCorrect() throws Exception {
+    public void shouldHaveCorrectSumsOfRequestsForEachPlan() throws Exception {
         UsagePerPlanBean metrics = apiVersions.metricsPlanUsage(beforeRecoding, afterRecording);
-        assertEquals("Unexpected metrics data for plan",
-                new Long(PLAN1_SUCC + PLAN1_FAIL),
-                metrics.getData().get(plan.getId()));
+        assertEquals("Unexpected metrics data for Plan",
+            new Long(PLAN1_SUCC + PLAN1_FAIL),
+            metrics.getData().get(plan.getId()));
 
-        assertEquals("Unexpected metrics data for plan2",
-                new Long(PLAN2_SUCC + PLAN2_FAIL),
-                metrics.getData().get(plan2.getId()));
+        assertEquals("Unexpected metrics data for Plan2",
+            new Long(PLAN2_SUCC + PLAN2_FAIL),
+            metrics.getData().get(plan2.getId()));
     }
 }

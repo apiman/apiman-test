@@ -51,31 +51,38 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     protected Date beforeRecoding;
     protected Date afterRecording;
 
-    protected static final int CLIENT1v1_SUCC = 1;
-    protected static final int CLIENT1v1_FAIL = 2;
-    protected static final int CLIENT1v2_SUCC = 3;
-    protected static final int CLIENT1v2_FAIL = 4;
-    protected static final int CLIENT2_PLAN1_SUCC = 5;
-    protected static final int CLIENT2_PLAN1_FAIL = 6;
-    protected static final int CLIENT2_PLAN2_SUCC = 7;
-    protected static final int CLIENT2_PLAN2_FAIL = 8;
+    protected static final int CLIENT_V1_SUCC = 1;
+    protected static final int CLIENT_V1_FAIL = 2;
+    protected static final int CLIENT_V2_SUCC = 3;
+    protected static final int CLIENT_V2_FAIL = 4;
+    protected static final int SINGLE_VERSION_CLIENT_PLAN1_SUCC = 5;
+    protected static final int SINGLE_VERSION_CLIENT_PLAN1_FAIL = 6;
+    protected static final int SINGLE_VERSION_CLIENT_PLAN2_SUCC = 7;
+    protected static final int SINGLE_VERSION_CLIENT_PLAN2_FAIL = 8;
     protected static final int PUBLIC_SUCC = 9;
     protected static final int PUBLIC_FAIL = 10;
 
     // Client metrics count
-    protected static final int CLIENT1_SUCC = CLIENT1v1_SUCC + CLIENT1v2_SUCC;
-    protected static final int CLIENT1_FAIL = CLIENT1v1_FAIL + CLIENT1v2_FAIL;
-    protected static final int CLIENT2_SUCC = CLIENT2_PLAN1_SUCC + CLIENT2_PLAN2_SUCC;
-    protected static final int CLIENT2_FAIL = CLIENT2_PLAN1_FAIL + CLIENT2_PLAN2_FAIL;
+    protected static final int CLIENT_SUCC = CLIENT_V1_SUCC + CLIENT_V2_SUCC;
+    protected static final int CLIENT_FAIL = CLIENT_V1_FAIL + CLIENT_V2_FAIL;
+    protected static final int SINGLE_VERSION_CLIENT_SUCC =
+        SINGLE_VERSION_CLIENT_PLAN1_SUCC + SINGLE_VERSION_CLIENT_PLAN2_SUCC;
+    protected static final int SINGLE_VERSION_CLIENT_FAIL =
+        SINGLE_VERSION_CLIENT_PLAN1_FAIL + SINGLE_VERSION_CLIENT_PLAN2_FAIL;
 
     // Plan metrics count
-    protected static final int PLAN1_SUCC = CLIENT1v1_SUCC + CLIENT1v2_SUCC + CLIENT2_PLAN1_SUCC;
-    protected static final int PLAN1_FAIL = CLIENT1v1_FAIL + CLIENT1v2_FAIL + CLIENT2_PLAN1_FAIL;
-    protected static final int PLAN2_SUCC = CLIENT2_PLAN2_SUCC;
-    protected static final int PLAN2_FAIL = CLIENT2_PLAN2_FAIL;
+    protected static final int PLAN1_SUCC = CLIENT_V1_SUCC + CLIENT_V2_SUCC + SINGLE_VERSION_CLIENT_PLAN1_SUCC;
+    protected static final int PLAN1_FAIL = CLIENT_V1_FAIL + CLIENT_V2_FAIL + SINGLE_VERSION_CLIENT_PLAN1_FAIL;
+    protected static final int PLAN2_SUCC = SINGLE_VERSION_CLIENT_PLAN2_SUCC;
+    protected static final int PLAN2_FAIL = SINGLE_VERSION_CLIENT_PLAN2_FAIL;
+
+    // Total metrics count
+    protected static final long TOTAL_FAILURES = CLIENT_FAIL + SINGLE_VERSION_CLIENT_FAIL + PUBLIC_FAIL;
+    protected static final long TOTAL_REQUESTS =
+        CLIENT_SUCC + SINGLE_VERSION_CLIENT_SUCC + PUBLIC_SUCC + TOTAL_FAILURES;
 
     @ApiVersion(api = "api",
-        vPlans = {"planVersion", "planVersion2"},
+        vPlans = {"planVersion", "plan2Version"},
         policies = @Policies("metrics_001"),
         unique = true,
         isPublic = true)
@@ -87,39 +94,39 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     @PlanVersion(plan = "plan")
     protected static PlanVersionBean planVersion;
 
-    @Plan(organization = "organization")
+    @Plan(organization = "organization", name = "TestPlan2_")
     protected static PlanBean plan2;
 
     @PlanVersion(plan = "plan2")
-    protected static PlanVersionBean planVersion2;
-
-    @Client(organization = "organization")
-    protected static ClientBean client2;
+    protected static PlanVersionBean plan2Version;
 
     @ClientVersion(client = "client", unique = true, contracts = {
         @Contract(vPlan = "planVersion", vApi = "apiVersion")})
-    protected ClientVersionBean client1version1;
+    protected ClientVersionBean clientVersion1;
 
     @ClientVersion(client = "client", unique = true, contracts = {
         @Contract(vPlan = "planVersion", vApi = "apiVersion")})
-    protected ClientVersionBean client1Version2;
+    protected ClientVersionBean clientVersion2;
 
-    @ClientVersion(client = "client2", unique = true, contracts = {
+    @Client(organization = "organization", name = "SingleVersionClient")
+    protected static ClientBean singleVersionClient;
+
+    @ClientVersion(client = "singleVersionClient", unique = true, contracts = {
         @Contract(vPlan = "planVersion", vApi = "apiVersion"),
-        @Contract(vPlan = "planVersion2", vApi = "apiVersion")})
-    protected ClientVersionBean client2Version;
+        @Contract(vPlan = "plan2Version", vApi = "apiVersion")})
+    protected ClientVersionBean singleVersionClientVersion;
 
-    @ApiKey(vApi = "apiVersion", vPlan = "planVersion", vClient = "client1version1")
-    protected String apiKey_Client1v1;
+    @ApiKey(vApi = "apiVersion", vPlan = "planVersion", vClient = "clientVersion1")
+    protected String apiKey_clientVersion1;
 
-    @ApiKey(vApi = "apiVersion", vPlan = "planVersion", vClient = "client1Version2")
-    protected String apiKey_Client1v2;
+    @ApiKey(vApi = "apiVersion", vPlan = "planVersion", vClient = "clientVersion2")
+    protected String apiKey_clientVersion2;
 
-    @ApiKey(vApi = "apiVersion", vPlan = "planVersion", vClient = "client2Version")
-    protected String apiKey_Client2plan1;
+    @ApiKey(vApi = "apiVersion", vPlan = "planVersion", vClient = "singleVersionClientVersion")
+    protected String apiKey_singleVersionClientPlan1;
 
-    @ApiKey(vApi = "apiVersion", vPlan = "planVersion2", vClient = "client2Version")
-    protected String apiKey_Client2plan2;
+    @ApiKey(vApi = "apiVersion", vPlan = "plan2Version", vClient = "singleVersionClientVersion")
+    protected String apiKey_singleVersionClientPlan2;
 
     @Before
     public void setUpClient() throws Exception {
@@ -131,17 +138,17 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     public void recordMetrics() throws Exception {
         beforeRecoding = new Date();
 
-        recordSuccessfulRequests(CLIENT1v1_SUCC, apiKey_Client1v1);
-        recordFailedRequests(CLIENT1v1_FAIL, apiKey_Client1v1);
+        recordSuccessfulRequests(CLIENT_V1_SUCC, apiKey_clientVersion1);
+        recordFailedRequests(CLIENT_V1_FAIL, apiKey_clientVersion1);
 
-        recordSuccessfulRequests(CLIENT1v2_SUCC, apiKey_Client1v2);
-        recordFailedRequests(CLIENT1v2_FAIL, apiKey_Client1v2);
+        recordSuccessfulRequests(CLIENT_V2_SUCC, apiKey_clientVersion2);
+        recordFailedRequests(CLIENT_V2_FAIL, apiKey_clientVersion2);
 
-        recordSuccessfulRequests(CLIENT2_PLAN1_SUCC, apiKey_Client2plan1);
-        recordFailedRequests(CLIENT2_PLAN1_FAIL, apiKey_Client2plan1);
+        recordSuccessfulRequests(SINGLE_VERSION_CLIENT_PLAN1_SUCC, apiKey_singleVersionClientPlan1);
+        recordFailedRequests(SINGLE_VERSION_CLIENT_PLAN1_FAIL, apiKey_singleVersionClientPlan1);
 
-        recordSuccessfulRequests(CLIENT2_PLAN2_SUCC, apiKey_Client2plan2);
-        recordFailedRequests(CLIENT2_PLAN2_FAIL, apiKey_Client2plan2);
+        recordSuccessfulRequests(SINGLE_VERSION_CLIENT_PLAN2_SUCC, apiKey_singleVersionClientPlan2);
+        recordFailedRequests(SINGLE_VERSION_CLIENT_PLAN2_FAIL, apiKey_singleVersionClientPlan2);
 
         recordSuccessfulRequests(PUBLIC_SUCC);
         recordFailedRequests(PUBLIC_FAIL);
@@ -151,25 +158,25 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     }
 
     protected void recordSuccessfulRequests(int count) {
-        for (long i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             givenGateway().get(endpoint);
         }
     }
 
     protected void recordFailedRequests(int count) {
-        for (long i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             givenGateway().get(endpoint + "/foo");
         }
     }
 
     protected void recordSuccessfulRequests(int count, String apiKey) {
-        for (long i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             givenGateway().get(addApiKeyParameter(endpoint, apiKey));
         }
     }
 
     protected void recordFailedRequests(int count, String apiKey) {
-        for (long i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             givenGateway().get(addApiKeyParameter(endpoint + "/foo", apiKey));
         }
     }

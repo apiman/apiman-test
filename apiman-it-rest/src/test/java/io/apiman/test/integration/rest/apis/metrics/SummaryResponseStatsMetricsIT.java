@@ -30,29 +30,30 @@ import org.junit.Test;
 public class SummaryResponseStatsMetricsIT extends AbstractMetricsIT {
 
     @Test
-    public void requestsAfterIntervalAreNotIncluded() throws Exception {
-        ResponseStatsSummaryBean metricsBefore = apiVersions.metricsSummaryResponseStats(beforeRecoding, afterRecording);
+    public void shouldNotIncludeRequestsAfterInterval() throws Exception {
+        ResponseStatsSummaryBean metricsBefore = apiVersions
+            .metricsSummaryResponseStats(beforeRecoding, afterRecording);
+
         recordSuccessfulRequests(1);
         recordFailedRequests(2);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
+
         ResponseStatsSummaryBean metricsAfter = apiVersions.metricsSummaryResponseStats(beforeRecoding, afterRecording);
 
         assertEquals("Unexpected metrics data", metricsBefore.getTotal(), metricsAfter.getTotal());
     }
 
     @Test
-    public void numberOfTotalRequestsIsCorrect() throws Exception {
+    public void shouldHaveCorrectNumberOfTotalRequests() throws Exception {
         ResponseStatsSummaryBean metrics = apiVersions.metricsSummaryResponseStats(beforeRecoding, afterRecording);
-        long totalRequests = CLIENT1_SUCC + CLIENT1_FAIL + CLIENT2_SUCC + CLIENT2_FAIL + PUBLIC_SUCC + PUBLIC_FAIL;
 
-        assertEquals("Unexpected number of total requests", totalRequests, metrics.getTotal());
+        assertEquals("Unexpected number of total requests", TOTAL_REQUESTS, metrics.getTotal());
     }
 
     @Test
-    public void numberOfFailuresIsCorrect() throws Exception {
+    public void shouldHaveCorrectNumberOfFailures() throws Exception {
         ResponseStatsSummaryBean metrics = apiVersions.metricsSummaryResponseStats(beforeRecoding, afterRecording);
-        long totalFailures = CLIENT1_FAIL + CLIENT2_FAIL + PUBLIC_FAIL;
 
-        assertEquals("Unexpected number of failed requests", totalFailures, metrics.getFailures());
+        assertEquals("Unexpected number of failed requests", TOTAL_FAILURES, metrics.getFailures());
     }
 }

@@ -30,27 +30,27 @@ import org.junit.Test;
 public class ClientUsageMetricsIT extends AbstractMetricsIT {
 
     @Test
-    public void requestsAfterIntervalAreNotIncluded() throws Exception {
+    public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         UsagePerClientBean metricsBefore = apiVersions.metricsClientUsage(beforeRecoding, afterRecording);
-        recordSuccessfulRequests(1, apiKey_Client2plan1);
-        recordFailedRequests(2, apiKey_Client2plan1);
+        recordSuccessfulRequests(1, apiKey_singleVersionClientPlan1);
+        recordFailedRequests(2, apiKey_singleVersionClientPlan1);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
         UsagePerClientBean metricsAfter = apiVersions.metricsClientUsage(beforeRecoding, afterRecording);
 
         assertEquals("Unexpected metrics data",
-                metricsBefore.getData().get(client2.getId()),
-                metricsAfter.getData().get(client2.getId()));
+            metricsBefore.getData().get(singleVersionClient.getId()),
+            metricsAfter.getData().get(singleVersionClient.getId()));
     }
 
     @Test
-    public void sumsOfRequestsForEachClientAreCorrect() throws Exception {
+    public void shouldHaveCorrectSumsOfRequestsForEachClient() throws Exception {
         UsagePerClientBean metrics = apiVersions.metricsClientUsage(beforeRecoding, afterRecording);
-        assertEquals("Unexpected metrics data for client",
-                new Long(CLIENT1_FAIL + CLIENT1_SUCC),
-                metrics.getData().get(client.getId()));
+        assertEquals("Unexpected metrics data for Client",
+            new Long(CLIENT_FAIL + CLIENT_SUCC),
+            metrics.getData().get(client.getId()));
 
-        assertEquals("Unexpected metrics data for client2",
-                new Long(CLIENT2_FAIL + CLIENT2_SUCC),
-                metrics.getData().get(client2.getId()));
+        assertEquals("Unexpected metrics data for SingleVersionClient",
+            new Long(SINGLE_VERSION_CLIENT_FAIL + SINGLE_VERSION_CLIENT_SUCC),
+            metrics.getData().get(singleVersionClient.getId()));
     }
 }

@@ -30,12 +30,14 @@ import org.junit.Test;
 public class ClientResponseStatsMetricsIT extends AbstractMetricsIT {
 
     @Test
-    public void requestsAfterIntervalAreNotIncluded() throws Exception {
+    public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         ResponseStatsPerClientBean metricsBefore = apiVersions
             .metricsClientResponseStats(beforeRecoding, afterRecording);
-        recordFailedRequests(1, apiKey_Client1v1);
-        recordSuccessfulRequests(1, apiKey_Client1v1);
+
+        recordFailedRequests(1, apiKey_clientVersion1);
+        recordSuccessfulRequests(1, apiKey_clientVersion1);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
+
         ResponseStatsPerClientBean metricsAfter = apiVersions
             .metricsClientResponseStats(beforeRecoding, afterRecording);
 
@@ -45,24 +47,25 @@ public class ClientResponseStatsMetricsIT extends AbstractMetricsIT {
     }
 
     @Test
-    public void numberOfFailuresForEachClientIsCorrect() throws Exception {
+    public void shouldHaveCorrectNumberOfFailuresForEachClient() throws Exception {
         ResponseStatsPerClientBean metrics = apiVersions.metricsClientResponseStats(beforeRecoding, afterRecording);
 
-        assertEquals("Unexpected number of failed requests for client", CLIENT1_FAIL,
+        assertEquals("Unexpected number of failed requests for Client", CLIENT_FAIL,
             metrics.getData().get(client.getId()).getFailures());
 
-        assertEquals("Unexpected number of failed requests for client2", CLIENT2_FAIL,
-            metrics.getData().get(client2.getId()).getFailures());
+        assertEquals("Unexpected number of failed requests for SingleVersionClient", SINGLE_VERSION_CLIENT_FAIL,
+            metrics.getData().get(singleVersionClient.getId()).getFailures());
     }
 
     @Test
-    public void numberOfTotalRequestsForEachClientIsCorrect() throws Exception {
+    public void shouldHaveCorrectNumberOfTotalRequestsForEachClient() throws Exception {
         ResponseStatsPerClientBean metrics = apiVersions.metricsClientResponseStats(beforeRecoding, afterRecording);
 
-        assertEquals("Unexpected number of total requests for client", CLIENT1_FAIL + CLIENT1_SUCC,
+        assertEquals("Unexpected number of total requests for Client", CLIENT_FAIL + CLIENT_SUCC,
             metrics.getData().get(client.getId()).getTotal());
 
-        assertEquals("Unexpected number of total requests for client", CLIENT2_FAIL + CLIENT2_SUCC,
-            metrics.getData().get(client2.getId()).getTotal());
+        assertEquals("Unexpected number of total requests for SingleVersionClient",
+            SINGLE_VERSION_CLIENT_FAIL + SINGLE_VERSION_CLIENT_SUCC,
+            metrics.getData().get(singleVersionClient.getId()).getTotal());
     }
 }
