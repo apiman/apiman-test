@@ -41,7 +41,7 @@ public class URLRewritingRegexHeaderAndBodyIT extends AbstractURLRewritingPolicy
 
     @Before
     public void setUpValues() {
-        setUpValues(endpoint, REGEX_HEADER_NAME);
+        setUpValues(endpoint);
     }
 
     @Test
