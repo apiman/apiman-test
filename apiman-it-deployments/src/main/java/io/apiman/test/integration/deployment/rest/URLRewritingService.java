@@ -13,7 +13,6 @@ public class URLRewritingService {
     public Response getDataToRewrite(){
         return Response.ok()
                 .header("URLRewrite","http://example.com/your/own/path")
-                .header("Change", "I want to change")
                 .entity("I want to change body message. http://example.com/your/own/path")
                 .build();
     }
