@@ -1,4 +1,4 @@
-FROM jboss/keycloak:1.8.1.Final
+FROM jboss/keycloak:1.9.0.Final
 
 ENV JAVA_OPTS "-Djava.security.egd=file:///dev/urandom"
 ENV REALM_DIR $JBOSS_HOME/realms
@@ -12,4 +12,3 @@ ADD scripts/docker-entrypoint.sh ${JBOSS_HOME}/bin/docker-entrypoint.sh
 ADD realms $REALM_DIR
 
 ENTRYPOINT ["sh", "/opt/jboss/keycloak/bin/docker-entrypoint.sh"]
-
