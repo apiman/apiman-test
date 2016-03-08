@@ -41,7 +41,7 @@ public class URLRewritingStringBodyIT extends AbstractURLRewritingPolicyIT {
 
     @Before
     public void setUpValues() {
-        setUpValues(endpoint, STRING_HEADER_NAME);
+        setUpValues(endpoint);
     }
 
     @Test

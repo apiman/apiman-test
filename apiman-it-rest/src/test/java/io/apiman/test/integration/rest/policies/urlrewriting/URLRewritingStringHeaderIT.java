@@ -41,12 +41,12 @@ public class URLRewritingStringHeaderIT extends AbstractURLRewritingPolicyIT {
 
     @Before
     public void setUpValues() {
-        setUpValues(endpoint, STRING_HEADER_NAME);
+        setUpValues(endpoint);
     }
 
     @Test
-    public void shouldPassWhenRewritingHeaderIsSuccessful() {
-        Assert.assertEquals(changedHeaderValue, STRING_VALUE_CHANGED);
+    public void canRewriteHeaderWithString() {
+        Assert.assertTrue(changedHeaderValue.contains(STRING_VALUE_CHANGED));
         Assert.assertEquals(originalBodyValue, changedBodyValue);
     }
 }
