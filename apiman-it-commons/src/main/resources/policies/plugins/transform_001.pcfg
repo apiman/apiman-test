@@ -1,0 +1,6 @@
+transformation-policy
+---
+{
+    "clientFormat" : "${client}",
+    "serverFormat" : "${server}"
+}

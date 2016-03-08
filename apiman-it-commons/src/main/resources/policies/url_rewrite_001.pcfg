@@ -1,0 +1,8 @@
+URLRewritingPolicy
+---
+{
+    "fromRegex" : "${regex}",
+    "toReplacement" : "${replace}",
+    "processBody" : ${body},
+    "processHeaders" : ${header}
+}
