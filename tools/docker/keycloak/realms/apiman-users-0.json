@@ -1,46 +1,53 @@
 {
   "realm" : "apiman",
   "users" : [ {
-    "id" : "dda64ec0-ecf0-46d7-9688-a7677f196b5b",
+    "id" : "7e1812bb-652d-4343-8ce0-0d9ff6340b09",
+    "createdTimestamp" : 1452717177895,
     "username" : "admin",
     "enabled" : true,
     "totp" : false,
-    "emailVerified" : false,
-    "firstName" : "apiman",
-    "lastName" : "admin",
-    "email" : "admin@admin.com",
+    "emailVerified" : true,
+    "firstName" : "Admin",
+    "lastName" : "User",
+    "email" : "admin@example.org",
     "credentials" : [ {
       "type" : "password",
-      "hashedSaltedValue" : "jPtofmcxNJmO1vq53qnyKt4DUICwXPf/lkrOFXhg9JZUjraa1s5KfH15nAhgrLWx4T1lf5dErhel/dSeKLlRCQ==",
-      "salt" : "eLdmF3b9L5Ftg6lPBUKHcg==",
+      "hashedSaltedValue" : "VfNsGOUkrhrh4KcESDOxhNde1amTyhETqSTDmgeIfBxsniM3vcyQdEYDzuEgW5GwWCyTE4cGHstAzSpzXnJIyg==",
+      "salt" : "04otAOy0+i+LEtmmX0iGhw==",
       "hashIterations" : 1,
       "counter" : 0,
       "algorithm" : "pbkdf2",
-      "digits" : 0
+      "digits" : 0,
+      "createdDate" : 1452717197000
     } ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "apiuser", "apiadmin" ],
+    "realmRoles" : [ "apiadmin", "offline_access", "apiuser" ],
     "clientRoles" : {
-      "realm-management" : [ "realm-admin" ]
+      "account" : [ "manage-account", "view-profile" ]
     },
     "groups" : [ ]
   }, {
-    "id" : "9e51cb42-368d-4ef1-9cb8-06580d4a1785",
+    "id" : "47fa988a-73c3-4a12-9e5d-92b0edd3115a",
+    "createdTimestamp" : 1452717220155,
     "username" : "apimanager",
     "enabled" : true,
     "totp" : false,
-    "emailVerified" : false,
+    "emailVerified" : true,
+    "firstName" : "API",
+    "lastName" : "Manager",
+    "email" : "apimanager@example.org",
     "credentials" : [ {
       "type" : "password",
-      "hashedSaltedValue" : "Ylipauv5AgHTb4PCFcxnnBAvQwxq4UlupyKVRg3KHLWZOg/ShplHj5qN7Ty+OFgXP22l99pSSBYgDrNFvWg4Pw==",
-      "salt" : "0xJXge6lz97d4M03dvYm9g==",
+      "hashedSaltedValue" : "opeyac9aLYiFXeNC7E2g3wSUUg5/HilmjJNd0HP3ipGaeMK2MfGsutNfkjqSmQ+F8xXwzMDIzUn8gQtTSN3fng==",
+      "salt" : "9T1xFfaLFBc1QXcdaH7Uow==",
       "hashIterations" : 1,
       "counter" : 0,
       "algorithm" : "pbkdf2",
-      "digits" : 0
+      "digits" : 0,
+      "createdDate" : 1452717231000
     } ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "apipublisher" ],
+    "realmRoles" : [ "offline_access", "apiuser", "apipublisher" ],
     "clientRoles" : {
       "account" : [ "manage-account", "view-profile" ]
     },
