@@ -64,6 +64,5 @@ public class CreateOrganizationIT {
     public void canNotSubmitFormWhenEmptyDescription() {
         createOrgPage.name(orgBean.getName());
         createOrgPage.createButton().shouldNotBe(disabled);
-        ;
     }
 }

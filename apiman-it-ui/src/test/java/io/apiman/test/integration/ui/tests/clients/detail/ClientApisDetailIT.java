@@ -80,23 +80,14 @@ public class ClientApisDetailIT extends AbstractClientTest {
     }
 
     @Test
-    public void shouldDisplayCorrectApiKeys() throws Exception {
-        page.apiKeyInput(text(organization.getName()), text(apiVersion.getVersion()))
-            .shouldHave(value(apiKey));
-
-        page.apiKeyInput(text(organization.getName()), text(secondApiVersion.getVersion()))
-            .shouldHave(value(secodnApiKey));
-    }
-
-    @Test
     public void shouldDisplayCorrectHowToInvokeQueryParameter() throws Exception {
-        page.queryParameterTextarea(text(organization.getName()), text(apiVersion.getVersion()))
+        page.queryParameterInput(text(organization.getName()), text(apiVersion.getVersion()))
             .shouldHave(value(addApiKeyParameter(endpoint, apiKey)));
     }
 
     @Test
     public void shouldDisplayCorrectHowToInvokeHttpHeader() throws Exception {
-        page.httpHeaderTextarea(text(organization.getName()), text(apiVersion.getVersion()))
+        page.httpHeaderInput(text(organization.getName()), text(apiVersion.getVersion()))
             .shouldHave(value("X-API-Key: " + apiKey));
     }
 }
