@@ -102,7 +102,7 @@ public class CreateApiVersionIT {
     }
 
     @Test
-    public void shoulcCreateApiVersionByCopySuccessfully() throws Exception {
+    public void shouldCreateApiVersionByCopySuccessfully() throws Exception {
         AbstractApiDetailPage apiDetailPage = createApiVersionPage.version(COPIED_VERSION).clone(true).create();
 
         apiDetailPage.versionSelectorButton().shouldHave(text(COPIED_VERSION));

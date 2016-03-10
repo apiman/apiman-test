@@ -20,13 +20,13 @@ import static com.codeborne.selenide.Condition.hasAttribute;
 import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Selenide.$;
 
+import io.apiman.test.integration.ui.support.selenide.ByApiman;
 import io.apiman.test.integration.ui.support.selenide.PageLocation;
 import io.apiman.test.integration.ui.support.selenide.components.ModalDialog;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
 /**
  * @author ldimaggi, jcechace
@@ -65,30 +65,16 @@ public class ClientApisDetailPage extends AbstractClientDetailPage<ClientApisDet
         return allApis().find(Condition.and("Find entries with specific values", conditions));
     }
 
-    public ClientApisDetailPage expandApi(Condition... conditions) {
-        findApi(conditions).find(".fa-chevron-right").click();
-        return this;
-    }
-
-    public SelenideElement apiExpandedArea(Condition... conditions) {
-        expandApi(conditions);
-        return findApi(conditions).find(By.xpath("following-sibling::tr"));
-    }
-
-    public SelenideElement apiKeyInput(Condition... conditions) {
-        return apiExpandedArea(conditions).find("input");
-    }
-
     public SelenideElement howToInvokeButton(Condition... conditions) {
-        return apiExpandedArea(conditions).find("button[apiman-i18n-key=\"how-to-invoke\"]");
+        return findApi(conditions).find(ByApiman.i18n("a", "client-apis.howtoinvoke"));
     }
 
-    public SelenideElement queryParameterTextarea(Condition... conditions) {
+    public SelenideElement queryParameterInput(Condition... conditions) {
         howToInvokeButton(conditions).click();
         return dialogWindow().find(".modal-body .input-group input");
     }
 
-    public SelenideElement httpHeaderTextarea(Condition... conditions) {
+    public SelenideElement httpHeaderInput(Condition... conditions) {
         howToInvokeButton(conditions).click();
         return dialogWindow().find(".modal-body .input-group:last-of-type input");
     }

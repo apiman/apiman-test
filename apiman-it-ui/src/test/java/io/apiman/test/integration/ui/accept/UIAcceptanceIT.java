@@ -283,7 +283,7 @@ public class UIAcceptanceIT {
 
         /* Display and verify managed URL */
         String managedAPI = clientDetailPage.manageAPIs()
-            .queryParameterTextarea(text(planBean.getName()))
+            .queryParameterInput(text(planBean.getName()))
             .getAttribute("value");
         String regex = "https://localhost:8443/apiman-gateway(.*)apikey=(.*)";
         assertTrue("Managed API " + managedAPI + " doesn't match pattern " + regex, managedAPI.matches(regex));
