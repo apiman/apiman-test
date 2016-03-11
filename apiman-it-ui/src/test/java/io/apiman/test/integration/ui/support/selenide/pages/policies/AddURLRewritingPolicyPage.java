@@ -24,7 +24,7 @@ import static com.codeborne.selenide.Selenide.$;
 /**
  * @author opontes
  */
-public class AddURLRewritingPolicyPage extends AbstractAddPolicyPage {
+public class AddURLRewritingPolicyPage extends AbstractAddPolicyPage<AddURLRewritingPolicyPage> {
 
     public SelenideElement regex(){
         return $("input[id='fromRegexp']");
@@ -46,13 +46,17 @@ public class AddURLRewritingPolicyPage extends AbstractAddPolicyPage {
             String regex, String replacement, boolean processHeader, boolean processBody){
         regex().setValue(regex);
         replacement().setValue(replacement);
-        if (processHeader) processHeader().click();
-        if (processBody) processBody().click();
-        return (AddURLRewritingPolicyPage) thisPageObject();
+        if (processHeader) {
+            processHeader().click();
+        }
+        if (processBody) {
+            processBody().click();
+        }
+        return thisPageObject();
     }
 
     @Override
-    public AbstractAddPolicyPage selectPolicyType() {
+    public AddURLRewritingPolicyPage selectPolicyType() {
         return policyType("URL Rewriting Policy");
     }
 }

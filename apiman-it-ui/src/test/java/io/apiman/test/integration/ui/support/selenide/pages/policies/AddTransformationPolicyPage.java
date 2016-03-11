@@ -24,7 +24,7 @@ import static com.codeborne.selenide.Selenide.$;
 /**
  * @author opontes
  */
-public class AddTransformationPolicyPage extends AbstractAddPolicyPage{
+public class AddTransformationPolicyPage extends AbstractAddPolicyPage<AddTransformationPolicyPage>{
 
     public SelenideElement clientDataFormat(){
         return $("select[name=\"root[clientFormat]\"");
@@ -37,11 +37,11 @@ public class AddTransformationPolicyPage extends AbstractAddPolicyPage{
     public AddTransformationPolicyPage configure(String client, String server){
         clientDataFormat().selectOptionByValue(client);
         serverDataFormat().selectOptionByValue(server);
-        return (AddTransformationPolicyPage) thisPageObject();
+        return thisPageObject();
     }
 
     @Override
-    public AbstractAddPolicyPage selectPolicyType() {
+    public AddTransformationPolicyPage selectPolicyType() {
         return policyType("Transformation Policy");
     }
 }
