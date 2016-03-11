@@ -33,4 +33,6 @@ public class PolicyDefs {
     public static final String JSONP_POLICY = "jsonp-policy";
     public static final String CORS_POLICY = "cors-policy";
     public static final String KEYCLOAK_AUTHENTICATION_POLICY = "keycloak-oauth-policy";
+    public static final String TRANSFORMATION_POLICY = "transformation-policy";
+    public static final String URL_REWRITING_POLICY = "URLRewritingPolicy";
 }
