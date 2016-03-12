@@ -20,6 +20,8 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.given;
 import static io.apiman.test.integration.runner.RestAssuredUtils.when;
 
 import io.apiman.test.integration.base.AbstractApiTest;
+import io.apiman.test.integration.categories.PluginTest;
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.rest.support.KCTokenProvider;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
@@ -30,12 +32,14 @@ import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author mjaros
  */
+@Category({PolicyTest.class, PluginTest.class})
 @Plugin(artifactId = "apiman-plugins-keycloak-oauth-policy")
 public class KeycloakAuthenticationPolicyIT extends AbstractApiTest {
 
