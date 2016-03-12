@@ -90,8 +90,8 @@ while true; do
 done
 
 if $BUILD_APIMAN; then
-    sh $MAVEN_SCRIPTS/build_apiman.sh
-    sh $MAVEN_SCRIPTS/build_plugins.sh
+    bash $MAVEN_SCRIPTS/build_apiman.sh
+    bash $MAVEN_SCRIPTS/build_plugins.sh
 fi
 
 if $MOVE_APIMAN; then
@@ -154,27 +154,27 @@ if $VERTX; then
 fi
 
 if $INSTALL_PLUGINS; then
-    sh $MAVEN_SCRIPTS/build_plugins.sh
+    bash $MAVEN_SCRIPTS/build_plugins.sh
 fi
 
 if $TEST_DEPLOYMENTS; then
-    sh $MAVEN_SCRIPTS/deploy_services.sh
+    bash $MAVEN_SCRIPTS/deploy_services.sh
 fi
 
 if $COMMUNITY_TESTS; then
-    sh $MAVEN_SCRIPTS/run_community_tests.sh
+    bash $MAVEN_SCRIPTS/run_community_tests.sh
 fi
 
 if $REST_TESTS; then
-    sh $MAVEN_SCRIPTS/build_rest_tests.sh
+    bash $MAVEN_SCRIPTS/build_rest_tests.sh
 fi
 
 if $UI_TESTS; then
-    sh $MAVEN_SCRIPTS/run_ui_tests.sh
+    bash $MAVEN_SCRIPTS/run_ui_tests.sh
 fi
 
 if $SMOKE_TESTS; then
-    sh $MAVEN_SCRIPTS/run_smoke_tests.sh
+    bash $MAVEN_SCRIPTS/run_smoke_tests.sh
 fi
 
 if $RUN_DOCKER && $CLEANUP; then
@@ -184,5 +184,4 @@ fi
 
 if $RUN_APIMAN && $CLEANUP; then
     kill -TERM $PID
-    wait $PID
 fi
