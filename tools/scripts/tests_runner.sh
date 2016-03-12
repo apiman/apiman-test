@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 DIR=`dirname ${BASH_SOURCE[0]}`
+MAVEN_SCRIPTS="$DIR/maven/"
 
+: ${RUN_APIMAN:=true}
+: ${CLEANUP:=true}
 : ${BUILD_APIMAN:=false}
 : ${MOVE_APIMAN:=false}
 : ${DELETE_ELASTIC:=false}
@@ -19,9 +22,10 @@ DIR=`dirname ${BASH_SOURCE[0]}`
 : ${INSTALL_PLUGINS:=false}
 : ${TEST_DEPLOYMENTS:=false}
 : ${COMMUNITY_TESTS:=false}
+: ${SMOKE_TESTS:=false}
 : ${RC_FILE="$DIR/custom.rc"}
 
-OPTS=`getopt -o urc --long ui,rest,community -- $@`
+OPTS=`getopt -o urcs --long ui,rest,community,smoke -- $@`
 
 source "$DIR/apimanrc.sh"
 if [ -f $RC_FILE ]; then
@@ -57,25 +61,37 @@ function set_rest() {
     TEST_DEPLOYMENTS=true
 }
 
-function set_comunity() {
+function set_community() {
     BUILD_APIMAN=true
     MOVE_APIMAN=true
     COMMUNITY_TESTS=true
 
 }
 
+function set_smoke() {
+    BUILD_APIMAN=true
+    MOVE_APIMAN=true
+    SMOKE_TESTS=true
+    RUN_DOCKER=true
+    API_CATALOG =true
+    DEPLOY_DS=true
+    DELETE_ELASTIC=true
+    CONFIGURE_ES=true
+    TEST_DEPLOYMENTS=true
+}
 while true; do
     case "$1" in
     -u | --ui) set_ui; shift ;;
     -r | --rest) set_rest; shift ;;
     -c | --community) set_community; shift;;
+    -s | --smoke) set_smoke; shift;;
     *) break ;;
     esac
 done
 
 if $BUILD_APIMAN; then
-    sh maven/build_apiman.sh
-    sh maven/build_plugins.sh
+    sh $MAVEN_SCRIPTS/build_apiman.sh
+    sh $MAVEN_SCRIPTS/build_plugins.sh
 fi
 
 if $MOVE_APIMAN; then
@@ -125,38 +141,48 @@ if $RUN_DOCKER; then
     docker-compose -f ${TEST_SOURCES}/tools/docker/docker-compose.yml up -d
 fi
 
-# run apiman
-$APIMAN_HOME/bin/standalone.sh > server_stdout.log 2>&1 &
-PID=$!
-sleep 30
+if $RUN_APIMAN; then
+    # run apiman
+    $APIMAN_HOME/bin/standalone.sh > server_stdout.log 2>&1 &
+    PID=$!
+    echo "PID=$PID"
+    sleep 30
+fi
 
 if $VERTX; then
     ${TEST_SOURCES}/tools/scripts/vertx.sh
 fi
 
 if $INSTALL_PLUGINS; then
-    sh maven/build_plugins.sh
+    sh $MAVEN_SCRIPTS/build_plugins.sh
 fi
 
 if $TEST_DEPLOYMENTS; then
-    sh maven/deploy_services.sh
+    sh $MAVEN_SCRIPTS/deploy_services.sh
 fi
 
 if $COMMUNITY_TESTS; then
-    sh maven/run_community_tests.sh
+    sh $MAVEN_SCRIPTS/run_community_tests.sh
 fi
 
 if $REST_TESTS; then
-    sh maven/build_rest_tests.sh
+    sh $MAVEN_SCRIPTS/build_rest_tests.sh
 fi
 
 if $UI_TESTS; then
-    sh maven/run_ui_tests.sh
+    sh $MAVEN_SCRIPTS/run_ui_tests.sh
 fi
 
-if $RUN_DOCKER; then
+if $SMOKE_TESTS; then
+    sh $MAVEN_SCRIPTS/run_smoke_tests.sh
+fi
+
+if $RUN_DOCKER && $CLEANUP; then
     docker-compose -f ${TEST_SOURCES}/tools/docker/docker-compose.yml stop
     docker-compose -f ${TEST_SOURCES}/tools/docker/docker-compose.yml rm -f
 fi
 
-kill -INT $PID
+if $RUN_APIMAN && $CLEANUP; then
+    kill -TERM $PID
+    wait $PID
+fi

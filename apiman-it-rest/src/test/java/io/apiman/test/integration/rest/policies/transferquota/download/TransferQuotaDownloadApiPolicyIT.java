@@ -17,14 +17,19 @@
 package io.apiman.test.integration.rest.policies.transferquota.download;
 
 import io.apiman.test.integration.DeployedServices;
+import io.apiman.test.integration.categories.LongRunningTest;
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.misc.Endpoint;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 
+import org.junit.experimental.categories.Category;
+
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class, LongRunningTest.class})
 public class TransferQuotaDownloadApiPolicyIT extends AbstractTransferQuotaDownloadPolicyIT {
 
     @ApiVersion(api = "api", endpoint = @Endpoint(DeployedServices.DOWNLOAD_ENDPOINT),

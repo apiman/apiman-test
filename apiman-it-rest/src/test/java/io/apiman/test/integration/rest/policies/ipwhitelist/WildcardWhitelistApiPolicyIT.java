@@ -16,16 +16,19 @@
 
 package io.apiman.test.integration.rest.policies.ipwhitelist;
 
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.rest.policies.AbstractIPPolicyIT;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class})
 public class WildcardWhitelistApiPolicyIT extends AbstractIPPolicyIT {
 
     @ManagedEndpoint

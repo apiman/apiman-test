@@ -22,6 +22,7 @@ import static org.junit.Assert.assertEquals;
 
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.base.AbstractClientTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.entity.Api;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
@@ -40,10 +41,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
+@Category({SmokeTest.class})
 public class ApiUsageMetricsIT extends AbstractClientTest {
 
     private static int TIME_DELAY = Integer.valueOf(SuiteProperties.getProperty("apiman.test.delay"));

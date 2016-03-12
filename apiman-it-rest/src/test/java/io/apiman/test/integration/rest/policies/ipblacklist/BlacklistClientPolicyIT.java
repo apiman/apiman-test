@@ -16,6 +16,8 @@
 
 package io.apiman.test.integration.rest.policies.ipblacklist;
 
+import io.apiman.test.integration.categories.PolicyTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
@@ -28,9 +30,12 @@ import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.manager.api.beans.clients.ClientBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
+import org.junit.experimental.categories.Category;
+
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class})
 public class BlacklistClientPolicyIT extends AbstractBlacklistPolicyIT {
 
     @ManagedEndpoint
