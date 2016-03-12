@@ -70,7 +70,7 @@ public abstract class AbstractApiTest {
     public void postRequest(String url, int statusCode) {
         when().
             post(url).
-        then().log().body(true).
+        then().
             statusCode(statusCode);
     }
 
