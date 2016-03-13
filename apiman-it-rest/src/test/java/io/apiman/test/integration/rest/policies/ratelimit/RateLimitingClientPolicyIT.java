@@ -18,6 +18,7 @@ package io.apiman.test.integration.rest.policies.ratelimit;
 
 import io.apiman.test.integration.categories.LongRunningTest;
 import io.apiman.test.integration.categories.PolicyTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.entity.Api;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
@@ -35,7 +36,7 @@ import org.junit.experimental.categories.Category;
 /**
  * @author jkaspar
  */
-@Category({PolicyTest.class, LongRunningTest.class})
+@Category({PolicyTest.class, LongRunningTest.class, SmokeTest.class})
 public class RateLimitingClientPolicyIT extends AbstractRateLimitingPolicyIT {
 
     @Api(organization = "organization")

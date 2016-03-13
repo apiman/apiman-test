@@ -17,7 +17,6 @@
 package io.apiman.test.integration.rest.policies.ipwhitelist;
 
 import io.apiman.test.integration.categories.PolicyTest;
-import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
