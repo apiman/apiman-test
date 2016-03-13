@@ -41,17 +41,6 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
-    <!-- Creaper EAP and WF tooling library -->
-    <dependency>
-      <groupId>org.jboss.qa.creaper</groupId>
-      <artifactId>creaper-core</artifactId>
-      <version>${version.creaper}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.qa.creaper</groupId>
-      <artifactId>creaper-commands</artifactId>
-      <version>${version.creaper}</version>
-    </dependency>
   </dependencies>
 
   <build>
@@ -68,18 +57,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <repositories>
-    <repository>
-      <id>jboss-qa-releases</id>
-      <name>JBoss QA release repository</name>
-      <url>http://repository.engineering.redhat.com/nexus/content/repositories/jboss-qa-releases/</url>
-    </repository>
-    <repository>
-      <id>jboss-qa-snapshots</id>
-      <name>JBoss QA snapshot repository</name>
-      <url>http://repository.engineering.redhat.com/nexus/content/repositories/jboss-qa-snapshots/</url>
-    </repository>
-  </repositories>
 
 </project>
