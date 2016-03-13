@@ -16,14 +16,11 @@ before_install:
 install:
   - export WORKSPACE="$(pwd)/workspace"
   - mkdir $WORKSPACE
-  - git clone https://github.com/apiman/apiman $WORKSPACE/apiman > /dev/null
-  - git clone https://github.com/apiman/apiman-plugins $WORKSPACE/apiman-plugins > /dev/null
+  - git clone https://github.com/apiman/apiman $WORKSPACE/apiman
+  - git clone https://github.com/apiman/apiman-plugins $WORKSPACE/apiman-plugins
   - echo "export TEST_SOURCES=$(pwd)" | tee --append tools/scripts/travis/installrc.sh tools/scripts/travis/scriptrc.sh
   - export RC_FILE=tools/scripts/travis/installrc.sh
   - travis_wait 30 bash -x tools/scripts/travis/travis_run.sh
-
-before_script:
-  - sed -i.bak -e 's|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|https://nexus.codehaus.org/snapshots/|g' ~/.m2/settings.xml
 
 script: 
   - export WORKSPACE="$(pwd)/workspace"
@@ -31,8 +28,9 @@ script:
 
 notifications:
   email:
-    - miroslav.jaros91@gmail.com
+    - jcechace@redhat.com
+    - mjaros@redhat.com
 
 branches:
   only:
-    - travis
+    - master
