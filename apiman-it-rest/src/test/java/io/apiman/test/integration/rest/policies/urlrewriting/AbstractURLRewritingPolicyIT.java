@@ -16,15 +16,16 @@
 
 package io.apiman.test.integration.rest.policies.urlrewriting;
 
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenTestServices;
+
 import io.apiman.test.integration.DeployedServices;
 import io.apiman.test.integration.base.AbstractApiTest;
-import org.junit.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
-import static io.apiman.test.integration.runner.RestAssuredUtils.givenTestServices;
+import org.junit.Assert;
 
 /**
  * @author opontes

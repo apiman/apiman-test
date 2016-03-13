@@ -20,6 +20,7 @@ import io.apiman.test.integration.DeployedServices;
 import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.categories.LongRunningTest;
 import io.apiman.test.integration.categories.PolicyTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
@@ -37,7 +38,7 @@ import org.junit.experimental.categories.Category;
 /**
  * @author jkaspar
  */
-@Category({PolicyTest.class, LongRunningTest.class})
+@Category({PolicyTest.class, LongRunningTest.class, SmokeTest.class})
 public class TransferQuotaCombinedPlanPolicyIT extends AbstractTransferQuotaCombinedPolicyIT {
 
     @ApiVersion(api = "api",

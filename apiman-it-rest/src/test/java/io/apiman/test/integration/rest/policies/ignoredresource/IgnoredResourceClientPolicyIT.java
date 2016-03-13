@@ -17,7 +17,6 @@
 package io.apiman.test.integration.rest.policies.ignoredresource;
 
 import io.apiman.test.integration.categories.PolicyTest;
-import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.entity.Api;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
@@ -35,7 +34,7 @@ import org.junit.experimental.categories.Category;
 /**
  * @author jkaspar
  */
-@Category({PolicyTest.class, SmokeTest.class})
+@Category({PolicyTest.class})
 public class IgnoredResourceClientPolicyIT extends AbstractIgnoredResourcePolicyIT {
 
     @Api(organization = "organization")

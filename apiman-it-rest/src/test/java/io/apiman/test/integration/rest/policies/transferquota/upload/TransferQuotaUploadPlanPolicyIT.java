@@ -17,6 +17,8 @@
 package io.apiman.test.integration.rest.policies.transferquota.upload;
 
 import io.apiman.test.integration.DeployedServices;
+import io.apiman.test.integration.categories.LongRunningTest;
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
@@ -29,9 +31,12 @@ import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
+import org.junit.experimental.categories.Category;
+
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class, LongRunningTest.class})
 public class TransferQuotaUploadPlanPolicyIT extends AbstractTransferQuotaUploadPolicyIT {
 
     @ApiVersion(api = "api", vPlans = "plan", endpoint = @Endpoint(DeployedServices.DOWNLOAD_ENDPOINT))
