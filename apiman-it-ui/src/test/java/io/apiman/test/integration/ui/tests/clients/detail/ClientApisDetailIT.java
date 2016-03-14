@@ -23,6 +23,7 @@ import static com.codeborne.selenide.Condition.value;
 
 import io.apiman.test.integration.base.AbstractClientTest;
 import io.apiman.test.integration.categories.VisualTest;
+import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
@@ -45,15 +46,21 @@ public class ClientApisDetailIT extends AbstractClientTest {
     public static ApiVersionBean secondApiVersion;
 
     @ClientVersion(client = "client", contracts = {
-        @Contract(vApi = "apiVersion", vPlan = "planVersion"),
-        @Contract(vApi = "secondApiVersion", vPlan = "planVersion")})
+        @Contract(vApi = "apiVersion", vPlan = "planVersion")
+    })
     private static ClientVersionBean clientVersion;
+
+    @Client(organization = "organization")
+    @ClientVersion(contracts = {
+        @Contract(vApi = "secondApiVersion", vPlan = "planVersion")
+    })
+    private static ClientVersionBean secondClientVersion;
 
     @ApiKey(vPlan = "planVersion", vApi = "apiVersion", vClient = "clientVersion")
     private static String apiKey;
 
-    @ApiKey(vPlan = "planVersion", vApi = "secondApiVersion", vClient = "clientVersion")
-    private static String secodnApiKey;
+    @ApiKey(vPlan = "planVersion", vApi = "secondApiVersion", vClient = "secondClientVersion")
+    private static String secondApiKey;
 
     private ClientApisDetailPage page;
 
