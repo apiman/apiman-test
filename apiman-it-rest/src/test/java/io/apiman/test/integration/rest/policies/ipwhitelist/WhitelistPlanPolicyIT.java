@@ -47,15 +47,20 @@ public class WhitelistPlanPolicyIT extends AbstractWhitelistPolicyIT {
 
     @Client(organization = "organization")
     @ClientVersion(contracts = {
-        @Contract(vApi = "endpoint", vPlan = "loopbackPlan"),
+        @Contract(vApi = "endpoint", vPlan = "loopbackPlan")
+    })
+    private static ClientBean loopbackClient;
+
+    @Client(organization = "organization")
+    @ClientVersion(contracts = {
         @Contract(vApi = "endpoint", vPlan = "proxyPlan")
     })
-    private static ClientBean client;
+    private static ClientBean proxyClient;
 
-    @ApiKey(vPlan = "loopbackPlan", vApi = "endpoint", vClient = "client")
+    @ApiKey(vPlan = "loopbackPlan", vApi = "endpoint", vClient = "loopbackClient")
     private static String loopbackApikey;
 
-    @ApiKey(vPlan = "proxyPlan", vApi = "endpoint", vClient = "client")
+    @ApiKey(vPlan = "proxyPlan", vApi = "endpoint", vClient = "proxyClient")
     private static String proxyApikey;
 
     @Override
