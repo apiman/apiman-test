@@ -16,10 +16,12 @@
 
 package io.apiman.test.integration.rest.plugins.policies.transformplugin;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.apis.EndpointContentType;
 import io.apiman.test.integration.DeployedServices;
 import io.apiman.test.integration.base.entity.TestData;
+import io.apiman.test.integration.base.entity.TestDataRoot;
 import io.apiman.test.integration.runner.annotations.misc.Endpoint;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
@@ -47,14 +49,15 @@ public class XmlToJsonIT extends AbstractTransformationIT {
     @Test
     public void shouldPassWhenCanTransformXmlToJson() throws IOException {
         TestData client = xmlToTestDataObject(getXmlFromTestService(DeployedServices.XML_DATA));
-        String xml = getJsonFromGateway(endpointXmlToJson);
-
-        Assert.assertNotEquals(xml, "");
-
-        TestData server = jsonToTestDataObject(xml);
+        TestDataRoot server = jsonToTestDataRootObject(getJsonFromGateway(endpointXmlToJson));
 
         Assert.assertNotNull(client);
-        Assert.assertEquals(client, server);
+        Assert.assertEquals(client, server.getTestData());
+    }
+
+    protected TestDataRoot jsonToTestDataRootObject(String json) throws IOException {
+        return new ObjectMapper().readValue(json, TestDataRoot.class);
+
     }
 
     @Override
