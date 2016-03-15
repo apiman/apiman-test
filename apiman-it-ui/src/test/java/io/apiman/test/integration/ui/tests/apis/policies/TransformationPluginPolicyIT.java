@@ -17,6 +17,7 @@
 package io.apiman.test.integration.ui.tests.apis.policies;
 
 import io.apiman.test.integration.base.policies.PolicyDefs;
+import io.apiman.test.integration.runner.annotations.entity.Plugin;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiPoliciesDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.policies.AddTransformationPolicyPage;
@@ -26,6 +27,7 @@ import org.junit.Test;
 /**
  * @author opontes
  */
+@Plugin(artifactId = "apiman-plugins-transformation-policy")
 public class TransformationPluginPolicyIT extends AbstractApiPolicyIT {
 
     private AddTransformationPolicyPage addPolicyPage;
