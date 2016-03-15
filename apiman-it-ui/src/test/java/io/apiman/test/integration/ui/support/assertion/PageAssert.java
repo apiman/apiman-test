@@ -21,9 +21,11 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
 
+import io.apiman.manager.api.beans.clients.ClientBean;
 import io.apiman.test.integration.ui.support.selenide.layouts.OrgEntitiesListPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.EditPolicyPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.PolicyDefsAdminPage;
+import io.apiman.test.integration.ui.support.selenide.pages.apis.BrowseApiDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.organizations.BrowseOrgDetailPage;
 import io.apiman.manager.api.beans.apis.ApiBean;
@@ -90,6 +92,20 @@ public class PageAssert {
         page.jsonTextField()
             .shouldHave(text("\"name\": \"" + expected.getName()))
             .shouldHave(text("\"id\": \"" + expected.getId()));
+    }
+
+    /**
+     * Assert that information on BrowseApiDetailPage matches given bean
+     * This method does not have to cross check all fields.
+     *
+     *  Currently checked fields: name, description
+     *
+     * @param expected expected bean
+     */
+    public static void assertBrowseApiDetail(ApiBean expected) {
+        BrowseApiDetailPage page = page(BrowseApiDetailPage.class);
+        page.apiTitle().shouldHave(text(expected.getName()));
+        page.apiDescription().shouldBe(text(expected.getDescription()));
     }
 }
 

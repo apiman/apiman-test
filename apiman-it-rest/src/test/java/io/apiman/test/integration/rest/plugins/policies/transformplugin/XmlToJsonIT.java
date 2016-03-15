@@ -29,7 +29,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static com.jayway.restassured.RestAssured.get;
 import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 
 /**

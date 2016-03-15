@@ -19,7 +19,11 @@ package io.apiman.test.integration.ui.support.beanutils;
 import static io.apiman.test.integration.ui.support.beanutils.BeanUtils.uniqueName;
 
 import io.apiman.manager.api.beans.apis.ApiBean;
+import io.apiman.manager.api.beans.apis.NewApiBean;
+import io.apiman.manager.api.beans.clients.NewClientBean;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
+import io.apiman.test.integration.runner.restclients.entity.APIs;
+import io.apiman.test.integration.runner.restclients.entity.Clients;
 
 /**
  * @author jcechace
@@ -27,6 +31,7 @@ import io.apiman.manager.api.beans.orgs.OrganizationBean;
 public class ApiUtils {
 
     public static final String TEST_API_NAME_BASE = "MyTestApi";
+    public static final String TEST_API_VERSION = "1.0";
 
     /**
      * Create an instance of ApiBean with unique name and description
@@ -40,5 +45,15 @@ public class ApiUtils {
         api.setName(uniqueName(TEST_API_NAME_BASE));
         api.setDescription(String.format("Description of %s", api.getName()));
         return api;
+    }
+
+    public static ApiBean remote(OrganizationBean orgBean) {
+        NewApiBean api = new NewApiBean();
+        api.setName(uniqueName(TEST_API_NAME_BASE));
+        api.setDescription(String.format("Description of %s", api.getName()));
+        api.setInitialVersion(TEST_API_VERSION);
+
+        APIs apIs = new APIs(orgBean);
+        return apIs.create(api).getBean();
     }
 }
