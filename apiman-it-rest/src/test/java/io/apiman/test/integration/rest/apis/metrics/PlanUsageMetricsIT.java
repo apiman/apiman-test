@@ -32,11 +32,9 @@ public class PlanUsageMetricsIT extends AbstractMetricsIT {
     @Test
     public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         UsagePerPlanBean metricsBefore = apiVersions.metricsPlanUsage(beforeRecoding, afterRecording);
-
         recordSuccessfulRequests(1, apiKey_clientVersion1);
         recordFailedRequests(2, apiKey_clientVersion1);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
-
         UsagePerPlanBean metricsAfter = apiVersions.metricsPlanUsage(beforeRecoding, afterRecording);
 
         assertEquals("Unexpected metrics data",

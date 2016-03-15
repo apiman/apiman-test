@@ -42,6 +42,39 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 
 /**
+ * Diagram describing contracts and entities
+ *
+ *                                  +-----------------+
+ *                                  |                 |
+ *                                  |   apiVersion    |
+ *                   +----------+   |                 |   +-----------+
+ *                   |          |   +--------+--------+   |           |
+ *                   |   plan   |            |            |   plan2   |
+ *                   |          |            |            |           |
+ *                   +-----+----+            |            +-----+-----+
+ *                         |                 |                  |
+ *                +--------+--------+        |         +--------+---------+
+ *                |   planVersion   | <------+-------> |   plan2Version   |
+ *                +-----------------+                  +------------------+
+ *                      ^   ^                                   ^
+ *                      |   |                                   |
+ *                      |   |                                   |
+ *            +---------+   +----------+                        +---+
+ *            |                        |                            |
+ *            |                        |                            |
+ *            |                        |                            |
+ *  +---------+----------+  +----------+---------+  +---------------+----------------+
+ *  |   clientVersion1   |  |   clientVersion2   |  |   singleVersionClientVersion   |
+ *  +---------+----------+  +----------+---------+  +---------------+----------------+
+ *            |                        |                            |
+ *            +------------+-----------+                            |
+ *                         |                                        |
+ *                   +-----+------+                     +-----------+-------------+
+ *                   |            |                     |                         |
+ *                   |   client   |                     |   singleVersionClient   |
+ *                   |            |                     |                         |
+ *                   +------------+                     +-------------------------+
+ *
  * @author jkaspar
  */
 public abstract class AbstractMetricsIT extends AbstractTest {
@@ -55,31 +88,24 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     protected static final int CLIENT_V1_FAIL = 2;
     protected static final int CLIENT_V2_SUCC = 3;
     protected static final int CLIENT_V2_FAIL = 4;
-    protected static final int SINGLE_VERSION_CLIENT_PLAN1_SUCC = 5;
-    protected static final int SINGLE_VERSION_CLIENT_PLAN1_FAIL = 6;
-    protected static final int SINGLE_VERSION_CLIENT_PLAN2_SUCC = 7;
-    protected static final int SINGLE_VERSION_CLIENT_PLAN2_FAIL = 8;
-    protected static final int PUBLIC_SUCC = 9;
-    protected static final int PUBLIC_FAIL = 10;
+    protected static final int SINGLE_VERSION_CLIENT_SUCC = 5;
+    protected static final int SINGLE_VERSION_CLIENT_FAIL = 6;
+    protected static final int PUBLIC_SUCC = 7;
+    protected static final int PUBLIC_FAIL = 8;
 
     // Client metrics count
     protected static final int CLIENT_SUCC = CLIENT_V1_SUCC + CLIENT_V2_SUCC;
     protected static final int CLIENT_FAIL = CLIENT_V1_FAIL + CLIENT_V2_FAIL;
-    protected static final int SINGLE_VERSION_CLIENT_SUCC =
-        SINGLE_VERSION_CLIENT_PLAN1_SUCC + SINGLE_VERSION_CLIENT_PLAN2_SUCC;
-    protected static final int SINGLE_VERSION_CLIENT_FAIL =
-        SINGLE_VERSION_CLIENT_PLAN1_FAIL + SINGLE_VERSION_CLIENT_PLAN2_FAIL;
 
     // Plan metrics count
-    protected static final int PLAN1_SUCC = CLIENT_V1_SUCC + CLIENT_V2_SUCC + SINGLE_VERSION_CLIENT_PLAN1_SUCC;
-    protected static final int PLAN1_FAIL = CLIENT_V1_FAIL + CLIENT_V2_FAIL + SINGLE_VERSION_CLIENT_PLAN1_FAIL;
-    protected static final int PLAN2_SUCC = SINGLE_VERSION_CLIENT_PLAN2_SUCC;
-    protected static final int PLAN2_FAIL = SINGLE_VERSION_CLIENT_PLAN2_FAIL;
+    protected static final int PLAN1_SUCC = CLIENT_V1_SUCC + CLIENT_V2_SUCC;
+    protected static final int PLAN1_FAIL = CLIENT_V1_FAIL + CLIENT_V2_FAIL;
+    protected static final int PLAN2_SUCC = SINGLE_VERSION_CLIENT_SUCC;
+    protected static final int PLAN2_FAIL = SINGLE_VERSION_CLIENT_FAIL;
 
     // Total metrics count
     protected static final long TOTAL_FAILURES = CLIENT_FAIL + SINGLE_VERSION_CLIENT_FAIL + PUBLIC_FAIL;
-    protected static final long TOTAL_REQUESTS =
-        CLIENT_SUCC + SINGLE_VERSION_CLIENT_SUCC + PUBLIC_SUCC + TOTAL_FAILURES;
+    protected static final long TOTAL_REQUESTS = CLIENT_SUCC + SINGLE_VERSION_CLIENT_SUCC + PUBLIC_SUCC + TOTAL_FAILURES;
 
     @ApiVersion(api = "api",
         vPlans = {"planVersion", "plan2Version"},
@@ -112,7 +138,6 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     protected static ClientBean singleVersionClient;
 
     @ClientVersion(client = "singleVersionClient", unique = true, contracts = {
-        @Contract(vPlan = "planVersion", vApi = "apiVersion"),
         @Contract(vPlan = "plan2Version", vApi = "apiVersion")})
     protected ClientVersionBean singleVersionClientVersion;
 
@@ -122,11 +147,8 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     @ApiKey(vApi = "apiVersion", vPlan = "planVersion", vClient = "clientVersion2")
     protected String apiKey_clientVersion2;
 
-    @ApiKey(vApi = "apiVersion", vPlan = "planVersion", vClient = "singleVersionClientVersion")
-    protected String apiKey_singleVersionClientPlan1;
-
     @ApiKey(vApi = "apiVersion", vPlan = "plan2Version", vClient = "singleVersionClientVersion")
-    protected String apiKey_singleVersionClientPlan2;
+    protected String apiKey_singleVersionClient;
 
     @Before
     public void setUpClient() throws Exception {
@@ -144,11 +166,8 @@ public abstract class AbstractMetricsIT extends AbstractTest {
         recordSuccessfulRequests(CLIENT_V2_SUCC, apiKey_clientVersion2);
         recordFailedRequests(CLIENT_V2_FAIL, apiKey_clientVersion2);
 
-        recordSuccessfulRequests(SINGLE_VERSION_CLIENT_PLAN1_SUCC, apiKey_singleVersionClientPlan1);
-        recordFailedRequests(SINGLE_VERSION_CLIENT_PLAN1_FAIL, apiKey_singleVersionClientPlan1);
-
-        recordSuccessfulRequests(SINGLE_VERSION_CLIENT_PLAN2_SUCC, apiKey_singleVersionClientPlan2);
-        recordFailedRequests(SINGLE_VERSION_CLIENT_PLAN2_FAIL, apiKey_singleVersionClientPlan2);
+        recordSuccessfulRequests(SINGLE_VERSION_CLIENT_SUCC, apiKey_singleVersionClient);
+        recordFailedRequests(SINGLE_VERSION_CLIENT_FAIL, apiKey_singleVersionClient);
 
         recordSuccessfulRequests(PUBLIC_SUCC);
         recordFailedRequests(PUBLIC_FAIL);

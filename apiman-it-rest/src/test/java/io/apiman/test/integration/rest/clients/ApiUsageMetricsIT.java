@@ -65,6 +65,7 @@ public class ApiUsageMetricsIT extends AbstractClientTest {
 
     @ManagedEndpoint("secondApiVersion")
     private static String secondEdpoint;
+
     @ClientVersion(client = "client", policies = @Policies("metrics_001"), unique = true, contracts = {
         @Contract(vPlan = "planVersion", vApi = "apiVersion"),
         @Contract(vPlan = "planVersion", vApi = "secondApiVersion")})
