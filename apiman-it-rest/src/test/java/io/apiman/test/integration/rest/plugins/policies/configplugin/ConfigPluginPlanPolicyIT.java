@@ -17,6 +17,10 @@
 package io.apiman.test.integration.rest.plugins.policies.configplugin;
 
 import io.apiman.test.integration.base.AbstractTest;
+import io.apiman.test.integration.categories.PluginTest;
+import io.apiman.test.integration.categories.PolicyTest;
+import io.apiman.test.integration.categories.SmokeTest;
+import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
@@ -32,10 +36,12 @@ import io.apiman.manager.api.beans.plans.PlanVersionBean;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class, PluginTest.class, SmokeTest.class})
 @Plugin(artifactId = "apiman-plugins-config-policy")
 public class ConfigPluginPlanPolicyIT extends AbstractTest {
 
@@ -53,15 +59,20 @@ public class ConfigPluginPlanPolicyIT extends AbstractTest {
     private static String endpoint;
 
     @ClientVersion(client = "client", contracts = {
-            @Contract(vApi = "apiVersion", vPlan = "basicPlanVersion"),
-            @Contract(vApi = "apiVersion", vPlan = "pluginPlanVersion")
+        @Contract(vApi = "apiVersion", vPlan = "basicPlanVersion")
     })
-    private static ClientVersionBean clientVersion;
+    private static ClientVersionBean clientBasicVersion;
 
-    @ApiKey(vClient = "clientVersion", vApi = "apiVersion", vPlan = "basicPlanVersion")
+    @Client(organization = "organization")
+    @ClientVersion(contracts = {
+        @Contract(vApi = "apiVersion", vPlan = "pluginPlanVersion")
+    })
+    private static ClientVersionBean clientPluginVersion;
+
+    @ApiKey(vClient = "clientBasicVersion", vApi = "apiVersion", vPlan = "basicPlanVersion")
     private static String basicApiKey;
 
-    @ApiKey(vClient = "clientVersion", vApi = "apiVersion", vPlan = "pluginPlanVersion")
+    @ApiKey(vClient = "clientPluginVersion", vApi = "apiVersion", vPlan = "pluginPlanVersion")
     private static String pluginApiKey;
 
     private static String basicEndpoint;

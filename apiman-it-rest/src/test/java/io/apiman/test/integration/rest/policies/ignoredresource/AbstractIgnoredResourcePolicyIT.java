@@ -17,12 +17,15 @@
 package io.apiman.test.integration.rest.policies.ignoredresource;
 
 import io.apiman.test.integration.base.AbstractApiTest;
+import io.apiman.test.integration.categories.PolicyTest;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jcechace
  */
+@Category({PolicyTest.class})
 public abstract class AbstractIgnoredResourcePolicyIT extends AbstractApiTest {
 
     protected static final String IGNORE_SIMPLE = "/path/to/ignore";

@@ -17,6 +17,7 @@
 package io.apiman.test.integration.rest.policies.ipblacklist;
 
 import io.apiman.test.integration.base.AbstractApiTest;
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
@@ -29,9 +30,12 @@ import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.manager.api.beans.clients.ClientBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
+import org.junit.experimental.categories.Category;
+
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class})
 public class BlacklistPlanPolicyIT extends AbstractBlacklistPolicyIT {
 
     @ManagedEndpoint
@@ -48,15 +52,20 @@ public class BlacklistPlanPolicyIT extends AbstractBlacklistPolicyIT {
 
     @Client(organization = "organization")
     @ClientVersion(contracts = {
-        @Contract(vApi = "endpoint", vPlan = "loopbackPlan"),
+        @Contract(vApi = "endpoint", vPlan = "loopbackPlan")
+    })
+    private static ClientBean loopbackClient;
+
+    @Client(organization = "organization")
+    @ClientVersion(contracts = {
         @Contract(vApi = "endpoint", vPlan = "proxyPlan")
     })
-    private static ClientBean client;
+    private static ClientBean proxyClient;
 
-    @ApiKey(vPlan = "loopbackPlan", vApi = "endpoint", vClient = "client")
+    @ApiKey(vPlan = "loopbackPlan", vApi = "endpoint", vClient = "loopbackClient")
     private static String loopbackApikey;
 
-    @ApiKey(vPlan = "proxyPlan", vApi = "endpoint", vClient = "client")
+    @ApiKey(vPlan = "proxyPlan", vApi = "endpoint", vClient = "proxyClient")
     private static String proxyApikey;
 
     @Override

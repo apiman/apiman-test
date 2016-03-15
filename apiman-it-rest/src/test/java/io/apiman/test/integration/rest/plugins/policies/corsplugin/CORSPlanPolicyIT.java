@@ -16,6 +16,8 @@
 
 package io.apiman.test.integration.rest.plugins.policies.corsplugin;
 
+import io.apiman.test.integration.categories.PluginTest;
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
@@ -28,9 +30,12 @@ import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
+import org.junit.experimental.categories.Category;
+
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class, PluginTest.class})
 public class CORSPlanPolicyIT extends AbstractCORSPolicyIT {
 
     @ApiVersion(api = "api", vPlans = {"plan", "corsValidationPlan"})
@@ -47,14 +52,20 @@ public class CORSPlanPolicyIT extends AbstractCORSPolicyIT {
 
     @Client(organization = "organization")
     @ClientVersion(contracts = {
-        @Contract(vPlan = "plan", vApi = "endpoint"),
-        @Contract(vPlan = "corsValidationPlan", vApi = "endpoint")})
+        @Contract(vPlan = "plan", vApi = "endpoint")
+    })
     private static ClientVersionBean clientVersion;
+
+    @Client(organization = "organization")
+    @ClientVersion(contracts = {
+        @Contract(vPlan = "corsValidationPlan", vApi = "endpoint")
+    })
+    private static ClientVersionBean clientValidationVersion;
 
     @ApiKey(vPlan = "plan", vApi = "endpoint", vClient = "clientVersion")
     private static String apikey;
 
-    @ApiKey(vPlan = "corsValidationPlan", vApi = "endpoint", vClient = "clientVersion")
+    @ApiKey(vPlan = "corsValidationPlan", vApi = "endpoint", vClient = "clientValidationVersion")
     private static String corsValidationApikey;
 
     @Override

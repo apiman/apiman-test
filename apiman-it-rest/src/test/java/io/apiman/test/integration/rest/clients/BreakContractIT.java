@@ -19,16 +19,19 @@ package io.apiman.test.integration.rest.clients;
 import static org.junit.Assert.assertEquals;
 
 import io.apiman.test.integration.base.clients.AbstractBreakContractTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.manager.api.beans.summary.ContractSummaryBean;
 
 import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
+@Category({SmokeTest.class})
 public class BreakContractIT extends AbstractBreakContractTest {
 
     @Test

@@ -21,22 +21,18 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.withGateway;
 import static org.junit.Assert.assertTrue;
 
 import io.apiman.test.integration.base.AbstractApiTest;
-import io.apiman.test.integration.categories.LongRunningTest;
-import io.apiman.test.integration.categories.PolicyTest;
 
 import java.util.concurrent.TimeUnit;
 
 import com.jayway.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author jcechace
  */
-@Category({PolicyTest.class, LongRunningTest.class})
 public abstract class AbstractRateLimitingPolicyIT extends AbstractApiTest {
 
     // Logger

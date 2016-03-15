@@ -18,25 +18,27 @@ package io.apiman.test.integration.rest.apis.metrics;
 
 import static org.junit.Assert.assertEquals;
 
+import io.apiman.test.integration.categories.LongRunningTest;
+import io.apiman.test.integration.categories.MetricTest;
 import io.apiman.manager.api.beans.metrics.UsagePerPlanBean;
 
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
+@Category({MetricTest.class, LongRunningTest.class})
 public class PlanUsageMetricsIT extends AbstractMetricsIT {
 
     @Test
     public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         UsagePerPlanBean metricsBefore = apiVersions.metricsPlanUsage(beforeRecoding, afterRecording);
-
         recordSuccessfulRequests(1, apiKey_clientVersion1);
         recordFailedRequests(2, apiKey_clientVersion1);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
-
         UsagePerPlanBean metricsAfter = apiVersions.metricsPlanUsage(beforeRecoding, afterRecording);
 
         assertEquals("Unexpected metrics data",

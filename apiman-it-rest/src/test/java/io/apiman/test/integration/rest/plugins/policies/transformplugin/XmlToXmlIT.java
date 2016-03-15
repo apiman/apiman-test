@@ -16,22 +16,27 @@
 
 package io.apiman.test.integration.rest.plugins.policies.transformplugin;
 
-import io.apiman.manager.api.beans.apis.ApiVersionBean;
-import io.apiman.manager.api.beans.apis.EndpointContentType;
 import io.apiman.test.integration.DeployedServices;
 import io.apiman.test.integration.base.entity.TestData;
+import io.apiman.test.integration.categories.PluginTest;
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.misc.Endpoint;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
-import org.junit.Assert;
-import org.junit.Test;
+import io.apiman.manager.api.beans.apis.ApiVersionBean;
+import io.apiman.manager.api.beans.apis.EndpointContentType;
 
 import java.io.IOException;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author opontes
  */
+@Category({PolicyTest.class, PluginTest.class})
 public class XmlToXmlIT extends AbstractTransformationIT {
 
     @ApiVersion(api = "api", endpoint = @Endpoint(value = DeployedServices.XML_DATA, contentType = EndpointContentType.xml),

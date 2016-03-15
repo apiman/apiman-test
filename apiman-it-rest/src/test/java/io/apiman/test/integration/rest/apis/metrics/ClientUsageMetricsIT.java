@@ -18,22 +18,26 @@ package io.apiman.test.integration.rest.apis.metrics;
 
 import static org.junit.Assert.assertEquals;
 
+import io.apiman.test.integration.categories.LongRunningTest;
+import io.apiman.test.integration.categories.MetricTest;
 import io.apiman.manager.api.beans.metrics.UsagePerClientBean;
 
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
+@Category({MetricTest.class, LongRunningTest.class})
 public class ClientUsageMetricsIT extends AbstractMetricsIT {
 
     @Test
     public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         UsagePerClientBean metricsBefore = apiVersions.metricsClientUsage(beforeRecoding, afterRecording);
-        recordSuccessfulRequests(1, apiKey_singleVersionClientPlan1);
-        recordFailedRequests(2, apiKey_singleVersionClientPlan1);
+        recordSuccessfulRequests(1, apiKey_singleVersionClient);
+        recordFailedRequests(2, apiKey_singleVersionClient);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
         UsagePerClientBean metricsAfter = apiVersions.metricsClientUsage(beforeRecoding, afterRecording);
 

@@ -16,16 +16,21 @@
 
 package io.apiman.test.integration.rest.plugins.policies.transformplugin;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.apis.EndpointContentType;
 import io.apiman.test.integration.DeployedServices;
 import io.apiman.test.integration.base.entity.TestData;
+import io.apiman.test.integration.base.entity.TestDataRoot;
+import io.apiman.test.integration.categories.PluginTest;
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.misc.Endpoint;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.io.IOException;
 
@@ -34,6 +39,7 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 /**
  * @author opontes
  */
+@Category({PolicyTest.class, PluginTest.class})
 public class XmlToJsonIT extends AbstractTransformationIT {
 
     @ApiVersion(api = "api", endpoint = @Endpoint(value = DeployedServices.XML_DATA, contentType = EndpointContentType.xml),
@@ -46,14 +52,15 @@ public class XmlToJsonIT extends AbstractTransformationIT {
     @Test
     public void shouldPassWhenCanTransformXmlToJson() throws IOException {
         TestData client = xmlToTestDataObject(getXmlFromTestService(DeployedServices.XML_DATA));
-        String xml = getJsonFromGateway(endpointXmlToJson);
-
-        Assert.assertNotEquals(xml, "");
-
-        TestData server = jsonToTestDataObject(xml);
+        TestDataRoot server = jsonToTestDataRootObject(getJsonFromGateway(endpointXmlToJson));
 
         Assert.assertNotNull(client);
-        Assert.assertEquals(client, server);
+        Assert.assertEquals(client, server.getTestData());
+    }
+
+    protected TestDataRoot jsonToTestDataRootObject(String json) throws IOException {
+        return new ObjectMapper().readValue(json, TestDataRoot.class);
+
     }
 
     @Override

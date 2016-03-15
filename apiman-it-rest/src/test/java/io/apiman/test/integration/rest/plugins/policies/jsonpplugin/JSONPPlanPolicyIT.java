@@ -16,6 +16,8 @@
 
 package io.apiman.test.integration.rest.plugins.policies.jsonpplugin;
 
+import io.apiman.test.integration.categories.PluginTest;
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
@@ -28,9 +30,12 @@ import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
+import org.junit.experimental.categories.Category;
+
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class, PluginTest.class})
 public class JSONPPlanPolicyIT extends AbstractJSONPPolicyIT {
 
     @ApiVersion(api = "api", vPlans = {"plan"})
