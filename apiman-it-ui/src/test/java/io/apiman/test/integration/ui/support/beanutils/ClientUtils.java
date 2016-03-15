@@ -19,6 +19,10 @@ package io.apiman.test.integration.ui.support.beanutils;
 import static io.apiman.test.integration.ui.support.beanutils.BeanUtils.uniqueName;
 
 import io.apiman.manager.api.beans.clients.ClientBean;
+import io.apiman.manager.api.beans.clients.NewClientBean;
+import io.apiman.manager.api.beans.orgs.NewOrganizationBean;
+import io.apiman.manager.api.beans.orgs.OrganizationBean;
+import io.apiman.test.integration.runner.restclients.entity.Clients;
 
 /**
  * @author ldimaggi
@@ -39,5 +43,4 @@ public class ClientUtils {
         client.setDescription(String.format("Description of %s", client.getName()));
         return client;
     }
-
 }
