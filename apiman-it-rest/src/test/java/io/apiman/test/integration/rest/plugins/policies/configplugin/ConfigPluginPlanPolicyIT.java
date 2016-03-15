@@ -17,6 +17,8 @@
 package io.apiman.test.integration.rest.plugins.policies.configplugin;
 
 import io.apiman.test.integration.base.AbstractTest;
+
+import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
@@ -53,15 +55,20 @@ public class ConfigPluginPlanPolicyIT extends AbstractTest {
     private static String endpoint;
 
     @ClientVersion(client = "client", contracts = {
-            @Contract(vApi = "apiVersion", vPlan = "basicPlanVersion"),
-            @Contract(vApi = "apiVersion", vPlan = "pluginPlanVersion")
+        @Contract(vApi = "apiVersion", vPlan = "basicPlanVersion")
     })
-    private static ClientVersionBean clientVersion;
+    private static ClientVersionBean clientBasicVersion;
 
-    @ApiKey(vClient = "clientVersion", vApi = "apiVersion", vPlan = "basicPlanVersion")
+    @Client(organization = "organization")
+    @ClientVersion(contracts = {
+        @Contract(vApi = "apiVersion", vPlan = "pluginPlanVersion")
+    })
+    private static ClientVersionBean clientPluginVersion;
+
+    @ApiKey(vClient = "clientBasicVersion", vApi = "apiVersion", vPlan = "basicPlanVersion")
     private static String basicApiKey;
 
-    @ApiKey(vClient = "clientVersion", vApi = "apiVersion", vPlan = "pluginPlanVersion")
+    @ApiKey(vClient = "clientPluginVersion", vApi = "apiVersion", vPlan = "pluginPlanVersion")
     private static String pluginApiKey;
 
     private static String basicEndpoint;

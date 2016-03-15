@@ -47,14 +47,20 @@ public class CORSPlanPolicyIT extends AbstractCORSPolicyIT {
 
     @Client(organization = "organization")
     @ClientVersion(contracts = {
-        @Contract(vPlan = "plan", vApi = "endpoint"),
-        @Contract(vPlan = "corsValidationPlan", vApi = "endpoint")})
+        @Contract(vPlan = "plan", vApi = "endpoint")
+    })
     private static ClientVersionBean clientVersion;
+
+    @Client(organization = "organization")
+    @ClientVersion(contracts = {
+        @Contract(vPlan = "corsValidationPlan", vApi = "endpoint")
+    })
+    private static ClientVersionBean clientValidationVersion;
 
     @ApiKey(vPlan = "plan", vApi = "endpoint", vClient = "clientVersion")
     private static String apikey;
 
-    @ApiKey(vPlan = "corsValidationPlan", vApi = "endpoint", vClient = "clientVersion")
+    @ApiKey(vPlan = "corsValidationPlan", vApi = "endpoint", vClient = "clientValidationVersion")
     private static String corsValidationApikey;
 
     @Override
