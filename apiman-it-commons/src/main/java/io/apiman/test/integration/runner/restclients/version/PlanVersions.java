@@ -43,7 +43,7 @@ public class PlanVersions extends AbstractEntityRestClient<PlanVersionBean, NewP
     }
 
     @Override
-    public PlanVersions lock() {
+    public PlanVersions publish() {
         ActionBean action = new ActionBean();
         action.setType(ActionType.lockPlan);
         action.setOrganizationId(getBean().getPlan().getOrganization().getId());

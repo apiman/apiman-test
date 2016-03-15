@@ -55,7 +55,7 @@ public abstract class AbstractClientDetailPage<P> extends AbstractDetailPage<P> 
     }
 
     /**
-     * Register (lock) current clientApp version
+     * Register (publish) current clientApp version
      * @return this page
      */
     public P register() {

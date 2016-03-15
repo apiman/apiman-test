@@ -19,6 +19,7 @@ package io.apiman.test.integration.ui.support.selenide.pages.apis.detail;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
+import io.apiman.test.integration.ui.support.selenide.ByApiman;
 import io.apiman.test.integration.ui.support.selenide.layouts.AbstractDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.CreateApiVersionPage;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.CreateContractPage;
@@ -56,7 +57,7 @@ public abstract class AbstractApiDetailPage<P> extends AbstractDetailPage<P> {
     }
 
     /**
-     * Publish (lock) current api version
+     * Publish current api version
      * @return this page object
      */
     public P publish() {
@@ -216,5 +217,22 @@ public abstract class AbstractApiDetailPage<P> extends AbstractDetailPage<P> {
     public ApiMetricsDetailPage manageMetrics() {
         metricsTab().click();
         return page(ApiMetricsDetailPage.class);
+    }
+
+    /**
+     * Button to retire current api version
+     * @return element
+     */
+    public SelenideElement republishButton() {
+        return $(ByApiman.i18n("republish"));
+    }
+
+    /**
+     * Retire current api version
+     * @return this page object
+     */
+    public P republish() {
+        republishButton().click();
+        return thisPageObject();
     }
 }

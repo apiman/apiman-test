@@ -35,5 +35,4 @@ public class DeployedServices {
     public static final String JSON_DATA = RESPONSE_REST_ROOT + "/json";
     public static final String XML_DATA = RESPONSE_REST_ROOT + "/xml";
     public static final String URL_REWRITING_DATA = REWRITING_REST_ROOT + "/get_data_to_rewrite";
-
 }
