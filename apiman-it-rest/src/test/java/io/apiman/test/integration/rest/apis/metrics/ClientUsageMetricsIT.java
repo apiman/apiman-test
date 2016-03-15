@@ -32,8 +32,8 @@ public class ClientUsageMetricsIT extends AbstractMetricsIT {
     @Test
     public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         UsagePerClientBean metricsBefore = apiVersions.metricsClientUsage(beforeRecoding, afterRecording);
-        recordSuccessfulRequests(1, apiKey_singleVersionClientPlan1);
-        recordFailedRequests(2, apiKey_singleVersionClientPlan1);
+        recordSuccessfulRequests(1, apiKey_singleVersionClient);
+        recordFailedRequests(2, apiKey_singleVersionClient);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
         UsagePerClientBean metricsAfter = apiVersions.metricsClientUsage(beforeRecoding, afterRecording);
 
