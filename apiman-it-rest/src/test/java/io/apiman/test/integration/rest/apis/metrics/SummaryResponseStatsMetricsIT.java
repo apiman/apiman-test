@@ -37,11 +37,9 @@ public class SummaryResponseStatsMetricsIT extends AbstractMetricsIT {
     public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         ResponseStatsSummaryBean metricsBefore = apiVersions
             .metricsSummaryResponseStats(beforeRecoding, afterRecording);
-
         recordSuccessfulRequests(1);
         recordFailedRequests(2);
         TimeUnit.SECONDS.sleep(TIME_DELAY);
-
         ResponseStatsSummaryBean metricsAfter = apiVersions.metricsSummaryResponseStats(beforeRecoding, afterRecording);
 
         assertEquals("Unexpected metrics data", metricsBefore.getTotal(), metricsAfter.getTotal());
@@ -50,14 +48,12 @@ public class SummaryResponseStatsMetricsIT extends AbstractMetricsIT {
     @Test
     public void shouldHaveCorrectNumberOfTotalRequests() throws Exception {
         ResponseStatsSummaryBean metrics = apiVersions.metricsSummaryResponseStats(beforeRecoding, afterRecording);
-
         assertEquals("Unexpected number of total requests", TOTAL_REQUESTS, metrics.getTotal());
     }
 
     @Test
     public void shouldHaveCorrectNumberOfFailures() throws Exception {
         ResponseStatsSummaryBean metrics = apiVersions.metricsSummaryResponseStats(beforeRecoding, afterRecording);
-
         assertEquals("Unexpected number of failed requests", TOTAL_FAILURES, metrics.getFailures());
     }
 }

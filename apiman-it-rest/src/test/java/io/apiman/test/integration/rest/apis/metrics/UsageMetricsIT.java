@@ -59,6 +59,7 @@ public class UsageMetricsIT extends AbstractIntervalMetricsIT {
             calendar.setTime(subinterval);
             calendar.add(Calendar.SECOND, 59);
             Date endOfSubinterval = calendar.getTime();
+
             ResponseStatsSummaryBean expectedMetrics = apiVersions
                 .metricsSummaryResponseStats(subinterval, endOfSubinterval);
 
