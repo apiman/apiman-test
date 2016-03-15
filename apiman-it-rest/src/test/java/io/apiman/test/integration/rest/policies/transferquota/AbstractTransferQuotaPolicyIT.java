@@ -16,29 +16,23 @@
 
 package io.apiman.test.integration.rest.policies.transferquota;
 
-import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
-import static io.apiman.test.integration.runner.RestAssuredUtils.with;
-import static io.apiman.test.integration.runner.RestAssuredUtils.withGateway;
+import static io.apiman.test.integration.runner.RestAssuredUtils.*;
 
 import static org.junit.Assert.assertTrue;
 
 import io.apiman.test.integration.base.AbstractApiTest;
-import io.apiman.test.integration.categories.LongRunningTest;
-import io.apiman.test.integration.categories.PolicyTest;
 
 import java.util.concurrent.TimeUnit;
 
 import com.jayway.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author jkaspar
  */
-@Category({PolicyTest.class, LongRunningTest.class})
 public abstract class AbstractTransferQuotaPolicyIT extends AbstractApiTest {
 
     protected static final Logger LOG = LoggerFactory.getLogger(AbstractTransferQuotaPolicyIT.class);

@@ -16,19 +16,24 @@
 
 package io.apiman.test.integration.rest.policies.urlrewriting;
 
-import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.test.integration.DeployedServices;
+import io.apiman.test.integration.categories.PolicyTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.misc.Endpoint;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
+import io.apiman.manager.api.beans.apis.ApiVersionBean;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author opontes
  */
+@Category({PolicyTest.class, SmokeTest.class})
 public class URLRewritingStringBodyIT extends AbstractURLRewritingPolicyIT {
 
     @ApiVersion(api = "api", endpoint = @Endpoint(value = DeployedServices.URL_REWRITING_DATA),

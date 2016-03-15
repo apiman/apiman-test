@@ -18,15 +18,19 @@ package io.apiman.test.integration.rest.apis.metrics;
 
 import static org.junit.Assert.assertEquals;
 
+import io.apiman.test.integration.categories.LongRunningTest;
+import io.apiman.test.integration.categories.MetricTest;
 import io.apiman.manager.api.beans.metrics.ResponseStatsSummaryBean;
 
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
+@Category({MetricTest.class, LongRunningTest.class})
 public class SummaryResponseStatsMetricsIT extends AbstractMetricsIT {
 
     @Test

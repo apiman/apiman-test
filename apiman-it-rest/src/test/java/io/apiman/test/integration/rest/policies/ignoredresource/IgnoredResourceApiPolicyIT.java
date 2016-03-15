@@ -16,14 +16,19 @@
 
 package io.apiman.test.integration.rest.policies.ignoredresource;
 
+import io.apiman.test.integration.categories.PolicyTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 
+import org.junit.experimental.categories.Category;
+
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class, SmokeTest.class})
 public class IgnoredResourceApiPolicyIT extends AbstractIgnoredResourcePolicyIT {
 
     @ApiVersion(api = "api", policies = @Policies("ignored_001"))

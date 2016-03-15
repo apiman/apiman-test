@@ -17,14 +17,17 @@
 package io.apiman.test.integration.rest.apis;
 
 import io.apiman.test.integration.base.AbstractApiTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jcechace
  */
+@Category({SmokeTest.class})
 public class PublicApiIT extends AbstractApiTest {
 
     @ApiVersion(api = "api")

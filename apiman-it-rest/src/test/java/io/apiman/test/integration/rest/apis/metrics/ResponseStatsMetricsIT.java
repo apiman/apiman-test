@@ -18,6 +18,8 @@ package io.apiman.test.integration.rest.apis.metrics;
 
 import static org.junit.Assert.assertEquals;
 
+import io.apiman.test.integration.categories.LongRunningTest;
+import io.apiman.test.integration.categories.MetricTest;
 import io.apiman.manager.api.beans.metrics.HistogramBean;
 import io.apiman.manager.api.beans.metrics.HistogramDataPoint;
 import io.apiman.manager.api.beans.metrics.HistogramIntervalType;
@@ -29,10 +31,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
+@Category({MetricTest.class, LongRunningTest.class})
 public class ResponseStatsMetricsIT extends AbstractIntervalMetricsIT {
 
     @SuppressWarnings("unchecked")

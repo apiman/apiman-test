@@ -17,7 +17,9 @@
 package io.apiman.test.integration.rest.plugins.policies.configplugin;
 
 import io.apiman.test.integration.base.AbstractTest;
-
+import io.apiman.test.integration.categories.PluginTest;
+import io.apiman.test.integration.categories.PolicyTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
@@ -34,10 +36,12 @@ import io.apiman.manager.api.beans.plans.PlanVersionBean;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
+@Category({PolicyTest.class, PluginTest.class, SmokeTest.class})
 @Plugin(artifactId = "apiman-plugins-config-policy")
 public class ConfigPluginPlanPolicyIT extends AbstractTest {
 
