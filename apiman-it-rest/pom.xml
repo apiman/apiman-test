@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.jboss.apiman.qa</groupId>
+    <groupId>io.apiman.test</groupId>
     <artifactId>apiman-integration-tests</artifactId>
     <version>1.1.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
@@ -14,7 +14,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.jboss.apiman.qa</groupId>
+      <groupId>io.apiman.test</groupId>
       <artifactId>apiman-it-commons</artifactId>
       <version>${project.version}</version>
     </dependency>
