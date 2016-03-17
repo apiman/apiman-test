@@ -19,6 +19,7 @@ package io.apiman.test.integration.ui.support.selenide.pages.clients.detail;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
+import io.apiman.test.integration.ui.support.selenide.ByApiman;
 import io.apiman.test.integration.ui.support.selenide.layouts.AbstractDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.BrowseApiPage;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.CreateContractPage;
@@ -51,7 +52,7 @@ public abstract class AbstractClientDetailPage<P> extends AbstractDetailPage<P> 
      * @return element
      */
     public SelenideElement registerButton() {
-        return $("button[data-field='registerButton']");
+        return $(ByApiman.i18n("button", "register"));
     }
 
     /**
@@ -64,11 +65,28 @@ public abstract class AbstractClientDetailPage<P> extends AbstractDetailPage<P> 
     }
 
     /**
+     * Button to Re-Register an client app
+     * @return element
+     */
+    public SelenideElement reregisterButton() {
+        return $(ByApiman.i18n("button", "reregister"));
+    }
+
+    /**
+     * Re-Register current client app
+     * @return this page
+     */
+    public P reregister() {
+        reregisterButton().click();
+        return thisPageObject();
+    }
+
+    /**
      * Button to unregister an clientApp
      * @return element
      */
     public SelenideElement unregisterButton() {
-        return $("button[data-field='unregisterButton']");
+        return $(ByApiman.i18n("button", "unregister"));
     }
 
     /**
