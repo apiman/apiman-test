@@ -25,6 +25,7 @@ import io.apiman.test.integration.ui.support.beanutils.PolicyDefinitionUtils;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.PolicyDefsAdminPage;
 import io.apiman.manager.api.beans.policies.PolicyDefinitionBean;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -47,6 +48,10 @@ public class PolicyDefinitionSearchIT {
     @BeforeClass
     public static void createDefBean() {
         defBean = PolicyDefinitionUtils.remote();
+    }
+
+    @Before
+    public void openPage() {
         policyPage = open(PolicyDefsAdminPage.class);
     }
 
