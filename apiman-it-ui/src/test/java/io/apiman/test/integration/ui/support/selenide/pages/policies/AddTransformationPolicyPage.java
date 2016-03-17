@@ -16,10 +16,11 @@
 
 package io.apiman.test.integration.ui.support.selenide.pages.policies;
 
-import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.$;
+
 import io.apiman.test.integration.ui.support.selenide.layouts.AbstractAddPolicyPage;
 
-import static com.codeborne.selenide.Selenide.$;
+import com.codeborne.selenide.SelenideElement;
 
 /**
  * @author opontes
@@ -27,11 +28,11 @@ import static com.codeborne.selenide.Selenide.$;
 public class AddTransformationPolicyPage extends AbstractAddPolicyPage<AddTransformationPolicyPage>{
 
     public SelenideElement clientDataFormat(){
-        return $("select[name=\"root[clientFormat]\"");
+        return $("select[name=\"root[clientFormat]\"]");
     }
 
     public SelenideElement serverDataFormat(){
-        return $("select[name=\"root[serverFormat]\"");
+        return $("select[name=\"root[serverFormat]\"]");
     }
 
     public AddTransformationPolicyPage configure(String client, String server){
