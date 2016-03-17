@@ -63,8 +63,9 @@ public class ClientRegisterIT extends AbstractClientTest {
         ClientDetailPage clientDetailPage = open(ClientDetailPage.class, organization.getId(), client.getId())
             .register();
 
-        clientDetailPage.registerButton().shouldBe(visible);
-        clientDetailPage.unregisterButton().shouldNotBe(visible);
+        clientDetailPage.registerButton().shouldNotBe(visible);
+        clientDetailPage.unregisterButton().shouldBe(visible);
+        clientDetailPage.reregisterButton().shouldBe(visible);
         clientDetailPage.status().shouldHave(text("Registered"));
 
         clientVersions.peek(clientVersion.getVersion(), expectedStatus);
