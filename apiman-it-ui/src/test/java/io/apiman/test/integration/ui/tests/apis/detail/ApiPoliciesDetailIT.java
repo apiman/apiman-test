@@ -24,7 +24,7 @@ import static com.codeborne.selenide.Condition.visible;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.restclients.version.ApiVersions;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractApiTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractApiUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiPoliciesDetailPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 
@@ -34,7 +34,7 @@ import org.junit.Test;
 /**
  * @author jkaspar
  */
-public class ApiPoliciesDetailIT extends AbstractApiTest {
+public class ApiPoliciesDetailIT extends AbstractApiUITest {
 
     private static final String POLICY_TITLE = "Ignored Resources";
 

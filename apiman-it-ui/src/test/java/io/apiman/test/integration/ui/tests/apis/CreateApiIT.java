@@ -27,7 +27,7 @@ import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
 import io.apiman.test.integration.ui.support.assertion.PageAssert;
 import io.apiman.test.integration.ui.support.beanutils.ApiUtils;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.ErrorPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.CreateApiPage;
 import io.apiman.manager.api.beans.apis.ApiBean;
@@ -39,7 +39,7 @@ import org.junit.Test;
 /**
  * @author jcechace
  */
-public class CreateApiIT extends AbstractUITest {
+public class CreateApiIT extends AbstractSimpleUITest {
 
     @Organization
     private static OrganizationBean organization;

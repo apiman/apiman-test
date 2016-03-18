@@ -21,7 +21,7 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 import static com.codeborne.selenide.Condition.text;
 
 import io.apiman.test.integration.categories.VisualTest;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.organizations.OrgActivityListPage;
 
 import org.junit.Test;
@@ -36,7 +36,7 @@ import org.junit.experimental.categories.Category;
  *
  */
 @Category({VisualTest.class})
-public class OrgActivityIT extends AbstractTest {
+public class OrgActivityIT extends AbstractUITest {
 
     /**
      * Verify expected presence of user, plan, app, api entries in organization activity log

@@ -23,7 +23,7 @@ import static com.codeborne.selenide.Condition.*;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
 import io.apiman.test.integration.ui.support.assertion.PageAssert;
 import io.apiman.test.integration.ui.support.beanutils.PolicyDefinitionUtils;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.EditPolicyPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.PolicyDefsAdminPage;
 import io.apiman.manager.api.beans.policies.PolicyDefinitionBean;
@@ -38,7 +38,7 @@ import org.junit.Test;
  *
  * @author jrumanov
  */
-public class PolicyDefinitionUpdateIT extends AbstractUITest {
+public class PolicyDefinitionUpdateIT extends AbstractSimpleUITest {
 
     private static final String NOT_VALID_JSON = "This is not valid json";
 

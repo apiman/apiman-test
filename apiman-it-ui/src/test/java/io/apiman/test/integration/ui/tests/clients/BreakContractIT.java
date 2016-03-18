@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.base.AbstractApiTest;
-import io.apiman.test.integration.ui.support.selenide.base.clients.AbstractBreakContractTest;
+import io.apiman.test.integration.ui.support.selenide.base.clients.AbstractBreakContractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientContractsDetailPage;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;
 import io.apiman.manager.api.beans.summary.ContractSummaryBean;
@@ -37,7 +37,7 @@ import org.junit.Test;
 /**
  * @author jkaspar
  */
-public class BreakContractIT extends AbstractBreakContractTest {
+public class BreakContractIT extends AbstractBreakContractUITest {
 
     private static ClientContractsDetailPage page;
 

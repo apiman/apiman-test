@@ -20,7 +20,7 @@ import static com.codeborne.selenide.Condition.text;
 
 import io.apiman.test.integration.categories.VisualTest;
 import io.apiman.test.integration.ui.support.selenide.SelenideUtils;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.plans.CreatePlanPage;
 import io.apiman.test.integration.ui.support.selenide.pages.plans.detail.PlanDetailPage;
 
@@ -36,7 +36,7 @@ import org.junit.experimental.categories.Category;
  *
  */
 @Category({VisualTest.class})
-public class NewPlanIT extends AbstractTest {
+public class NewPlanIT extends AbstractUITest {
 
     /**
      * Verify expected presence of plan

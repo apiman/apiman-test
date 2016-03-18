@@ -22,7 +22,7 @@ import io.apiman.test.integration.base.policies.PolicyDefs;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.restclients.version.ClientVersions;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractClientTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractClientUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiPoliciesDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientPoliciesDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.policies.AddIgnoredResourcePolicyPage;
@@ -34,7 +34,7 @@ import org.junit.Test;
 /**
  * @author jkaspar
  */
-public class IgnoredResourcePolicyIT extends AbstractClientTest {
+public class IgnoredResourcePolicyIT extends AbstractClientUITest {
 
     private static final String IGNORED_PATH_FOO = "/foo";
     private static final String IGNORED_PATH_BAR = "/bar";

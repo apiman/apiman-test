@@ -25,7 +25,7 @@ import io.apiman.test.integration.runner.annotations.entity.Api;
 import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.restclients.version.ApiVersions;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.ErrorPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.CreateApiVersionPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.AbstractApiDetailPage;
@@ -40,7 +40,7 @@ import org.junit.Test;
 /**
  * @author jkaspar
  */
-public class CreateApiVersionIT extends AbstractUITest {
+public class CreateApiVersionIT extends AbstractSimpleUITest {
 
     // Test Attributes
     private static final String EXISTING_VERSION = "existing-version";
