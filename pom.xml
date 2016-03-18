@@ -40,7 +40,6 @@
     <groups></groups>
     <groups.exclude></groups.exclude>
     <skipCoverage>false</skipCoverage>
-    <!-- in seconds -->
   </properties>
 
   <dependencyManagement>

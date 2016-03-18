@@ -42,6 +42,12 @@
       <artifactId>selenide</artifactId>
       <version>${version.selenide}</version>
     </dependency>
+    <dependency>
+      <groupId>com.paulhammant</groupId>
+      <artifactId>ngwebdriver</artifactId>
+      <version>0.9.5</version>
+      <scope>test</scope>
+    </dependency>
     <!-- for managing properties in JSON -->
     <dependency>
       <groupId>org.apache.commons</groupId>

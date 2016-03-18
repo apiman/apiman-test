@@ -16,13 +16,18 @@
 
 package io.apiman.test.integration.ui.support.selenide;
 
+import static io.apiman.test.integration.SuiteProperties.JS_TIMEOUT_PROP;
+
 import static com.codeborne.selenide.Selenide.page;
 
+import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.ui.support.selenide.pages.LoginPage;
 
 import java.text.MessageFormat;
+import java.util.concurrent.TimeUnit;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 
 /**
  * @author jcechace
@@ -70,6 +75,15 @@ public class SelenideUtils {
             return page;
         }
         return loginPage.login("admin", "admin123!", pageObjectClass);
+    }
+
+    /**
+     * Set custom event listener as {@link EventListener} and script timeout to {@value SuiteProperties#JS_TIMEOUT_PROP}
+     */
+    public static void setEventListener() {
+        WebDriverRunner.addListener(new EventListener());
+        Integer scriptTimeout = Integer.valueOf(SuiteProperties.getProperty(JS_TIMEOUT_PROP));
+        WebDriverRunner.getWebDriver().manage().timeouts().setScriptTimeout(scriptTimeout, TimeUnit.SECONDS);
     }
 
 }

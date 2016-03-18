@@ -23,8 +23,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractApiTest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiImplDetailPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.apis.EndpointType;

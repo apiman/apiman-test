@@ -22,11 +22,10 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static org.hamcrest.Matchers.equalTo;
 
-import io.apiman.test.integration.base.AbstractClientTest;
-import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.restclients.version.ClientVersions;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractClientTest;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientDetailPage;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;
 
@@ -34,12 +33,10 @@ import com.jayway.restassured.builder.ResponseSpecBuilder;
 import com.jayway.restassured.specification.ResponseSpecification;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author jrumanov
  */
-@RunWith(ApimanRunner.class)
 public class ClientUnregisterIT extends AbstractClientTest {
 
     @ClientVersion(client = "client",

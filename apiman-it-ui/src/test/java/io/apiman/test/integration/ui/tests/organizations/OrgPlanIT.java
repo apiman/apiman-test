@@ -20,16 +20,14 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
 import static com.codeborne.selenide.Condition.text;
 
-import io.apiman.test.integration.base.AbstractTest;
 import io.apiman.test.integration.categories.VisualTest;
-import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractTest;
 import io.apiman.test.integration.ui.support.selenide.pages.plans.detail.PlanDetailPage;
 import io.apiman.manager.api.beans.plans.PlanVersionBean;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
 
 /**
  * @author ldimaggi
@@ -39,7 +37,6 @@ import org.junit.runner.RunWith;
  *    /apimanui/api-manager/orgs/{0}/plans/{1} - PlanDetailPage.java
  *
  */
-@RunWith(ApimanRunner.class)
 @Category({VisualTest.class})
 public class OrgPlanIT extends AbstractTest {
 

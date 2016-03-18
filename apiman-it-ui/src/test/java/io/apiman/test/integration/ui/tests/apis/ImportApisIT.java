@@ -25,11 +25,11 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 
 import io.apiman.test.integration.SuiteProperties;
-import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.test.integration.runner.restclients.entity.APIs;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.introduce.ImportApiStep1Page;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.introduce.ImportApiStep2Page;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.introduce.ImportApiStep4Page;
@@ -42,13 +42,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author jkaspar
  */
-@RunWith(ApimanRunner.class)
-public class ImportApisIT {
+public class ImportApisIT extends AbstractUITest {
 
     @Organization
     private OrganizationBean organization;

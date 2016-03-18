@@ -18,11 +18,11 @@ package io.apiman.test.integration.ui.tests.clients.policies;
 
 import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
-import io.apiman.test.integration.base.AbstractClientTest;
 import io.apiman.test.integration.base.policies.PolicyDefs;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.restclients.version.ClientVersions;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractClientTest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiPoliciesDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientPoliciesDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.policies.AddIgnoredResourcePolicyPage;
