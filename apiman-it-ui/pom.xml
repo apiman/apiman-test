@@ -12,7 +12,7 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <version.selenide>3.0</version.selenide>
+    <version.selenide>3.4</version.selenide>
   </properties>
 
   <dependencies>
