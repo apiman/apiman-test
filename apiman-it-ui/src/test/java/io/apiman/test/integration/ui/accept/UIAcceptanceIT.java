@@ -28,6 +28,7 @@ import io.apiman.test.integration.ui.support.beanutils.OrgUtils;
 import io.apiman.test.integration.ui.support.beanutils.PlanUtils;
 import io.apiman.test.integration.ui.support.beanutils.UserUtils;
 import io.apiman.test.integration.ui.support.selenide.SelenideUtils;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.layouts.AbstractPage;
 import io.apiman.test.integration.ui.support.selenide.layouts.OrgEntitiesListPage;
 import io.apiman.test.integration.ui.support.selenide.pages.HomePage;
@@ -64,7 +65,7 @@ import org.junit.Test;
  * @author ldimaggi
  *
  */
-public class UIAcceptanceIT {
+public class UIAcceptanceIT extends AbstractUITest {
 
     /* Backend test data */
     public UserBean apiDev;

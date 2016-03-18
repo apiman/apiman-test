@@ -20,10 +20,10 @@ import static io.apiman.test.integration.ui.support.assertion.BeanAssert.assertN
 import static io.apiman.test.integration.ui.support.assertion.BeanAssert.assertPolicyPresent;
 import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
-import io.apiman.test.integration.base.AbstractPlanTest;
 import io.apiman.test.integration.base.policies.PolicyDefs;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.test.integration.runner.restclients.version.PlanVersions;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractPlanTest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiPoliciesDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.plans.detail.PlanPoliciesDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.policies.AddRateLimitPolicyPage;
