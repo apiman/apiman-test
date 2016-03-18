@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
 /**
  * @author jkaspar
  */
-public class EventListener implements WebDriverEventListener {
+public class ApimanEventListener implements WebDriverEventListener {
 
-    protected static final Logger LOG = LoggerFactory.getLogger(EventListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ApimanEventListener.class);
 
     @Override
     public void beforeNavigateTo(String url, WebDriver driver) {
