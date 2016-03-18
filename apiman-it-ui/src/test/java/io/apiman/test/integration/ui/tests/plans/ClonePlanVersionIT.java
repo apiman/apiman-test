@@ -23,7 +23,7 @@ import static org.hamcrest.CoreMatchers.is;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.test.integration.runner.restclients.version.PlanVersions;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractPlanTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractPlanUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.plans.CreatePlanVersionPage;
 import io.apiman.manager.api.beans.plans.PlanVersionBean;
 
@@ -34,7 +34,7 @@ import org.junit.Test;
 /**
  * @author jrumanov
  */
-public class ClonePlanVersionIT extends AbstractPlanTest {
+public class ClonePlanVersionIT extends AbstractPlanUITest {
 
     private static final String CLONED_NAME = "2.0";
 

@@ -1,15 +1,18 @@
 package io.apiman.test.integration.ui.support.selenide.base;
 
+import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.ui.support.selenide.SelenideUtils;
 
 import com.codeborne.selenide.junit.ScreenShooter;
 import org.junit.BeforeClass;
 import org.junit.Rule;
+import org.junit.runner.RunWith;
 
 /**
  * @author jkaspar
  */
-public abstract class AbstractApiTest extends io.apiman.test.integration.base.AbstractApiTest {
+@RunWith(ApimanRunner.class)
+public abstract class AbstractSimpleUITest {
 
     @Rule
     public ScreenShooter makeScreenshotOnFailure = ScreenShooter.failedTests();

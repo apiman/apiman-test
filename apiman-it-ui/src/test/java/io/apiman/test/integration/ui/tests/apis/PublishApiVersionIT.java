@@ -29,7 +29,7 @@ import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.test.integration.runner.restclients.version.ApiVersions;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiDetailPage;
 import io.apiman.manager.api.beans.apis.ApiBean;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
@@ -44,7 +44,7 @@ import org.junit.Test;
 /**
  * @author jkaspar
  */
-public class PublishApiVersionIT extends AbstractUITest {
+public class PublishApiVersionIT extends AbstractSimpleUITest {
 
     @Organization
     private static OrganizationBean organization;
