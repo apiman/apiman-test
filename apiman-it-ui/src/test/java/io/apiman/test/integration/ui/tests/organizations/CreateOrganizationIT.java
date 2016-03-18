@@ -23,7 +23,7 @@ import static com.codeborne.selenide.Condition.disabled;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
 import io.apiman.test.integration.ui.support.assertion.PageAssert;
 import io.apiman.test.integration.ui.support.beanutils.OrgUtils;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.organizations.CreateOrgPage;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
 
@@ -33,7 +33,7 @@ import org.junit.Test;
 /**
  * @author jcechace
  */
-public class CreateOrganizationIT extends AbstractUITest {
+public class CreateOrganizationIT extends AbstractSimpleUITest {
 
     private OrganizationBean orgBean;
     private CreateOrgPage createOrgPage;

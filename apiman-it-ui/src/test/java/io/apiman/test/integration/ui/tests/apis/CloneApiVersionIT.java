@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.restclients.version.ApiVersions;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractApiTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractApiUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.CreateApiVersionPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 
@@ -34,7 +34,7 @@ import org.junit.Test;
 /**
  * @author jrumanov
  */
-public class CloneApiVersionIT extends AbstractApiTest {
+public class CloneApiVersionIT extends AbstractApiUITest {
 
     private static final String CLONED_NAME = "2.0";
 

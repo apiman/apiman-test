@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.equalTo;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.restclients.version.ClientVersions;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractClientTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractClientUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientDetailPage;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;
 
@@ -37,7 +37,7 @@ import org.junit.Test;
 /**
  * @author jrumanov
  */
-public class ClientRegisterIT extends AbstractClientTest {
+public class ClientRegisterIT extends AbstractClientUITest {
 
     @ClientVersion(client = "client",
         publish = false,

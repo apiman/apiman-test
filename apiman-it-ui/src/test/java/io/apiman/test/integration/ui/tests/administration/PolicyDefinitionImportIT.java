@@ -24,7 +24,7 @@ import static com.codeborne.selenide.Condition.visible;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
 import io.apiman.test.integration.ui.support.assertion.PageAssert;
 import io.apiman.test.integration.ui.support.beanutils.PolicyDefinitionUtils;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.ImportPolicyPage;
 import io.apiman.manager.api.beans.policies.PolicyDefinitionBean;
 
@@ -37,7 +37,7 @@ import org.junit.Test;
  *
  * @author jrumanov
  */
-public class PolicyDefinitionImportIT extends AbstractUITest {
+public class PolicyDefinitionImportIT extends AbstractSimpleUITest {
 
     private PolicyDefinitionBean defBean;
     private ImportPolicyPage importPolicyPage;

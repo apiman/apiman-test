@@ -26,7 +26,7 @@ import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientDetailPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;
@@ -44,7 +44,7 @@ import org.junit.experimental.categories.Category;
  *
  */
 @Category({VisualTest.class})
-public class OrgClientIT extends AbstractTest {
+public class OrgClientIT extends AbstractUITest {
 
     @PlanVersion(plan = "plan")
     public static PlanVersionBean planVersion;

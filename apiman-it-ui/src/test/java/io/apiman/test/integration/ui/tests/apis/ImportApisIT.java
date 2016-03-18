@@ -29,7 +29,7 @@ import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.test.integration.runner.restclients.entity.APIs;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.introduce.ImportApiStep1Page;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.introduce.ImportApiStep2Page;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.introduce.ImportApiStep4Page;
@@ -46,7 +46,7 @@ import org.junit.Test;
 /**
  * @author jkaspar
  */
-public class ImportApisIT extends AbstractUITest {
+public class ImportApisIT extends AbstractSimpleUITest {
 
     @Organization
     private OrganizationBean organization;

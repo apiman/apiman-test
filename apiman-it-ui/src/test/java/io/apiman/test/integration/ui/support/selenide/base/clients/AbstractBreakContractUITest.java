@@ -1,5 +1,6 @@
-package io.apiman.test.integration.ui.support.selenide.base;
+package io.apiman.test.integration.ui.support.selenide.base.clients;
 
+import io.apiman.test.integration.base.clients.AbstractBreakContractTest;
 import io.apiman.test.integration.ui.support.selenide.SelenideUtils;
 
 import com.codeborne.selenide.junit.ScreenShooter;
@@ -9,7 +10,7 @@ import org.junit.Rule;
 /**
  * @author jkaspar
  */
-public abstract class AbstractClientTest extends io.apiman.test.integration.base.AbstractClientTest {
+public abstract class AbstractBreakContractUITest extends AbstractBreakContractTest {
 
     @Rule
     public ScreenShooter makeScreenshotOnFailure = ScreenShooter.failedTests();

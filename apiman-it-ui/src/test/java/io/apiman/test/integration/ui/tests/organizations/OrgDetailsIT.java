@@ -23,7 +23,7 @@ import static com.codeborne.selenide.Condition.text;
 import io.apiman.test.integration.categories.VisualTest;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.organizations.OrgApisListPage;
 import io.apiman.test.integration.ui.support.selenide.pages.organizations.OrgClientsListPage;
 import io.apiman.test.integration.ui.support.selenide.pages.organizations.OrgMembersListPage;
@@ -46,7 +46,7 @@ import org.junit.experimental.categories.Category;
  *
  */
 @Category({VisualTest.class})
-public class OrgDetailsIT extends AbstractTest {
+public class OrgDetailsIT extends AbstractUITest {
 
     @PlanVersion(plan = "plan")
     private static PlanVersionBean planVersion;

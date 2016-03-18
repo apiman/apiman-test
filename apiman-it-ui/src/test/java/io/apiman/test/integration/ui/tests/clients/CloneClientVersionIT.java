@@ -25,7 +25,7 @@ import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.restclients.version.ClientVersions;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractClientTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractClientUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.CreateClientVersionPage;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;
 
@@ -35,7 +35,7 @@ import org.junit.Test;
 /**
  * @author jrumanov
  */
-public class CloneClientVersionIT extends AbstractClientTest {
+public class CloneClientVersionIT extends AbstractClientUITest {
 
     private static final String CLONED_NAME = "2.0";
 

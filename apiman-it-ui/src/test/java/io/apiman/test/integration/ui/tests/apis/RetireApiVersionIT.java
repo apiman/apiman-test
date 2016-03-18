@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.restclients.version.ApiVersions;
-import io.apiman.test.integration.ui.support.selenide.base.AbstractApiTest;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractApiUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiDetailPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 
@@ -36,7 +36,7 @@ import org.junit.Test;
 /**
  * @author jcechace
  */
-public class RetireApiVersionIT extends AbstractApiTest {
+public class RetireApiVersionIT extends AbstractApiUITest {
 
     public static final String STATUS_RETIRED = "retired";
     public static final String STATUS_PUBLISHED = "published";
