@@ -21,12 +21,12 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 
-import io.apiman.test.integration.base.AbstractClientTest;
 import io.apiman.test.integration.categories.VisualTest;
 import io.apiman.test.integration.runner.annotations.misc.ApiKey;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractClientTest;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientApisDetailPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;

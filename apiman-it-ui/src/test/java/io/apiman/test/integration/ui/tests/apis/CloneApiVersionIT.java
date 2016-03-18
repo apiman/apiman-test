@@ -21,22 +21,19 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import io.apiman.test.integration.base.AbstractApiTest;
-import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.restclients.version.ApiVersions;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractApiTest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.CreateApiVersionPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author jrumanov
  */
-@RunWith(ApimanRunner.class)
 public class CloneApiVersionIT extends AbstractApiTest {
 
     private static final String CLONED_NAME = "2.0";

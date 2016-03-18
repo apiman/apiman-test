@@ -22,6 +22,7 @@ import static com.codeborne.selenide.Condition.*;
 
 import io.apiman.test.integration.ui.support.assertion.PageAssert;
 import io.apiman.test.integration.ui.support.beanutils.OrgUtils;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.organizations.BrowseOrgPage;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
 
@@ -31,7 +32,7 @@ import org.junit.Test;
 /**
  * @author jcechace
  */
-public class FindOrganizationsIT {
+public class FindOrganizationsIT extends AbstractUITest {
 
     private static OrganizationBean firstOrgBean;
     private static OrganizationBean secondOrgBean;
