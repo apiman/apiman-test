@@ -1,0 +1,13 @@
+simple-header-policy
+---
+{
+    "addHeaders": [
+        {
+            "headerName": "${name}",
+            "headerValue": "${value}",
+            "valueType": "System Properties",
+            "applyTo": "Both"
+        }
+    ],
+    "stripHeaders": []
+}

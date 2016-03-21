@@ -1,0 +1,19 @@
+simple-header-policy
+---
+{
+    "addHeaders": [
+        {
+            "headerName": "${name}",
+            "headerValue": "${value}",
+            "valueType": "String",
+            "applyTo": "Response"
+        }
+    ],
+    "stripHeaders": [
+        {
+            "stripType": "Key",
+            "with": "String",
+            "pattern": "${remove}"
+        }
+    ]
+}

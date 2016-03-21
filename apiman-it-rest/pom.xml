@@ -50,6 +50,8 @@
       <version>${version.jackson}</version>
       <scope>test</scope>
     </dependency>
+
+
   </dependencies>
 
   <build>
