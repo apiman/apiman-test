@@ -1,0 +1,14 @@
+simpleheader-policy
+---
+{
+    "addHeaders": [
+        {
+            "headerName": "${name}",
+            "headerValue": "${value}",
+            "valueType": "${type}",
+            "applyTo": "${apply}",
+            "overwrite": "${overwrite}"
+        }
+    ],
+    "stripHeaders": []
+}
