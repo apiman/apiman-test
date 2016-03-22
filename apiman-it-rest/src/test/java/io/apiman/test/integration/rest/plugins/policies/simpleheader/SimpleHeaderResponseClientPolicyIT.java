@@ -32,7 +32,7 @@ import io.apiman.manager.api.beans.plans.PlanBean;
  * Created by pstanko.
  * @author pstanko
  */
-public class SimpleHeaderResponseClientPolicyIT extends AbstractSimpleHeaderPolicyResponseIT {
+public class SimpleHeaderResponseClientPolicyIT extends AbstractSimpleResponseHeaderPolicyIT {
     @ApiVersion(api = "api", vPlans = {"plan"})
     private static ApiVersionBean apiVersion;
 

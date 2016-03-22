@@ -39,7 +39,7 @@ import org.junit.experimental.categories.Category;
  */
 
 @Category({PolicyTest.class, PluginTest.class})
-public class SimpleHeaderRequestClientPolicyIT extends AbstractSimpleHeaderPolicyRequestIT {
+public class SimpleHeaderRequestClientPolicyIT extends AbstractSimpleRequestHeaderPolicyIT {
 
     @ApiVersion(api = "api", vPlans = {"plan"})
     private static ApiVersionBean apiVersion;

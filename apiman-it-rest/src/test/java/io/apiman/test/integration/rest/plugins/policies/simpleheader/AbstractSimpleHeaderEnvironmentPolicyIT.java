@@ -19,26 +19,25 @@ package io.apiman.test.integration.rest.plugins.policies.simpleheader;
 import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 import static io.apiman.test.integration.runner.RestAssuredUtils.when;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+
 import io.apiman.test.integration.base.AbstractApiTest;
-import io.apiman.test.integration.runner.annotations.entity.Plugin;
 
 import com.jayway.restassured.path.json.JsonPath;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-
 /**
  * Created by pstanko.
+ * @author pstanko
  */
-@Plugin(artifactId = "apiman-plugins-simple-header-policy")
-public abstract class AbstractSimpleHeaderPolicyResponseIT extends AbstractApiTest {
-
-    protected static final String HEADER_NAME = "X-Response";
-    protected static final String HEADER_VALUE = "This is response";
-    protected static final String HEADER_STRIP = "Host";
+public abstract class AbstractSimpleHeaderEnvironmentPolicyIT extends AbstractApiTest {
+    protected static final String HEADER_NAME   = "X-PATH";
+    protected static final String HEADER_VALUE  = "PATH";
 
     protected abstract String getResourceURL();
 
@@ -48,36 +47,27 @@ public abstract class AbstractSimpleHeaderPolicyResponseIT extends AbstractApiTe
 
     @Before
     public void setUp() throws Exception {
-        echoResponse = givenGateway().get(getApiEndpoint())
+        echoResponse = givenGateway().get(getResourceURL())
             .getBody().print();
     }
 
 
     @Test
-    public void requestStringHeaderShouldNotAddXREQ() throws Exception {
+    public void requestStringHeaderShouldAddXREQ() throws Exception {
 
         final String req = new JsonPath(echoResponse)
             .get("headers." + HEADER_NAME);
 
-        assertThat(req, isEmptyOrNullString());
-
+        assertNotNull(req);
     }
 
     @Test
-    public void responseHeaderShouldHaveXRESP() throws Exception {
+    public void responseStringHeaderShouldHaveNotXREQ() throws Exception {
         when()
             .get(getResourceURL())
             .then()
-            .header(HEADER_NAME, equalTo(HEADER_VALUE));
+            .header(HEADER_NAME, not(isEmptyOrNullString()));
 
     }
 
-    @Test
-    public void stripResponseHeaderShouldHaveNotHostHeader() throws Exception {
-        when()
-            .get(getResourceURL())
-            .then()
-            .header(HEADER_STRIP, isEmptyOrNullString());
-
-    }
 }

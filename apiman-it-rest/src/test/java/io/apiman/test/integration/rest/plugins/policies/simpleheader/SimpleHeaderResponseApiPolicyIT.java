@@ -30,7 +30,7 @@ import org.junit.experimental.categories.Category;
  * @author pstanko
  */
 @Category({PolicyTest.class, PluginTest.class})
-public class SimpleHeaderResponseApiPolicyIT extends AbstractSimpleHeaderPolicyResponseIT {
+public class SimpleHeaderResponseApiPolicyIT extends AbstractSimpleResponseHeaderPolicyIT {
 
     @ApiVersion(api = "api",
         policies = @Policies(value = "plugins/simpleheader/string_response_001",

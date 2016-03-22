@@ -5,8 +5,8 @@ simple-header-policy
         {
             "headerName": "${name}",
             "headerValue": "${value}",
-            "valueType": "String",
-            "applyTo": "Request"
+            "valueType": "System Properties",
+            "applyTo": "Both"
         }
     ],
     "stripHeaders": []

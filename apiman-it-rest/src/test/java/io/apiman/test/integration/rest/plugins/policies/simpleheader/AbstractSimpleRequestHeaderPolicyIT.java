@@ -35,7 +35,7 @@ import org.junit.Test;
  * Created by pstanko.
  */
 @Plugin(artifactId = "apiman-plugins-simple-header-policy")
-public abstract class AbstractSimpleHeaderPolicyRequestIT extends AbstractApiTest {
+public abstract class AbstractSimpleRequestHeaderPolicyIT extends AbstractApiTest {
 
     protected static final String HEADER_NAME = "X-Request";
     protected static final String HEADER_VALUE = "This is request";
@@ -45,7 +45,7 @@ public abstract class AbstractSimpleHeaderPolicyRequestIT extends AbstractApiTes
 
     protected abstract String getApiEndpoint();
 
-    private static String echoResponse;
+    private String echoResponse;
 
     @Before
     public void setUp() throws Exception {

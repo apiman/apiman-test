@@ -16,29 +16,22 @@
 
 package io.apiman.test.integration.rest.plugins.policies.simpleheader;
 
-import io.apiman.test.integration.categories.PluginTest;
-import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
-
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
-
-import org.junit.experimental.categories.Category;
 
 /**
  * Created by pstanko.
  * @author pstanko
  */
-@Category({PolicyTest.class, PluginTest.class})
-public class SimpleHeaderRequestApiPolicyIT extends AbstractSimpleRequestHeaderPolicyIT {
+public class SimpleHeaderEnvironmentApiPolicyIT extends AbstractSimpleHeaderEnvironmentPolicyIT {
 
     @ApiVersion(api = "api",
-        policies = @Policies(value = "plugins/simpleheader/string_request_001",
+        policies = @Policies(value = "plugins/simpleheader/string_env_001",
             params = {
                 "name", HEADER_NAME,
-                "value", HEADER_VALUE,
-                "remove", HEADER_STRIP
+                "value", HEADER_VALUE
             }))
     private static ApiVersionBean apiVersion;
 
