@@ -21,7 +21,6 @@ import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
-
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 
 import org.junit.experimental.categories.Category;

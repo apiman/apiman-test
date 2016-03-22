@@ -21,7 +21,7 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.when;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
 import io.apiman.test.integration.base.AbstractApiTest;
@@ -39,7 +39,7 @@ public abstract class AbstractSimpleRequestHeaderPolicyIT extends AbstractApiTes
 
     protected static final String HEADER_NAME = "X-Request";
     protected static final String HEADER_VALUE = "This is request";
-    protected static final String HEADER_STRIP ="Host";
+    protected static final String HEADER_STRIP = "Host";
 
     protected abstract String getResourceURL();
 
@@ -53,20 +53,19 @@ public abstract class AbstractSimpleRequestHeaderPolicyIT extends AbstractApiTes
             .getBody().print();
     }
 
-
     @Test
-    public void requestStringHeaderShouldAddXREQ() throws Exception {
+    public void shouldAddXRequestHeaderAtRequest() throws Exception {
 
         final String req = new JsonPath(echoResponse)
             .get("headers." + HEADER_NAME);
 
-        assertNotNull(req);
+        assertThat(req, not(isEmptyOrNullString()));
         assertThat(req, equalTo(HEADER_VALUE));
 
     }
 
     @Test
-    public void responseStringHeaderShouldHaveNotXREQ() throws Exception {
+    public void shouldNotAddXRequestHeaderAtRequest() throws Exception {
         when()
             .get(getResourceURL())
             .then()

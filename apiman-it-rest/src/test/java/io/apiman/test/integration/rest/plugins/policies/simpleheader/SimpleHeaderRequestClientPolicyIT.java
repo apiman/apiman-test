@@ -27,7 +27,6 @@ import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
-
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
@@ -48,7 +47,8 @@ public class SimpleHeaderRequestClientPolicyIT extends AbstractSimpleRequestHead
     private static String endpoint;
 
     @Plan(organization = "organization")
-    @PlanVersion private static PlanBean plan;
+    @PlanVersion
+    private static PlanBean plan;
 
     @Client(organization = "organization")
     @ClientVersion(contracts = @Contract(vPlan = "plan", vApi = "apiVersion"),

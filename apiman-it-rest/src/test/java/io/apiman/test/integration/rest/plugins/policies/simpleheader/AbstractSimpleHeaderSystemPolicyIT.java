@@ -21,7 +21,7 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.when;
 
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import io.apiman.test.integration.base.AbstractApiTest;
 
@@ -34,8 +34,8 @@ import org.junit.Test;
  * @author pstanko
  */
 public abstract class AbstractSimpleHeaderSystemPolicyIT extends AbstractApiTest {
-    protected static final String HEADER_NAME   = "X-OS";
-    protected static final String HEADER_VALUE  = "os.name";
+    protected static final String HEADER_NAME = "X-OS";
+    protected static final String HEADER_VALUE = "os.name";
 
     protected abstract String getResourceURL();
 
@@ -49,18 +49,17 @@ public abstract class AbstractSimpleHeaderSystemPolicyIT extends AbstractApiTest
             .getBody().print();
     }
 
-
     @Test
-    public void requestStringHeaderShouldAddXREQ() throws Exception {
+    public void shouldAddOsNameSystemVariableToRequestHeader() throws Exception {
 
         final String req = new JsonPath(echoResponse)
             .get("headers." + HEADER_NAME);
 
-        assertNotNull(req);
+        assertThat(req, not(isEmptyOrNullString()));
     }
 
     @Test
-    public void responseStringHeaderShouldHaveNotXREQ() throws Exception {
+    public void shouldAddOsNameSystemVariableToResponseHeader() throws Exception {
         when()
             .get(getResourceURL())
             .then()

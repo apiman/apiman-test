@@ -19,16 +19,16 @@ package io.apiman.test.integration.rest.plugins.policies.simpleheader;
 import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 import static io.apiman.test.integration.runner.RestAssuredUtils.when;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.junit.Assert.assertThat;
+
 import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 
 import com.jayway.restassured.path.json.JsonPath;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 /**
  * Created by pstanko.
@@ -52,9 +52,8 @@ public abstract class AbstractSimpleResponseHeaderPolicyIT extends AbstractApiTe
             .getBody().print();
     }
 
-
     @Test
-    public void requestStringHeaderShouldNotAddXREQ() throws Exception {
+    public void shouldNotAddXResponseHeaderAtRequest() throws Exception {
 
         final String req = new JsonPath(echoResponse)
             .get("headers." + HEADER_NAME);
@@ -64,7 +63,7 @@ public abstract class AbstractSimpleResponseHeaderPolicyIT extends AbstractApiTe
     }
 
     @Test
-    public void responseHeaderShouldHaveXRESP() throws Exception {
+    public void shouldAddXResponseHeaderAtResponse() throws Exception {
         when()
             .get(getResourceURL())
             .then()
@@ -73,11 +72,10 @@ public abstract class AbstractSimpleResponseHeaderPolicyIT extends AbstractApiTe
     }
 
     @Test
-    public void stripResponseHeaderShouldHaveNotHostHeader() throws Exception {
+    public void shouldStripHostHeaderFromResponse() throws Exception {
         when()
             .get(getResourceURL())
             .then()
             .header(HEADER_STRIP, isEmptyOrNullString());
-
     }
 }
