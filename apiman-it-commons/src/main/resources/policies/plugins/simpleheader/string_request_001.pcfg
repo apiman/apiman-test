@@ -1,0 +1,13 @@
+simple-header-policy
+---
+{
+    "addHeaders": [
+        {
+            "headerName": "${name}",
+            "headerValue": "${value}",
+            "valueType": "String",
+            "applyTo": "Request"
+        }
+    ],
+    "stripHeaders": []
+}

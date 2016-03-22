@@ -69,6 +69,7 @@ public class SuiteProperties {
         return properties;
     }
 
+
     public static String getManagerUrl() {
         String protocol = getProperty(APIMAN_MANAGER_PROTOCOL_PROP);
         String host = getProperty(APIMAN_MANAGER_HOST_PROP);
