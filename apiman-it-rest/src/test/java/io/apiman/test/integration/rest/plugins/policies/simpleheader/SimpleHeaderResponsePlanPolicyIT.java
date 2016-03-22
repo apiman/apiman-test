@@ -16,37 +16,46 @@
 
 package io.apiman.test.integration.rest.plugins.policies.simpleheader;
 
-import io.apiman.test.integration.categories.PluginTest;
-import io.apiman.test.integration.categories.PolicyTest;
+import io.apiman.test.integration.runner.annotations.entity.Client;
+import io.apiman.test.integration.runner.annotations.entity.Plan;
+import io.apiman.test.integration.runner.annotations.misc.ApiKey;
+import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
+import io.apiman.test.integration.runner.annotations.version.ClientVersion;
+import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
-
-import org.junit.experimental.categories.Category;
+import io.apiman.manager.api.beans.plans.PlanBean;
 
 /**
  * Created by pstanko.
  * @author pstanko
  */
-@Category({PolicyTest.class, PluginTest.class})
-public class SimpleHeaderPolicyResponseIT extends AbstractSimpleHeaderPolicyResponseIT {
-
-    @ApiVersion(api = "api",
-        policies = @Policies(value = "plugins/simpleheader/string_response_001",
-            params = {
-                "name", HEADER_NAME,
-                "value", HEADER_VALUE,
-                "remove", HEADER_CONNECTION
-            }))
+public class SimpleHeaderResponsePlanPolicyIT extends AbstractSimpleHeaderPolicyResponseIT {
+    @ApiVersion(api = "api", vPlans = {"plan"})
     private static ApiVersionBean apiVersion;
 
     @ManagedEndpoint("apiVersion")
     private static String endpoint;
 
+    @Plan(organization = "organization")
+    @PlanVersion(policies = @Policies(value = "plugins/simpleheader/string_response_001",
+        params = {
+            "name", HEADER_NAME,
+            "value", HEADER_VALUE,
+            "remove", HEADER_STRIP
+        }))
+    private static PlanBean plan;
+
+    @Client(organization = "organization")
+    @ClientVersion(contracts = @Contract(vPlan = "plan", vApi = "apiVersion"))
+    @ApiKey(vPlan = "plan", vApi = "apiVersion")
+    private static String apikey;
+
     @Override
     protected String getResourceURL() {
-        return endpoint;
+        return addApiKeyParameter(endpoint, apikey);
     }
 
     @Override

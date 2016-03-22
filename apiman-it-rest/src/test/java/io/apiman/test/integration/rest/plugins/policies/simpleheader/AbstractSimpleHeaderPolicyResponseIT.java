@@ -23,7 +23,6 @@ import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 
 import com.jayway.restassured.path.json.JsonPath;
-import com.jayway.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,7 +38,7 @@ public abstract class AbstractSimpleHeaderPolicyResponseIT extends AbstractApiTe
 
     protected static final String HEADER_NAME = "X-Response";
     protected static final String HEADER_VALUE = "This is response";
-    protected static final String HEADER_CONNECTION = "Connection";
+    protected static final String HEADER_STRIP = "Host";
 
     protected abstract String getResourceURL();
 
@@ -65,7 +64,7 @@ public abstract class AbstractSimpleHeaderPolicyResponseIT extends AbstractApiTe
     }
 
     @Test
-    public void responseHeaderShouldHaveXREQ() throws Exception {
+    public void responseHeaderShouldHaveXRESP() throws Exception {
         when()
             .get(getResourceURL())
             .then()
@@ -74,11 +73,11 @@ public abstract class AbstractSimpleHeaderPolicyResponseIT extends AbstractApiTe
     }
 
     @Test
-    public void responseHeaderShouldHaveNotConnection() throws Exception {
+    public void stripResponseHeaderShouldHaveNotHostHeader() throws Exception {
         when()
             .get(getResourceURL())
             .then()
-            .header(HEADER_CONNECTION, isEmptyOrNullString());
+            .header(HEADER_STRIP, isEmptyOrNullString());
 
     }
 }

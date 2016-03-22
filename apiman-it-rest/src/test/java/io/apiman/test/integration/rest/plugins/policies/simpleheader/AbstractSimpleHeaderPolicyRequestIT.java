@@ -39,7 +39,7 @@ public abstract class AbstractSimpleHeaderPolicyRequestIT extends AbstractApiTes
 
     protected static final String HEADER_NAME = "X-Request";
     protected static final String HEADER_VALUE = "This is request";
-    protected static final String HEADER_CONNECTION="Connection";
+    protected static final String HEADER_STRIP ="Host";
 
     protected abstract String getResourceURL();
 
@@ -49,7 +49,7 @@ public abstract class AbstractSimpleHeaderPolicyRequestIT extends AbstractApiTes
 
     @Before
     public void setUp() throws Exception {
-        echoResponse = givenGateway().get(getApiEndpoint())
+        echoResponse = givenGateway().get(getResourceURL())
             .getBody().print();
     }
 
@@ -74,12 +74,4 @@ public abstract class AbstractSimpleHeaderPolicyRequestIT extends AbstractApiTes
 
     }
 
-    @Test
-    public void requestStringHeaderShouldHaveNotConnectionHeader() throws Exception {
-        when()
-            .get(getResourceURL())
-            .then()
-            .header(HEADER_CONNECTION, isEmptyOrNullString());
-
-    }
 }

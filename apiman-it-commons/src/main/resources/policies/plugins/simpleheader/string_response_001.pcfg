@@ -9,5 +9,11 @@ simple-header-policy
             "applyTo": "Response"
         }
     ],
-    "stripHeaders": []
+    "stripHeaders": [
+        {
+            "stripType": "Key",
+            "with": "String",
+            "pattern": "${remove}"
+        }
+    ]
 }

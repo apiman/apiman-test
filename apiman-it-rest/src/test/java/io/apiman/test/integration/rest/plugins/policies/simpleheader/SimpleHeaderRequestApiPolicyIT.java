@@ -31,13 +31,14 @@ import org.junit.experimental.categories.Category;
  * @author pstanko
  */
 @Category({PolicyTest.class, PluginTest.class})
-public class SimpleHeaderPolicyRequestIT extends AbstractSimpleHeaderPolicyRequestIT {
+public class SimpleHeaderRequestApiPolicyIT extends AbstractSimpleHeaderPolicyRequestIT {
 
     @ApiVersion(api = "api",
         policies = @Policies(value = "plugins/simpleheader/string_request_001",
             params = {
                 "name", HEADER_NAME,
-                "value", HEADER_VALUE
+                "value", HEADER_VALUE,
+                "remove", HEADER_STRIP
             }))
     private static ApiVersionBean apiVersion;
 
