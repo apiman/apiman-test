@@ -41,8 +41,6 @@ public abstract class AbstractSimpleHeaderSystemPolicyIT extends AbstractApiTest
 
     protected abstract String getApiEndpoint();
 
-
-
     @Test
     public void shouldAddOsNameSystemVariableToRequestHeader() throws Exception {
         when().

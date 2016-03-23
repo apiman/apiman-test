@@ -45,7 +45,6 @@ public abstract class AbstractSimpleResponseHeaderPolicyIT extends AbstractApiTe
 
     protected abstract String getApiEndpoint();
 
-
     @Test
     public void shouldNotAddXResponseHeaderAtRequest() throws Exception {
         when().

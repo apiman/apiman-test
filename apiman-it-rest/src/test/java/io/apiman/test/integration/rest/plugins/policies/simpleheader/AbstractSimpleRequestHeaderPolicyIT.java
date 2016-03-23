@@ -40,12 +40,10 @@ public abstract class AbstractSimpleRequestHeaderPolicyIT extends AbstractApiTes
 
     protected static final String HEADER_NAME = "X-Request";
     protected static final String HEADER_VALUE = "This is request";
-    protected static final String HEADER_STRIP = "Host";
 
     protected abstract String getResourceURL();
 
     protected abstract String getApiEndpoint();
-
 
     @Test
     public void shouldAddXRequestHeaderAtRequest() throws Exception {

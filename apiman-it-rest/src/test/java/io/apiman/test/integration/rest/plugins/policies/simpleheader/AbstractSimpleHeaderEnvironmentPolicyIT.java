@@ -41,9 +41,6 @@ public abstract class AbstractSimpleHeaderEnvironmentPolicyIT extends AbstractAp
 
     protected abstract String getApiEndpoint();
 
-
-
-
     @Test
     public void shouldAddPathEnvironmentVariableToRequestHeader() throws Exception {
         when().
