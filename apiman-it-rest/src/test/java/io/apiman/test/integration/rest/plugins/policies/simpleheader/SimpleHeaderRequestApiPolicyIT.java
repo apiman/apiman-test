@@ -32,13 +32,7 @@ import org.junit.experimental.categories.Category;
 @Category({PolicyTest.class, PluginTest.class})
 public class SimpleHeaderRequestApiPolicyIT extends AbstractSimpleRequestHeaderPolicyIT {
 
-    @ApiVersion(api = "api",
-        policies = @Policies(value = "plugins/simpleheader/string_request_001",
-            params = {
-                "name", HEADER_NAME,
-                "value", HEADER_VALUE,
-                "remove", HEADER_STRIP
-            }))
+    @ApiVersion(api = "api", policies = @Policies(value = "plugins/simpleheader/string_request", params = {"name", HEADER_NAME, "value", HEADER_VALUE, "remove", HEADER_STRIP}))
     private static ApiVersionBean apiVersion;
 
     @ManagedEndpoint("apiVersion")

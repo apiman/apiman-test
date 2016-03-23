@@ -52,12 +52,8 @@ public class SimpleHeaderRequestClientPolicyIT extends AbstractSimpleRequestHead
 
     @Client(organization = "organization")
     @ClientVersion(contracts = @Contract(vPlan = "plan", vApi = "apiVersion"),
-        policies = @Policies(value = "plugins/simpleheader/string_request_001",
-            params = {
-                "name", HEADER_NAME,
-                "value", HEADER_VALUE,
-                "remove", HEADER_STRIP
-            }))
+            policies = @Policies(value = "plugins/simpleheader/string_request",
+            params = {"name", HEADER_NAME, "value", HEADER_VALUE, "remove", HEADER_STRIP}))
     @ApiKey(vPlan = "plan", vApi = "apiVersion")
     private static String apikey;
 

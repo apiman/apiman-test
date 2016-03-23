@@ -41,29 +41,22 @@ public abstract class AbstractSimpleHeaderSystemPolicyIT extends AbstractApiTest
 
     protected abstract String getApiEndpoint();
 
-    private static String echoResponse;
 
-    @Before
-    public void setUp() throws Exception {
-        echoResponse = givenGateway().get(getResourceURL())
-            .getBody().print();
-    }
 
     @Test
     public void shouldAddOsNameSystemVariableToRequestHeader() throws Exception {
-
-        final String req = new JsonPath(echoResponse)
-            .get("headers." + HEADER_NAME);
-
-        assertThat(req, not(isEmptyOrNullString()));
+        when().
+            get(getResourceURL()).
+        then().
+            body("headers." + HEADER_NAME,  not(isEmptyOrNullString()));
     }
 
     @Test
     public void shouldAddOsNameSystemVariableToResponseHeader() throws Exception {
-        when()
-            .get(getResourceURL())
-            .then()
-            .header(HEADER_NAME, not(isEmptyOrNullString()));
+        when().
+            get(getResourceURL()).
+        then().
+            header(HEADER_NAME, not(isEmptyOrNullString()));
 
     }
 

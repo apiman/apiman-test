@@ -21,6 +21,7 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.when;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 import io.apiman.test.integration.base.AbstractApiTest;
@@ -44,38 +45,29 @@ public abstract class AbstractSimpleResponseHeaderPolicyIT extends AbstractApiTe
 
     protected abstract String getApiEndpoint();
 
-    private String echoResponse;
-
-    @Before
-    public void setUp() throws Exception {
-        echoResponse = givenGateway().get(getResourceURL())
-            .getBody().print();
-    }
 
     @Test
     public void shouldNotAddXResponseHeaderAtRequest() throws Exception {
-
-        final String req = new JsonPath(echoResponse)
-            .get("headers." + HEADER_NAME);
-
-        assertThat(req, isEmptyOrNullString());
-
+        when().
+            get(getResourceURL()).
+        then().
+            body("headers." + HEADER_NAME,  isEmptyOrNullString());
     }
 
     @Test
     public void shouldAddXResponseHeaderAtResponse() throws Exception {
-        when()
-            .get(getResourceURL())
-            .then()
-            .header(HEADER_NAME, equalTo(HEADER_VALUE));
+        when().
+            get(getResourceURL()).
+        then().
+            header(HEADER_NAME, equalTo(HEADER_VALUE));
 
     }
 
     @Test
     public void shouldStripHostHeaderFromResponse() throws Exception {
-        when()
-            .get(getResourceURL())
-            .then()
-            .header(HEADER_STRIP, isEmptyOrNullString());
+        when().
+            get(getResourceURL()).
+        then().
+            header(HEADER_STRIP, isEmptyOrNullString());
     }
 }

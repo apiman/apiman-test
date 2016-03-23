@@ -27,12 +27,7 @@ import io.apiman.manager.api.beans.apis.ApiVersionBean;
  */
 public class SimpleHeaderEnvironmentApiPolicyIT extends AbstractSimpleHeaderEnvironmentPolicyIT {
 
-    @ApiVersion(api = "api",
-        policies = @Policies(value = "plugins/simpleheader/string_env_001",
-            params = {
-                "name", HEADER_NAME,
-                "value", HEADER_VALUE
-            }))
+    @ApiVersion(api = "api", policies = @Policies(value = "plugins/simpleheader/string_env", params = {"name", HEADER_NAME, "value", HEADER_VALUE}))
     private static ApiVersionBean apiVersion;
 
     @ManagedEndpoint("apiVersion")

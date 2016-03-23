@@ -28,11 +28,8 @@ import io.apiman.manager.api.beans.apis.ApiVersionBean;
 public class SimpleHeaderSystemApiPolicyIT extends AbstractSimpleHeaderSystemPolicyIT {
 
     @ApiVersion(api = "api",
-        policies = @Policies(value = "plugins/simpleheader/string_system_001",
-            params = {
-                "name", HEADER_NAME,
-                "value", HEADER_VALUE
-            }))
+            policies = @Policies(value = "plugins/simpleheader/string_system",
+            params = {"name", HEADER_NAME, "value", HEADER_VALUE}))
     private static ApiVersionBean apiVersion;
 
     @ManagedEndpoint("apiVersion")

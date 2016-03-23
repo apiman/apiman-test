@@ -28,6 +28,7 @@ import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 
 import com.jayway.restassured.path.json.JsonPath;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,31 +46,21 @@ public abstract class AbstractSimpleRequestHeaderPolicyIT extends AbstractApiTes
 
     protected abstract String getApiEndpoint();
 
-    private String echoResponse;
-
-    @Before
-    public void setUp() throws Exception {
-        echoResponse = givenGateway().get(getResourceURL())
-            .getBody().print();
-    }
 
     @Test
     public void shouldAddXRequestHeaderAtRequest() throws Exception {
-
-        final String req = new JsonPath(echoResponse)
-            .get("headers." + HEADER_NAME);
-
-        assertThat(req, not(isEmptyOrNullString()));
-        assertThat(req, equalTo(HEADER_VALUE));
-
+        when().
+            get(getResourceURL()).
+        then().
+            body("headers." + HEADER_NAME, equalTo(HEADER_VALUE));
     }
 
     @Test
     public void shouldNotAddXRequestHeaderAtRequest() throws Exception {
-        when()
-            .get(getResourceURL())
-            .then()
-            .header(HEADER_NAME, isEmptyOrNullString());
+        when().
+            get(getResourceURL()).
+        then().
+            header(HEADER_NAME, isEmptyOrNullString());
 
     }
 

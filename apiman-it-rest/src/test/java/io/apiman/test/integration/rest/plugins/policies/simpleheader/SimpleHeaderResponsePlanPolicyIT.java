@@ -40,12 +40,8 @@ public class SimpleHeaderResponsePlanPolicyIT extends AbstractSimpleResponseHead
     private static String endpoint;
 
     @Plan(organization = "organization")
-    @PlanVersion(policies = @Policies(value = "plugins/simpleheader/string_response_001",
-        params = {
-            "name", HEADER_NAME,
-            "value", HEADER_VALUE,
-            "remove", HEADER_STRIP
-        }))
+    @PlanVersion(policies = @Policies(value = "plugins/simpleheader/string_response",
+        params = {"name", HEADER_NAME, "value", HEADER_VALUE, "remove", HEADER_STRIP}))
     private static PlanBean plan;
 
     @Client(organization = "organization")
