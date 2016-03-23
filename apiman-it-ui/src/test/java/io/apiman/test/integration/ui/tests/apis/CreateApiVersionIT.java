@@ -21,11 +21,11 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.page;
 
-import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.entity.Api;
 import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.restclients.version.ApiVersions;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.ErrorPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.CreateApiVersionPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.AbstractApiDetailPage;
@@ -36,13 +36,11 @@ import io.apiman.manager.api.beans.orgs.OrganizationBean;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author jkaspar
  */
-@RunWith(ApimanRunner.class)
-public class CreateApiVersionIT {
+public class CreateApiVersionIT extends AbstractSimpleUITest {
 
     // Test Attributes
     private static final String EXISTING_VERSION = "existing-version";
