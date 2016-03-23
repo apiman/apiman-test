@@ -35,4 +35,6 @@ public class PolicyDefs {
     public static final String KEYCLOAK_AUTHENTICATION_POLICY = "keycloak-oauth-policy";
     public static final String TRANSFORMATION_POLICY = "transformation-policy";
     public static final String URL_REWRITING_POLICY = "URLRewritingPolicy";
+    public static final String SIMPLE_HEADER_POLICY = "simple-header-policy";
+
 }
