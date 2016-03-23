@@ -52,7 +52,7 @@ public class ClientVersions extends AbstractEntityRestClient<ClientVersionBean, 
     }
 
     @Override
-    public ClientVersions lock() {
+    public ClientVersions publish() {
         ActionBean action = new ActionBean();
         action.setType(ActionType.registerClient);
         action.setOrganizationId(getBean().getClient().getOrganization().getId());
