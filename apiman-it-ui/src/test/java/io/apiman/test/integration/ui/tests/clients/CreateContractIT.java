@@ -20,7 +20,6 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
 import static com.codeborne.selenide.Condition.*;
 
-import io.apiman.test.integration.base.AbstractTest;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
@@ -28,6 +27,7 @@ import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
 import io.apiman.test.integration.runner.restclients.entity.Contracts;
 import io.apiman.test.integration.runner.restclients.version.ClientVersions;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.CreateContractPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;
@@ -41,7 +41,7 @@ import org.junit.Test;
 /**
  * @author jkaspar
  */
-public class CreateContractIT extends AbstractTest {
+public class CreateContractIT extends AbstractUITest {
 
     @PlanVersion(plan = "plan")
     private static PlanVersionBean planVersion;

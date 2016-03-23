@@ -20,9 +20,9 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
 import static com.codeborne.selenide.Condition.text;
 
-import io.apiman.test.integration.base.AbstractClientTest;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractClientUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.CreateContractPage;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientContractsDetailPage;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;
@@ -33,7 +33,7 @@ import org.junit.Test;
 /**
  * @author jkaspar
  */
-public class ClientContractsDetailIT extends AbstractClientTest {
+public class ClientContractsDetailIT extends AbstractClientUITest {
 
     private static ClientContractsDetailPage page;
 

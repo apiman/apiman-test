@@ -20,18 +20,16 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
 import static com.codeborne.selenide.Condition.text;
 
-import io.apiman.test.integration.base.AbstractTest;
 import io.apiman.test.integration.categories.VisualTest;
-import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.plans.CreatePlanVersionPage;
 import io.apiman.test.integration.ui.support.selenide.pages.plans.detail.PlanVersionDetailPage;
 import io.apiman.manager.api.beans.plans.PlanVersionBean;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
 
 /**
  * @author jrumanov, ldimaggi
@@ -43,9 +41,8 @@ import org.junit.runner.RunWith;
  *    Adapted from ClonePlanVersionTest.java (jrumanov)
  *
  */
-@RunWith(ApimanRunner.class)
 @Category({VisualTest.class})
-public class NewPlanVersionIT extends AbstractTest {
+public class NewPlanVersionIT extends AbstractUITest {
 
     private static final String CLONED_NAME = "2.0";
 

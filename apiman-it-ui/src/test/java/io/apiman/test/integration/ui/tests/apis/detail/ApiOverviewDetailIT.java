@@ -20,9 +20,9 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
 import static com.codeborne.selenide.Condition.text;
 
-import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.categories.VisualTest;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractApiUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiDetailPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 
@@ -34,7 +34,7 @@ import org.junit.experimental.categories.Category;
  * @author jkaspar
  */
 @Category({VisualTest.class})
-public class ApiOverviewDetailIT extends AbstractApiTest {
+public class ApiOverviewDetailIT extends AbstractApiUITest {
 
     @ApiVersion(api = "api", publish = false)
     private static ApiVersionBean apiVersion;

@@ -22,12 +22,12 @@ import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.hasText;
 import static com.codeborne.selenide.Selenide.page;
 
-import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.entity.Api;
 import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
 import io.apiman.test.integration.ui.support.assertion.PageAssert;
 import io.apiman.test.integration.ui.support.beanutils.ApiUtils;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.ErrorPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.CreateApiPage;
 import io.apiman.manager.api.beans.apis.ApiBean;
@@ -35,13 +35,11 @@ import io.apiman.manager.api.beans.orgs.OrganizationBean;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author jcechace
  */
-@RunWith(ApimanRunner.class)
-public class CreateApiIT {
+public class CreateApiIT extends AbstractSimpleUITest {
 
     @Organization
     private static OrganizationBean organization;

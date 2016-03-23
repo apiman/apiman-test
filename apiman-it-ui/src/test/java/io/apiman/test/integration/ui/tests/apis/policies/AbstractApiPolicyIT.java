@@ -19,10 +19,10 @@ package io.apiman.test.integration.ui.tests.apis.policies;
 import static io.apiman.test.integration.ui.support.assertion.BeanAssert.assertNoPolicies;
 import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
-import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.restclients.version.ApiVersions;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractApiUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiPoliciesDetailPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 
@@ -31,7 +31,7 @@ import org.junit.Before;
 /**
  * @author jcechace
  */
-public abstract class AbstractApiPolicyIT extends AbstractApiTest {
+public abstract class AbstractApiPolicyIT extends AbstractApiUITest {
 
     protected ApiVersions apiVersions;
     protected ApiPoliciesDetailPage policiesDetailPage;

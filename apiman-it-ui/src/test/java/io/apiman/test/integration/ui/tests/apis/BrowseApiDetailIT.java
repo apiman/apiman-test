@@ -20,12 +20,12 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
 import static com.codeborne.selenide.Condition.*;
 
-import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.categories.VisualTest;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractApiUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.BrowseApiDetailPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
@@ -38,7 +38,7 @@ import org.junit.experimental.categories.Category;
  * @author jkaspar
  */
 @Category({VisualTest.class})
-public class BrowseApiDetailIT extends AbstractApiTest {
+public class BrowseApiDetailIT extends AbstractApiUITest {
 
     private BrowseApiDetailPage page;
 

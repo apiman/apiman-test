@@ -20,15 +20,13 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
 import static com.codeborne.selenide.Condition.exist;
 
-import io.apiman.test.integration.base.AbstractTest;
-import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.plans.detail.PlanPoliciesDetailPage;
 import io.apiman.manager.api.beans.plans.PlanVersionBean;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author ldimaggi
@@ -38,8 +36,7 @@ import org.junit.runner.RunWith;
  *    apimanui/api-manager/orgs/{0}/plans/{1}/{2}/policies - PlanPoliciesDetailPage.java
  *
  */
-@RunWith(ApimanRunner.class)
-public class PlanPolicyIT extends AbstractTest {
+public class PlanPolicyIT extends AbstractUITest {
 
     @PlanVersion(plan = "plan", policies = @Policies("ignored_001"))
     private static PlanVersionBean version;
