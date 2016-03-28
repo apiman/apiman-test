@@ -16,9 +16,11 @@
 
 package io.apiman.test.integration.ui.tests.apis.policies;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
 import io.apiman.test.integration.base.policies.PolicyDefs;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
-import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiPoliciesDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.policies.AddSimpleHeaderPolicyPage;
 
 import org.junit.Before;
@@ -50,14 +52,16 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
                 AddSimpleHeaderPolicyPage.ValueType.String, AddSimpleHeaderPolicyPage.ApplyTo.Request, true)
             .addPolicy(AddSimpleHeaderPolicyPage.class);
         assertPolicyPresent();
+        assertThat(addPolicyPage.getAddHeaderCount(), equalTo(1));
     }
 
     @Test
-    public void shouldStripSomePolicy(){
+    public void shouldStripValueByRegexPolicy(){
         addPolicyPage
             .stripHeader(AddSimpleHeaderPolicyPage.HeaderType.Value, AddSimpleHeaderPolicyPage.WithMatcher.Regex, "ahoj")
             .addPolicy(AddSimpleHeaderPolicyPage.class);
         assertPolicyPresent();
+        assertThat(addPolicyPage.getStripHeaderCount(), equalTo(1));
     }
 
 

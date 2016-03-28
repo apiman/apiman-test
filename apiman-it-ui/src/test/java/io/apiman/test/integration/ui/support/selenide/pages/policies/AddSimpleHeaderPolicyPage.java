@@ -178,6 +178,13 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         return thisPageObject();
     }
 
+    public int getAddHeaderCount() {
+        return addHeaderCount;
+    }
+
+    public int getStripHeaderCount() {
+        return stripHeaderCount;
+    }
 
     public AddSimpleHeaderPolicyPage stripHeader(
         HeaderType headerType, WithMatcher withMatcher, String pattern){
@@ -186,6 +193,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         getStripMatchTypeSelect(stripHeaderCount).selectOption(headerType.toString());
         getStripMatchWithSelect(stripHeaderCount).selectOption(withMatcher.toString());
         getStripMatchPatternText(stripHeaderCount).setValue(pattern);
+        stripHeaderCount++;
 
         return thisPageObject();
     }
