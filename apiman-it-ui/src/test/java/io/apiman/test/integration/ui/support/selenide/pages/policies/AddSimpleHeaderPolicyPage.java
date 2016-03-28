@@ -142,6 +142,16 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         return $("button[title=\"Move up\"][data-i=\"" + number + "\"]");
     }
 
+    public SelenideElement getDeleteLastButton()
+    {
+        return $("button[title=\"Delete Last Header\"]");
+    }
+
+    public SelenideElement getDeleteAllButton()
+    {
+        return $("button[title=\"Delete All\"]");
+    }
+
     public SelenideElement getMoveDownButton(int number) {
         return $("button[title=\"Move down\"][data-i=\"" + number + "\"]");
     }

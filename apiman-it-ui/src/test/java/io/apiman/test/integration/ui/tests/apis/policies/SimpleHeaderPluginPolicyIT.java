@@ -21,6 +21,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import io.apiman.test.integration.base.policies.PolicyDefs;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
+import io.apiman.test.integration.ui.support.assertion.BeanAssert;
 import io.apiman.test.integration.ui.support.selenide.pages.policies.AddSimpleHeaderPolicyPage;
 
 import com.codeborne.selenide.Condition;
@@ -66,6 +67,15 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
             .addPolicy(AddSimpleHeaderPolicyPage.class);
         assertPolicyPresent();
         assertThat(addPolicyPage.getAddHeaderCount(), equalTo(1));
+    }
+
+    @Test
+    public void shouldNotAddRequestPolicyCancel() {
+        addPolicyPage
+            .addHeader("X-Request", "Request value",
+                AddSimpleHeaderPolicyPage.ValueType.String, AddSimpleHeaderPolicyPage.ApplyTo.Request, true)
+            .cancel(AddSimpleHeaderPolicyPage.class);
+        assertPolicyNotPresent();
     }
 
     @Test
@@ -115,6 +125,15 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
         addPolicyPage.getMoveDownButton(1).click();
         addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
         assertPolicyPresent();
+    }
+
+    @Test
+    public void shouldRemoveLastAddedHeader() {
+        addHeaders();
+        addPolicyPage.getDeleteLastButton().click();
+        addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+        assertPolicyPresent();
+
     }
 
 }
