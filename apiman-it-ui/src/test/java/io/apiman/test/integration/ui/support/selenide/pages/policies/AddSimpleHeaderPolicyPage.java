@@ -28,7 +28,6 @@ import com.codeborne.selenide.SelenideElement;
  */
 public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHeaderPolicyPage> {
 
-
     public enum ValueType {
         Env("Env"),
         String("String"),
@@ -98,8 +97,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         }
     }
 
-    public enum WithMatcher
-    {
+    public enum WithMatcher {
         String("String"),
         Regex("Regex");
 
@@ -134,6 +132,22 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
 
     public SelenideElement getHeaderNameTextBox(int number) {
         return $("input[name=\"root[addHeaders][" + number + "][headerName]\"]");
+    }
+
+    public SelenideElement getUpdatePolicyButton() {
+        return $("button[id=\"update-policy\"]");
+    }
+
+    public SelenideElement getMoveUpButton(int number) {
+        return $("button[title=\"Move up\"][data-i=\"" + number + "\"]");
+    }
+
+    public SelenideElement getMoveDownButton(int number) {
+        return $("button[title=\"Move down\"][data-i=\"" + number + "\"]");
+    }
+
+    public SelenideElement getDeleteButton(int number) {
+        return $("button[title=\"Delete\"][data-i=\"" + number + "\"]");
     }
 
     public SelenideElement getHeaderValueTextBox(int number) {
@@ -178,6 +192,13 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         return thisPageObject();
     }
 
+    public AddSimpleHeaderPolicyPage deletedHeader(int index) {
+
+        getDeleteButton(index).click();
+        addHeaderCount--;
+        return thisPageObject();
+    }
+
     public int getAddHeaderCount() {
         return addHeaderCount;
     }
@@ -187,7 +208,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
     }
 
     public AddSimpleHeaderPolicyPage stripHeader(
-        HeaderType headerType, WithMatcher withMatcher, String pattern){
+        HeaderType headerType, WithMatcher withMatcher, String pattern) {
 
         clickStripHeader();
         getStripMatchTypeSelect(stripHeaderCount).selectOption(headerType.toString());

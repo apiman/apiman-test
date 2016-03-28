@@ -23,6 +23,7 @@ import io.apiman.test.integration.base.policies.PolicyDefs;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 import io.apiman.test.integration.ui.support.selenide.pages.policies.AddSimpleHeaderPolicyPage;
 
+import com.codeborne.selenide.Condition;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,8 +36,20 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
 
     private AddSimpleHeaderPolicyPage addPolicyPage;
 
+    private final int NUM_HEAD = 3;
+
+    private void addHeaders() {
+        for (int i = 0; i < NUM_HEAD; i++) {
+            addPolicyPage.
+                addHeader("X-Header-" + i, "Value" + i,
+                    AddSimpleHeaderPolicyPage.ValueType.String,
+                    AddSimpleHeaderPolicyPage.ApplyTo.Both, true);
+        }
+        assertThat(addPolicyPage.getAddHeaderCount(), equalTo(3));
+    }
+
     @Before
-    public void openPage(){
+    public void openPage() {
         addPolicyPage = policiesDetailPage.addPolicy(AddSimpleHeaderPolicyPage.class);
     }
 
@@ -46,7 +59,7 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
     }
 
     @Test
-    public void shouldAddRequestPolicy(){
+    public void shouldAddRequestPolicy() {
         addPolicyPage
             .addHeader("X-Request", "Request value",
                 AddSimpleHeaderPolicyPage.ValueType.String, AddSimpleHeaderPolicyPage.ApplyTo.Request, true)
@@ -56,15 +69,52 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
     }
 
     @Test
-    public void shouldStripValueByRegexPolicy(){
+    public void shouldBeDisabledAddButton() {
+        addPolicyPage.clickAddHeader();
+        addPolicyPage.addPolicyButton().shouldBe(Condition.disabled);
+    }
+
+    @Test
+    public void shouldStripValueByRegexPolicy() {
         addPolicyPage
-            .stripHeader(AddSimpleHeaderPolicyPage.HeaderType.Value, AddSimpleHeaderPolicyPage.WithMatcher.Regex, "ahoj")
+            .stripHeader(AddSimpleHeaderPolicyPage.HeaderType.Value, AddSimpleHeaderPolicyPage.WithMatcher.Regex,
+                "ahoj")
             .addPolicy(AddSimpleHeaderPolicyPage.class);
         assertPolicyPresent();
         assertThat(addPolicyPage.getStripHeaderCount(), equalTo(1));
     }
 
+    @Test
+    public void shouldDeleteHeaderPolicyFromAddHeaderByClickDeleteButton() {
+        addHeaders();
 
+        addPolicyPage.deletedHeader(1);
+        assertThat(addPolicyPage.getAddHeaderCount(), equalTo(NUM_HEAD - 1));
+        addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+        assertPolicyPresent();
+    }
 
+    @Test
+    public void shouldAdd3AddHeaders() {
+        addHeaders();
+        addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+        assertPolicyPresent();
+    }
+
+    @Test
+    public void shouldMoveHeaderUp() {
+        addHeaders();
+        addPolicyPage.getMoveUpButton(1).click();
+        addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+        assertPolicyPresent();
+    }
+
+    @Test
+    public void shouldMoveHeaderDown() {
+        addHeaders();
+        addPolicyPage.getMoveDownButton(1).click();
+        addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+        assertPolicyPresent();
+    }
 
 }
