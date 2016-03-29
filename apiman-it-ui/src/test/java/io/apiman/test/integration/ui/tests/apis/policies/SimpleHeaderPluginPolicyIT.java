@@ -21,7 +21,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 import io.apiman.test.integration.base.policies.PolicyDefs;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
-import io.apiman.test.integration.ui.support.assertion.BeanAssert;
 import io.apiman.test.integration.ui.support.selenide.pages.policies.AddSimpleHeaderPolicyPage;
 
 import com.codeborne.selenide.Condition;
@@ -46,6 +45,7 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
                     AddSimpleHeaderPolicyPage.ValueType.String,
                     AddSimpleHeaderPolicyPage.ApplyTo.Both, true);
         }
+
         assertThat(addPolicyPage.getAddHeaderCount(), equalTo(3));
     }
 
@@ -61,10 +61,12 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
 
     @Test
     public void shouldAddRequestPolicy() {
-        addPolicyPage
-            .addHeader("X-Request", "Request value",
-                AddSimpleHeaderPolicyPage.ValueType.String, AddSimpleHeaderPolicyPage.ApplyTo.Request, true)
-            .addPolicy(AddSimpleHeaderPolicyPage.class);
+        addPolicyPage.
+            addHeader("X-Request", "Request value",
+                AddSimpleHeaderPolicyPage.ValueType.String,
+                AddSimpleHeaderPolicyPage.ApplyTo.Request, true);
+        addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+
         assertPolicyPresent();
         assertThat(addPolicyPage.getAddHeaderCount(), equalTo(1));
     }
@@ -75,6 +77,7 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
             .addHeader("X-Request", "Request value",
                 AddSimpleHeaderPolicyPage.ValueType.String, AddSimpleHeaderPolicyPage.ApplyTo.Request, true)
             .cancel(AddSimpleHeaderPolicyPage.class);
+
         assertPolicyNotPresent();
     }
 
@@ -82,14 +85,17 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
     public void shouldBeDisabledAddButton() {
         addPolicyPage.clickAddHeader();
         addPolicyPage.addPolicyButton().shouldBe(Condition.disabled);
+        addPolicyPage.getHeaderValueTypeSelect(0).setValue(AddSimpleHeaderPolicyPage.ValueType.System.toString());
+        addPolicyPage.addPolicyButton().shouldBe(Condition.disabled);
     }
 
     @Test
     public void shouldStripValueByRegexPolicy() {
         addPolicyPage
-            .stripHeader(AddSimpleHeaderPolicyPage.HeaderType.Value, AddSimpleHeaderPolicyPage.WithMatcher.Regex,
-                "ahoj")
-            .addPolicy(AddSimpleHeaderPolicyPage.class);
+            .stripHeader(AddSimpleHeaderPolicyPage.HeaderType.Value,
+                AddSimpleHeaderPolicyPage.WithMatcher.Regex, "ahoj");
+        addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+
         assertPolicyPresent();
         assertThat(addPolicyPage.getStripHeaderCount(), equalTo(1));
     }
@@ -97,10 +103,10 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
     @Test
     public void shouldDeleteHeaderPolicyFromAddHeaderByClickDeleteButton() {
         addHeaders();
-
         addPolicyPage.deletedHeader(1);
         assertThat(addPolicyPage.getAddHeaderCount(), equalTo(NUM_HEAD - 1));
         addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+
         assertPolicyPresent();
     }
 
@@ -108,6 +114,7 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
     public void shouldAdd3AddHeaders() {
         addHeaders();
         addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+
         assertPolicyPresent();
     }
 
@@ -116,6 +123,7 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
         addHeaders();
         addPolicyPage.getMoveUpButton(1).click();
         addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+
         assertPolicyPresent();
     }
 
@@ -124,6 +132,7 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
         addHeaders();
         addPolicyPage.getMoveDownButton(1).click();
         addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
+
         assertPolicyPresent();
     }
 
@@ -132,8 +141,8 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
         addHeaders();
         addPolicyPage.getDeleteLastButton().click();
         addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
-        assertPolicyPresent();
 
+        assertPolicyPresent();
     }
 
 }

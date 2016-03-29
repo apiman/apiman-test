@@ -134,21 +134,15 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         return $("input[name=\"root[addHeaders][" + number + "][headerName]\"]");
     }
 
-    public SelenideElement getUpdatePolicyButton() {
-        return $("button[id=\"update-policy\"]");
-    }
-
     public SelenideElement getMoveUpButton(int number) {
         return $("button[title=\"Move up\"][data-i=\"" + number + "\"]");
     }
 
-    public SelenideElement getDeleteLastButton()
-    {
+    public SelenideElement getDeleteLastButton() {
         return $("button[title=\"Delete Last Header\"]");
     }
 
-    public SelenideElement getDeleteAllButton()
-    {
+    public SelenideElement getDeleteAllButton() {
         return $("button[title=\"Delete All\"]");
     }
 
@@ -197,8 +191,8 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         getHeaderValueTypeSelect(addHeaderCount).selectOption(valueType.toString());
         getHeaderApplyToSelect(addHeaderCount).selectOption(applyTo.toString());
         getHeaderOverwriteSelect(addHeaderCount).selectOption(overwrite.toString());
-
         addHeaderCount++;
+
         return thisPageObject();
     }
 
@@ -206,6 +200,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
 
         getDeleteButton(index).click();
         addHeaderCount--;
+
         return thisPageObject();
     }
 
