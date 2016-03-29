@@ -52,6 +52,7 @@ public class SuiteProperties {
 
     // Additional configuration properties
     public static final String JS_TIMEOUT_PROP = "apiman.test.js.timeout";
+    public static final String BROWSER_DOWNLOAD_DIR = "apiman.test.download.dir";
 
     // Tools binding address properties
     public static final String TOOL_PROXY_ADDRESS_PROP = "apiman.test.proxy.address";
@@ -143,12 +144,16 @@ public class SuiteProperties {
         int eToken = raw.indexOf("}");
 
         if (sToken != -1 && eToken != -1) {
+            String prefix = raw.substring(0, sToken);
+            String suffix = raw.substring(eToken + 1);
             String key = raw.substring(sToken + 2, eToken);
+            String keyValue;
             if (key.startsWith("env:")) {
-                value = System.getenv(key.substring(4));
+                keyValue = System.getenv(key.substring(4));
             } else {
-                value = System.getProperty(key, properties.getProperty(key));
+                keyValue = System.getProperty(key, properties.getProperty(key));
             }
+            value = prefix + keyValue + suffix;
         }
 
         return value;
