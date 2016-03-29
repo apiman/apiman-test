@@ -28,6 +28,9 @@ import com.codeborne.selenide.SelenideElement;
  */
 public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHeaderPolicyPage> {
 
+    /**
+     * Enum representing Value Type select options
+     */
     public enum ValueType {
         Env("Env"),
         String("String"),
@@ -35,22 +38,19 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
 
         private final String text;
 
-        /**
-         * @param text
-         */
         ValueType(final String text) {
             this.text = text;
         }
 
-        /* (non-Javadoc)
-         * @see java.lang.Enum#toString()
-         */
         @Override
         public String toString() {
             return text;
         }
     }
 
+    /**
+     * Enum representing Apply to select options
+     */
     public enum ApplyTo {
         Request("Request"),
         Response("Response"),
@@ -58,16 +58,10 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
 
         private final String text;
 
-        /**
-         * @param text
-         */
         ApplyTo(final String text) {
             this.text = text;
         }
 
-        /* (non-Javadoc)
-         * @see java.lang.Enum#toString()
-         */
         @Override
         public String toString() {
             return text;
@@ -75,44 +69,38 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
 
     }
 
+    /**
+     * Enum representing Header type select options
+     */
     public enum HeaderType {
         Key("Key"),
         Value("Value");
 
         private final String text;
 
-        /**
-         * @param text
-         */
         HeaderType(final String text) {
             this.text = text;
         }
 
-        /* (non-Javadoc)
-         * @see java.lang.Enum#toString()
-         */
         @Override
         public String toString() {
             return text;
         }
     }
 
+    /**
+     * Enum representing WithMatcher select options
+     */
     public enum WithMatcher {
         String("String"),
         Regex("Regex");
 
         private final String text;
 
-        /**
-         * @param text
-         */
         WithMatcher(final String text) {
             this.text = text;
         }
 
-        /* (non-Javadoc)
-         * @see java.lang.Enum#toString()
-         */
         @Override
         public String toString() {
             return text;
@@ -130,55 +118,52 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         $("button[title=\"Add Strip Headers\"]").click();
     }
 
-    public SelenideElement getHeaderNameTextBox(int number) {
+    public SelenideElement headerNameTextBox(int number) {
         return $("input[name=\"root[addHeaders][" + number + "][headerName]\"]");
     }
 
-    public SelenideElement getMoveUpButton(int number) {
+    public SelenideElement moveUpButton(int number) {
         return $("button[title=\"Move up\"][data-i=\"" + number + "\"]");
     }
 
-    public SelenideElement getDeleteLastButton() {
+    public SelenideElement deleteLastButton() {
         return $("button[title=\"Delete Last Header\"]");
     }
 
-    public SelenideElement getDeleteAllButton() {
-        return $("button[title=\"Delete All\"]");
-    }
 
     public SelenideElement getMoveDownButton(int number) {
         return $("button[title=\"Move down\"][data-i=\"" + number + "\"]");
     }
 
-    public SelenideElement getDeleteButton(int number) {
+    public SelenideElement deleteButton(int number) {
         return $("button[title=\"Delete\"][data-i=\"" + number + "\"]");
     }
 
-    public SelenideElement getHeaderValueTextBox(int number) {
+    public SelenideElement headerValueTextBox(int number) {
         return $("input[name=\"root[addHeaders][" + number + "][headerValue]\"]");
     }
 
-    public SelenideElement getHeaderValueTypeSelect(int number) {
+    public SelenideElement headerValueTypeSelect(int number) {
         return $("select[name=\"root[addHeaders][" + number + "][valueType]\"]");
     }
 
-    public SelenideElement getHeaderApplyToSelect(int number) {
+    public SelenideElement headerApplyToSelect(int number) {
         return $("select[name=\"root[addHeaders][" + number + "][applyTo]\"]");
     }
 
-    public SelenideElement getHeaderOverwriteSelect(int number) {
+    public SelenideElement headerOverwriteSelect(int number) {
         return $("select[name=\"root[addHeaders][" + number + "][overwrite]\"]");
     }
 
-    public SelenideElement getStripMatchTypeSelect(int number) {
+    public SelenideElement stripMatchTypeSelect(int number) {
         return $("select[name=\"root[stripHeaders][" + number + "][stripType]\"]");
     }
 
-    public SelenideElement getStripMatchWithSelect(int number) {
+    public SelenideElement stripMatchWithSelect(int number) {
         return $("select[name=\"root[stripHeaders][" + number + "][with]\"]");
     }
 
-    public SelenideElement getStripMatchPatternText(int number) {
+    public SelenideElement stripMatchPatternText(int number) {
         return $("input[name=\"root[stripHeaders][" + number + "][pattern]\"]");
     }
 
@@ -186,11 +171,11 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         String name, String value, ValueType valueType, ApplyTo applyTo, Boolean overwrite) {
 
         clickAddHeader();
-        getHeaderNameTextBox(addHeaderCount).setValue(name);
-        getHeaderValueTextBox(addHeaderCount).setValue(value);
-        getHeaderValueTypeSelect(addHeaderCount).selectOption(valueType.toString());
-        getHeaderApplyToSelect(addHeaderCount).selectOption(applyTo.toString());
-        getHeaderOverwriteSelect(addHeaderCount).selectOption(overwrite.toString());
+        headerNameTextBox(addHeaderCount).setValue(name);
+        headerValueTextBox(addHeaderCount).setValue(value);
+        headerValueTypeSelect(addHeaderCount).selectOption(valueType.toString());
+        headerApplyToSelect(addHeaderCount).selectOption(applyTo.toString());
+        headerOverwriteSelect(addHeaderCount).selectOption(overwrite.toString());
         addHeaderCount++;
 
         return thisPageObject();
@@ -198,7 +183,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
 
     public AddSimpleHeaderPolicyPage deletedHeader(int index) {
 
-        getDeleteButton(index).click();
+        deleteButton(index).click();
         addHeaderCount--;
 
         return thisPageObject();
@@ -216,9 +201,9 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         HeaderType headerType, WithMatcher withMatcher, String pattern) {
 
         clickStripHeader();
-        getStripMatchTypeSelect(stripHeaderCount).selectOption(headerType.toString());
-        getStripMatchWithSelect(stripHeaderCount).selectOption(withMatcher.toString());
-        getStripMatchPatternText(stripHeaderCount).setValue(pattern);
+        stripMatchTypeSelect(stripHeaderCount).selectOption(headerType.toString());
+        stripMatchWithSelect(stripHeaderCount).selectOption(withMatcher.toString());
+        stripMatchPatternText(stripHeaderCount).setValue(pattern);
         stripHeaderCount++;
 
         return thisPageObject();
