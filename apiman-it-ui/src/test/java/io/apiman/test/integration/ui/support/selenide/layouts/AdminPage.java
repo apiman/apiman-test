@@ -19,7 +19,9 @@ package io.apiman.test.integration.ui.support.selenide.layouts;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
+import io.apiman.test.integration.ui.support.selenide.ByApiman;
 import io.apiman.test.integration.ui.support.selenide.Layout;
+import io.apiman.test.integration.ui.support.selenide.pages.administration.exportimport.ExportImportAdminPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.gateways.GatewaysAdminPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.plugins.PluginsAdminPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.PolicyDefsAdminPage;
@@ -36,7 +38,7 @@ public class AdminPage<P> extends AbstractPage<P> {
      * @return RolesAdminPage
      */
     public RolesAdminPage roles() {
-        $("a[data-field='toRoles']").click();
+        $(ByApiman.i18n("a", "admin-nav.admin-roles")).click();
         return page(RolesAdminPage.class);
     }
 
@@ -45,7 +47,7 @@ public class AdminPage<P> extends AbstractPage<P> {
      * @return PolicyDefsAdminPage
      */
     public PolicyDefsAdminPage policies() {
-        $("a[data-field='toPolicyDefs']").click();
+        $(ByApiman.i18n("a", "admin-nav.policy-definitions")).click();
         return page(PolicyDefsAdminPage.class);
     }
 
@@ -54,7 +56,7 @@ public class AdminPage<P> extends AbstractPage<P> {
      * @return GatewaysAdminPage
      */
     public GatewaysAdminPage gateways() {
-        $("a[data-field='toGateways']").click();
+        $(ByApiman.i18n("a", "admin-nav.gateways")).click();
         return page(GatewaysAdminPage.class);
     }
 
@@ -63,7 +65,16 @@ public class AdminPage<P> extends AbstractPage<P> {
      * @return PluginsAdminPage
      */
     public PluginsAdminPage plugins() {
-        $("a[data-field='toPlugins']").click();
+        $(ByApiman.i18n("a", "admin-nav.plugins")).click();
         return page(PluginsAdminPage.class);
+    }
+
+    /**
+     * Activates Export/Import tabs
+     * @return ExportImportAdminPage
+     */
+    public ExportImportAdminPage exportImport() {
+        $(ByApiman.i18n("a", "admin-nav.export")).click();
+        return page(ExportImportAdminPage.class);
     }
 }

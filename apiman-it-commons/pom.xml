@@ -36,6 +36,12 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
+    <!-- JSON assertion -->
+    <dependency>
+      <groupId>org.valid4j</groupId>
+      <artifactId>json-path-matchers</artifactId>
+      <version>1.1</version>
+    </dependency>
     <!-- Utility libraries -->
     <dependency>
       <groupId>org.apache.commons</groupId>
