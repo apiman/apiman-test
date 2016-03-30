@@ -18,6 +18,7 @@ package io.apiman.test.integration.runner.handlers.version;
 
 import static io.apiman.test.integration.runner.handlers.version.PolicyConfigurationUtils.configurePolicies;
 
+import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.runner.annotations.misc.Endpoint;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.handlers.FieldAnnotationHandler;
@@ -70,7 +71,7 @@ public class ApiVersionAnnotationHandler extends FieldAnnotationHandler<ApiVersi
         Endpoint endpoint = annotation.endpoint();
         String value = endpoint.value();
         String path = value.startsWith("/") ? value.substring(1) : value;
-        String url = String.format("http://%s:%s/%s", API_HOST, API_PORT, path);
+        String url = SuiteProperties.getDeploymentUrl() + "/" + path;
 
         UpdateApiVersionBean updateBean = new UpdateApiVersionBean();
         updateBean.setEndpoint(url);
