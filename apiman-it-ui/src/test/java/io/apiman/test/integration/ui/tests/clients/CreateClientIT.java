@@ -22,18 +22,14 @@ import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.hasText;
 import static com.codeborne.selenide.Selenide.page;
 
-import io.apiman.test.integration.runner.annotations.entity.Api;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.ui.support.assertion.BeanAssert;
 import io.apiman.test.integration.ui.support.assertion.PageAssert;
-import io.apiman.test.integration.ui.support.beanutils.ApiUtils;
 import io.apiman.test.integration.ui.support.beanutils.ClientUtils;
 import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.ErrorPage;
-import io.apiman.test.integration.ui.support.selenide.pages.apis.CreateApiPage;
 import io.apiman.test.integration.ui.support.selenide.pages.clients.CreateClientPage;
-import io.apiman.manager.api.beans.apis.ApiBean;
 import io.apiman.manager.api.beans.clients.ClientBean;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
 
@@ -101,6 +97,5 @@ public class CreateClientIT extends AbstractSimpleUITest {
             .version("1.0")
             .create();
     }
-
 
 }
