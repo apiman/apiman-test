@@ -89,7 +89,7 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
         addPolicyPage.headerValueTypeSelect(0).setValue(AddSimpleHeaderPolicyPage.ValueType.System.toString());
 =======
         addPolicyPage.getHeaderValueTypeSelect(0).setValue(AddSimpleHeaderPolicyPage.ValueType.System.toString());
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         addPolicyPage.addPolicyButton().shouldBe(Condition.disabled);
     }
 
@@ -129,7 +129,7 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
         addPolicyPage.moveUpButton(1).click();
 =======
         addPolicyPage.getMoveUpButton(1).click();
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
 
         assertPolicyPresent();
@@ -151,7 +151,7 @@ public class SimpleHeaderPluginPolicyIT extends AbstractApiPolicyIT {
         addPolicyPage.deleteLastButton().click();
 =======
         addPolicyPage.getDeleteLastButton().click();
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         addPolicyPage.addPolicy(AddSimpleHeaderPolicyPage.class);
 
         assertPolicyPresent();

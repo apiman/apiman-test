@@ -33,7 +33,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
      * Enum representing Value Type select options
      */
 =======
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
     public enum ValueType {
         Env("Env"),
         String("String"),
@@ -46,7 +46,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         /**
          * @param text
          */
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         ValueType(final String text) {
             this.text = text;
         }
@@ -56,7 +56,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         /* (non-Javadoc)
          * @see java.lang.Enum#toString()
          */
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         @Override
         public String toString() {
             return text;
@@ -68,7 +68,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
      * Enum representing Apply to select options
      */
 =======
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
     public enum ApplyTo {
         Request("Request"),
         Response("Response"),
@@ -81,7 +81,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         /**
          * @param text
          */
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         ApplyTo(final String text) {
             this.text = text;
         }
@@ -91,7 +91,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         /* (non-Javadoc)
          * @see java.lang.Enum#toString()
          */
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         @Override
         public String toString() {
             return text;
@@ -104,7 +104,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
      * Enum representing Header type select options
      */
 =======
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
     public enum HeaderType {
         Key("Key"),
         Value("Value");
@@ -116,7 +116,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         /**
          * @param text
          */
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         HeaderType(final String text) {
             this.text = text;
         }
@@ -126,7 +126,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         /* (non-Javadoc)
          * @see java.lang.Enum#toString()
          */
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         @Override
         public String toString() {
             return text;
@@ -138,7 +138,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
      * Enum representing WithMatcher select options
      */
 =======
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
     public enum WithMatcher {
         String("String"),
         Regex("Regex");
@@ -150,7 +150,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         /**
          * @param text
          */
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         WithMatcher(final String text) {
             this.text = text;
         }
@@ -160,7 +160,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         /* (non-Javadoc)
          * @see java.lang.Enum#toString()
          */
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         @Override
         public String toString() {
             return text;
@@ -207,7 +207,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
     public SelenideElement getDeleteAllButton() {
         return $("button[title=\"Delete All\"]");
     }
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
 
     public SelenideElement getMoveDownButton(int number) {
         return $("button[title=\"Move down\"][data-i=\"" + number + "\"]");
@@ -273,7 +273,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
     }
 
     public SelenideElement getStripMatchPatternText(int number) {
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         return $("input[name=\"root[stripHeaders][" + number + "][pattern]\"]");
     }
 
@@ -293,7 +293,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         getHeaderValueTypeSelect(addHeaderCount).selectOption(valueType.toString());
         getHeaderApplyToSelect(addHeaderCount).selectOption(applyTo.toString());
         getHeaderOverwriteSelect(addHeaderCount).selectOption(overwrite.toString());
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         addHeaderCount++;
 
         return thisPageObject();
@@ -305,7 +305,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         deleteButton(index).click();
 =======
         getDeleteButton(index).click();
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         addHeaderCount--;
 
         return thisPageObject();
@@ -331,7 +331,7 @@ public class AddSimpleHeaderPolicyPage extends AbstractAddPolicyPage<AddSimpleHe
         getStripMatchTypeSelect(stripHeaderCount).selectOption(headerType.toString());
         getStripMatchWithSelect(stripHeaderCount).selectOption(withMatcher.toString());
         getStripMatchPatternText(stripHeaderCount).setValue(pattern);
->>>>>>> e507f33... Simple Header UI Tests - 2 simple cases - working
+>>>>>>> eaaffbb2341298422d11e4e092876d67250e8cb3
         stripHeaderCount++;
 
         return thisPageObject();
