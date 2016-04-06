@@ -1,4 +1,4 @@
-FROM jboss/wildfly:8.2.0.Final
+FROM jboss/wildfly:10.0.0.Final
 MAINTAINER Jakub Cechacek <jcechace@redhat.com>
 
 ENV INIT_DIRECTORY  $JBOSS_HOME/init.d
