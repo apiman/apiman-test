@@ -22,11 +22,13 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
 
 import io.apiman.manager.api.beans.clients.ClientBean;
+import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.ui.support.selenide.layouts.OrgEntitiesListPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.EditPolicyPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.PolicyDefsAdminPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.BrowseApiDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiDetailPage;
+import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.organizations.BrowseOrgDetailPage;
 import io.apiman.manager.api.beans.apis.ApiBean;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
@@ -74,6 +76,21 @@ public class PageAssert {
      */
     public static void assertApiDetail(ApiBean expected) {
         ApiDetailPage page = page(ApiDetailPage.class);
+        page.name().shouldHave(text(expected.getName()));
+        page.description().shouldHave(text(expected.getDescription()));
+    }
+
+
+    /**
+     * Assert that information on ApiDetailPage matches given bean
+     * This method does not have to cross check all fields.
+     *
+     *  Currently checked fields: name, description
+     *
+     * @param expected expected bean
+     */
+    public static void assertClientDetail(ClientBean expected) {
+        ClientDetailPage page = page(ClientDetailPage.class);
         page.name().shouldHave(text(expected.getName()));
         page.description().shouldHave(text(expected.getDescription()));
     }

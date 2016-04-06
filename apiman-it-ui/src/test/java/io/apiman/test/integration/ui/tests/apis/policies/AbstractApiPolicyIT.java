@@ -57,6 +57,11 @@ public abstract class AbstractApiPolicyIT extends AbstractApiUITest {
         BeanAssert.assertPolicyPresent(apiVersions, getDefinitionId());
     }
 
+    protected void assertPolicyNotPresent() {
+        BeanAssert.assertNoPolicies(apiVersions);
+    }
+
+
     protected abstract String getDefinitionId();
 
 }
