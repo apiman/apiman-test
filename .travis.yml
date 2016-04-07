@@ -20,11 +20,19 @@ install:
   - git clone https://github.com/apiman/apiman-plugins $WORKSPACE/apiman-plugins
   - echo "export TEST_SOURCES=$(pwd)" | tee --append tools/scripts/travis/installrc.sh tools/scripts/travis/scriptrc.sh
   - export RC_FILE=tools/scripts/travis/installrc.sh
+<<<<<<< HEAD
   - travis_wait 30 bash -x tools/scripts/travis/travis_run.sh
 
 script: 
   - export WORKSPACE="$(pwd)/workspace"
   - RC_FILE=tools/scripts/travis/scriptrc.sh bash -x tools/scripts/tests_runner.sh
+=======
+  - travis_wait 30 bash tools/scripts/travis/travis_run.sh
+
+script: 
+  - export WORKSPACE="$(pwd)/workspace"
+  - RC_FILE=tools/scripts/travis/scriptrc.sh bash tools/scripts/tests_runner.sh | egrep -v 'Download|\\[exec\\] [[:digit:]]+/[[:digit:]]+|^[[:space:]]*\\[exec\\][[:space:]]*$' ; [ ${PIPESTATUS[0]} == 0 ];
+>>>>>>> master
 
 notifications:
   email:

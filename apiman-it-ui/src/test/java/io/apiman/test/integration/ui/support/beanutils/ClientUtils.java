@@ -43,4 +43,22 @@ public class ClientUtils {
         client.setDescription(String.format("Description of %s", client.getName()));
         return client;
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Create an instance of ClientBean with unique name and description
+     * This ClientBean won't be created inside Apiman
+     *
+     * @param orgBean - organization bean
+     * @return ClientBean instance
+     */
+    public static ClientBean local(OrganizationBean orgBean) {
+        ClientBean client = new ClientBean();
+        client.setOrganization(orgBean);
+        client.setName(uniqueName(TEST_CLIENT_NAME_BASE));
+        client.setDescription(String.format("Description of %s", client.getName()));
+        return client;
+    }
+>>>>>>> master
 }

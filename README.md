@@ -27,14 +27,14 @@ Alternatively you can configure and run these tools however you see fit -- in th
 
 ### REST tests
 ```bash
-mvn clean install -Ptests-rest -Dapiman.test.proxy.address=${proxyAddress}
+mvn clean install -Prest-tests -Dapiman.test.proxy.address=${proxyAddress}
 ```
 
 Where ${proxyAddress} is your current IP address (anything different from ```localhost``` will do).
 
 ### UI tests
 ```bash
-mvn clean install -Ptests-ui -Pbrowser=${browser}
+mvn clean install -Pui-tests -Pbrowser=${browser}
 ```
 Where ```${browser}``` is either ```firefox``` or ```chrome```
 
@@ -45,7 +45,7 @@ Various system properties can be used to configure the suit's execution. Default
 Custom configuration can be provided. Furthermore property values specified in configuration file can be overriden directly on command line.
 
 ```bash
-mvn clean install -Ptests-rest -Dsuite.properties="custom.properties" -Dapiman.host="10.10.10.42"
+mvn clean install -Prest-tests  -Dsuite.properties="custom.properties" -Dapiman.host="10.10.10.42"
 ```
 
 

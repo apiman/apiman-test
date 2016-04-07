@@ -50,6 +50,9 @@ public class SuiteProperties {
     public static final String TOOL_DEPLOY_PORT_PROP = "apiman.test.deploy.port";
     public static final String TOOL_DEPLOY_PROTOCOL_PROP = "apiman.test.deploy.protocol";
 
+    // Additional configuration properties
+    public static final String JS_TIMEOUT_PROP = "apiman.test.js.timeout";
+
     // Tools binding address properties
     public static final String TOOL_PROXY_ADDRESS_PROP = "apiman.test.proxy.address";
     public static final String TOOL_PROXY_PORT_PROP = "apiman.test.proxy.port";
@@ -68,6 +71,7 @@ public class SuiteProperties {
     public static Properties getProperties() {
         return properties;
     }
+
 
     public static String getManagerUrl() {
         String protocol = getProperty(APIMAN_MANAGER_PROTOCOL_PROP);

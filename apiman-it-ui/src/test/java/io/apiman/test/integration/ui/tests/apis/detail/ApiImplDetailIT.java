@@ -23,8 +23,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractApiUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiImplDetailPage;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.apis.EndpointType;
@@ -36,7 +36,7 @@ import org.junit.Test;
 /**
  * @author jkaspar
  */
-public class ApiImplDetailIT extends AbstractApiTest {
+public class ApiImplDetailIT extends AbstractApiUITest {
 
     private static final String NEW_ENDPOINT = "http://localhost:8080/foo/bar";
     private static final String NEW_API_TYPE = EndpointType.soap.toString();

@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.jboss.apiman.qa</groupId>
+  <groupId>io.apiman.test</groupId>
   <artifactId>apiman-integration-tests</artifactId>
   <version>1.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -24,7 +24,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.test.failure.ignore>true</maven.test.failure.ignore>
     <!-- Dependency version properties -->
-    <version.apiman>1.2.3-SNAPSHOT</version.apiman>
+    <version.apiman>1.2.4-SNAPSHOT</version.apiman>
     <version.junit>4.12</version.junit>
     <version.log4j>1.2.17</version.log4j>
     <version.slf4j>1.7.12</version.slf4j>
@@ -40,7 +40,6 @@
     <groups></groups>
     <groups.exclude></groups.exclude>
     <skipCoverage>false</skipCoverage>
-    <!-- in seconds -->
   </properties>
 
   <dependencyManagement>

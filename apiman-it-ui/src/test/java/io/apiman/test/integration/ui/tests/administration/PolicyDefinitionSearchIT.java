@@ -22,9 +22,11 @@ import static com.codeborne.selenide.Condition.*;
 
 import io.apiman.test.integration.ui.support.assertion.PageAssert;
 import io.apiman.test.integration.ui.support.beanutils.PolicyDefinitionUtils;
+import io.apiman.test.integration.ui.support.selenide.base.AbstractSimpleUITest;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.PolicyDefsAdminPage;
 import io.apiman.manager.api.beans.policies.PolicyDefinitionBean;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -32,7 +34,7 @@ import org.junit.Test;
  *
  * @author jrumanov
  */
-public class PolicyDefinitionSearchIT {
+public class PolicyDefinitionSearchIT extends AbstractSimpleUITest {
 
     private static PolicyDefinitionBean defBean;
     private static PolicyDefsAdminPage policyPage;
@@ -47,6 +49,10 @@ public class PolicyDefinitionSearchIT {
     @BeforeClass
     public static void createDefBean() {
         defBean = PolicyDefinitionUtils.remote();
+    }
+
+    @Before
+    public void openPage() {
         policyPage = open(PolicyDefsAdminPage.class);
     }
 
