@@ -43,6 +43,8 @@ public class ClientUtils {
         client.setDescription(String.format("Description of %s", client.getName()));
         return client;
     }
+<<<<<<< HEAD
+=======
 
     /**
      * Create an instance of ClientBean with unique name and description
@@ -58,4 +60,5 @@ public class ClientUtils {
         client.setDescription(String.format("Description of %s", client.getName()));
         return client;
     }
+>>>>>>> master
 }

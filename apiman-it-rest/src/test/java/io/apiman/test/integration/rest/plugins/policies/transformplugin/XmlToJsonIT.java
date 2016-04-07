@@ -16,9 +16,8 @@
 
 package io.apiman.test.integration.rest.plugins.policies.transformplugin;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.apiman.manager.api.beans.apis.ApiVersionBean;
-import io.apiman.manager.api.beans.apis.EndpointContentType;
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
+
 import io.apiman.test.integration.DeployedServices;
 import io.apiman.test.integration.base.entity.TestData;
 import io.apiman.test.integration.base.entity.TestDataRoot;
@@ -28,13 +27,15 @@ import io.apiman.test.integration.runner.annotations.misc.Endpoint;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import io.apiman.manager.api.beans.apis.ApiVersionBean;
+import io.apiman.manager.api.beans.apis.EndpointContentType;
 
 import java.io.IOException;
 
-import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author opontes

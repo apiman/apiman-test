@@ -22,7 +22,10 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
 
 import io.apiman.manager.api.beans.clients.ClientBean;
+<<<<<<< HEAD
+=======
 import io.apiman.test.integration.runner.annotations.entity.Client;
+>>>>>>> master
 import io.apiman.test.integration.ui.support.selenide.layouts.OrgEntitiesListPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.EditPolicyPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.PolicyDefsAdminPage;

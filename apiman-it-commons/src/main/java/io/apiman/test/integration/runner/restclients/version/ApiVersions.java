@@ -67,7 +67,7 @@ public class ApiVersions extends AbstractEntityRestClient<ApiVersionBean, NewApi
     }
 
     @Override
-    public ApiVersions lock() {
+    public ApiVersions publish() {
         ActionBean action = new ActionBean();
         action.setType(ActionType.publishAPI);
         action.setOrganizationId(getBean().getApi().getOrganization().getId());
@@ -76,6 +76,10 @@ public class ApiVersions extends AbstractEntityRestClient<ApiVersionBean, NewApi
 
         post(path(ACTION_PATH), action);
         return this;
+    }
+
+    public ApiVersions republish() {
+        return publish();
     }
 
     public String getManagedEndpoint() {
