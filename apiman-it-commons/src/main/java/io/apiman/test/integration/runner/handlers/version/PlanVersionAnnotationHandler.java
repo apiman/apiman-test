@@ -59,7 +59,7 @@ public class PlanVersionAnnotationHandler extends FieldAnnotationHandler<PlanVer
 
     private void lockBean(PlanVersion annotation, PlanVersions client) {
         if (annotation.publish()) {
-            client.lock();
+            client.publish();
         }
     }
 

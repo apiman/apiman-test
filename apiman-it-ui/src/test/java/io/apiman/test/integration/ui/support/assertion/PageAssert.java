@@ -21,8 +21,6 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
 
-import io.apiman.manager.api.beans.clients.ClientBean;
-import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.ui.support.selenide.layouts.OrgEntitiesListPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.EditPolicyPage;
 import io.apiman.test.integration.ui.support.selenide.pages.administration.policies.PolicyDefsAdminPage;
@@ -31,6 +29,7 @@ import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiDetai
 import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.ClientDetailPage;
 import io.apiman.test.integration.ui.support.selenide.pages.organizations.BrowseOrgDetailPage;
 import io.apiman.manager.api.beans.apis.ApiBean;
+import io.apiman.manager.api.beans.clients.ClientBean;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
 import io.apiman.manager.api.beans.policies.PolicyDefinitionBean;
 

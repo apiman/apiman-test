@@ -61,7 +61,7 @@ public class ClientVersionAnnotationHandler extends FieldAnnotationHandler<Clien
 
     private void lockBean(ClientVersion annotation, ClientVersions client) {
         if (annotation.publish()) {
-            client.lock();
+            client.publish();
         }
     }
 

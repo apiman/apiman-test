@@ -215,7 +215,7 @@ public class UIAcceptanceIT extends AbstractSimpleUITest {
         /* Lock plan */
         planPoliciesPage.lock();
 
-        /* Verify the plan's lock in the activity log */
+        /* Verify the plan's publish in the activity log */
         ActivityAssert.assertLatestActivity(apiOrg, "Plan", "Lock");
 
         /* Create the api */

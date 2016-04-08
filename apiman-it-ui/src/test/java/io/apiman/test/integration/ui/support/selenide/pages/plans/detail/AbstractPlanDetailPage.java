@@ -29,7 +29,7 @@ import com.codeborne.selenide.SelenideElement;
 public abstract class AbstractPlanDetailPage<P> extends AbstractDetailPage<P> {
 
     /**
-     * Button to lock plan
+     * Button to publish plan
      * @return element
      */
     public SelenideElement lockButton() {

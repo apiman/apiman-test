@@ -25,5 +25,5 @@ public interface VersionRestClient<ClientType extends EntityRestClient> {
 
     Policies<ClientType> policies();
 
-    ClientType lock();
+    ClientType publish();
 }
