@@ -101,7 +101,7 @@ public class ApiVersionAnnotationHandler extends FieldAnnotationHandler<ApiVersi
 
     private void lockBean(ApiVersion annotation, ApiVersions client) {
         if (annotation.publish()) {
-            client.lock();
+            client.publish();
         }
     }
 
