@@ -41,7 +41,7 @@ import org.junit.experimental.categories.Category;
 /**
  * @author jkaspar
  */
-@Category({PolicyTest.class, PluginTest.class, SmokeTest.class})
+@Category({PolicyTest.class, PluginTest.class})
 @Plugin(artifactId = "apiman-plugins-config-policy")
 public class ConfigPluginPlanPolicyIT extends AbstractTest {
 

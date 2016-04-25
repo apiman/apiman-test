@@ -18,6 +18,7 @@ package io.apiman.test.integration.rest.plugins.policies.simpleheader;
 
 import io.apiman.test.integration.categories.PluginTest;
 import io.apiman.test.integration.categories.PolicyTest;
+import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
@@ -29,7 +30,7 @@ import org.junit.experimental.categories.Category;
  * Created by pstanko.
  * @author pstanko
  */
-@Category({PolicyTest.class, PluginTest.class})
+@Category({PolicyTest.class, PluginTest.class, SmokeTest.class})
 public class SimpleHeaderRequestApiPolicyIT extends AbstractSimpleRequestHeaderPolicyIT {
 
     @ApiVersion(api = "api", policies = @Policies(value = "plugins/simpleheader/string_request", params = {"name", HEADER_NAME, "value", HEADER_VALUE}))

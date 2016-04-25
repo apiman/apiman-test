@@ -19,7 +19,6 @@ package io.apiman.test.integration.rest.plugins.policies.configplugin;
 import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.categories.PluginTest;
 import io.apiman.test.integration.categories.PolicyTest;
-import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
@@ -31,7 +30,7 @@ import org.junit.experimental.categories.Category;
 /**
  * @author jkaspar
  */
-@Category({PluginTest.class, PolicyTest.class, SmokeTest.class})
+@Category({PluginTest.class, PolicyTest.class})
 @Plugin(artifactId = "apiman-plugins-config-policy")
 public class ConfigPluginApiPolicyIT extends AbstractApiTest {
 
