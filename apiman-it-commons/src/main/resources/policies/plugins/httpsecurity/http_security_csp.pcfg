@@ -1,0 +1,17 @@
+http-security-policy
+---
+{
+    "hsts": {
+        "enabled" : false,
+        "includeSubdomains" : false,
+        "maxAge" : 0,
+        "preload" : false
+    },
+    "contentSecurityPolicy": {
+        "mode" : "${csp.mode}",
+        "csp" : "${csp}"
+    },
+    "frameOptions" : "DISABLED",
+    "xssProtection" : "DISABLED",
+    "contentTypeOptions" : false
+}
