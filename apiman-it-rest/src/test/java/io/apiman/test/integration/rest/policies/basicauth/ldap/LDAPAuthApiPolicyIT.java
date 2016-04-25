@@ -17,7 +17,6 @@
 package io.apiman.test.integration.rest.policies.basicauth.ldap;
 
 import io.apiman.test.integration.categories.PolicyTest;
-import io.apiman.test.integration.categories.SmokeTest;
 import io.apiman.test.integration.rest.policies.basicauth.AbstractBASICAuthenticationPolicyIT;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
