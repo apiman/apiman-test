@@ -16,8 +16,38 @@
 
 package io.apiman.test.integration.rest.plugins.policies.httpsecurityplugin;
 
+import io.apiman.test.integration.base.AbstractApiTest;
+import io.apiman.test.integration.runner.annotations.entity.Plugin;
+import org.junit.Test;
+
+import static io.apiman.test.integration.runner.RestAssuredUtils.when;
+import static org.hamcrest.Matchers.*;
+
 /**
  * Created by jsmolar.
  */
-public class AbstractHttpSecurityPolicyIT {
+@Plugin(artifactId = "apiman-plugins-http-security-policy")
+public abstract class AbstractHttpSecurityPolicyIT extends AbstractApiTest {
+
+    //headers
+    protected static final String STRICT_TRANSPORT_SECURITY = "Strict-Transport-Security";
+    protected static final String X_FRAME_OPTIONS = "X-Frame-Options";
+    protected static final String X_XSS_PROTECTION = "X-XSS-Protection";
+    protected static final String X_CONTENT_TYPE = "X-Content-Type-Options";
+
+    protected static final String CONTENT_SECURITY = "Content-Security-Policy";
+
+    protected abstract String getResourceURL();
+
+    @Test
+    public void shouldNotContainHSTSHeader(){
+        when().
+            get(getResourceURL()).
+        then().
+            header(STRICT_TRANSPORT_SECURITY, is(isEmptyOrNullString())).
+            header(CONTENT_SECURITY, not(isEmptyOrNullString())).
+            header(X_FRAME_OPTIONS, not(isEmptyOrNullString())).
+            header(X_XSS_PROTECTION, not(isEmptyOrNullString())).
+            header(X_CONTENT_TYPE, not(isEmptyOrNullString()));
+    }
 }

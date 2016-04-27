@@ -42,7 +42,7 @@ public abstract class AbstractHttpSecurityHSTSPolicyIT extends AbstractApiTest {
     protected abstract String getHstsDisabledResourceURL();
 
     @Test
-    public void shouldNotContainsContentSecurityPolicyHeader(){
+    public void shouldNotContainContentSecurityPolicyHeader(){
         when().
             get(getResourceURL()).
         then().
@@ -51,7 +51,7 @@ public abstract class AbstractHttpSecurityHSTSPolicyIT extends AbstractApiTest {
     }
 
     @Test
-    public void shloudNotcontainsXFrameOptionsHeader(){
+    public void shouldNotContainXFrameOptionsHeader(){
         when().
             get(getResourceURL()).
         then().
@@ -59,7 +59,7 @@ public abstract class AbstractHttpSecurityHSTSPolicyIT extends AbstractApiTest {
     }
 
     @Test
-    public void shloudNotContainsXXSSProtectionHeader(){
+    public void shouldNotContainsXXSSProtectionHeader(){
         when().
             get(getResourceURL()).
         then().

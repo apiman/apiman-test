@@ -29,7 +29,7 @@ import static org.hamcrest.Matchers.*;
 @Plugin(artifactId = "apiman-plugins-http-security-policy")
 public abstract class AbstractHttpSecurityCSPPolicyIT extends AbstractApiTest {
 
-    //headers
+    //Headers
     protected static final String STRICT_TRANSPORT_SECURITY = "Strict-Transport-Security";
     protected static final String X_FRAME_OPTIONS = "X-Frame-Options";
     protected static final String X_XSS_PROTECTION = "X-XSS-Protection";
@@ -38,7 +38,7 @@ public abstract class AbstractHttpSecurityCSPPolicyIT extends AbstractApiTest {
     protected static final String CONTENT_SECURITY = "Content-Security-Policy";
     protected static final String CONTENT_SECURITY_REPORT_ONLY = "Content-Security-Policy-Report-Only";
 
-    //config
+    //Configuration
     protected static final String CSP_CONFIG = "Test CSP config";
 
     protected abstract String getResourceURL();
@@ -48,7 +48,7 @@ public abstract class AbstractHttpSecurityCSPPolicyIT extends AbstractApiTest {
     protected abstract String getCspDisabledResourceURL();
 
     @Test
-    public void shouldNotContainsStrictTransportSecurityHeader() throws Exception{
+    public void shouldNotContainStrictTransportSecurityHeader() throws Exception{
         when().
             get(getResourceURL()).
         then().
@@ -64,7 +64,7 @@ public abstract class AbstractHttpSecurityCSPPolicyIT extends AbstractApiTest {
     }
 
     @Test
-    public void shouldNotContainsXXSSProtectionHeader() throws Exception{
+    public void shouldNotContainXXSSProtectionHeader() throws Exception{
         when().
             get(getResourceURL()).
         then().
@@ -72,7 +72,7 @@ public abstract class AbstractHttpSecurityCSPPolicyIT extends AbstractApiTest {
     }
 
     @Test
-    public void shouldNotContainsXContentTypeHeader() throws Exception{
+    public void shouldNotContainXContentTypeHeader() throws Exception{
         when().
             get(getResourceURL()).
         then().
@@ -80,7 +80,7 @@ public abstract class AbstractHttpSecurityCSPPolicyIT extends AbstractApiTest {
     }
 
     @Test
-    public void shouldContainsContentSecurityHeader() throws Exception{
+    public void shouldContainContentSecurityHeader() throws Exception{
         when().
             get(getResourceURL()).
         then().
@@ -89,7 +89,7 @@ public abstract class AbstractHttpSecurityCSPPolicyIT extends AbstractApiTest {
     }
 
     @Test
-    public void shouldContainsContentSecurityReportOnlyHeader() throws Exception{
+    public void shouldContainContentSecurityReportHeader() throws Exception{
         when().
             get(getCspReportOnlyResourceURL()).
         then().
@@ -98,7 +98,7 @@ public abstract class AbstractHttpSecurityCSPPolicyIT extends AbstractApiTest {
     }
 
     @Test
-    public void shouldNotCointainsAnyContentSecurityHeader() throws Exception{
+    public void shouldNotContainAnyContentSecurityHeader() throws Exception{
         when().
             get(getCspDisabledResourceURL()).
         then().
