@@ -16,7 +16,7 @@
 
 package io.apiman.test.integration.ui.support.selenide;
 
-import static io.apiman.test.integration.SuiteProperties.JS_TIMEOUT_PROP;
+import static io.apiman.test.integration.SuiteProperties.TEST_JS_TIMEOUT_PROP;
 
 import static com.codeborne.selenide.Selenide.page;
 
@@ -78,11 +78,11 @@ public class SelenideUtils {
     }
 
     /**
-     * Set custom event listener as {@link ApimanEventListener} and script timeout to {@value SuiteProperties#JS_TIMEOUT_PROP}
+     * Set custom event listener as {@link ApimanEventListener} and script timeout to {@value SuiteProperties#TEST_JS_TIMEOUT_PROP}
      */
     public static void setEventListener() {
         WebDriverRunner.addListener(new ApimanEventListener());
-        Integer scriptTimeout = Integer.valueOf(SuiteProperties.getProperty(JS_TIMEOUT_PROP));
+        Integer scriptTimeout = Integer.valueOf(SuiteProperties.getProperty(TEST_JS_TIMEOUT_PROP));
         WebDriverRunner.getWebDriver().manage().timeouts().setScriptTimeout(scriptTimeout, TimeUnit.SECONDS);
     }
 

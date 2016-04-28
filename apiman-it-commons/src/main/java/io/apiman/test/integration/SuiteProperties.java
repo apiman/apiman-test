@@ -51,7 +51,7 @@ public class SuiteProperties {
     public static final String TOOL_DEPLOY_PROTOCOL_PROP = "apiman.test.deploy.protocol";
 
     // Additional configuration properties
-    public static final String JS_TIMEOUT_PROP = "apiman.test.js.timeout";
+    public static final String TEST_JS_TIMEOUT_PROP = "apiman.test.js.timeout";
 
     // Tools binding address properties
     public static final String TOOL_PROXY_ADDRESS_PROP = "apiman.test.proxy.address";
