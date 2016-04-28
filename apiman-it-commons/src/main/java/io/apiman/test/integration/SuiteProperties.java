@@ -33,6 +33,7 @@ public class SuiteProperties {
         initProperties();
     }
 
+    // Testsuite properties
     public static final String SUITE_PROPERTIES_PROP = "suite.properties";
 
     // Apiman properties
@@ -51,6 +52,7 @@ public class SuiteProperties {
     public static final String TOOL_DEPLOY_PROTOCOL_PROP = "apiman.test.deploy.protocol";
 
     // Additional configuration properties
+    public static final String TEST_ACTION_DELAY_PROP = "apiman.test.delay";
     public static final String TEST_JS_TIMEOUT_PROP = "apiman.test.js.timeout";
 
     // Tools binding address properties
@@ -70,23 +72,6 @@ public class SuiteProperties {
 
     public static Properties getProperties() {
         return properties;
-    }
-
-
-    public static String getManagerUrl() {
-        String protocol = getProperty(APIMAN_MANAGER_PROTOCOL_PROP);
-        String host = getProperty(APIMAN_MANAGER_HOST_PROP);
-        String port = getProperty(APIMAN_MANAGER_PORT_PROP);
-
-        return String.format("%s://%s:%s/apiman", protocol, host, port);
-    }
-
-    public static String getDeploymentUrl() {
-        String protocol = getProperty(TOOL_DEPLOY_PROTOCOL_PROP);
-        String host = getProperty(TOOL_DEPLOY_HOST_PROP);
-        String port = getProperty(TOOL_DEPLOY_PORT_PROP);
-
-        return String.format("%s://%s:%s", protocol, host, port);
     }
 
     private static void initProperties() {

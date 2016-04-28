@@ -21,6 +21,7 @@ import static io.apiman.test.integration.SuiteProperties.APIMAN_MANAGER_USER;
 
 import static com.jayway.restassured.RestAssured.preemptive;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.SuiteProperties;
 
 import com.jayway.restassured.RestAssured;
@@ -69,7 +70,7 @@ public class RestAssuredUtils {
         .setAuth(preemptive().basic(MANAGER_USER, MANAGER_PASS))
         .setContentType(ContentType.JSON)
         .setAccept(ContentType.JSON)
-        .setBaseUri(SuiteProperties.getManagerUrl())
+        .setBaseUri(Suite.getManagerUrl())
         .build();
 
     /**
@@ -84,7 +85,7 @@ public class RestAssuredUtils {
      */
     public static RequestSpecification TEST_SERVICES_SPEC = new RequestSpecBuilder()
         .addRequestSpecification(DEFAULT_TEST_SPEC)
-        .setBaseUri(SuiteProperties.getDeploymentUrl())
+        .setBaseUri(Suite.getDeploymentUrl())
         .build();
 
     /*
