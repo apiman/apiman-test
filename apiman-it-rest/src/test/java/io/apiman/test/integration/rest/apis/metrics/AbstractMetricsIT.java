@@ -18,6 +18,7 @@ package io.apiman.test.integration.rest.apis.metrics;
 
 import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.base.AbstractTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
@@ -159,6 +160,7 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     @Before
     public void recordMetrics() throws Exception {
         beforeRecoding = new Date();
+        Suite.waitForAction();
 
         recordSuccessfulRequests(CLIENT_V1_SUCC, apiKey_clientVersion1);
         recordFailedRequests(CLIENT_V1_FAIL, apiKey_clientVersion1);

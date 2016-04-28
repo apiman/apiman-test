@@ -20,6 +20,7 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 
 import static org.junit.Assert.assertEquals;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.base.AbstractClientTest;
 import io.apiman.test.integration.categories.MetricTest;
@@ -97,6 +98,7 @@ public class ApiUsageMetricsIT extends AbstractClientTest {
     @Before
     public void setUp() throws Exception {
         beforeRecoding = new Date();
+        Suite.waitForAction();
 
         recordSuccessfulRequests(SUCCESSFUL_REQUESTS, endpoint, apiKey);
         recordFailedRequests(FAILED_REQUESTS, endpoint, apiKey);
