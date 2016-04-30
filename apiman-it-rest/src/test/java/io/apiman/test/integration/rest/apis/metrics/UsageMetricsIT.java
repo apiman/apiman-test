@@ -27,6 +27,8 @@ import io.apiman.manager.api.beans.metrics.ResponseStatsSummaryBean;
 import io.apiman.manager.api.beans.metrics.UsageDataPoint;
 import io.apiman.manager.api.beans.metrics.UsageHistogramBean;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -54,11 +56,8 @@ public class UsageMetricsIT extends AbstractIntervalMetricsIT {
             HistogramIntervalType.minute);
 
         for (UsageDataPoint i : metrics.getData()) {
-            Date subinterval = formatter.parse(i.getLabel());
-
-            calendar.setTime(subinterval);
-            calendar.add(Calendar.SECOND, 59);
-            Date endOfSubinterval = calendar.getTime();
+            LocalDateTime subinterval = LocalDateTime.from(ZonedDateTime.parse(i.getLabel()));
+            LocalDateTime endOfSubinterval = subinterval.plusSeconds(59);
 
             ResponseStatsSummaryBean expectedMetrics = apiVersions
                 .metricsSummaryResponseStats(subinterval, endOfSubinterval);

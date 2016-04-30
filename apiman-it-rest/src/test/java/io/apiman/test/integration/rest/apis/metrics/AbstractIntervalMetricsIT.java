@@ -19,16 +19,16 @@ package io.apiman.test.integration.rest.apis.metrics;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.manager.api.beans.metrics.HistogramBean;
 import io.apiman.manager.api.beans.metrics.HistogramDataPoint;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -42,9 +42,8 @@ public abstract class AbstractIntervalMetricsIT extends AbstractMetricsIT {
 
     protected static final Logger LOG = LoggerFactory.getLogger(AbstractIntervalMetricsIT.class);
 
-    protected static Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-    protected static SimpleDateFormat formatter;
-    protected Date tenMinutesAfterRecording;
+    protected static DateTimeFormatter formatter;
+    protected LocalDateTime tenMinutesAfterRecording;
 
     /**
      * Get metrics from a 10 minutes interval divided into minutes.
@@ -56,42 +55,43 @@ public abstract class AbstractIntervalMetricsIT extends AbstractMetricsIT {
         // wait until current minute expires
         long millisWithinMinute = System.currentTimeMillis() % TimeUnit.MINUTES.toMillis(1);
         long waitFor = TimeUnit.MINUTES.toMillis(1) - millisWithinMinute;
-        LOG.info(
-            String.format("Waiting %d seconds current minute expires.", TimeUnit.MILLISECONDS.toSeconds(waitFor)));
-        Thread.sleep(waitFor);
+        Suite.waitFor(60 * 1000 - millisWithinMinute, "Waiting %d milliseconds until end of minute.");
 
         recordSuccessfulRequests(2);
         recordFailedRequests(5);
-        TimeUnit.SECONDS.sleep(TIME_DELAY);
+        Suite.waitForAction();
     }
 
     @BeforeClass
     public static void setUpFormatter() throws Exception {
-        formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
     }
 
     @Before
     public void setUp() throws Exception {
-        calendar.setTime(beforeRecoding);
-        calendar.add(Calendar.MINUTE, 9);
-        tenMinutesAfterRecording = calendar.getTime();
+        tenMinutesAfterRecording = afterRecording.plusMinutes(10);
     }
 
     @Test
     public void shouldHaveCorrectNumberOfSubintervals() throws Exception {
         HistogramBean metrics = getMetrics();
-        assertEquals("Unexpected number of subintervals", 10, metrics.getData().size());
+
+        double secondsBetween = Duration.between(
+            beforeRecoding.truncatedTo(ChronoUnit.MINUTES), // truncate to get starting minute
+            tenMinutesAfterRecording).getSeconds();
+        double expectedNumber = Math.ceil(secondsBetween / 60.0); // ceiling to get last minute
+
+        assertEquals("Unexpected number of subintervals", expectedNumber, metrics.getData().size(), 0.001);
     }
 
     @Test
     public void shouldHaveConsecutiveValueOnSubintervals() throws Exception {
         HistogramBean<HistogramDataPoint> metrics = getMetrics();
 
-        Date prevDate = formatter.parse(metrics.getData().get(0).getLabel());
+        LocalDateTime prevDate = LocalDateTime.from(formatter.parse(metrics.getData().get(0).getLabel()));
         for (int i = 1; i < metrics.getData().size(); i++) {
-            Date date = formatter.parse(metrics.getData().get(i).getLabel());
-            assertTrue("Unexpected label value", date.after(prevDate));
+            LocalDateTime date = LocalDateTime.from(formatter.parse(metrics.getData().get(i).getLabel()));
+            assertTrue("Unexpected label value", date.isAfter(prevDate));
             prevDate = date;
         }
     }
@@ -99,19 +99,19 @@ public abstract class AbstractIntervalMetricsIT extends AbstractMetricsIT {
     @Test
     public void shouldHaveCorrectLabelOnFirstSubinterval() throws Exception {
         HistogramBean<HistogramDataPoint> metrics = getMetrics();
-        Date firstSubinterval = formatter.parse(metrics.getData().get(0).getLabel());
+        LocalDateTime firstSubinterval = LocalDateTime.from(formatter.parse(metrics.getData().get(0).getLabel()));
 
         assertEquals("Unexpected label value of first subinterval",
-            DateUtils.truncate(beforeRecoding, Calendar.MINUTE), firstSubinterval);
+            beforeRecoding.truncatedTo(ChronoUnit.MINUTES), firstSubinterval);
     }
 
     @Test
     public void shouldHaveCorrectLabelOnLastSubinterval() throws Exception {
         HistogramBean<HistogramDataPoint> metrics = getMetrics();
         int last = metrics.getData().size() - 1;
-        Date lastSubinterval = formatter.parse(metrics.getData().get(last).getLabel());
+        LocalDateTime lastSubinterval = LocalDateTime.from(formatter.parse(metrics.getData().get(last).getLabel()));
 
         assertEquals("Unexpected label value of last subinterval",
-            DateUtils.truncate(tenMinutesAfterRecording, Calendar.MINUTE), lastSubinterval);
+            tenMinutesAfterRecording.truncatedTo(ChronoUnit.MINUTES), lastSubinterval);
     }
 }

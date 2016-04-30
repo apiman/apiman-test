@@ -19,7 +19,6 @@ package io.apiman.test.integration.rest.apis.metrics;
 import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 
 import io.apiman.test.integration.Suite;
-import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.base.AbstractTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
@@ -37,8 +36,8 @@ import io.apiman.manager.api.beans.clients.ClientVersionBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 import io.apiman.manager.api.beans.plans.PlanVersionBean;
 
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import org.junit.Before;
 
@@ -80,10 +79,9 @@ import org.junit.Before;
  */
 public abstract class AbstractMetricsIT extends AbstractTest {
 
-    protected static final int TIME_DELAY = Integer.valueOf(SuiteProperties.getProperty("apiman.test.delay"));
     protected ApiVersions apiVersions;
-    protected Date beforeRecoding;
-    protected Date afterRecording;
+    protected LocalDateTime beforeRecoding;
+    protected LocalDateTime afterRecording;
 
     protected static final int CLIENT_V1_SUCC = 1;
     protected static final int CLIENT_V1_FAIL = 2;
@@ -108,6 +106,22 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     protected static final long TOTAL_FAILURES = CLIENT_FAIL + SINGLE_VERSION_CLIENT_FAIL + PUBLIC_FAIL;
     protected static final long TOTAL_REQUESTS = CLIENT_SUCC + SINGLE_VERSION_CLIENT_SUCC + PUBLIC_SUCC + TOTAL_FAILURES;
 
+
+    // Static configuration
+    @Plan(organization = "organization", name = "TestPlan2_")
+    protected static PlanBean plan2;
+
+    @PlanVersion(plan = "plan")
+    protected static PlanVersionBean planVersion;
+
+    @PlanVersion(plan = "plan2")
+    protected static PlanVersionBean plan2Version;
+
+    @Client(organization = "organization", name = "SingleVersionClient")
+    protected static ClientBean singleVersionClient;
+
+
+    // Non-static configuration
     @ApiVersion(api = "api",
         vPlans = {"planVersion", "plan2Version"},
         policies = @Policies("metrics_001"),
@@ -118,14 +132,6 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     @ManagedEndpoint("apiVersion")
     protected String endpoint;
 
-    @PlanVersion(plan = "plan")
-    protected static PlanVersionBean planVersion;
-
-    @Plan(organization = "organization", name = "TestPlan2_")
-    protected static PlanBean plan2;
-
-    @PlanVersion(plan = "plan2")
-    protected static PlanVersionBean plan2Version;
 
     @ClientVersion(client = "client", unique = true, contracts = {
         @Contract(vPlan = "planVersion", vApi = "apiVersion")})
@@ -135,12 +141,10 @@ public abstract class AbstractMetricsIT extends AbstractTest {
         @Contract(vPlan = "planVersion", vApi = "apiVersion")})
     protected ClientVersionBean clientVersion2;
 
-    @Client(organization = "organization", name = "SingleVersionClient")
-    protected static ClientBean singleVersionClient;
-
     @ClientVersion(client = "singleVersionClient", unique = true, contracts = {
         @Contract(vPlan = "plan2Version", vApi = "apiVersion")})
     protected ClientVersionBean singleVersionClientVersion;
+
 
     @ApiKey(vApi = "apiVersion", vPlan = "planVersion", vClient = "clientVersion1")
     protected String apiKey_clientVersion1;
@@ -152,15 +156,9 @@ public abstract class AbstractMetricsIT extends AbstractTest {
     protected String apiKey_singleVersionClient;
 
     @Before
-    public void setUpClient() throws Exception {
-        apiVersions = new ApiVersions(api);
-        apiVersions.fetch(apiVersion.getVersion());
-    }
-
-    @Before
     public void recordMetrics() throws Exception {
-        beforeRecoding = new Date();
-        Suite.waitForAction();
+        beforeRecoding = LocalDateTime.now(ZoneOffset.UTC);
+        Suite.waitFor(10 * 1000, "Waiting %d milliseconds before recording metrics");
 
         recordSuccessfulRequests(CLIENT_V1_SUCC, apiKey_clientVersion1);
         recordFailedRequests(CLIENT_V1_FAIL, apiKey_clientVersion1);
@@ -174,8 +172,11 @@ public abstract class AbstractMetricsIT extends AbstractTest {
         recordSuccessfulRequests(PUBLIC_SUCC);
         recordFailedRequests(PUBLIC_FAIL);
 
-        afterRecording = new Date();
-        TimeUnit.SECONDS.sleep(TIME_DELAY);
+        Suite.waitFor(20 * 1000, "Waiting %d milliseconds for metrics to be recorded");
+        afterRecording = LocalDateTime.now(ZoneOffset.UTC);
+
+        apiVersions = new ApiVersions(api);
+        apiVersions.fetch(apiVersion.getVersion());
     }
 
     protected void recordSuccessfulRequests(int count) {

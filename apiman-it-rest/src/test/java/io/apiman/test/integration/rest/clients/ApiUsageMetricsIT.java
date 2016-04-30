@@ -38,8 +38,8 @@ import io.apiman.manager.api.beans.apis.ApiVersionBean;
 import io.apiman.manager.api.beans.clients.ClientVersionBean;
 import io.apiman.manager.api.beans.metrics.ClientUsagePerApiBean;
 
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,16 +51,14 @@ import org.junit.experimental.categories.Category;
 @Category({MetricTest.class, SmokeTest.class})
 public class ApiUsageMetricsIT extends AbstractClientTest {
 
-    private static int TIME_DELAY = Integer.valueOf(SuiteProperties.getProperty("apiman.test.delay"));
-
     private static final int SUCCESSFUL_REQUESTS = 10;
     private static final int FAILED_REQUESTS = 11;
     private static final int SECOND_API_SUCCESSFUL_REQUESTS = 22;
     private static final int SECOND_API_FAILED_REQUESTS = 20;
 
     ClientVersions clientVersions;
-    private Date beforeRecoding;
-    private Date afterRecording;
+    private LocalDateTime beforeRecoding;
+    private LocalDateTime afterRecording;
 
     @Api(organization = "organization")
     private static ApiBean secondApi;
@@ -97,17 +95,17 @@ public class ApiUsageMetricsIT extends AbstractClientTest {
 
     @Before
     public void setUp() throws Exception {
-        beforeRecoding = new Date();
-        Suite.waitForAction();
+        beforeRecoding = LocalDateTime.now(ZoneOffset.UTC);
+        Suite.waitFor(10 * 1000, "Waiting %d milliseconds before recording metrics");
 
-        recordSuccessfulRequests(SUCCESSFUL_REQUESTS, endpoint, apiKey);
         recordFailedRequests(FAILED_REQUESTS, endpoint, apiKey);
+        recordSuccessfulRequests(SUCCESSFUL_REQUESTS, endpoint, apiKey);
 
         recordSuccessfulRequests(SECOND_API_SUCCESSFUL_REQUESTS, secondEdpoint, secondApiKey);
         recordFailedRequests(SECOND_API_FAILED_REQUESTS, secondEdpoint, secondApiKey);
 
-        afterRecording = new Date();
-        TimeUnit.SECONDS.sleep(TIME_DELAY);
+        Suite.waitFor(20 * 1000, "Waiting %d milliseconds for metrics to be recorded");
+        afterRecording = LocalDateTime.now(ZoneOffset.UTC);;
 
         clientVersions = new ClientVersions(clientVersion.getClient());
         clientVersions.fetch(clientVersion.getVersion());
@@ -116,8 +114,11 @@ public class ApiUsageMetricsIT extends AbstractClientTest {
     @Test
     public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         ClientUsagePerApiBean metricsBefore = clientVersions.metrics(beforeRecoding, afterRecording);
+
+        Suite.waitFor(10 * 1000, "Waiting %d milliseconds before recording additional metrics.");
         recordSuccessfulRequests(10, endpoint, apiKey);
-        TimeUnit.SECONDS.sleep(TIME_DELAY);
+        Suite.waitFor(10 * 1000, "Waiting %d milliseconds after recording additional metrics.");
+
         ClientUsagePerApiBean metricsAfter = clientVersions.metrics(beforeRecoding, afterRecording);
 
         assertEquals("Unexpected metrics data",

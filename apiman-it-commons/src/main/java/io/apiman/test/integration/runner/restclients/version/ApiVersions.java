@@ -35,6 +35,7 @@ import io.apiman.manager.api.beans.metrics.UsagePerClientBean;
 import io.apiman.manager.api.beans.metrics.UsagePerPlanBean;
 import io.apiman.manager.api.beans.summary.ApiVersionEndpointSummaryBean;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -94,34 +95,34 @@ public class ApiVersions extends AbstractEntityRestClient<ApiVersionBean, NewApi
         return this;
     }
 
-    public UsageHistogramBean metricsUsage(Date from, Date to, HistogramIntervalType interval) {
+    public UsageHistogramBean metricsUsage(LocalDateTime from, LocalDateTime to, HistogramIntervalType interval) {
         return getMetrics(from, to, getBean().getVersion(), METRICS_USAGE, UsageHistogramBean.class, interval);
     }
 
-    public UsagePerClientBean metricsClientUsage(Date from, Date to) {
+    public UsagePerClientBean metricsClientUsage(LocalDateTime from, LocalDateTime to) {
         return getMetrics(from, to, getBean().getVersion(), METRICS_CLIENT_USAGE, UsagePerClientBean.class);
     }
 
-    public UsagePerPlanBean metricsPlanUsage(Date from, Date to) {
+    public UsagePerPlanBean metricsPlanUsage(LocalDateTime from, LocalDateTime to) {
         return getMetrics(from, to, getBean().getVersion(), METRICS_PLAN_USAGE, UsagePerPlanBean.class);
     }
 
-    public ResponseStatsHistogramBean metricsResponseStats(Date from, Date to, HistogramIntervalType interval) {
+    public ResponseStatsHistogramBean metricsResponseStats(LocalDateTime from, LocalDateTime to, HistogramIntervalType interval) {
         return getMetrics(from, to, getBean().getVersion(), METRICS_RESPONSE_STATS, ResponseStatsHistogramBean.class,
             interval);
     }
 
-    public ResponseStatsPerClientBean metricsClientResponseStats(Date from, Date to) {
+    public ResponseStatsPerClientBean metricsClientResponseStats(LocalDateTime from, LocalDateTime to) {
         return getMetrics(from, to, getBean().getVersion(), METRICS_CLIENT_RESPONSE_STATS,
             ResponseStatsPerClientBean.class);
     }
 
-    public ResponseStatsPerPlanBean metricsPlanResponseStats(Date from, Date to) {
+    public ResponseStatsPerPlanBean metricsPlanResponseStats(LocalDateTime from, LocalDateTime to) {
         return getMetrics(from, to, getBean().getVersion(), METRICS_PLAN_RESPONSE_STATS,
             ResponseStatsPerPlanBean.class);
     }
 
-    public ResponseStatsSummaryBean metricsSummaryResponseStats(Date from, Date to) {
+    public ResponseStatsSummaryBean metricsSummaryResponseStats(LocalDateTime from, LocalDateTime to) {
         return getMetrics(from, to, getBean().getVersion(), METRICS_SUMMARY_RESPONSE_STATS,
             ResponseStatsSummaryBean.class);
     }

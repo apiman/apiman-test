@@ -18,6 +18,7 @@ package io.apiman.test.integration.rest.apis.metrics;
 
 import static org.junit.Assert.assertEquals;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.categories.LongRunningTest;
 import io.apiman.test.integration.categories.MetricTest;
 import io.apiman.manager.api.beans.metrics.ResponseStatsPerClientBean;
@@ -38,9 +39,10 @@ public class ClientResponseStatsMetricsIT extends AbstractMetricsIT {
         ResponseStatsPerClientBean metricsBefore = apiVersions
             .metricsClientResponseStats(beforeRecoding, afterRecording);
 
+        Suite.waitFor(10 * 1000, "Waiting %d milliseconds before recording additional metrics.");
         recordFailedRequests(1, apiKey_clientVersion1);
         recordSuccessfulRequests(1, apiKey_clientVersion1);
-        TimeUnit.SECONDS.sleep(TIME_DELAY);
+        Suite.waitFor(10 * 1000, "Waiting %d milliseconds after recording additional metrics.");
 
         ResponseStatsPerClientBean metricsAfter = apiVersions
             .metricsClientResponseStats(beforeRecoding, afterRecording);

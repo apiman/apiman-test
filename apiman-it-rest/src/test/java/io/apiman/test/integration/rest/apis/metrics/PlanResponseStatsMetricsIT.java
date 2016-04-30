@@ -22,8 +22,6 @@ import io.apiman.test.integration.categories.LongRunningTest;
 import io.apiman.test.integration.categories.MetricTest;
 import io.apiman.manager.api.beans.metrics.ResponseStatsPerPlanBean;
 
-import java.util.concurrent.TimeUnit;
-
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -32,19 +30,6 @@ import org.junit.experimental.categories.Category;
  */
 @Category({MetricTest.class, LongRunningTest.class})
 public class PlanResponseStatsMetricsIT extends AbstractMetricsIT {
-
-    @Test
-    public void shouldNotIncludeRequestsAfterInterval() throws Exception {
-        ResponseStatsPerPlanBean metricsBefore = apiVersions.metricsPlanResponseStats(beforeRecoding, afterRecording);
-        recordFailedRequests(1, apiKey_clientVersion1);
-        recordSuccessfulRequests(1, apiKey_clientVersion1);
-        TimeUnit.SECONDS.sleep(TIME_DELAY);
-        ResponseStatsPerPlanBean metricsAfter = apiVersions.metricsPlanResponseStats(beforeRecoding, afterRecording);
-
-        assertEquals("Unexpected number of total requests",
-            metricsBefore.getData().get(plan.getId()).getTotal(),
-            metricsAfter.getData().get(plan.getId()).getTotal());
-    }
 
     @Test
     public void shouldHaveCorrectNumberOfFailuresForEachPlan() throws Exception {

@@ -21,9 +21,8 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.withManager;
 
 import io.apiman.manager.api.beans.metrics.HistogramIntervalType;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.jayway.restassured.builder.ResponseSpecBuilder;
 import com.jayway.restassured.specification.ResponseSpecification;
@@ -37,14 +36,13 @@ public class AbstractEntityRestClient<Entity, NewEntity> extends AbstractRestWra
     private final String resourcePath;
     private final Class<Entity> clazz;
     private Entity bean;
-    private final SimpleDateFormat formatter;
+    private final DateTimeFormatter formatter;
 
     public AbstractEntityRestClient(String resourcePath, Class<Entity> clazz) {
         this.resourcePath = resourcePath;
         this.clazz = clazz;
 
-        formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
     }
 
     @Override
@@ -90,7 +88,7 @@ public class AbstractEntityRestClient<Entity, NewEntity> extends AbstractRestWra
         this.bean = bean;
     }
 
-    protected <Bean> Bean getMetrics(Date from, Date to, String idOrVersion, String metricsPath, Class<Bean> clazz) {
+    protected <Bean> Bean getMetrics(LocalDateTime from, LocalDateTime to, String idOrVersion, String metricsPath, Class<Bean> clazz) {
         return  withManager().given().
                     param("from", formatter.format(from)).
                     param("to", formatter.format(to)).
@@ -99,7 +97,7 @@ public class AbstractEntityRestClient<Entity, NewEntity> extends AbstractRestWra
                     as(clazz);
     }
 
-    protected <Bean> Bean getMetrics(Date from, Date to, String idOrVersion, String metricsPath, Class<Bean> clazz,
+    protected <Bean> Bean getMetrics(LocalDateTime from, LocalDateTime to, String idOrVersion, String metricsPath, Class<Bean> clazz,
             HistogramIntervalType interval) {
         return  givenManager().
                     param("from", formatter.format(from)).

@@ -27,7 +27,8 @@ import io.apiman.manager.api.beans.clients.ClientVersionBean;
 import io.apiman.manager.api.beans.clients.NewClientVersionBean;
 import io.apiman.manager.api.beans.metrics.ClientUsagePerApiBean;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 /**
  * @author jcechace
@@ -63,7 +64,7 @@ public class ClientVersions extends AbstractEntityRestClient<ClientVersionBean, 
         return this;
     }
 
-    public ClientUsagePerApiBean metrics(Date from, Date to) {
+    public ClientUsagePerApiBean metrics(LocalDateTime from, LocalDateTime to) {
         return getMetrics(from, to, getBean().getVersion(), METRICS_API_USAGE, ClientUsagePerApiBean.class);
     }
 }

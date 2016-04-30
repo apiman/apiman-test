@@ -18,6 +18,7 @@ package io.apiman.test.integration.rest.apis.metrics;
 
 import static org.junit.Assert.assertEquals;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.categories.LongRunningTest;
 import io.apiman.test.integration.categories.MetricTest;
 import io.apiman.manager.api.beans.metrics.UsagePerClientBean;
@@ -36,9 +37,12 @@ public class ClientUsageMetricsIT extends AbstractMetricsIT {
     @Test
     public void shouldNotIncludeRequestsAfterInterval() throws Exception {
         UsagePerClientBean metricsBefore = apiVersions.metricsClientUsage(beforeRecoding, afterRecording);
+        Suite.waitFor(10 * 1000, "Waiting %d milliseconds before recording additional metrics.");
+
         recordSuccessfulRequests(1, apiKey_singleVersionClient);
         recordFailedRequests(2, apiKey_singleVersionClient);
-        TimeUnit.SECONDS.sleep(TIME_DELAY);
+        Suite.waitForAction();
+
         UsagePerClientBean metricsAfter = apiVersions.metricsClientUsage(beforeRecoding, afterRecording);
 
         assertEquals("Unexpected metrics data",

@@ -27,8 +27,7 @@ import io.apiman.manager.api.beans.metrics.ResponseStatsDataPoint;
 import io.apiman.manager.api.beans.metrics.ResponseStatsHistogramBean;
 import io.apiman.manager.api.beans.metrics.ResponseStatsSummaryBean;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -54,11 +53,8 @@ public class ResponseStatsMetricsIT extends AbstractIntervalMetricsIT {
             HistogramIntervalType.minute);
 
         for (ResponseStatsDataPoint i : metrics.getData()) {
-            Date subinterval = formatter.parse(i.getLabel());
-
-            calendar.setTime(subinterval);
-            calendar.add(Calendar.SECOND, 59);
-            Date endOfSubinterval = calendar.getTime();
+            LocalDateTime subinterval = LocalDateTime.from(formatter.parse(i.getLabel()));
+            LocalDateTime endOfSubinterval = subinterval.plusSeconds(59);
 
             ResponseStatsSummaryBean expectedMetrics = apiVersions
                 .metricsSummaryResponseStats(subinterval, endOfSubinterval);
