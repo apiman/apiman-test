@@ -24,7 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 
-import io.apiman.test.integration.SuiteProperties;
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.runner.annotations.entity.Organization;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
@@ -38,7 +38,6 @@ import io.apiman.manager.api.beans.plans.PlanVersionBean;
 import io.apiman.manager.api.beans.summary.ApiSummaryBean;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -105,7 +104,7 @@ public class ImportApisIT extends AbstractSimpleUITest {
     public void canImportApis() throws Exception {
         addTwoApisAndGoToTheLastStep()
             .importApis();
-        TimeUnit.SECONDS.sleep(Integer.valueOf(SuiteProperties.getProperty("apiman.test.delay")));
+        Suite.waitForAction();
 
         List<ApiSummaryBean> apis = new APIs(organization).fetchAll();
 

@@ -20,6 +20,7 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.withManager;
 
 import static org.hamcrest.Matchers.equalTo;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.manager.api.beans.orgs.OrganizationBean;
 
@@ -41,7 +42,7 @@ public class ActivityAssert {
      */
     public static void assertLatestActivity(OrganizationBean expected, String entityType, String what)
         throws InterruptedException {
-        TimeUnit.SECONDS.sleep(Integer.valueOf(SuiteProperties.getProperty("apiman.test.delay")));
+        Suite.waitForAction();
         final String path = "/organizations/{org}/activity/";
        
         /* Select the activity listed first on page 1 */

@@ -82,8 +82,8 @@ public class SelenideUtils {
      */
     public static void setEventListener() {
         WebDriverRunner.addListener(new ApimanEventListener());
-        Integer scriptTimeout = Integer.valueOf(SuiteProperties.getProperty(TEST_JS_TIMEOUT_PROP));
-        WebDriverRunner.getWebDriver().manage().timeouts().setScriptTimeout(scriptTimeout, TimeUnit.SECONDS);
+        long scriptTimeout = Long.parseLong(SuiteProperties.getProperty(TEST_JS_TIMEOUT_PROP));
+        WebDriverRunner.getWebDriver().manage().timeouts().setScriptTimeout(scriptTimeout, TimeUnit.MILLISECONDS);
     }
 
 }

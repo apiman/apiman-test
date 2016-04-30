@@ -53,6 +53,7 @@ public class SuiteProperties {
 
     // Additional configuration properties
     public static final String TEST_ACTION_DELAY_PROP = "apiman.test.delay";
+    public static final String TEST_SETUP_DELAY_PROP = "apiman.test.setup.delay";
     public static final String TEST_JS_TIMEOUT_PROP = "apiman.test.js.timeout";
 
     // Tools binding address properties

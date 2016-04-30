@@ -16,16 +16,22 @@
 
 package io.apiman.test.integration.runner;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.runner.handlers.FieldAnnotationHandler;
 
 import java.util.List;
 
 import org.junit.runners.model.Statement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author jcechace
  */
 public class RunApimanInitAnnotations extends Statement {
+
+    private static final Logger LOG = LoggerFactory.getLogger(RunApimanInitAnnotations.class);
+
     private final Statement next;
 
     private final List<FieldAnnotationHandler> chain;
@@ -43,9 +49,11 @@ public class RunApimanInitAnnotations extends Statement {
 
     @Override
     public void evaluate() throws Throwable {
+        LOG.info("Starting apiman setup");
         for (FieldAnnotationHandler handler : chain) {
             handler.process(!skipStatic, !skipInstance);
         }
+        Suite.waitForSetup();
         next.evaluate();
     }
 }

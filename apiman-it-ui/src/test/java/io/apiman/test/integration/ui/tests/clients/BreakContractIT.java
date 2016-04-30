@@ -21,6 +21,7 @@ import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 import static com.codeborne.selenide.Condition.visible;
 import static org.junit.Assert.assertEquals;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.ui.support.selenide.base.clients.AbstractBreakContractUITest;
@@ -72,7 +73,7 @@ public class BreakContractIT extends AbstractBreakContractUITest {
         openPage(unregisteredClientVersion);
         page.breakAllContracts();
 
-        TimeUnit.SECONDS.sleep(Integer.valueOf(SuiteProperties.getProperty("apiman.test.delay")));
+        Suite.waitForAction();
         List<ContractSummaryBean> contracts = getContracts(unregisteredClientVersion);
         assertEquals("Unexpected number of contracts", 0, contracts.size());
     }
