@@ -24,7 +24,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.test.failure.ignore>true</maven.test.failure.ignore>
     <!-- Dependency version properties -->
-    <version.apiman>1.2.5-SNAPSHOT</version.apiman>
+    <version.apiman>1.2.5.Final</version.apiman>
     <version.junit>4.12</version.junit>
     <version.log4j>1.2.17</version.log4j>
     <version.slf4j>1.7.12</version.slf4j>
