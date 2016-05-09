@@ -60,6 +60,10 @@ public class Suite {
         }
     }
 
+    public static void waitFor(String message) {
+        long amount = Long.parseLong(getProperty(TEST_ACTION_DELAY_PROP));
+        waitFor(amount, message);
+    }
     public static void waitFor(long amount) {
         waitFor(amount, "Waiting %d milliseconds for things to happen...");
     }

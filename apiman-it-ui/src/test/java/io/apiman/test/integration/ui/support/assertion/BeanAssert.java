@@ -20,6 +20,7 @@ import static io.apiman.test.integration.runner.RestAssuredUtils.givenManager;
 
 import static org.hamcrest.Matchers.equalTo;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.runner.restclients.VersionRestClient;
 import io.apiman.manager.api.beans.apis.ApiBean;
@@ -149,7 +150,7 @@ public class BeanAssert {
     }
 
     public static void assertPolicyPresent(VersionRestClient<?> client, String policyDefId) {
-        Selenide.sleep(Integer.valueOf(SuiteProperties.getProperty("apiman.test.delay")) * 1000);
+        Suite.waitFor("Waiting %d milliseconds before asserting policy");
         boolean containsType = client.policies().containsType(policyDefId);
         Assert.assertTrue(String.format("Expected a policy of type %s to be present", policyDefId), containsType);
     }
