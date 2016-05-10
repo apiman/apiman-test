@@ -34,7 +34,7 @@
     <version.jaxrs>1.0.1.Final</version.jaxrs>
     <version.commons-lang3>3.4</version.commons-lang3>
     <version.commons-io>2.5</version.commons-io>
-    <version.restassred>2.4.1</version.restassred>
+    <version.restassred>2.9.0</version.restassred>
     <version.jackson>2.6.3</version.jackson>
     <version.jacoco>0.7.5.201505241946</version.jacoco>
     <!-- Build influencing properties -->
