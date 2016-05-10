@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package io.apiman.test.integration.rest.policies.ipwhitelist;
+package io.apiman.test.integration.rest.policies.iplist.blacklist;
 
-import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
 import io.apiman.test.integration.runner.annotations.entity.Plan;
@@ -36,7 +35,7 @@ import org.junit.experimental.categories.Category;
  * @author jkaspar
  */
 @Category({PolicyTest.class})
-public class WhitelistClientPolicyIT extends AbstractWhitelistPolicyIT {
+public class BlacklistClientPolicyIT extends AbstractBlacklistPolicyIT {
 
     @ManagedEndpoint
     @ApiVersion(api = "api", vPlans = {"plan"})
@@ -50,22 +49,13 @@ public class WhitelistClientPolicyIT extends AbstractWhitelistPolicyIT {
     private static ClientBean client;
 
     @ClientVersion(client = "client", unique = true, contracts = @Contract(vApi = "endpoint", vPlan = "plan"),
-        policies = @Policies(value = "iplist_white_001"))
+        policies = @Policies(value = "ip_list/blacklist"))
     @ApiKey(vApi = "endpoint", vPlan = "plan")
-    private static String loopbackApikey;
+    private static String apikey;
 
-    @ClientVersion(client = "client", unique = true, contracts = @Contract(vApi = "endpoint", vPlan = "plan"),
-        policies = @Policies(value = "iplist_white_002"))
-    @ApiKey(vApi = "endpoint", vPlan = "plan")
-    private static String proxyApikey;
 
     @Override
-    protected String getLoopbackResourceURL() {
-        return AbstractApiTest.addApiKeyParameter(endpoint, loopbackApikey);
-    }
-
-    @Override
-    protected String getProxyResourceURL() {
-        return AbstractApiTest.addApiKeyParameter(endpoint, proxyApikey);
+    protected String getResourceURL() {
+        return addApiKeyParameter(endpoint, apikey);
     }
 }

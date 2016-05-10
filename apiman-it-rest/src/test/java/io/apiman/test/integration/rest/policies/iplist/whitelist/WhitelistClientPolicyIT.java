@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.apiman.test.integration.rest.policies.ipblacklist;
+package io.apiman.test.integration.rest.policies.iplist.whitelist;
 
 import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
@@ -26,6 +26,7 @@ import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
+import io.apiman.manager.api.beans.clients.ClientBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
 import org.junit.experimental.categories.Category;
@@ -34,10 +35,10 @@ import org.junit.experimental.categories.Category;
  * @author jkaspar
  */
 @Category({PolicyTest.class})
-public class BlackWhiteListClientPolicyIT extends AbstractBlackWhiteListPolicyIT {
+public class WhitelistClientPolicyIT extends AbstractWhitelistPolicyIT {
 
     @ManagedEndpoint
-    @ApiVersion(api = "api", vPlans = "plan")
+    @ApiVersion(api = "api", vPlans = {"plan"})
     private static String endpoint;
 
     @Plan(organization = "organization")
@@ -45,13 +46,16 @@ public class BlackWhiteListClientPolicyIT extends AbstractBlackWhiteListPolicyIT
     private static PlanBean plan;
 
     @Client(organization = "organization")
-    @ClientVersion(contracts = @Contract(vApi = "endpoint", vPlan = "plan"),
-        policies = @Policies(value = "iplist_black_white_001"))
+    private static ClientBean client;
+
+    @ClientVersion(client = "client", unique = true, contracts = @Contract(vApi = "endpoint", vPlan = "plan"),
+        policies = @Policies(value = "ip_list/whitelist"))
     @ApiKey(vApi = "endpoint", vPlan = "plan")
-    private static String apiKey;
+    private static String apikey;
+
 
     @Override
     protected String getResourceURL() {
-        return addApiKeyParameter(endpoint, apiKey);
+        return addApiKeyParameter(endpoint, apikey);
     }
 }

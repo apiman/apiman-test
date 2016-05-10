@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.apiman.test.integration.rest.policies.ipblacklist;
+package io.apiman.test.integration.rest.policies.iplist.blacklist;
 
-import io.apiman.test.integration.rest.policies.AbstractIPPolicyIT;
+import io.apiman.test.integration.rest.policies.iplist.AbstractIPPolicyIT;
 
 import org.junit.Test;
 
@@ -25,27 +25,16 @@ import org.junit.Test;
  */
 public abstract class AbstractBlacklistPolicyIT extends AbstractIPPolicyIT {
 
-    protected abstract String getLoopbackResourceURL();
-
-    protected abstract String getProxyResourceURL();
+    protected abstract String getResourceURL();
 
     @Test
-    public void shouldPassWhenGetRequestToProxyFromLoopback() {
-        getRequest(getProxyResourceURL(), 200);
+    public void shouldPassOnRequestFromNonListedIP() {
+        getProxiedRequest(getResourceURL(), 200);
     }
 
     @Test
-    public void shouldFailWhenGetRequestToLoopbackFromLoopback() {
-        getRequest(getLoopbackResourceURL(), 500);
+    public void shouldFailOnRequestFromListedIP() {
+        getRequest(getResourceURL(), 500);
     }
 
-    @Test
-    public void shouldPassWhenGetRequestToProxyFromProxy() {
-        getProxiedRequest(getLoopbackResourceURL(), 200);
-    }
-
-    @Test
-    public void shouldFailWhenGetRequestToProxyFromProxy() {
-        getProxiedRequest(getProxyResourceURL(), 500);
-    }
 }

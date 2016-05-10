@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package io.apiman.test.integration.rest.policies;
+package io.apiman.test.integration.rest.policies.iplist;
 
 import static io.apiman.test.integration.SuiteProperties.TOOL_PROXY_ADDRESS_PROP;
 import static io.apiman.test.integration.SuiteProperties.TOOL_PROXY_PORT_PROP;
+import static io.apiman.test.integration.SuiteProperties.TOOL_PROXY_START_PROP;
 import static io.apiman.test.integration.runner.RestAssuredUtils.given;
 
 import io.apiman.test.integration.SuiteProperties;
@@ -44,6 +45,7 @@ public abstract class AbstractIPPolicyIT extends AbstractApiTest {
 
     // Proxy server
     private static String PROXY_PORT = SuiteProperties.getProperty(TOOL_PROXY_PORT_PROP);
+    private static String PROXY_START = SuiteProperties.getProperty(TOOL_PROXY_START_PROP);
     private static String PROXY_ADDRESS = SuiteProperties.getProperty(TOOL_PROXY_ADDRESS_PROP);
 
     private static HttpProxyServer proxy;
@@ -51,10 +53,12 @@ public abstract class AbstractIPPolicyIT extends AbstractApiTest {
 
     @BeforeClass
     public static void startHttpProxy() throws UnknownHostException {
-        proxy = DefaultHttpProxyServer.bootstrap()
-            .withNetworkInterface(new InetSocketAddress(InetAddress.getByName(PROXY_ADDRESS), 0))
-            .withAddress(new InetSocketAddress(InetAddress.getLoopbackAddress(), Integer.parseInt(PROXY_PORT)))
-            .start();
+        if ("true".equalsIgnoreCase(PROXY_START)) {
+            proxy = DefaultHttpProxyServer.bootstrap()
+                .withNetworkInterface(new InetSocketAddress(InetAddress.getByName(PROXY_ADDRESS), 0))
+                .withAddress(new InetSocketAddress(InetAddress.getLoopbackAddress(), Integer.parseInt(PROXY_PORT)))
+                .start();
+        }
     }
 
     @AfterClass
@@ -66,7 +70,7 @@ public abstract class AbstractIPPolicyIT extends AbstractApiTest {
 
     public void getProxiedRequest(String url, int statusCode) {
         given().
-            proxy(Integer.parseInt(PROXY_PORT)).
+            proxy(PROXY_ADDRESS, Integer.parseInt(PROXY_PORT)).
         when().
             get(url).
         then().

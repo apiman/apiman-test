@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.apiman.test.integration.rest.policies.ipwhitelist;
+package io.apiman.test.integration.rest.policies.iplist.combined;
 
 import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.entity.Client;
@@ -26,7 +26,6 @@ import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
-import io.apiman.manager.api.beans.clients.ClientBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 
 import org.junit.experimental.categories.Category;
@@ -35,45 +34,23 @@ import org.junit.experimental.categories.Category;
  * @author jkaspar
  */
 @Category({PolicyTest.class})
-public class WhitelistPlanPolicyIT extends AbstractWhitelistPolicyIT {
+public class BlackWhiteListPlanPolicyIT extends AbstractBlackWhiteListPolicyIT {
 
     @ManagedEndpoint
-    @ApiVersion(api = "api", vPlans = {"loopbackPlan", "proxyPlan"})
+    @ApiVersion(api = "api", vPlans = "plan")
     private static String endpoint;
 
     @Plan(organization = "organization")
-    @PlanVersion(policies = @Policies(value = "iplist_white_001"))
-    private static PlanBean loopbackPlan;
-
-    @Plan(organization = "organization")
-    @PlanVersion(policies = @Policies(value = "iplist_white_002"))
-    private static PlanBean proxyPlan;
+    @PlanVersion(policies = @Policies(value = "ip_list/combined"))
+    private static PlanBean plan;
 
     @Client(organization = "organization")
-    @ClientVersion(contracts = {
-        @Contract(vApi = "endpoint", vPlan = "loopbackPlan")
-    })
-    private static ClientBean loopbackClient;
-
-    @Client(organization = "organization")
-    @ClientVersion(contracts = {
-        @Contract(vApi = "endpoint", vPlan = "proxyPlan")
-    })
-    private static ClientBean proxyClient;
-
-    @ApiKey(vPlan = "loopbackPlan", vApi = "endpoint", vClient = "loopbackClient")
-    private static String loopbackApikey;
-
-    @ApiKey(vPlan = "proxyPlan", vApi = "endpoint", vClient = "proxyClient")
-    private static String proxyApikey;
+    @ClientVersion(contracts = @Contract(vApi = "endpoint", vPlan = "plan"))
+    @ApiKey(vApi = "endpoint", vPlan = "plan")
+    private static String apiKey;
 
     @Override
-    protected String getLoopbackResourceURL() {
-        return addApiKeyParameter(endpoint, loopbackApikey);
-    }
-
-    @Override
-    protected String getProxyResourceURL() {
-        return addApiKeyParameter(endpoint, proxyApikey);
+    protected String getResourceURL() {
+        return addApiKeyParameter(endpoint, apiKey);
     }
 }

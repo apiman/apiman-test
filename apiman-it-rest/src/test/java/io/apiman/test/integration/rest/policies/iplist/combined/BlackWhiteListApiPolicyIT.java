@@ -14,35 +14,27 @@
  * limitations under the License.
  */
 
-package io.apiman.test.integration.rest.policies.ipwhitelist;
+package io.apiman.test.integration.rest.policies.iplist.combined;
 
 import io.apiman.test.integration.categories.PolicyTest;
-import io.apiman.test.integration.rest.policies.AbstractIPPolicyIT;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 
-import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 /**
  * @author jkaspar
  */
 @Category({PolicyTest.class})
-public class WildcardWhitelistApiPolicyIT extends AbstractIPPolicyIT {
+public class BlackWhiteListApiPolicyIT extends AbstractBlackWhiteListPolicyIT {
 
     @ManagedEndpoint
-    @ApiVersion(version = "1.0", api = "api", policies = @Policies(value = "iplist_white_003"))
-    public static String loopbackEndpoint;
+    @ApiVersion(api = "api", policies = @Policies(value = "ip_list/combined"))
+    private static String endpoint;
 
-    @Test
-    public void shouldPassWhenGetRequestOnLoopbackWildcardFromLoopback() {
-        getRequest(loopbackEndpoint, 200);
+    @Override
+    protected String getResourceURL() {
+        return endpoint;
     }
-
-    @Test
-    public void shouldFailWhenGetRequestOnLoopbackWildcardFromProxy() {
-        getProxiedRequest(loopbackEndpoint, 500);
-    }
-
 }

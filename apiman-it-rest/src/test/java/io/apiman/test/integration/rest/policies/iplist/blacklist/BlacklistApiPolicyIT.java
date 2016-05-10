@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.apiman.test.integration.rest.policies.ipblacklist;
+package io.apiman.test.integration.rest.policies.iplist.blacklist;
 
 import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
@@ -27,14 +27,15 @@ import org.junit.experimental.categories.Category;
  * @author jkaspar
  */
 @Category({PolicyTest.class})
-public class BlackWhiteListApiPolicyIT extends AbstractBlackWhiteListPolicyIT {
+public class BlacklistApiPolicyIT extends AbstractBlacklistPolicyIT {
 
     @ManagedEndpoint
-    @ApiVersion(api = "api", policies = @Policies(value = "iplist_black_white_001"))
+    @ApiVersion(version = "1.0", api = "api", policies = @Policies(value = "ip_list/blacklist"))
     private static String endpoint;
 
     @Override
     protected String getResourceURL() {
         return endpoint;
     }
+
 }

@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-package io.apiman.test.integration.rest.policies.ipblacklist;
+package io.apiman.test.integration.rest.policies.iplist.whitelist;
 
 import io.apiman.test.integration.categories.PolicyTest;
-import io.apiman.test.integration.runner.annotations.entity.Client;
-import io.apiman.test.integration.runner.annotations.entity.Plan;
-import io.apiman.test.integration.runner.annotations.misc.ApiKey;
-import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
-import io.apiman.test.integration.runner.annotations.version.ClientVersion;
-import io.apiman.test.integration.runner.annotations.version.PlanVersion;
-import io.apiman.manager.api.beans.plans.PlanBean;
 
 import org.junit.experimental.categories.Category;
 
@@ -34,23 +27,15 @@ import org.junit.experimental.categories.Category;
  * @author jkaspar
  */
 @Category({PolicyTest.class})
-public class BlackWhiteListPlanPolicyIT extends AbstractBlackWhiteListPolicyIT {
+public class WhitelistApiPolicyIT extends AbstractWhitelistPolicyIT {
 
     @ManagedEndpoint
-    @ApiVersion(api = "api", vPlans = "plan")
+    @ApiVersion(version = "1.0", api = "api", policies = @Policies(value = "ip_list/whitelist"))
     private static String endpoint;
-
-    @Plan(organization = "organization")
-    @PlanVersion(policies = @Policies(value = "iplist_black_white_001"))
-    private static PlanBean plan;
-
-    @Client(organization = "organization")
-    @ClientVersion(contracts = @Contract(vApi = "endpoint", vPlan = "plan"))
-    @ApiKey(vApi = "endpoint", vPlan = "plan")
-    private static String apiKey;
 
     @Override
     protected String getResourceURL() {
-        return addApiKeyParameter(endpoint, apiKey);
+        return endpoint;
     }
+
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.apiman.test.integration.rest.policies.ipblacklist;
+package io.apiman.test.integration.rest.policies.iplist.blacklist;
 
 import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.categories.PolicyTest;
@@ -39,42 +39,23 @@ import org.junit.experimental.categories.Category;
 public class BlacklistPlanPolicyIT extends AbstractBlacklistPolicyIT {
 
     @ManagedEndpoint
-    @ApiVersion(api = "api", vPlans = {"loopbackPlan", "proxyPlan"})
+    @ApiVersion(api = "api", vPlans = {"plan"})
     private static String endpoint;
 
     @Plan(organization = "organization")
-    @PlanVersion(policies = @Policies(value = "iplist_black_001"))
-    private static PlanBean loopbackPlan;
-
-    @Plan(organization = "organization")
-    @PlanVersion(policies = @Policies(value = "iplist_black_002"))
-    private static PlanBean proxyPlan;
+    @PlanVersion(policies = @Policies(value = "ip_list/blacklist"))
+    private static PlanBean plan;
 
     @Client(organization = "organization")
-    @ClientVersion(contracts = {
-        @Contract(vApi = "endpoint", vPlan = "loopbackPlan")
-    })
-    private static ClientBean loopbackClient;
+    @ClientVersion(contracts = { @Contract(vApi = "endpoint", vPlan = "plan") })
+    private static ClientBean client;
 
-    @Client(organization = "organization")
-    @ClientVersion(contracts = {
-        @Contract(vApi = "endpoint", vPlan = "proxyPlan")
-    })
-    private static ClientBean proxyClient;
-
-    @ApiKey(vPlan = "loopbackPlan", vApi = "endpoint", vClient = "loopbackClient")
-    private static String loopbackApikey;
-
-    @ApiKey(vPlan = "proxyPlan", vApi = "endpoint", vClient = "proxyClient")
-    private static String proxyApikey;
+    @ApiKey(vPlan = "loopbackPlan", vApi = "endpoint", vClient = "client")
+    private static String apiKey;
 
     @Override
-    protected String getLoopbackResourceURL() {
-        return AbstractApiTest.addApiKeyParameter(endpoint, loopbackApikey);
+    protected String getResourceURL() {
+        return AbstractApiTest.addApiKeyParameter(endpoint, apiKey);
     }
 
-    @Override
-    protected String getProxyResourceURL() {
-        return AbstractApiTest.addApiKeyParameter(endpoint, proxyApikey);
-    }
 }

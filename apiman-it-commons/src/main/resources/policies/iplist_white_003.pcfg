@@ -1,5 +1,0 @@
-IPWhitelistPolicy
----
-{
-"ipList" : ["127.*.*.*"]
-}

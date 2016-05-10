@@ -1,5 +1,0 @@
-IPWhitelistPolicy
----
-{
-"ipList" : ["${apiman.test.proxy.address}"]
-}

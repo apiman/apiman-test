@@ -57,6 +57,7 @@ public class SuiteProperties {
     public static final String TEST_JS_TIMEOUT_PROP = "apiman.test.js.timeout";
 
     // Tools binding address properties
+    public static final String TOOL_PROXY_START_PROP = "apiman.test.proxy.start";
     public static final String TOOL_PROXY_ADDRESS_PROP = "apiman.test.proxy.address";
     public static final String TOOL_PROXY_PORT_PROP = "apiman.test.proxy.port";
     public static final String TOOL_KC_ADDRESS_PROP = "apiman.test.kc.address";
