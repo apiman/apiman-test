@@ -16,19 +16,14 @@
 
 package io.apiman.test.integration.rest.plugins.policies.simpleheader;
 
-import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 import static io.apiman.test.integration.runner.RestAssuredUtils.when;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertThat;
 
 import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
 
-import com.jayway.restassured.path.json.JsonPath;
-import org.junit.Before;
 import org.junit.Test;
 
 /**

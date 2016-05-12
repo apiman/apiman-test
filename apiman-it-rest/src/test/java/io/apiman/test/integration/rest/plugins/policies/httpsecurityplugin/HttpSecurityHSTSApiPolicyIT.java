@@ -17,13 +17,18 @@
 package io.apiman.test.integration.rest.plugins.policies.httpsecurityplugin;
 
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
+import io.apiman.test.integration.categories.PluginTest;
+import io.apiman.test.integration.categories.PolicyTest;
 import io.apiman.test.integration.runner.annotations.misc.ManagedEndpoint;
 import io.apiman.test.integration.runner.annotations.misc.Policies;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 
+import org.junit.experimental.categories.Category;
+
 /**
  * Created by jsmolar.
  */
+@Category({PolicyTest.class, PluginTest.class})
 public class HttpSecurityHSTSApiPolicyIT extends AbstractHttpSecurityHSTSPolicyIT{
 
     @ApiVersion(api = "api",
