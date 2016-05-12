@@ -47,23 +47,4 @@ public class BreakContractIT extends AbstractBreakContractTest {
         List<ContractSummaryBean> contracts = getContracts(unregisteredClientVersion);
         assertEquals("Unexpected number of contracts", 0, contracts.size());
     }
-
-    // TODO: Should we remove this test?
-    @Test
-    @Ignore
-    public void canNotBreakContractOnRegisteredClientVersion() throws Exception {
-        breakContract(registeredContractBean, noExpectations);
-        getContract(registeredContractBean, expectedStatusCode(200));
-    }
-
-    // TODO: Should we remove this test?
-    @Test
-    @Ignore
-    public void canNotBreakAllContractsOnRegisteredClientVersion() throws Exception {
-        List<ContractSummaryBean> contractsBefore = getContracts(registeredClientVersion);
-        breakAllContracts(registeredClientVersion, noExpectations);
-        List<ContractSummaryBean> contractsAfter = getContracts(registeredClientVersion);
-
-        assertEquals("Unexpected number of contracts", contractsBefore.size(), contractsAfter.size());
-    }
 }

@@ -18,6 +18,7 @@ package io.apiman.test.integration.base.clients;
 
 import static io.apiman.test.integration.runner.RestAssuredUtils.givenManager;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.base.AbstractClientTest;
 import io.apiman.test.integration.runner.ApimanRunner;
 import io.apiman.test.integration.runner.annotations.misc.Contract;
@@ -141,6 +142,8 @@ public class AbstractBreakContractTest extends AbstractClientTest {
             delete(CONTRACT_PATH, orgId, clientId, clientVersion, contractId).
         then().
             spec(expectations);
+
+        Suite.waitFor("waiting %d milliseconds for contracts to be deleted");
     }
 
     /**
@@ -158,6 +161,8 @@ public class AbstractBreakContractTest extends AbstractClientTest {
             delete(CONTRACTS_PATH, org, client, version).
         then().
             spec(expectations);
+
+        Suite.waitFor("waiting %d milliseconds for contracts to be deleted");
     }
 
     /**
