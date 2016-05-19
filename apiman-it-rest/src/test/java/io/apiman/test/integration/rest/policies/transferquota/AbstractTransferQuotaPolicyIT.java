@@ -72,10 +72,14 @@ public abstract class AbstractTransferQuotaPolicyIT extends AbstractApiTest {
         TimeUnit.SECONDS.sleep(waitFor);
     }
 
+
+
     @Test
     public void shouldHaveValidResponseHeadersWithLimitInfo() {
         for (int i = 1; i <= LIMIT; i++) {
-            Response response = useUpNBytes(1);
+            useUpNBytes(1);
+
+            Response response = withGateway().get(getResourceURL());
 
             response.then().
                 header(HEADER_LIMIT, String.valueOf(LIMIT)).
