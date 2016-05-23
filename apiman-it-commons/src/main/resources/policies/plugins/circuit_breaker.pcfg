@@ -1,0 +1,9 @@
+circuit-breaker-policy
+---
+{
+    "window" : 60,
+    "limit" : ${limit},
+    "reset" : ${reset},
+    "errorCodes" : ["${error}"],
+    "failureCode" : ${failure}
+}

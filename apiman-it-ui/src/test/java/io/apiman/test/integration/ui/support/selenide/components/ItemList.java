@@ -27,6 +27,7 @@ import org.openqa.selenium.By;
 
 /**
  * Component representing list of items used on policy configuration pages.
+ *
  * @author jkaspar
  */
 public class ItemList<P extends AbstractPage> {
@@ -35,8 +36,7 @@ public class ItemList<P extends AbstractPage> {
     protected SelenideElement root;
 
     /**
-     *
-     * @param root root element
+     * @param root           root element
      * @param thisPageObject this page object
      */
     public ItemList(SelenideElement root, P thisPageObject) {
@@ -45,8 +45,7 @@ public class ItemList<P extends AbstractPage> {
     }
 
     /**
-     *
-     * @param rootSelector element selector for root element
+     * @param rootSelector   element selector for root element
      * @param thisPageObject this page object
      */
     public ItemList(By rootSelector, P thisPageObject) {
@@ -82,5 +81,14 @@ public class ItemList<P extends AbstractPage> {
 
     public ElementsCollection listedItems() {
         return root.findAll("div[data-schematype]").filter(Condition.visible);
+    }
+
+    public SelenideElement deleteItemButton(int position) {
+        return root.find("button[title='Delete item'][data-i='" + position + "']");
+    }
+
+    public P deleteItem(int position) {
+        deleteItemButton(position).click();
+        return thisPageObject;
     }
 }
