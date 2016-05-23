@@ -16,14 +16,13 @@
 
 package io.apiman.test.integration.ui.support.selenide.components;
 
-import static com.codeborne.selenide.Selenide.$;
-
-import io.apiman.test.integration.ui.support.selenide.layouts.AbstractPage;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.apiman.test.integration.ui.support.selenide.layouts.AbstractPage;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Component representing list of items used on policy configuration pages.
@@ -82,5 +81,14 @@ public class ItemList<P extends AbstractPage> {
 
     public ElementsCollection listedItems() {
         return root.findAll("div[data-schematype]").filter(Condition.visible);
+    }
+
+    public SelenideElement deleteItemButton(int position){
+        return root.find("button[title='Delete item'][data-i='" + position + "']");
+    }
+
+    public P deleteItem(int position){
+        deleteItemButton(position).click();
+        return thisPageObject;
     }
 }
