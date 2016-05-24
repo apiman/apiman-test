@@ -2,6 +2,7 @@ FROM jboss/base
 MAINTAINER Miroslav Jaros <mjaros@redhat.com>
 
 USER root
+
 ADD apacheds-2.0.0-M20-x86_64.rpm  /tmp/apacheds.rpm
 COPY wrapper/* /opt/wrapper/
 ADD add_content.ldif /opt/add_content.ldif
