@@ -19,9 +19,10 @@ package io.apiman.test.integration.ui.support.assertion;
 import static io.apiman.test.integration.runner.RestAssuredUtils.givenManager;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 
 import io.apiman.test.integration.Suite;
-import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.runner.restclients.VersionRestClient;
 import io.apiman.manager.api.beans.apis.ApiBean;
 import io.apiman.manager.api.beans.apis.ApiVersionBean;
@@ -32,7 +33,6 @@ import io.apiman.manager.api.beans.summary.PolicySummaryBean;
 
 import java.util.List;
 
-import com.codeborne.selenide.Selenide;
 import com.jayway.restassured.builder.ResponseSpecBuilder;
 import com.jayway.restassured.specification.ResponseSpecification;
 import org.hamcrest.Matchers;
@@ -58,6 +58,23 @@ public class BeanAssert {
         then().
             body("name", equalTo(expected.getName())).
             body("description", equalTo(expected.getDescription()));
+    }
+
+    /**
+     * Asserts that the given bean does not matches one inside apiman.
+     * This method does not have to cross check all fields.
+     *
+     *  Currently checked fields: name, description
+     *
+     * @param expected expected bean
+     */
+    public static void assertOrganizationNotPresent(OrganizationBean expected){
+        final String path = "/organizations/{org}";
+        givenManager().
+            get(path, expected.getName()).
+        then().
+            body("name", is(isEmptyOrNullString())).
+            body("description", is(isEmptyOrNullString()));
     }
 
     /**
