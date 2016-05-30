@@ -50,7 +50,7 @@ public class XmlToJsonIT extends AbstractTransformationIT {
     private String endpointXmlToJson;
 
     @Test
-    public void shouldPassWhenCanTransformXmlToJson() throws IOException {
+    public void canTransformXmlToJson() throws IOException {
         TestData client = xmlToTestDataObject(getXmlFromTestService(DeployedServices.XML_DATA));
         TestDataRoot server = jsonToTestDataRootObject(getJsonFromGateway(endpointXmlToJson));
 
