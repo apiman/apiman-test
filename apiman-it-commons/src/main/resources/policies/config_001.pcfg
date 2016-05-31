@@ -1,6 +1,0 @@
-config-policy
----
-{
-"requestHeader" : "request-header",
-"responseHeader" : "response-header"
-}
