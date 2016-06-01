@@ -35,6 +35,8 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sun.org.apache.xerces.internal.util.URI;
+
 /**
  * @author jcechace
  */
@@ -70,8 +72,13 @@ public class ApiVersionAnnotationHandler extends FieldAnnotationHandler<ApiVersi
     private void configureEndpoint(ApiVersion annotation, Field field, ApiVersions client) {
         Endpoint endpoint = annotation.endpoint();
         String value = endpoint.value();
-        String path = value.startsWith("/") ? value.substring(1) : value;
-        String url = Suite.getDeploymentUrl() + "/" + path;
+        String url;
+        if (value.startsWith("http://") || value.startsWith("https://")) {
+            url = value;
+        } else {
+            String path = value.startsWith("/") ? value.substring(1) : value;
+            url = Suite.getDeploymentUrl() + "/" + path;
+        }
 
         UpdateApiVersionBean updateBean = new UpdateApiVersionBean();
         updateBean.setEndpoint(url);
