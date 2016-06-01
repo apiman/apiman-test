@@ -16,9 +16,7 @@
 
 package io.apiman.test.integration.rest.plugins.policies.jsonpplugin;
 
-import static io.apiman.test.integration.runner.RestAssuredUtils.given;
-import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
-import static io.apiman.test.integration.runner.RestAssuredUtils.when;
+import static io.apiman.test.integration.runner.RestAssuredUtils.*;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -44,7 +42,7 @@ public abstract class AbstractJSONPPolicyIT extends AbstractApiTest {
 
     @Before
     public void setUp() throws Exception {
-        echoApiPureResponse = givenGateway().get(getApiEndpoint()).getBody().print();
+        echoApiPureResponse = withTestServices().get(getApiEndpoint()).getBody().asString();
     }
 
     @Test
@@ -57,12 +55,11 @@ public abstract class AbstractJSONPPolicyIT extends AbstractApiTest {
 
     @Test
     public void shouldNotChangeResponseBodyLengthWhenCallbackIsNotSet() throws Exception {
-        Integer expectedLength = echoApiPureResponse.length();
-
+        int expectedLength = echoApiPureResponse.length();
         when().
             get(getResourceURL()).
         then().
-            header("Content-Length", equalTo(expectedLength.toString()));
+            header("Content-Length", Integer::parseInt, equalTo(expectedLength  ));
     }
 
     @Test
