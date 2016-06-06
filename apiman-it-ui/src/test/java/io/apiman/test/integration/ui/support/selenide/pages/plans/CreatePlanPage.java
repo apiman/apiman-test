@@ -24,7 +24,7 @@ import io.apiman.test.integration.ui.support.selenide.pages.plans.detail.PlanDet
 /**
  * @author ldimaggi
  */
-@PageLocation("/apimanui/api-manager/new-plan")
+@PageLocation("/api-manager/new-plan")
 public class CreatePlanPage extends AbstractPage<CreatePlanPage> implements
     CreateChildEntityForm<CreatePlanPage> {
 

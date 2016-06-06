@@ -24,7 +24,7 @@ import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiDetai
 /**
  * @author jcechace
  */
-@PageLocation("/apimanui/api-manager/new-api")
+@PageLocation("/api-manager/new-api")
 public class CreateApiPage extends AbstractPage<CreateApiPage> implements
     CreateChildEntityForm<CreateApiPage> {
 

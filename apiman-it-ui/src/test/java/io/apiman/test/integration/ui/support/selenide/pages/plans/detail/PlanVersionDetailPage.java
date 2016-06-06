@@ -23,6 +23,6 @@ import io.apiman.test.integration.ui.support.selenide.PageLocation;
  * Created by Jarek Kaspar, ldimaggi
  */
 @Layout
-@PageLocation("/apimanui/api-manager/orgs/{0}/plans/{1}/{2}")
+@PageLocation("/api-manager/orgs/{0}/plans/{1}/{2}")
 public class PlanVersionDetailPage extends AbstractPlanDetailPage<PlanVersionDetailPage> {
 }

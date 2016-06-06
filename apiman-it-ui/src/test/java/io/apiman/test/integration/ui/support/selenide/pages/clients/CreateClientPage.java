@@ -24,7 +24,7 @@ import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.Clien
 /**
  * @author jcechace
  */
-@PageLocation("/apimanui/api-manager/new-client")
+@PageLocation("/api-manager/new-client")
 public class CreateClientPage extends AbstractPage<CreateClientPage> implements
     CreateChildEntityForm<CreateClientPage> {
 

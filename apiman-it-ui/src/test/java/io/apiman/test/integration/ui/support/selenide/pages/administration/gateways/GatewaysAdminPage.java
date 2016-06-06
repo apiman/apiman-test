@@ -27,7 +27,7 @@ import com.codeborne.selenide.SelenideElement;
 /**
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/admin/gateways")
+@PageLocation("/api-manager/admin/gateways")
 public class GatewaysAdminPage extends AdminPage {
 
     public SelenideElement newGatewayButton() {

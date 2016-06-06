@@ -21,7 +21,7 @@ import io.apiman.test.integration.ui.support.selenide.PageLocation;
 /**
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/plans/{1}/{2}/activity")
+@PageLocation("/api-manager/orgs/{0}/plans/{1}/{2}/activity")
 public class PlanActivityDetailPage extends AbstractPlanDetailPage<PlanActivityDetailPage> {
     // TODO: impl this class
 }

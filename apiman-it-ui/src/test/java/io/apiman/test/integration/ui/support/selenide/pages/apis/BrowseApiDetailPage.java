@@ -32,7 +32,7 @@ import org.openqa.selenium.By;
 /**
  * @author jcechace
  */
-@PageLocation("/apimanui/api-manager/browse/orgs/{0}/{1}/{2}")
+@PageLocation("/api-manager/browse/orgs/{0}/{1}/{2}")
 public class BrowseApiDetailPage extends AbstractPage implements RowEntries {
 
     /**

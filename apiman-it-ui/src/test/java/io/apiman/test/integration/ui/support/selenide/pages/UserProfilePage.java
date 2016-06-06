@@ -27,7 +27,7 @@ import com.codeborne.selenide.SelenideElement;
 /**
  * Created by Jarek Kaspar
  */
-@PageLocation("/apimanui/api-manager/profile")
+@PageLocation("/api-manager/profile")
 public class UserProfilePage extends AbstractPage {
 
     /**

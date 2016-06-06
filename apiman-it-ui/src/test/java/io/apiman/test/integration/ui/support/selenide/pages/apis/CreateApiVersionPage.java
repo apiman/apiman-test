@@ -24,7 +24,7 @@ import io.apiman.test.integration.ui.support.selenide.pages.apis.detail.ApiDetai
 /**
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/apis/{1}/{2}/new-version")
+@PageLocation("/api-manager/orgs/{0}/apis/{1}/{2}/new-version")
 public class CreateApiVersionPage extends AbstractPage<CreateApiVersionPage> implements
     CreateEntityVersionForm<CreateApiVersionPage> {
 

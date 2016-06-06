@@ -25,7 +25,7 @@ import com.codeborne.selenide.SelenideElement;
 /**
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/errors/{0}")
+@PageLocation("/api-manager/errors/{0}")
 public class ErrorPage {
 
     /**

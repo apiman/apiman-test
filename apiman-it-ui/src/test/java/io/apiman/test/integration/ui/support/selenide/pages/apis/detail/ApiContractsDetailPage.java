@@ -27,7 +27,7 @@ import com.codeborne.selenide.SelenideElement;
 /**
  * Created by Jarek Kaspar
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/apis/{1}/{2}/contracts")
+@PageLocation("/api-manager/orgs/{0}/apis/{1}/{2}/contracts")
 public class ApiContractsDetailPage extends AbstractApiDetailPage<ApiContractsDetailPage> {
 
     /**

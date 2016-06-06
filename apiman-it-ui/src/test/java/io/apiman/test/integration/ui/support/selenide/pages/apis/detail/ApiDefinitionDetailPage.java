@@ -21,7 +21,7 @@ import io.apiman.test.integration.ui.support.selenide.PageLocation;
 /**
  * Created by Jarek Kaspar
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/apis/{1}/{2}/def")
+@PageLocation("/api-manager/orgs/{0}/apis/{1}/{2}/def")
 public class ApiDefinitionDetailPage extends AbstractApiDetailPage<ApiDefinitionDetailPage> {
     // TODO: implement this class
 }

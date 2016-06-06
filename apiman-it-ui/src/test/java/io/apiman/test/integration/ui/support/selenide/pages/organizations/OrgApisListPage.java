@@ -28,7 +28,7 @@ import com.codeborne.selenide.SelenideElement;
 /**
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/apis")
+@PageLocation("/api-manager/orgs/{0}/apis")
 public class OrgApisListPage extends OrgEntitiesListPage<OrgApisListPage> {
 
     /**

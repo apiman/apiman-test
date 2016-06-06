@@ -20,6 +20,7 @@ import static io.apiman.test.integration.SuiteProperties.TEST_JS_TIMEOUT_PROP;
 
 import static com.codeborne.selenide.Selenide.page;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.SuiteProperties;
 import io.apiman.test.integration.ui.support.selenide.pages.LoginPage;
 
@@ -47,7 +48,14 @@ public class SelenideUtils {
             );
         }
         PageLocation annotation = pageObjectClassClass.getAnnotation(PageLocation.class);
-        return MessageFormat.format(annotation.value(), params);
+
+        String path = MessageFormat.format(annotation.value(), params);
+
+        if (path.startsWith("http") || path.startsWith("https")) {
+            return path;
+        } else {
+            return Suite.getManagerUIUrl(path);
+        }
     }
 
     /**

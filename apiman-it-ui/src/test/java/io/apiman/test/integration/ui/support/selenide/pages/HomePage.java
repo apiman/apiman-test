@@ -35,7 +35,7 @@ import io.apiman.test.integration.ui.support.selenide.pages.users.UserOrgsListPa
  *
  * @author jcechace
  */
-@PageLocation("/apimanui/api-manager/dash")
+@PageLocation("/api-manager/dash")
 public class HomePage extends AbstractPage {
 
     // Organizations

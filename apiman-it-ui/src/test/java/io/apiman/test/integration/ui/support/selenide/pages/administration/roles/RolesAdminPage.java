@@ -30,7 +30,7 @@ import org.openqa.selenium.By;
 /**
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/admin/roles")
+@PageLocation("/api-manager/admin/roles")
 public class RolesAdminPage extends AdminPage<RolesAdminPage> implements
     FilterForm<RolesAdminPage>,
     RowEntries {

@@ -22,7 +22,7 @@ import io.apiman.test.integration.ui.support.selenide.components.EntityDetailPol
 /**
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/plans/{1}/{2}/policies")
+@PageLocation("/api-manager/orgs/{0}/plans/{1}/{2}/policies")
 public class PlanPoliciesDetailPage extends AbstractPlanDetailPage<PlanPoliciesDetailPage>
         implements EntityDetailPolicies<PlanPoliciesDetailPage> {
 

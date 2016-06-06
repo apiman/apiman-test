@@ -31,7 +31,7 @@ import com.codeborne.selenide.SelenideElement;
 /**
  * @author ldimaggi, jcechace
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/clients/{1}/{2}/apis")
+@PageLocation("/api-manager/orgs/{0}/clients/{1}/{2}/apis")
 public class ClientApisDetailPage extends AbstractClientDetailPage<ClientApisDetailPage>
         implements ModalDialog<ClientApisDetailPage> {
 

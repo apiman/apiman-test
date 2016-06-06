@@ -28,7 +28,7 @@ import org.openqa.selenium.By;
 /**
  * @author jkaspar, ldimaggi
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/new-member")
+@PageLocation("/api-manager/orgs/{0}/new-member")
 public class OrgNewMemberPage extends AbstractPage {
     
     /**

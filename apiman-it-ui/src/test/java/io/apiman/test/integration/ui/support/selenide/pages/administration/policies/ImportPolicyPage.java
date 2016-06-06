@@ -27,7 +27,7 @@ import com.codeborne.selenide.SelenideElement;
  *
  * @author jrumanov
  */
-@PageLocation("/apimanui/api-manager/import-policyDefs")
+@PageLocation("/api-manager/import-policyDefs")
 public class ImportPolicyPage {
 
     /**

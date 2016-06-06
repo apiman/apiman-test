@@ -28,7 +28,7 @@ import com.codeborne.selenide.SelenideElement;
  *
  * @author jrumanov
  */
-@PageLocation("/apimanui/api-manager/admin/policyDefs/{0}")
+@PageLocation("/api-manager/admin/policyDefs/{0}")
 public class EditPolicyPage implements UpdateFormButtons {
 
     /**

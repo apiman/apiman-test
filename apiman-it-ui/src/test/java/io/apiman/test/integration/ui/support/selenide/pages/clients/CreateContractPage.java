@@ -35,7 +35,7 @@ import com.codeborne.selenide.SelenideElement;
 /**
  * @author ldimaggi
  */
-@PageLocation("/apimanui/api-manager/new-contract")
+@PageLocation("/api-manager/new-contract")
 public class CreateContractPage extends AbstractPage<CreateContractPage>
     implements CreateFormButtons {
 

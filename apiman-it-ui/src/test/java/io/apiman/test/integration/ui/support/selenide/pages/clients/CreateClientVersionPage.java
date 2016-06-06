@@ -24,7 +24,7 @@ import io.apiman.test.integration.ui.support.selenide.pages.clients.detail.Clien
 /**
  * @author jrumanov
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/clients/{1}/{2}/new-version")
+@PageLocation("/api-manager/orgs/{0}/clients/{1}/{2}/new-version")
 public class CreateClientVersionPage extends AbstractPage<CreateClientVersionPage> implements
     CreateEntityVersionForm<CreateClientVersionPage> {
 

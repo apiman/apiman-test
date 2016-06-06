@@ -24,7 +24,7 @@ import io.apiman.test.integration.ui.support.selenide.layouts.AbstractPage;
 /**
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/new-role")
+@PageLocation("/api-manager/new-role")
 public class CreateRolePage extends AbstractPage<CreateRolePage> implements
     CreateEntityForm<CreateRolePage>,
     RoleCheckboxes<CreateRolePage> {

@@ -25,7 +25,7 @@ import io.apiman.test.integration.ui.support.selenide.pages.plans.detail.PlanDet
 /**
  * Created by Jarek Kaspar
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/plans/{1}/{2}/new-version")
+@PageLocation("/api-manager/orgs/{0}/plans/{1}/{2}/new-version")
 public class CreatePlanVersionPage extends AbstractPage<CreatePlanVersionPage>
     implements CreateEntityVersionForm<CreatePlanVersionPage> {
 

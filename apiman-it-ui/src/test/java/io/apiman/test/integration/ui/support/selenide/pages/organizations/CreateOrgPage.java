@@ -24,7 +24,7 @@ import io.apiman.test.integration.ui.support.selenide.layouts.OrgEntitiesListPag
 /**
  * @author jcechace
  */
-@PageLocation("/apimanui/api-manager/new-org")
+@PageLocation("/api-manager/new-org")
 public class CreateOrgPage extends AbstractPage<CreateOrgPage> implements
     CreateEntityForm<CreateOrgPage> {
 

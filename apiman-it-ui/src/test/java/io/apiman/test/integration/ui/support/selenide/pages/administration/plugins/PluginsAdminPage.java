@@ -22,7 +22,7 @@ import io.apiman.test.integration.ui.support.selenide.layouts.AdminPage;
 /**
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/admin/plugins")
+@PageLocation("/api-manager/admin/plugins")
 public class PluginsAdminPage extends AdminPage {
 
 }

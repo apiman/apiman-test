@@ -70,7 +70,7 @@ public class RestAssuredUtils {
         .setAuth(preemptive().basic(MANAGER_USER, MANAGER_PASS))
         .setContentType(ContentType.JSON)
         .setAccept(ContentType.JSON)
-        .setBaseUri(Suite.getManagerUrl())
+        .setBaseUri(Suite.getManagerApiUrl())
         .build();
 
     /**

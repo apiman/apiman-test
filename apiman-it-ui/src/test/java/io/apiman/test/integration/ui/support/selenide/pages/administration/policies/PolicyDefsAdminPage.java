@@ -31,7 +31,7 @@ import org.openqa.selenium.By;
  *
  * @author jrumanov
  */
-@PageLocation("/apimanui/api-manager/admin/policyDefs")
+@PageLocation("/api-manager/admin/policyDefs")
 public class PolicyDefsAdminPage extends AdminPage<PolicyDefsAdminPage> implements
     FilterForm<PolicyDefsAdminPage>,
     RowEntries {

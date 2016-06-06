@@ -27,7 +27,7 @@ import com.codeborne.selenide.SelenideElement;
 /**
  * @author ldimaggi
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/apis/{1}/{2}/plans")
+@PageLocation("/api-manager/orgs/{0}/apis/{1}/{2}/plans")
 public class ApiPlansDetailPage extends AbstractApiDetailPage<ApiPlansDetailPage> {
 
     /**

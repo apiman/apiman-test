@@ -30,7 +30,7 @@ import org.openqa.selenium.By;
 /**
  * @author jcechace
  */
-@PageLocation("/apimanui/api-manager/browse/orgs/{0}")
+@PageLocation("/api-manager/browse/orgs/{0}")
 public class BrowseOrgDetailPage extends AbstractPage<BrowseOrgDetailPage> implements
     FilterForm<BrowseOrgDetailPage>,
     RowEntries {

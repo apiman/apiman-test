@@ -29,7 +29,7 @@ import org.openqa.selenium.By;
 /**
  * Created by Jarek Kaspar
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/clients/{1}/{2}/contracts")
+@PageLocation("/api-manager/orgs/{0}/clients/{1}/{2}/contracts")
 public class ClientContractsDetailPage extends AbstractClientDetailPage<ClientContractsDetailPage> implements
     RowEntries {
 

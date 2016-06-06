@@ -30,12 +30,33 @@ public class Suite {
 
     private static final Logger LOG = LoggerFactory.getLogger(Suite.class);
 
-    public static String getManagerUrl() {
+    public static String getManagerApiUrl() {
         String protocol = getProperty(APIMAN_MANAGER_PROTOCOL_PROP);
         String host = getProperty(APIMAN_MANAGER_HOST_PROP);
         String port = getProperty(APIMAN_MANAGER_PORT_PROP);
 
         return String.format("%s://%s:%s/apiman", protocol, host, port);
+    }
+
+    public static String getManagerUIUrl() {
+        String protocol = getProperty(APIMAN_MANAGER_PROTOCOL_PROP);
+        String host = getProperty(APIMAN_MANAGER_HOST_PROP);
+        String port = getProperty(APIMAN_MANAGER_PORT_PROP);
+
+        return String.format("%s://%s:%s/apimanui", protocol, host, port);
+    }
+
+    public static String getManagerUIUrl(String path) {
+        StringBuilder url = new StringBuilder();
+        String base = getManagerUIUrl();
+
+        url.append(base);
+        if (!path.startsWith("/")) {
+            url.append("/");
+        }
+        url.append(path);
+
+        return url.toString();
     }
 
     public static String getDeploymentUrl() {

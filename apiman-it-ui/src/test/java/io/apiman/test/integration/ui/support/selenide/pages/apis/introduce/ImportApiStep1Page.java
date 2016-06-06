@@ -24,7 +24,7 @@ import io.apiman.test.integration.ui.support.selenide.PageLocation;
  * Overview page - step 1
  * @author jkaspar
  */
-@PageLocation("/apimanui/api-manager/orgs/{0}/import/apis")
+@PageLocation("/api-manager/orgs/{0}/import/apis")
 public class ImportApiStep1Page extends ImportApiPage<ImportApiStep1Page> {
 
     public ImportApiStep2Page next() {

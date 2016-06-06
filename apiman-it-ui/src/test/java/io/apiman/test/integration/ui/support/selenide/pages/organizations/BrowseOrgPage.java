@@ -24,7 +24,7 @@ import io.apiman.test.integration.ui.support.selenide.layouts.BrowsePage;
 /**
  * @author jcechace
  */
-@PageLocation("/apimanui/api-manager/browse/orgs")
+@PageLocation("/api-manager/browse/orgs")
 public class BrowseOrgPage extends BrowsePage {
 
     @Override

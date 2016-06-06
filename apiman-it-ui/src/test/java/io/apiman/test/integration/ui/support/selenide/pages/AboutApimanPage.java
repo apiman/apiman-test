@@ -22,6 +22,6 @@ import io.apiman.test.integration.ui.support.selenide.layouts.AbstractPage;
 /**
  * Created by Jarek Kaspar
  */
-@PageLocation("/apimanui/api-manager/about")
+@PageLocation("/api-manager/about")
 public class AboutApimanPage extends AbstractPage {
 }
