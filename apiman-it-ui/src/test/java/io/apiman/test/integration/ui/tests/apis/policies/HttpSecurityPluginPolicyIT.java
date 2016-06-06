@@ -27,7 +27,7 @@ import static io.apiman.test.integration.ui.support.selenide.pages.policies.AddH
 /**
  * Created by jsmolar.
  */
-@Plugin(artifactId = "apiman-plugins-simple-header-policy")
+@Plugin(artifactId = "apiman-plugins-http-security-policy")
 public class HttpSecurityPluginPolicyIT extends AbstractApiPolicyIT {
 
     private AddHttpSecurityPluginPolicyPage addPolicyPage;
