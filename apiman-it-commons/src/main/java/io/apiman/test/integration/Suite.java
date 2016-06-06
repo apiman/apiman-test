@@ -82,4 +82,8 @@ public class Suite {
         long amount = Long.parseLong(getProperty(TEST_SETUP_DELAY_PROP));
         waitFor(amount, "Waiting %d milliseconds before next setup.");
     }
+
+    public static void waitAfterRequest() {
+        waitFor(1000, "Waiting %d milliseconds before next request");
+    }
 }

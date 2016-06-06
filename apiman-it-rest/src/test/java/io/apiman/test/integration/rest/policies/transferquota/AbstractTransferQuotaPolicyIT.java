@@ -18,8 +18,9 @@ package io.apiman.test.integration.rest.policies.transferquota;
 
 import static io.apiman.test.integration.runner.RestAssuredUtils.*;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.base.AbstractApiTest;
 
 import java.util.concurrent.TimeUnit;
@@ -79,13 +80,14 @@ public abstract class AbstractTransferQuotaPolicyIT extends AbstractApiTest {
         for (int i = 1; i <= LIMIT; i++) {
             useUpNBytes(1);
 
-            Response response = withGateway().get(getResourceURL());
-
-            response.then().
+            givenGateway().
+                get(getResourceURL()).
+            then().
                 header(HEADER_LIMIT, String.valueOf(LIMIT)).
-                header(HEADER_REMAINING, String.valueOf(LIMIT - i));
-            int reset = Integer.valueOf(response.getHeader(HEADER_RESET));
-            assertTrue("Unexpected value in " + HEADER_RESET + " header", reset <= 60);
+                header(HEADER_REMAINING, String.valueOf(LIMIT - i)).
+                header(HEADER_RESET, Integer::parseInt, lessThanOrEqualTo(60));
+
+            Suite.waitAfterRequest();
         }
     }
 
@@ -93,6 +95,7 @@ public abstract class AbstractTransferQuotaPolicyIT extends AbstractApiTest {
     public void shouldPassWhenLimitIsNotExhausted() {
         for (int i = 0; i < LIMIT; i++) {
             useUpNBytes(1).then().statusCode(200);
+            Suite.waitAfterRequest();
         }
     }
 

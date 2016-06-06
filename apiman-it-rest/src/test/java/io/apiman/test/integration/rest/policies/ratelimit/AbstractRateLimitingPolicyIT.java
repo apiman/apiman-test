@@ -16,10 +16,12 @@
 
 package io.apiman.test.integration.rest.policies.ratelimit;
 
+import static io.apiman.test.integration.runner.RestAssuredUtils.givenGateway;
 import static io.apiman.test.integration.runner.RestAssuredUtils.withGateway;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
+import io.apiman.test.integration.Suite;
 import io.apiman.test.integration.base.AbstractApiTest;
 
 import java.util.concurrent.TimeUnit;
@@ -65,19 +67,20 @@ public abstract class AbstractRateLimitingPolicyIT extends AbstractApiTest {
     protected void getNRequests(int n) {
         for (int i = 0; i < n; i++) {
             withGateway().get(getResourceURL());
+            Suite.waitAfterRequest();
         }
     }
 
     @Test
     public void shouldHaveValidResponseHeadersWithLimitInfo() {
         for (int i = 1; i <= LIMIT; i++ ) {
-            Response response = withGateway().get(getResourceURL());
-            response.then().
-                    header(HEADER_LIMIT, String.valueOf(LIMIT)).
-                    header(HEADER_REMAINING, String.valueOf(LIMIT - i));
-
-            int reset = Integer.valueOf(response.getHeader(HEADER_RESET));
-            assertTrue("Unexpected value in " + HEADER_RESET + " header", reset <= 60);
+            givenGateway().
+                get(getResourceURL()).
+            then().
+                header(HEADER_LIMIT, String.valueOf(LIMIT)).
+                header(HEADER_REMAINING, String.valueOf(LIMIT - i)).
+                header(HEADER_RESET, Integer::parseInt, lessThanOrEqualTo(60));
+            Suite.waitAfterRequest();
         }
     }
 
