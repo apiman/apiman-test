@@ -45,10 +45,15 @@ public class JsonToJsonIT extends AbstractTransformationIT {
     private String endpointJsonToJson;
 
     @Test
-    public void shouldNotMakeChangesOnJsonToJsonTransform() throws IOException {
-        TestData client = jsonToTestDataObject(getJsonFromTestService(DeployedServices.JSON_DATA));
-        TestData server = jsonToTestDataObject(getJsonFromGateway(endpointJsonToJson));
-        Assert.assertNotNull(client);
-        Assert.assertEquals(client, server);
+    public void shouldNotMakeChangesOnJsonToJsonTransformServerToClient() throws IOException {
+        TestData server = jsonToTestDataObject(getJsonFromTestService(DeployedServices.JSON_DATA));
+        TestData client = jsonToTestDataObject(getJsonFromGateway(endpointJsonToJson));
+        Assert.assertNotNull(server);
+        Assert.assertEquals(server, client);
+    }
+
+    @Test
+    public void shouldNotMakeChangesOnJsonToJsonTransformClientToServer(){
+        postJsonToGateway(endpointJsonToJson, getJsonFromTestService(DeployedServices.JSON_DATA));
     }
 }

@@ -50,12 +50,17 @@ public class XmlToJsonIT extends AbstractTransformationIT {
     private String endpointXmlToJson;
 
     @Test
-    public void canTransformXmlToJson() throws IOException {
-        TestData client = xmlToTestDataObject(getXmlFromTestService(DeployedServices.XML_DATA));
-        TestDataRoot server = jsonToTestDataRootObject(getJsonFromGateway(endpointXmlToJson));
+    public void canTransformXmlToJsonServerToClient() throws IOException {
+        TestData server = xmlToTestDataObject(getXmlFromTestService(DeployedServices.XML_DATA));
+        TestDataRoot client = jsonToTestDataRootObject(getJsonFromGateway(endpointXmlToJson));
 
-        Assert.assertNotNull(client);
-        Assert.assertEquals(client, server.getTestData());
+        Assert.assertNotNull(server);
+        Assert.assertEquals(server, client.getTestData());
+    }
+
+    @Test
+    public void canTransformXmlToJsonClientToServer(){
+        postXMLToGateway(endpointXmlToJson, getXmlFromTestService(DeployedServices.XML_DATA));
     }
 
     protected TestDataRoot jsonToTestDataRootObject(String json) throws IOException {
