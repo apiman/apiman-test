@@ -92,7 +92,7 @@ public class OrgDetailsIT extends AbstractUITest {
     @Test
     public void shouldListExpectedUsers() {
         OrgMembersListPage theMembersPage = open(OrgMembersListPage.class, organization.getName());
-        theMembersPage.entriesContainer().shouldHave(text("Admin (admin)"));
+        theMembersPage.entriesContainer().shouldHave(text("Admin User (admin)"));
     }
 
 }
