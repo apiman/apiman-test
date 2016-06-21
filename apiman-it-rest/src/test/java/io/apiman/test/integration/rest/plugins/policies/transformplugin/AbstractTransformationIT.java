@@ -73,6 +73,15 @@ public abstract class AbstractTransformationIT extends AbstractApiTest {
             statusCode(200);
     }
 
+    protected String postJsonToGateway(String link, String json, String o){
+        return givenGateway().
+            contentType(ContentType.JSON).
+            body(json).
+            when().
+            post(link).
+            body().prettyPrint().toString();
+    }
+
     protected void postXMLToGateway(String link, String xml){
         givenGateway().
             contentType(ContentType.XML).
@@ -82,6 +91,15 @@ public abstract class AbstractTransformationIT extends AbstractApiTest {
         then().
             assertThat().
             statusCode(200);
+    }
+
+    protected String postXMLToGateway(String link, String xml, String o){
+        return givenGateway().
+            contentType(ContentType.XML).
+            body(xml).
+            when().
+            post(link).
+            prettyPrint();
     }
 
     protected String getXmlFromTestService(String link) {

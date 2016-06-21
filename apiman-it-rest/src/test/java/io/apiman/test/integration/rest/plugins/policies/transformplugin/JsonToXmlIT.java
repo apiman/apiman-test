@@ -56,7 +56,10 @@ public class JsonToXmlIT extends AbstractTransformationIT {
     }
 
     @Test
-    public void canTransformJsonToXmlClientToServer(){
+    public void canTransformJsonToXmlClientToServer() throws IOException {
+        TestData client = jsonToTestDataObject(getJsonFromTestService(DeployedServices.JSON_DATA));
+        TestData server = jsonToTestDataObject(postXMLToGateway(endpointJsonToXml, getXmlFromTestService(DeployedServices.XML_DATA), ""));
+
         postJsonToGateway(endpointJsonToXml, getJsonFromTestService(DeployedServices.JSON_DATA));
     }
 

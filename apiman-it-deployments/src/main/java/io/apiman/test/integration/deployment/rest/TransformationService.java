@@ -24,7 +24,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  * @author opontes
@@ -37,9 +36,9 @@ public class TransformationService {
         return new TestData();
     }
 
-    @POST @Path("/json") @Consumes(MediaType.APPLICATION_JSON)
-    public Response postJSON(TestData testData){
-        return Response.status((testData.equals(new TestData())) ? 200 : 500).build();
+    @POST @Path("/json")
+    public String postJSON(String testData){
+        return testData;
     }
 
     @GET @Path("/xml") @Produces(MediaType.APPLICATION_XML)
@@ -47,8 +46,8 @@ public class TransformationService {
         return new TestData();
     }
 
-    @POST @Path("/xml") @Consumes(MediaType.APPLICATION_XML)
-    public Response postXML(TestData testData){
-        return Response.status((testData.equals(new TestData())) ? 200 : 500).build();
+    @POST @Path("/xml")
+    public String postXML(String testData){
+        return testData;
     }
 }
