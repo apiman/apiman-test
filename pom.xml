@@ -36,6 +36,7 @@
     <version.restassred>2.9.0</version.restassred>
     <version.jackson>2.6.3</version.jackson>
     <version.jacoco>0.7.5.201505241946</version.jacoco>
+    <version.hamcrest>1.3</version.hamcrest>
     <!-- Build influencing properties -->
     <groups></groups>
     <groups.exclude></groups.exclude>
@@ -90,6 +91,13 @@
         <artifactId>commons-io</artifactId>
         <version>${version.commons-io}</version>
       </dependency>
+      <!-- Assertion -->
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-core</artifactId>
+        <version>${version.hamcrest}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 

@@ -16,6 +16,9 @@
 
 package io.apiman.test.integration.rest.plugins.policies.transformplugin;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import io.apiman.test.integration.DeployedServices;
 import io.apiman.test.integration.base.entity.TestData;
 import io.apiman.test.integration.categories.PluginTest;
@@ -29,7 +32,6 @@ import io.apiman.manager.api.beans.apis.EndpointContentType;
 
 import java.io.IOException;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -47,10 +49,16 @@ public class XmlToXmlIT extends AbstractTransformationIT {
     private String endpointXmlToXml;
 
     @Test
-    public void shouldNotMakeChangesOnXmlToXmlTransform() throws IOException {
-        TestData client = xmlToTestDataObject(getXmlFromTestService(DeployedServices.XML_DATA));
-        TestData server = xmlToTestDataObject(getXmlFromGateway(endpointXmlToXml));
-        Assert.assertNotNull(client);
-        Assert.assertEquals(client, server);
+    public void shouldNotMakeChangesOnXmlToXmlTransformServerToClient() throws IOException {
+        TestData server = xmlToTestDataObject(getXmlFromTestService(DeployedServices.XML_DATA));
+        TestData client = xmlToTestDataObject(getXmlFromGateway(endpointXmlToXml));
+
+        assertThat(server, is(not(null)));
+        assertThat(server, is(equalTo(client)));
+    }
+
+    @Test
+    public void shouldNotMakeChangesOnXmlToXmlTransformClientToServer(){
+        postXMLToGateway(endpointXmlToXml, getXmlFromTestService(DeployedServices.XML_DATA));
     }
 }
