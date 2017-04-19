@@ -47,10 +47,15 @@ public class XmlToXmlIT extends AbstractTransformationIT {
     private String endpointXmlToXml;
 
     @Test
-    public void shouldNotMakeChangesOnXmlToXmlTransform() throws IOException {
-        TestData client = xmlToTestDataObject(getXmlFromTestService(DeployedServices.XML_DATA));
-        TestData server = xmlToTestDataObject(getXmlFromGateway(endpointXmlToXml));
-        Assert.assertNotNull(client);
-        Assert.assertEquals(client, server);
+    public void shouldNotMakeChangesOnXmlToXmlTransformServerToClient() throws IOException {
+        TestData server = xmlToTestDataObject(getXmlFromTestService(DeployedServices.XML_DATA));
+        TestData client = xmlToTestDataObject(getXmlFromGateway(endpointXmlToXml));
+        Assert.assertNotNull(server);
+        Assert.assertEquals(server, client);
+    }
+
+    @Test
+    public void shouldNotMakeChangesOnXmlToXmlTransformClientToServer(){
+        postXMLToGateway(endpointXmlToXml, getXmlFromTestService(DeployedServices.XML_DATA));
     }
 }

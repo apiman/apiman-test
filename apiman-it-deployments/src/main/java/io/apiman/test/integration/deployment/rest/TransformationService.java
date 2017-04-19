@@ -16,11 +16,11 @@
 
 package io.apiman.test.integration.deployment.rest;
 
-
-
 import io.apiman.test.integration.base.entity.TestData;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * @author opontes
  */
-@Path("/response")
+@Path("/transform")
 public class TransformationService {
 
     @GET @Path("/json") @Produces(MediaType.APPLICATION_JSON)
@@ -36,8 +36,18 @@ public class TransformationService {
         return new TestData();
     }
 
+    @POST @Path("/json")
+    public String postJSON(String testData){
+        return testData;
+    }
+
     @GET @Path("/xml") @Produces(MediaType.APPLICATION_XML)
     public TestData getXML(){
         return new TestData();
+    }
+
+    @POST @Path("/xml")
+    public String postXML(String testData){
+        return testData;
     }
 }

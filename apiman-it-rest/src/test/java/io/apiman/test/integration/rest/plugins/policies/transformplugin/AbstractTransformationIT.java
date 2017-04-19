@@ -19,6 +19,8 @@ package io.apiman.test.integration.rest.plugins.policies.transformplugin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.response.Response;
+
 import io.apiman.test.integration.base.AbstractApiTest;
 import io.apiman.test.integration.base.entity.TestData;
 import io.apiman.test.integration.runner.annotations.entity.Plugin;
@@ -58,6 +60,46 @@ public abstract class AbstractTransformationIT extends AbstractApiTest {
                    body().
                    jsonPath().
                    prettyPrint();
+    }
+
+    protected void postJsonToGateway(String link, String json){
+        givenGateway().
+            contentType(ContentType.JSON).
+            body(json).
+        when().
+            post(link).
+        then().
+            assertThat().
+            statusCode(200);
+    }
+
+    protected String postJsonToGateway(String link, String json, String o){
+        return givenGateway().
+            contentType(ContentType.JSON).
+            body(json).
+            when().
+            post(link).
+            body().prettyPrint().toString();
+    }
+
+    protected void postXMLToGateway(String link, String xml){
+        givenGateway().
+            contentType(ContentType.XML).
+            body(xml).
+        when().
+            post(link).
+        then().
+            assertThat().
+            statusCode(200);
+    }
+
+    protected String postXMLToGateway(String link, String xml, String o){
+        return givenGateway().
+            contentType(ContentType.XML).
+            body(xml).
+            when().
+            post(link).
+            prettyPrint();
     }
 
     protected String getXmlFromTestService(String link) {

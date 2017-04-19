@@ -48,11 +48,19 @@ public class JsonToXmlIT extends AbstractTransformationIT {
     private String endpointJsonToXml;
 
     @Test
-    public void canTransformJsonToXml() throws IOException {
-        TestData client = jsonToTestDataObject(getJsonFromTestService(DeployedServices.JSON_DATA));
-        TestData server = xmlToTestDataObject(getXmlFromGateway(endpointJsonToXml));
+    public void canTransformJsonToXmlServerToClient() throws IOException {
+        TestData server = jsonToTestDataObject(getJsonFromTestService(DeployedServices.JSON_DATA));
+        TestData client = xmlToTestDataObject(getXmlFromGateway(endpointJsonToXml));
 
-        Assert.assertEquals(client, server);
+        Assert.assertEquals(server, client);
+    }
+
+    @Test
+    public void canTransformJsonToXmlClientToServer() throws IOException {
+        TestData client = jsonToTestDataObject(getJsonFromTestService(DeployedServices.JSON_DATA));
+        TestData server = jsonToTestDataObject(postXMLToGateway(endpointJsonToXml, getXmlFromTestService(DeployedServices.XML_DATA), ""));
+
+        postJsonToGateway(endpointJsonToXml, getJsonFromTestService(DeployedServices.JSON_DATA));
     }
 
     @Override
