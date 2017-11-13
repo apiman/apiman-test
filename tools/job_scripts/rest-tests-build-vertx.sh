@@ -16,7 +16,6 @@ sleep 30
 
 # Configure vertx gateway
 ${TEST_SOURCES}/tools/use_vertx.sh
-envsubst < $VERTX_CFG_TEMPLATE > $VERTX_CFG
 
 # Start the gateway
 java -version

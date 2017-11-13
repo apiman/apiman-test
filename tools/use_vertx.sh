@@ -9,6 +9,6 @@ curl -X POST -u ${CREDENTIALS} -H ${CONTENT_TYPE} ${ENDPOINT} -d '{
  "name" : "vertx",
  "description" : "Vert.X gateway",
  "type": "REST",
- "configuration": "{\"endpoint\":\"http://localhost:8081/\",\"username\":\"admin\",\"password\":\"admin\"}"
+ "configuration": "{\"endpoint\":\"http://localhost:8081/\",\"username\":\"${GW_AUTH_USERNAME:-admin}\",\"password\":\"${GW_AUTH_PASSWORD:-admin}\"}"
 }'
 
