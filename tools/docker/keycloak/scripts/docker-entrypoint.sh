@@ -25,6 +25,7 @@ rm ${JBOSS_HOME}/standalone/log/server.log 2> /dev/null
 
 if [ ! -f $CONFIGURED_FILE ]
 then
+    echo ">>>>> STARTING SERVER / IMPORTING REALM <<<<<"
     # Create variables containing arrays for realm file
     eval `build_array $MANAGER_HOST $MANAGER_PORT $MANAGER_HTTPS_PORT "apiman/*" "APIMAN_URLS"`
     eval `build_array $MANAGER_HOST $MANAGER_PORT $MANAGER_HTTPS_PORT "apimanui/*" "APIMANUI_URLS"`
@@ -34,7 +35,7 @@ then
     envsubst '$APIMAN_URLS:$APIMANUI_URLS:$APIMAN_GATEWAY_URLS' < ${REALM_FILE_TMPL} > ${REALM_FILE}
 
     ${JBOSS_HOME}/bin/add-user-keycloak.sh -r master -u ${KC_USER_NAME} -p ${KC_USER_PASSWORD}
-    ${JBOSS_HOME}/bin/standalone.sh -b 0.0.0.0      \
+    ${JBOSS_HOME}/bin/standalone.sh                 \
         -Dkeycloak.migration.action=import          \
         -Dkeycloak.migration.provider=singleFile    \
         -Dkeycloak.migration.file=${REALM_FILE}     &
@@ -43,7 +44,8 @@ then
     touch ${CONFIGURED_FILE}
 
 else
-    ${JBOSS_HOME}/bin/standalone.sh -b 0.0.0.0 &
+    echo ">>>>> STARTING SERVER <<<<<"
+    ${JBOSS_HOME}/bin/standalone.sh  &
     WILDFLY_PID=$!
 fi
 

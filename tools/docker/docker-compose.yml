@@ -20,5 +20,11 @@ elastic:
 keycloak:
     image: apimanqe/keycloak
     ports:
-        - "8081:8080"
+        - "8180:8080"
     container_name: apiman_it_keycloak
+
+deployments:
+    image: apimanqe/deployments
+    ports:
+        - "8181:8080"
+    container_name: apiman_it_deployments
