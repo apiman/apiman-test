@@ -4,7 +4,7 @@
       "es": {
         "protocol": "http",
         "host": "localhost",
-        "port": 19200,
+        "port": 9200,
         "username": null,
         "password": null,
         "timeout": 10000
@@ -244,6 +244,7 @@
     }
   },
 
+  // SSL configuration to the gateway's *front end* (i.e. client <-> gateway).
   "ssl": {
     "keystore": {
       "path": "${APIMAN_KEYSTORE}",
@@ -259,8 +260,8 @@
   "auth": {
     "type": "BASIC",
     "config": {
-      "username": "${GW_AUTH_USERNAME:-admin}",
-      "password": "${GW_AUTH_PASSWORD:-admin}"
+      "username": "admin",
+      "password": "admin"
     }
   },
 
