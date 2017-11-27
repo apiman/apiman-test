@@ -38,14 +38,15 @@ then
     ${JBOSS_HOME}/bin/standalone.sh                 \
         -Dkeycloak.migration.action=import          \
         -Dkeycloak.migration.provider=singleFile    \
-        -Dkeycloak.migration.file=${REALM_FILE}     &
+        -Dkeycloak.migration.file=${REALM_FILE}     \
+        -b 0.0.0.0 &
 
     WILDFLY_PID=$!
     touch ${CONFIGURED_FILE}
 
 else
     echo ">>>>> STARTING SERVER <<<<<"
-    ${JBOSS_HOME}/bin/standalone.sh  &
+    ${JBOSS_HOME}/bin/standalone.sh  -b 0.0.0.0 &
     WILDFLY_PID=$!
 fi
 

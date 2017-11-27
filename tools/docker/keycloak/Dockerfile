@@ -1,6 +1,5 @@
 FROM jboss/keycloak:1.9.5.Final
 
-ENV JAVA_OPTS "-Djava.security.egd=file:///dev/urandom"
 ENV REALM_DIR $JBOSS_HOME/realms
 ENV REALM_FILE $REALM_DIR/apiman-realm.json
 ENV REALM_FILE_TMPL $REALM_DIR/apiman-realm.json.tmpl
