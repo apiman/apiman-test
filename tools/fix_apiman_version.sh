@@ -18,4 +18,6 @@ fi
 
 : ${APIMAN_VERSION=$( grep -oP -m 1 '<version>\K[^<]+' ${APIMAN_SOURCES}/pom.xml )}
 
+echo "[RUNNER] --> Setting apiman version in {TEST_SOURCES}/pom.xml to ${APIMAN_VERSION}"
+
 sed -i "s/<version.apiman>.*<\/version.apiman>/<version.apiman>${APIMAN_VERSION}<\/version.apiman>/g" ${TEST_SOURCES}/pom.xml

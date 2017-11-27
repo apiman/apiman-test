@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "[RUNNER] --> Running tests: UI"
+
 PROPERTIES=(
     "-Dbrowser=$BROWSER"
     "-Dapiman.keystore=${APIMAN_KEYSTORE}"

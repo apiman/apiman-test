@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "[RUNNER] --> Running tests: SMOKE"
+
 PROPERTIES=(
     "-Dapiman.keystore=$APIMAN_KEYSTORE"
     "-Dapiman.home=$APIMAN_HOME"

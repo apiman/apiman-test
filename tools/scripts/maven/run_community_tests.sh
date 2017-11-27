@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "[RUNNER] --> Running tests: COMMUNITY"
+
 declare -a PROPERTIES=(
     "-Dapiman.suite.api-endpoint=$API_ENDPOINT"
     "-Dapiman.suite.api-username=$API_USERNAME"
