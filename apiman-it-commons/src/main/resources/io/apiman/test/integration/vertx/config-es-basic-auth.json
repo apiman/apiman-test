@@ -245,16 +245,16 @@
   },
 
   // SSL configuration to the gateway's *front end* (i.e. client <-> gateway).
-  "ssl": {
-    "keystore": {
-      "path": "${APIMAN_KEYSTORE}",
-      "password": "secret"
-    },
-    "truststore": {
-      "path": "${APIMAN_KEYSTORE}",
-      "password": "secret"
-    }
-  },
+//  "ssl": {
+//    "keystore": {
+//      "path": "${APIMAN_KEYSTORE}",
+//      "password": "secret"
+//    },
+//    "truststore": {
+//      "path": "${APIMAN_KEYSTORE}",
+//      "password": "secret"
+//    }
+//  },
 
   // Gateway API Authentication. See documentation for further possibilities..
   "auth": {
