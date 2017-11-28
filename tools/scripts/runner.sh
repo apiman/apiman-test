@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -a
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 MAVEN_SCRIPTS="$DIR/maven/"
 TEST_SOURCES="$DIR/../.."
