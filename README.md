@@ -59,7 +59,7 @@ Common base containing shared resources.
 This module provides code-coverage analysis of Apiman's Gateway and Manager components. As of yet, this module requires tests to be executed against Apiman deployed to a WildFly server. 
 
 ### apiman-it-deployments
-This modules contains various utility services used by the the following modules in tests. Artifacts provided by this test suite needs to be built and deployed prior to running any tests.
+This modules contains various utility services used by the following modules in tests. Artifacts provided by this test suite needs to be built and deployed prior to running any tests.
 
 This command can be used for WildFly deployment
 ```
