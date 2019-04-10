@@ -19,9 +19,11 @@ package io.apiman.test.integration.ui.tests.clients;
 import static io.apiman.test.integration.ui.support.selenide.SelenideUtils.open;
 
 import static com.codeborne.selenide.Condition.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringContains.containsString;
 
 import io.apiman.test.integration.runner.annotations.entity.Plan;
-import io.apiman.test.integration.runner.annotations.misc.Contract;
 import io.apiman.test.integration.runner.annotations.version.ApiVersion;
 import io.apiman.test.integration.runner.annotations.version.ClientVersion;
 import io.apiman.test.integration.runner.annotations.version.PlanVersion;
@@ -34,7 +36,7 @@ import io.apiman.manager.api.beans.clients.ClientVersionBean;
 import io.apiman.manager.api.beans.plans.PlanBean;
 import io.apiman.manager.api.beans.plans.PlanVersionBean;
 
-import org.junit.Assert;
+import com.codeborne.selenide.Selenide;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,18 +54,20 @@ public class CreateContractIT extends AbstractUITest {
     @PlanVersion(plan = "secondPlan")
     private static PlanVersionBean secondPlanVersion;
 
-    @ApiVersion(api = "api", unique = true, vPlans = {"planVersion", "secondPlanVersion"})
-    private static ApiVersionBean publishedApiVersion;
+    @ApiVersion(api = "api", unique = true, isPublic = false, vPlans = {"planVersion", "secondPlanVersion"})
+    private static ApiVersionBean firstAPI;
 
-    @ApiVersion(api = "api", unique = true, publish = false)
-    private static ApiVersionBean unpublishedApiVersion;
+    @ApiVersion(api = "api", unique = true, isPublic = false, vPlans = {"planVersion", "secondPlanVersion"})
+    private static ApiVersionBean secondAPI;
 
-    @ClientVersion(client = "client", unique = true,
-        contracts = @Contract(vPlan = "planVersion", vApi = "publishedApiVersion"))
-    private static ClientVersionBean registeredClientVersion;
+    @ApiVersion(api = "api", publish = false)
+    private static ApiVersionBean unpublishAPI;
 
-    @ClientVersion(client = "client", unique = true, publish = false)
-    private static ClientVersionBean nonRegisteredClientVersion;
+    @ClientVersion(client = "client", unique = true)
+    private static ClientVersionBean firstClientVersion;
+
+    @ClientVersion(client = "client", unique = true)
+    private static ClientVersionBean secondClientVersion;
 
     CreateContractPage page;
 
@@ -78,13 +82,13 @@ public class CreateContractIT extends AbstractUITest {
 
         page.clientVersionSelect().open();
 
-        page.clientVersionSelect().options().findBy(text(nonRegisteredClientVersion.getVersion())).should(exist);
-        page.clientVersionSelect().options().findBy(text(registeredClientVersion.getVersion())).should(exist);
+        page.clientVersionSelect().options().findBy(text(firstClientVersion.getVersion())).should(exist);
+        page.clientVersionSelect().options().findBy(text(secondClientVersion.getVersion())).should(exist);
     }
 
     @Test
     public void shouldListAllAvailablePlansForSelectedApi() throws Exception {
-        page.selectApiVersion(api.getName(), publishedApiVersion.getVersion());
+        page.selectApiVersion(api.getName(), firstAPI.getVersion());
 
         page.planSelect().open();
         page.planSelect().options().findBy(text(plan.getName())).should(exist);
@@ -96,32 +100,54 @@ public class CreateContractIT extends AbstractUITest {
         page.selectApi(api.getName());
         page.apiVersionSelect().open();
         page.apiVersionSelect().options()
-            .findBy(text(publishedApiVersion.getVersion()))
+            .findBy(text(firstAPI.getVersion()))
+            .should(exist);
+        page.apiVersionSelect().options()
+            .findBy(text(secondAPI.getVersion()))
             .should(exist);
 
-        page.apiVersionSelect().options().shouldHaveSize(1);
+        page.apiVersionSelect().options().shouldHaveSize(2);
     }
 
     @Test
     public void shouldListCorrectApiVersionWhenSelected() throws Exception {
-        page.selectApiVersion(api.getName(), publishedApiVersion.getVersion());
-        page.selectedApiButton().shouldHave(
-            and("Selected api version button displays api name and api version",
-                text(api.getName()), text(publishedApiVersion.getVersion())));
+        selectAndCheckApiVersion(firstAPI.getVersion());
+        selectAndCheckApiVersion(secondAPI.getVersion());
     }
 
     @Test
-    public void canCreateContract() throws Exception {
-        page.selectClientVersion(client.getName(), nonRegisteredClientVersion.getVersion())
-            .selectApiVersion(api.getName(), publishedApiVersion.getVersion())
-            .selectPlan(plan.getName())
+    public void canCreateContractWithOldestVersionOfApi() throws Exception {
+        createContract(firstClientVersion, firstAPI);
+    }
+
+    @Test
+    public void canCreateContractWithNewestVersionOfApi(){
+        createContract(secondClientVersion, secondAPI);
+    }
+    
+    private void createContract(ClientVersionBean clientVersion, ApiVersionBean apiVersion){
+        page.selectClientVersion(client.getName(), clientVersion.getVersion())
+            .selectApiVersion(api.getName(), apiVersion.getVersion())
             .create();
 
+        assertThat(getDescriptionOfContract(), containsString(apiVersion.getVersion()));
+
         ClientVersions clientVersions = new ClientVersions(client);
-        clientVersions.fetch(nonRegisteredClientVersion.getVersion());
+        clientVersions.fetch(clientVersion.getVersion());
         Contracts contractClient = clientVersions.contracts();
 
-        contractClient.fetch(organization, publishedApiVersion, planVersion);
-        Assert.assertNotNull("Contract hasn't been created", contractClient.getBean());
+        contractClient.fetch(organization, apiVersion, planVersion);
+        assertThat(contractClient.getBean(), is(not(null)));
+    }
+
+    private void selectAndCheckApiVersion(String version){
+        page.selectApiVersion(api.getName(), version);
+        page.selectedApiButton().shouldHave(
+            and("Selected api version button displays api name and api version",
+                text(api.getName()), text(version)));
+    }
+
+    private String getDescriptionOfContract(){
+        return Selenide.$("div.versionAndPlan").getText();
     }
 }
