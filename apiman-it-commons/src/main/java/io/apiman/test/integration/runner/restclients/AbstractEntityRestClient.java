@@ -47,14 +47,19 @@ public class AbstractEntityRestClient<Entity, NewEntity> extends AbstractRestWra
 
     @Override
     public EntityRestClient<Entity, NewEntity> fetch(String idOrVersion) {
-        this.bean = withManager().get(getResourcePath(idOrVersion)) .as(clazz);
+        this.bean = withManager().get(getResourcePath(idOrVersion)).as(clazz);
         return this;
     }
 
     @Override
     public EntityRestClient<Entity, NewEntity> create(NewEntity newBean) {
-        this.bean =  withManager().content(newBean).post(resourcePath).as(clazz);;
+        this.bean =  withManager().content(newBean).post(resourcePath).as(clazz);
         return this;
+    }
+
+    @Override
+    public void delete(String idOrVersion, ResponseSpecification spec){
+        givenManager().delete(getResourcePath(idOrVersion)).then().specification(spec);
     }
 
     @Override

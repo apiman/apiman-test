@@ -42,6 +42,20 @@ public class OrgEntitiesListPage<P> extends AbstractListPage<P> {
         return $("#descriptionWrapper");
     }
 
+    public SelenideElement deleteButton() {
+        SelenideElement orgMenu = $("[class='org-menu pull-right']");
+        orgMenu.find("[class='dropdown']").click();
+        return $("[class='org-delete']");
+    }
+
+    public void confirmOrgName(String name){
+        $("[ng-model='confirmOrgName']").setValue(name);
+    }
+
+    public SelenideElement confirmOrgNameButton(){
+        return $("[apiman-i18n-key='org-delete-modal-confirmation-button']");
+    }
+
     // Tabs
 
     /**
@@ -79,7 +93,7 @@ public class OrgEntitiesListPage<P> extends AbstractListPage<P> {
         $("#tab-members").click();
         return page(OrgMembersListPage.class);
     }
-    
+
     /**
      * Activates activity tab
      * @return OrgPlansListPage page object

@@ -40,6 +40,13 @@ public interface EntityRestClient<Entity, NewEntity> {
     EntityRestClient<Entity, NewEntity> create(NewEntity newBean);
 
     /**
+     * Perform DELETE request via REST API by id or version
+     * @param idOrVersion id or version
+     * @param spec specification to be used for response verification
+     */
+    void delete(String idOrVersion, ResponseSpecification spec);
+
+    /**
      * Perform GET request and verify the response
      * @param idOrVersion id or version
      * @param spec specification to be used for response verification
