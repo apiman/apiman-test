@@ -16,6 +16,9 @@
 
 package io.apiman.test.integration.rest.plugins.policies.transformplugin;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import io.apiman.test.integration.DeployedServices;
 import io.apiman.test.integration.base.entity.TestData;
 import io.apiman.test.integration.categories.PluginTest;
@@ -28,7 +31,6 @@ import io.apiman.manager.api.beans.apis.ApiVersionBean;
 
 import java.io.IOException;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -45,10 +47,16 @@ public class JsonToJsonIT extends AbstractTransformationIT {
     private String endpointJsonToJson;
 
     @Test
-    public void shouldNotMakeChangesOnJsonToJsonTransform() throws IOException {
-        TestData client = jsonToTestDataObject(getJsonFromTestService(DeployedServices.JSON_DATA));
-        TestData server = jsonToTestDataObject(getJsonFromGateway(endpointJsonToJson));
-        Assert.assertNotNull(client);
-        Assert.assertEquals(client, server);
+    public void shouldNotMakeChangesOnJsonToJsonTransformServerToClient() throws IOException {
+        TestData server = jsonToTestDataObject(getJsonFromTestService(DeployedServices.JSON_DATA));
+        TestData client = jsonToTestDataObject(getJsonFromGateway(endpointJsonToJson));
+
+        assertThat(server, is(not(null)));
+        assertThat(server, is(equalTo(client)));
+    }
+
+    @Test
+    public void shouldNotMakeChangesOnJsonToJsonTransformClientToServer(){
+        postJsonToGateway(endpointJsonToJson, getJsonFromTestService(DeployedServices.JSON_DATA));
     }
 }
